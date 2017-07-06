@@ -1,0 +1,167 @@
+{
+    "global": {
+        "title": "AirSqreen",
+        "subheader": "Yönetim Paneli",
+        "browsehappy": "<strong>Güncel olmayan</strong> bir tarayıcı kullanıyorsunuz. Daha iyi bir kullanıcı deneyimi için <a href=\"http://browsehappy.com/?locale=tr\">tarayıcınızı güncelleyiniz</a>.",
+        "menu": {
+            "home": "Anasayfa",
+            "account": {
+                "main": "Kullanıcı",
+                "settings": "Tanımlar",
+                "password": "Şifre",
+                "sessions": "Oturumlar",
+                "login": "Doğrula",
+                "logout": "Çıkış",
+                "register": "Kayıt ol"
+            },
+            "security": {
+                "title":"Kullanıcı Tanımlamaları",
+                "user":"Kullanıcı Yönetimi",
+                "role":"Rol Yönetimi"
+            },
+            "admin": {
+                "title":"Super Kullanıcı",
+                "main": "Yönetimi",
+                "tracker": "Kullanıcı takibi",
+                "metrics": "Metrikler",
+                "health": "Sistem durumu",
+                "configuration": "Konfigürasyon",
+                "logs": "Loglar",
+                "audits": "Denetlemeler",
+                "apidocs": "API",
+                "database": "Veritabanı"
+            },
+            "language": "Dil"
+        },
+        "form": {
+            "username": {
+                "placeholder": "Kayıt"
+            },
+            "newpassword": {
+                "placeholder": "Yeni Şifre"
+            },
+            "confirmpassword": {
+                "placeholder": "Yeni şifreyi onayla"
+            },
+            "email": {
+                "placeholder": "E-mailiniz"
+            }
+        },
+        "messages": {
+            "info": {
+                "authenticated": "If you want to <a href=\"#\/login\">authenticate<\/a>, you can try the default accounts:<br\/>- Administrator (login=\"admin\" and password=\"admin\") <br\/>- User (login=\"user\" and password=\"user\").",
+                "register": "Henüz kullanıcı adınız yok? <a href=\"#\/register\">Yeni kullanıcı girişi<\/a>"
+            },
+            "error": {
+                "dontmatch": "Şifrenizle onayı tutmuyor."
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "Şifre girmeniz zorunludur.",
+                    "minlength": "Şifreniz en az 5 karakter olmalıdır.",
+                    "maxlength": "Şifreniz 50 karakterden uzun olmamalıdır.",
+                    "strength": "Parolanın gücü:"
+                },
+                "confirmpassword": {
+                    "required": "Onay şifre girmeniz zorunludur.",
+                    "minlength": "Onay şifreniz en az 5 karakter olmalıdır.",
+                    "maxlength": "Onay şifreniz 50 karakterten uzun olmamalıdır."
+                },
+                "email": {
+                    "required": "Email adresi girmeniz zorunludur.",
+                    "invalid": "Email adresiniz geçersizdir.",
+                    "minlength": "Email adresiniz en az 5 karakter olmalıdır.",
+                    "maxlength": "Email adresiniz 50 karakterten uzun olmamalıdır."
+                }
+            }
+        },
+        "field": {
+            "id": "ID",
+            "createdDate":"Oluşturma Tarihi"
+        }
+    },
+    "entity": {
+        "action": {
+            "back": "Geri",
+            "cancel": "İptal",
+            "delete": "Sil",
+            "edit": "Düzenle",
+            "save": "Kaydet",
+            "view": "Görüntüle"
+        },
+        "detail": {
+            "field": "Alan",
+            "value": "Değer"
+        },
+        "delete": {
+            "title": "Silme onayı"
+        },
+        "validation": {
+            "required": "Bu alan zorunludur.",
+            "minlength": "Bu alan en az {{min}} karakterdir.",
+            "maxlength": "Bu alan {{max}} karakterden fazla olamaz.",
+            "min": "Bu an min {{min}}karakter olmalıdır.",
+            "max": "Bu alan {{max}}dan fazla olamaz.",
+            "pattern": "This field should follow pattern {{pattern}}.",
+            "number": "Bu alan nümerik olmalıdır.",
+            "datetimelocal": "Bu alana tarih giriniz."
+        }
+    },
+    "data.status": {
+        "active": "Aktif",
+        "passive": "Pasif"
+    },
+    "languages":{
+      "turkish":"Türkçe",
+      "english":"İngilizce"
+    },
+    "validation":" girmeniz zorunludur.",
+    "footer": "AirSqreen",
+    "showBtn": "<span class=\"glyphicon glyphicon-chevron-right\"></span>",
+    "showPopupBtn": "<span class=\"glyphicon glyphicon-chevron-up\"></span>",
+    "newBtn": "<span class=\"glyphicon glyphicon-plus\"></span>Yeni",
+    "addBtn": "<span class=\"glyphicon glyphicon-plus\"></span> Ekle",
+    "destroyBtn": "<span class=\"glyphicon glyphicon-remove\"></span>",
+    "viewBtn": "<span class=\"glyphicon glyphicon-eye-open\"></span>",
+    "removeBtn": "<span class=\"glyphicon glyphicon-remove\"></span> Sil",
+    "refreshBtn": "<span class=\"glyphicon glyphicon-refresh\"></span>Güncelle",
+    "approvedBtn": "<span class=\"glyphicon glyphicon-ok\"></span> Onay",
+    "declinedBtn": "<span class=\"glyphicon glyphicon-remove\"></span> Red",
+    "search": "<span class=\"glyphicon glyphicon-search\"></span> Arama",
+    "clearSearch": " <i class=\"glyphicon glyphicon-erase\"></i> Aramayı Temizle",
+    "saveBtn": "Kaydet",
+    "deleteBtn": "Sil",
+    "updateBtn": "Güncelle",
+    "update": "Güncelle",
+    "save": "Kaydet",
+    "upload":"<span class=\"glyphicon glyphicon-upload\"></span> Yükle",
+    "delete": "Sil",
+    "cancel": "İptal",
+    "backBtn": "<span class=\"glyphicon glyphicon-chevron-left\"></span> Geri",
+    "choose": "Seç",
+    "all": "Hepsi",
+    "status": "Durum",
+    "language": "Dil",
+    "gender": "Cinsiyet",
+    "detail": "Detay",
+    "multiple": "Çoklu",
+    "deleteTooltip": "Sil",
+    "viewTooltip": "Görüntüle",
+    "editTooltip": "Düzenle",
+    "detailTooltip": "Detay",
+    "minSize": "Min Büyüklük",
+    "deleteConfirmation": "Silme onayı",
+    "deleteMessage": "%s Sil ?",
+    "saved": "%s kaydedildi",
+    "notSaved": "%s kaydedilemedi",
+    "edit": "Düzenle",
+    "new": "Yeni",
+    "isMultipleUsage": "Çoklu Kullanıcı",
+    "profile": "Profil",
+    "close": "Kapat",
+    "yes": "Evet",
+    "no": "Hayır",
+    "user": "Kullanıcı",
+    "role": "Rol"
+
+}

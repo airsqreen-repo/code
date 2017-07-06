@@ -1,0 +1,13 @@
+{
+    "configuration": {
+        "singular": "Configuration",
+        "plural": "Configurations",
+        "management": "Management",
+        "title": "Configuration",
+        "filter": "Filter (by prefix)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Properties"
+        }
+    }
+}

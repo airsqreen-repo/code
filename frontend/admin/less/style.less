@@ -1,0 +1,341 @@
+@import "../src/bower_components/bootstrap/less/bootstrap";
+@import "../src/bower_components/font-awesome-less/less/font-awesome";
+@import (inline) "adminlte/css/morris/morris.css";
+@import (inline) "adminlte/css/jvectormap/jquery-jvectormap-1.2.2.css";
+@import (inline) "adminlte/css/daterangepicker/daterangepicker-bs3.css";
+@import (inline) "adminlte/css/timepicker/bootstrap-timepicker.css";
+@import "adminlte/less/AdminLTE.less";
+//@import (inline) "adminlte/css/AdminLTE.css";
+@import (inline) "kendo.bootstrap.min.css";
+@import (inline) "kendo.common-bootstrap.min.css";
+@import (inline) "kendo.dataviz.bootstrap.min.css";
+@import (inline) "kendo.rtl.min.css";
+
+
+//@import "variables";
+//@import "bootswatch";
+/*
+* Base structure
+*/
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 60px;
+}
+
+
+div#strength{
+
+}
+ul#strengthBar {
+    display: inline-block;
+    list-style:none;
+    margin:0;
+    margin-left:15px;
+    padding:0;
+    vertical-align:2px;
+}
+
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    margin-right:1px;
+    width:20px;
+}
+
+.tab-pane {
+  padding: 10px;
+}
+
+input.k-textbox, textarea.k-textbox,select.k-widget {
+  width: 100% ;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+
+.k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+  min-width:inherit !important;
+}
+
+
+.k-button-icontext .k-icon, .k-button-icontext .k-image {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.back-container {
+  float: right;
+  background: transparent;
+  margin-top: 0px;
+  margin-bottom: 0;
+  font-size: 12px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.k-state-selected {
+  transition: all .3s ease-out;
+}
+
+
+.tab-content-ui {
+  border: 1px solid #dddddd;
+  border-top: inherit;
+  margin-bottom: 15px;
+}
+
+.item-tab-container {
+  position:relative;
+
+  .form-control-buttons{
+    position:absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.popup-grid-scroll {
+  overflow: scroll;
+}
+
+.popup-process{
+   display:inline-block;
+   padding-right: 5px;
+}
+
+.no-margin{
+  margin: 0 !important;
+}
+
+
+.k-toolbar.k-widget, .k-state-selected, .k-state-selected:link, .k-state-selected:visited, .k-list>.k-state-selected, .k-list>.k-state-highlight, .k-panel>.k-state-selected, .k-ghost-splitbar-vertical, .k-ghost-splitbar-horizontal, .k-draghandle.k-state-selected:hover, .k-scheduler .k-scheduler-toolbar .k-state-selected, .k-scheduler .k-today.k-state-selected, .k-marquee-color{
+  background:#3c8dbc;
+}
+
+
+// Sidebar menu
+.treeview-menu-unlimited {
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    > li {
+        margin: 0;
+        padding: 0;
+        > a {
+            padding: 12px 5px 12px 15px;
+            display: block;
+            > .fa, > .glyphicon, > .ion {
+                width: 20px;
+            }
+        }
+    }
+
+    // Tree view menu
+    .treeview-menu {
+        display: none;
+        list-style: none;
+        padding:0;
+        margin:0;
+        > li {
+            margin: 0;
+            > a {
+                padding: 5px 5px 5px 15px;
+                display: block;
+                font-size: 14px;
+                margin: 0px 0px;
+                > .fa, > .glyphicon, > .ion {
+                    width: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+.attributeCategoryMenus {
+    .treeview-menu-top{
+        padding-left: 10px;
+        list-style: none;
+    }
+    .treeview-menu {
+        display: none;
+        list-style: none;
+        padding:0;
+        margin:0;
+        > li {
+            margin: 0;
+            margin-left: 7px;
+            > a {
+                padding: 5px 5px 5px 7px;
+                display: block;
+                font-size: 14px;
+                margin: 0px 0px;
+                > .fa, > .glyphicon, > .ion {
+                    width: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+/* ******************************************* */
+/* Optional CSS, default style for ng-sortable */
+/* ******************************************* */
+.attribute-head-item {
+    line-height: 40px;
+    border-bottom: 1px solid gray;
+}
+.attribute-head-item .row, .attribute-value-item .row{margin:0;}
+.attribute-value-item .text-vertical{
+    line-height: 34px;
+}
+.as-sortable-item, .as-sortable-placeholder {
+    min-height: 34px;
+    margin-bottom: 4px;
+}
+
+.as-sortable-item {
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+.as-sortable-item-handle {
+}
+
+.as-sortable-placeholder {
+    border: 1px dashed darkgrey;
+    box-sizing: border-box;
+    background-color: #dbdbdb;
+}
+
+.as-sortable-drag {
+    opacity: .8;
+}
+
+.as-sortable-hidden {
+}
+
+
+.k-state-selected .grid-preview-item {
+ color:white;
+}
+
+
+
+
+.gallery {
+  padding: 10px 5px;
+  margin-bottom: -1px;
+  min-height: 510px;
+}
+.galleryItem {
+  float: left;
+  position: relative;
+  width: 200px;
+  margin: 6px;
+  padding: 0;
+}
+.galleryItem img {
+  width: 100%;
+}
+.galleryItem h3 {
+  margin: 0;
+  padding: 3px 5px 5px 0;
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #999;
+  text-align: center;
+}
+.galleryItem p {
+  visibility: hidden;
+}
+.galleryItem:hover p {
+  visibility: visible;
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  line-height: 110px;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0,0,0,0.75);
+  transition: background .2s linear, color .2s linear;
+  -moz-transition: background .2s linear, color .2s linear;
+  -webkit-transition: background .2s linear, color .2s linear;
+  -o-transition: background .2s linear, color .2s linear;
+}
+
+.k-listview:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.galleryType{
+  position: absolute;
+  right: 7.5px;
+  top: 2.5px;
+  z-index: 99;
+  color: red;
+  font-size: 20px;
+  background: #fef5f5;
+  padding: 0px 2px;
+  border-radius: 5px;
+}
+
+.galleryItem:hover .galleryType i {
+  color:black;
+}
+
+.ta-editor.container {
+  width:auto!important;
+  padding:0;
+}
+
+.ta-editor.ta-html {
+  width: 100%;
+}
+
+.form-group .form-control.kendo-auto-complete {
+   padding:0!important;
+   text-indent: inherit !important;
+}
+
+.width350 {
+  max-width: 350px;
+  width: 100%;
+}
+
+
+.form-input-bracket {
+  font-size: 24px;
+  text-align: center;
+  padding: 0;
+}
+
+.w100AutoComplete .k-autocomplete {
+  width: 100%;
+}
+
+.labelCheck {
+  margin-top: 10px!important;
+}

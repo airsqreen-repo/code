@@ -1,0 +1,107 @@
+<div class="tab-pane" ng-cloak>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="inWhichWeek" translate="security.user.label.inWhichWeek"></label>
+        <div class="col-sm-2">
+            <input id="inWhichWeek"  name="inWhichWeek" class="form-control input-md" ng-model="userProfile.inWhichWeek" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="lastMenstruationTime" translate="security.user.label.lastMenstruationTime"></label>
+        <div class="col-sm-2">
+            <input id="lastMenstruationTime" name="lastMenstruationTime" class="form-control input-md" kendo-date-picker ng-model="userProfile.lastMenstruationTime" k-ng-model="dateObject" style="width: 100%;" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="babyName" translate="security.user.label.babyName"></label>
+        <div class="col-sm-2">
+            <input id="babyName" name="babyName" class="form-control input-md" ng-model="userProfile.babyName" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="babyGender" class="col-sm-2 control-label" translate="security.user.label.babyGender"></label>
+        <div class="col-sm-2">
+            <select kendo-drop-down-list ng-model="userProfile.babyGender" name="babyGender" id="babyGender"
+                    k-data-text-field="'text'"
+                    k-data-value-field="'value'"
+                    k-data-source="babyGenders"
+                    style="  width: 100%;">
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="countOfPregnancy" translate="security.user.label.countOfPregnancy"></label>
+        <div class="col-sm-2">
+            <input id="countOfPregnancy" name="countOfPregnancy" class="form-control input-md" ng-model="userProfile.countOfPregnancy" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="havingMiscarriage" translate="security.user.label.havingMiscarriage"></label>
+        <div class="col-sm-2">
+            <input id="havingMiscarriage" type="checkbox" ng-model="userProfile.havingMiscarriage" ng-true-value="true" ng-false-value="false" class="labelCheck "/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="ectopic" translate="security.user.label.ectopic"></label>
+        <div class="col-sm-2">
+            <input id="ectopic" type="checkbox" ng-model="userProfile.ectopic" ng-true-value="true" ng-false-value="false" class="labelCheck "/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="treatment" translate="security.user.label.treatment"></label>
+        <div class="col-sm-2">
+            <input id="treatment" type="checkbox" ng-model="userProfile.treatment" ng-true-value="true" ng-false-value="false" class="labelCheck "/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="birthType" class="col-sm-2 control-label" translate="security.user.label.birthType"></label>
+        <div class="col-sm-2">
+            <select kendo-drop-down-list ng-model="userProfile.birthType" name="birthType" id="birthType"
+                    k-data-text-field="'text'"
+                    k-data-value-field="'value'"
+                    k-data-source="birthTypes"
+                    style="  width: 100%;">
+            </select>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="daysMenstruation" translate="security.user.label.daysMenstruation"></label>
+        <div class="col-sm-2">
+            <input id="daysMenstruation" name="daysMenstruation" class="form-control input-md" ng-model="userProfile.daysMenstruation" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="totalMenstruationDay" translate="security.user.label.totalMenstruationDay"></label>
+        <div class="col-sm-2">
+            <input id="totalMenstruationDay" name="totalMenstruationDay" class="form-control input-md" ng-model="userProfile.totalMenstruationDay" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="canNotBeProtected" translate="security.user.label.canNotBeProtected"></label>
+        <div class="col-sm-2">
+            <input id="canNotBeProtected" name="canNotBeProtected" class="form-control input-md" ng-model="userProfile.canNotBeProtected" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="previouslyLiveBirths" translate="security.user.label.previouslyLiveBirths"></label>
+        <div class="col-sm-2">
+            <input id="previouslyLiveBirths" type="checkbox" ng-model="userProfile.previouslyLiveBirths" ng-true-value="true" ng-false-value="false" class="labelCheck "/>
+        </div>
+    </div>
+
+</div>
+

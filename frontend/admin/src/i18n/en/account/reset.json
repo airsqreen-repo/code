@@ -1,0 +1,40 @@
+{
+    "reset": {
+        "form": {
+            "username": "Login",
+            "username.placeholder": "Your login",
+            "newpassword": "New password",
+            "newpassword.placeholder": "New password",
+            "confirmpassword": "New password confirmation",
+            "confirmpassword.placeholder": "Confirm the new password",
+            "email": "E-mail",
+            "email.placeholder": "Your e-mail"
+        },
+        "request": {
+            "title": "Reset your password",
+            "form": {
+                "button": "Reset password"
+            },
+            "messages": {
+                "info": "Enter the e-mail address you used to register",
+                "success": "Check your e-mails for details on how to reset your password.",
+                "notfound": "<strong>E-Mail address isn't registered!</strong> Please check and try again"
+
+            }
+
+        },
+        "finish" : {
+            "title": "Reset password",
+            "form": {
+                "button": "Validate new password"
+            },
+            "messages": {
+                "info": "Choose a new password",
+                "success": "<strong>Your password has been reset.</strong> Please <a href=\"#/login\">authenticate</a>.",
+                "keymissing": "The reset key is missing.",
+                "error": "Your password couldn't be reset. Remember a password request is only valid for 24 hours."
+            }
+        }
+    }
+
+}

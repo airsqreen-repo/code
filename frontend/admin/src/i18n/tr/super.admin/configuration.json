@@ -1,0 +1,13 @@
+{
+    "configuration": {
+        "singular": "Konfigürasyon",
+        "plural": "Konfigürasyon",
+        "management": "Yönetim",
+        "title": "Konfigürasyon",
+        "filter": "Filtre (prefixe göre)",
+        "table": {
+            "prefix": "Prefix",
+            "properties": "Özellikler"
+        }
+    }
+}

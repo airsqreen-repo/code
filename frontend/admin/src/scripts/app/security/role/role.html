@@ -1,0 +1,61 @@
+<script id="comboTemplate" type="text/x-kendo-template">
+    <span class="k-state-default">#= data.text#</span>
+    <span class="k-state-default">##</span>
+</script>
+
+<div>
+
+    <div class="row">
+        <form ng-submit="search(roleSearch)">
+            <fieldset ng-disabled="!hasSearch">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div style="  max-width: 117px; margin:auto">
+                                <select kendo-drop-down-list ng-model="roleSearch.dataStatus" name="dataStatus"
+                                        k-data-text-field="'text'"
+                                        k-data-value-field="'value'"
+                                        k-data-source="dataStatusDataSource"
+                                        style="  width: 119px;"
+                                        required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div style="max-width:370px; margin:0 auto">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="search_input" name="search_input" ng-model="roleSearch.input"   placeHolder="{{lblSearchInput}}" >
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" ng-click="search(roleSearch)" type="button"><i class="glyphicon glyphicon-search"></i></button>
+                                         <button class="btn btn-default" ng-click="clearSearch(roleSearch)" type="button"><i
+                                             class="glyphicon glyphicon-erase"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div has-right="{{ right.LIST }}" >
+        <div kendo-tool-bar k-options="toolbarOptions"></div>
+        <div
+             kendo-grid-checkbox
+             id="grid"
+             kendo-grid="grid"
+             data-role="grid"
+             k-data-source="data"
+             k-data-binding="dataBinding"
+             k-options="gridOptions"
+             k-on-change="onChange(data)"
+            >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+{
+    "logout": {
+        "title": "Çıkış",
+        "desc": "Çıkış yaptınız. <br /> <a href=\"#/login\">Giriş yapınız</a>"
+    }
+}

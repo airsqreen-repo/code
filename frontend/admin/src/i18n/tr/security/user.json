@@ -1,0 +1,49 @@
+{
+    "security": {
+        "user": {
+            "singular": "Kullanıcı",
+            "plural": "Kullanıcılar",
+            "management": "Tanımlama",
+            "title": "Kullanıcı Yönetimi",
+            "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
+            "detail": "Detay",
+            "roles": "Roller",
+            "profiles": "Profil",
+            "showBtn": "<i class='fa fa-user'></i>",
+            "label": {
+                "name": "Adı",
+                "surname": "Soyadı",
+                "nickname": "Rumuz",
+
+                "username": "Kullanıcı Adı",
+                "email": "E-mail",
+                "password": "Şifre",
+                "repeatPassword": "Şifre Tekrarı",
+                "status": "Durum",
+                "role": {
+                    "name": "Rol İsmi"
+                },
+                "activated": "Aktif",
+                "enabled": "Etkin"
+            },
+            "error": {
+                "password": {
+                    "minlength": "Şifreniz en az 5 karakter olmalıdır.",
+                    "maxlength": "Şifreniz 60 kararkterden fazla olamaz.",
+                    "strength": "Şifre Gücü:"
+                },
+                "confirmpassword": {
+                    "minlength": "Onay şifreniz en az 5 karakter olmalıdır.",
+                    "maxlength": "Onay şifreniz 60 kararkterden fazla olamaz."
+                },
+                "email": {
+                    "invalid": "E-mail adresiniz geçersizdir.",
+                    "minlength": "E-mail adresiniz en az 2 karakter olmalıdır.",
+                    "maxlength": "E-mail adresiniz 150 karakterden fazla olamaz."
+                }
+            },
+            "roleList": "Roller",
+            "profilesList": "Profil"
+        }
+    }
+}

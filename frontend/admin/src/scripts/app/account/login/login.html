@@ -1,0 +1,31 @@
+<div class="form-box" id="login-box">
+    <div class="header" translate="login.title">Authentication</div>
+    <form role="form" class="form-horizontal" ng-submit="login($event)">
+        <div class="body">
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="{{'global.form.username.placeholder' | translate}}" ng-model="username">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="password" placeholder="{{'login.form.password.placeholder' | translate}}"
+                       ng-model="password">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="remember_me" /> <span translate="login.form.rememberme">Remember me</span>
+            </div>
+            <div class="row">
+                <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
+                    <strong>Authentication failed!</strong> Please check your credentials and try again.
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button type="submit" class="btn bg-light-blue btn-block" translate="login.form.button">Authenticate</button>
+
+            <p> <a ui-sref="requestReset" translate="login.password.forgot">Did you forget your password?</a></p>
+
+            <a href="register.html" class="text-center" translate="global.messages.info.register" >Register a new account</a>
+        </div>
+    </form>
+</div>
+
+

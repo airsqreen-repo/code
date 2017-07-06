@@ -1,0 +1,39 @@
+{
+    "reset": {
+        "form": {
+            "username": "Kullanıcı Adı",
+            "username.placeholder": "Kullanıcı Adı",
+            "newpassword": "Yeni şifre",
+            "newpassword.placeholder": "Yeni Şifre",
+            "confirmpassword": "Yeni Şifre (Tekrar)",
+            "confirmpassword.placeholder": "Yeni Şifre (Tekrar)",
+            "email": "E-mail",
+            "email.placeholder": "E-mail"
+        },
+        "request": {
+            "title": "Şifrenizi Tekrar Tanımlayınız",
+            "form": {
+                "button": "Şifreyi Tekrar Tanımla"
+            },
+            "messages": {
+                "info": "Kayıtta kullandığınız email adresinizi giriniz",
+                "success": "Lütfen e-postalarını şifre yenileme bildirimi için kontrol ediniz.",
+                "notfound": "<strong>E-posta adresiniz sistemde kayıtlı değil!</strong> Lütfen kontrol ediniz"
+            }
+
+        },
+        "finish" : {
+            "title": "Şifreyi Sıfırla",
+            "form": {
+                "button": "Şifreyi Sıfırla"
+            },
+            "messages": {
+                "info": "Yeni bir şifre giriniz",
+                "success": "<strong>Şifreniz tanımlandı.</strong> Lütfen sisteme <a href=\"#/login\">giriş yapınız</a>.",
+                "keymissing": "Şifre sıfırlama anahtarı yok ya da geçersiz",
+                "error": "<strong>Şifreniz sıfırlanamadı!</strong> Çünkü şifre sıfırlama istekleri 24 saat içinde gerçekleştirilmelidir"
+            }
+        }
+    }
+
+}

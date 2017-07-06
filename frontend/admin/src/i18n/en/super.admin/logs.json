@@ -1,0 +1,13 @@
+{
+    "logs": {
+        "singular": "Log",
+        "plural": "Logs",
+        "management": "Management",
+        "nbloggers": "There are {{ total }} loggers.",
+        "filter": "Filter",
+        "table": {
+            "name": "Name",
+            "level": "Level"
+        }
+    }
+}

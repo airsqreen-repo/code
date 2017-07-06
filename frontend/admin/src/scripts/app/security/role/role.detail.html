@@ -1,0 +1,26 @@
+<div>
+    <form kendo-validator="validator" ng-submit=""  name="form" enter-navigate autocomplete="off" class="form-horizontal">
+        <fieldset ng-disabled="isView">
+            <div role="tabpanel" class="item-tab-container">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" ui-sref-active="active"><a ui-sref=".detail" aria-controls="detail" role="tab" tabindex="-1" translate="security.role.detail">Detail</a></li>
+                    <li role="presentation" ui-sref-active="active"><a ui-sref=".rightList" aria-controls="rightList" role="tab" tabindex="-1" translate="security.role.rights" ng-show="!isCreate">Rights</a></li>
+                </ul>
+                <div class="col-sm-offset-1 form-control-buttons">
+                    <div ng-show="!isView" class="popup-process">
+                        <button class="btn btn-danger" ng-click="removeDialog()" has-right="{{ right.DELETE }}"    ng-show="isUpdate" translate="delete">Delete</button>
+                        <button class="btn btn-primary" ng-click="save($event)"  has-right="{{ right.UPDATE }}"  ng-class="{disabled: form.$invalid}"  ng-show="isUpdate" translate="update">Update</button>
+                        <button class="btn btn-primary" ng-click="save($event)"  has-right="{{ right.CREATE }}"  ng-class="{disabled: form.$invalid}"  ng-show="isCreate" translate="save">Save</button>
+                    </div>
+                </div>
+            </div>
+            <!-- tablar buraya geliyor -->
+            <div ui-view="tabContent" class="tab-content-ui"></div>
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <button type="button" ui-sref="roleManagement" class="k-button pull-left ng-scope c-back" translate="backBtn"></button>
+                </div>
+            </div>
+    </form>
+</div>

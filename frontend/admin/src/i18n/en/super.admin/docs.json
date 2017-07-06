@@ -1,0 +1,7 @@
+{
+    "docs": {
+        "singular": "Doc",
+        "plural": "Docs",
+        "management": "Management"
+    }
+}

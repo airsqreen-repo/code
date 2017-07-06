@@ -1,0 +1,5 @@
+INSERT INTO air_roles (id, create_user, create_date, data_status, update_user, update_date, version, name) VALUES ('1', 'system', NULL, 'ACTIVE', '', NULL, '0', 'SuperAdmin')
+INSERT INTO air_rights (id, create_user, create_date, data_status, update_user, update_date, version, name) VALUES ('1', 'system', NULL, 'ACTIVE', '', NULL, '0', 'ADMIN')
+INSERT INTO air_role_rights (id, create_user, create_date, data_status, update_user, update_date, version, right_id, role_id) VALUES ('1', 'system', NULL, 'ACTIVE', '', NULL, '0', '1', '1')
+INSERT INTO air_users(id, create_user, create_date, data_status, update_user, update_date, version, activated, activation_key,  default_language, email, username, firstname, lastname, nickname,  password ) VALUES ('1', 'system', NULL,  'ACTIVE', NULL, NULL, '0', 't', NULL, 'TURKISH', 'admin@airsqreen.com','admin@airsqreen.com', 'Super Admin', 'airsqreen', 'airsqreenadmin', '$2a$10$A3tZV9agcdp4VT1wTyeGY.pXdlvX5T0zANITox917cp70jRlVarT2')
+INSERT INTO air_user_roles (id, create_user, create_date, data_status, update_user, update_date, version, role_id, user_id) VALUES ('1', 'system', NULL, 'ACTIVE', '', NULL, '0', '1', '1')

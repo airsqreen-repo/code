@@ -1,0 +1,96 @@
+<header class="header">
+    <a ui-sref="app.dashboard" class="logo">
+        <!-- Add the class icon to your logo image or logo icon to add the margining -->
+        AirSqreen
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="dropdown notifications-menu" ng-controller="LanguageController">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-flag"></i>
+                        <span translate>Language</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; ">
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li><a href="" ng-click="changeLanguage('en')"><i class="fa fa-flag"></i> English</a></li>
+                                    <li><a href="" ng-click="changeLanguage('tr')"><i class="fa fa-flag"></i>Türkçe</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown" ng-hide="isAuthenticated">
+                    <a href="" role="button" ui-sref="login"><i class="fa fa-sign-in"></i> <span>Login</span></a>
+                </li>
+
+                <li class="dropdown user user-menu" ng-show="isAuthenticated">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <span>{{account.firstName}} <i class="caret"></i></span>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header bg-light-blue">
+                            <p>
+                                {{account.firstName}}
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href=""  ui-sref="settings" translate="profile" class="btn btn-default btn-flat">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="" class="btn btn-default btn-flat" ui-sref="logout"><i class="fa fa-sign-out"></i> <span translate="global.menu.account.logout">Logout</span></a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>
+
+<div class="wrapper row-offcanvas row-offcanvas-left">
+
+    <aside class="left-side sidebar-offcanvas" ng-include="'scripts/components/sidebar/sidebar.html'">
+    </aside>
+
+    <div ui-view="sidebar" ng-cloak=""></div>
+
+    <aside class="right-side" >
+
+        <section class="content-header">
+            <h1>
+                <span translate> {{header}} </span>
+                <small translate>{{subHeader}}</small>
+            </h1>
+            <div class='back-container' ng-show="$state.current.name != 'app.dashboard'">
+                <button type="button" href back-button class="k-button pull-right ng-scope c-back"  translate="backBtn"> <span class="glyphicon glyphicon-chevron-left"></span> Back</button>
+            </div>
+        </section>
+
+        <section class="content">
+            <div ui-view="content"></div>
+        </section>
+    </aside>
+</div>

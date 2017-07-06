@@ -1,0 +1,24 @@
+{
+    "register": {
+        "title": "Kayıt",
+        "form": {
+            "button": "Kayıt Ol"
+        },
+        "messages": {
+            "validate": {
+                "login": {
+                    "required": "Girilmesi zorunludur.",
+                    "minlength": "Girişiniz en az 1 karakter olmalıdır.",
+                    "maxlength": "Girişiniz 50 karakterden uzun olamaz.",
+                    "pattern": "Girişiniz sadece küçük harf ve basamaktan oluşabilir."
+                }
+            },
+            "success": "<strong>Kaydoldunuz!</strong> Lütfen onay için e-mailinizi kontrol ediniz.",
+            "error": {
+                "fail": "<strong>Kayıt başarısız!</strong> Lütfen tekrar deneyiniz.",
+                "userexists": "<strong>Bu kullanıcı adı başka bir üye tarafından kullanılıyor!</strong> Lütfen başka bir kullanıcı adı seçin",
+                "emailexists": "<strong>Bu e-mail adresi kullanımda!</strong> Lütfen başka bir e-mail adresi seçiniz."
+            }
+        }
+    }
+}

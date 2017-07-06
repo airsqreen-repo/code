@@ -1,0 +1,11 @@
+
+Run the following commands in terminals
+-- dev
+npm install
+npm install -g bower
+bower install
+grunt serve
+
+-- prod
+
+grunt build

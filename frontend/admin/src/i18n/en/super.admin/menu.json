@@ -1,0 +1,19 @@
+{
+    "superAdmin": {
+        "menu": {
+            "singular": "Menu",
+            "plural": "Menus",
+            "management": "Management",
+            "searchPlaceHolder": "Searching by menu name...",
+            "label": {
+                "parentMenu": "Parent Menu",
+                "textKey": "Name",
+                "stateLink": "Link",
+                "menuType": "Type",
+                "menuIcon": "Icon",
+                "isLeaf": "is leaf",
+                "name": "Name"
+            }
+        }
+    }
+}

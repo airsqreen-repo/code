@@ -1,0 +1,95 @@
+server:
+    port: 8080
+
+liquibase:
+    context: dev
+
+spring:
+    profiles:
+          active: dev
+    datasource:
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        url:
+        databaseName: airsqreen
+        serverName: localhost
+        username: postgres
+        password:
+
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+        database: POSTGRESQL
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_memtrue            javax.persistence.validation.modeber: : NONE
+
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                  logs: target/elasticsearch/log
+                  data: target/elasticsearch/data
+    messages:
+        cache-seconds: 1
+    thymeleaf:
+        mode: XHTML
+        cache: false
+
+metrics:
+    jmx.enabled: true
+    spark:
+        enabled: false
+        host: localhost
+        port: 9999
+    graphite:
+        enabled: false
+        host: localhost
+        port: 2003
+        prefix: solen
+
+cache:
+    timeToLiveSeconds: 3600
+    hazelcast:
+        debug: true
+        stickySession: false
+        backupCount: 1
+mail:
+    ENV_SPRING_MAIL: mail.
+    defaultHost: mail.pusulait.com
+    defaultPropHost: mail.pusulait.com
+    mailFrom: info@pusulait.com
+    PROP_PORT: 587
+    PROP_PASSWORD: Bg8381bg
+    PROP_PROTO: smtp
+    PROP_TLS: tls
+    PROP_AUTH: auth
+    PROP_SMTP_AUTH: mail.smtp.auth
+    PROP_STARTTLS: mail.smtp.starttls.enable
+    PROP_TRANSPORT_PROTO: smtp
+    transport.protocol: smtp
+    propUser: info@pusulait.com
+    PROP_HOST: mail.pusulait.com
+
+mailJet:
+    fromEmail: info@guideofpregnancy.com
+    fromName: Guide of Pregnancy
+    apiKey: 056758a4de6699e86ec1c179dc502184
+    apiSecret: 802eeede9692cca1b63a019165eba806
+
+logback:
+    loglevel: INFO
+
+
+upload:
+    UPLOAD_DIRECTORY:
+

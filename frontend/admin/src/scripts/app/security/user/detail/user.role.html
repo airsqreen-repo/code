@@ -1,0 +1,46 @@
+<div class="tab-pane" ng-cloak>
+
+    <div class="modal fade" tabindex="-1"  id="editor" role="dialog" dialog="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" translate="edit">
+                    Edit
+                </div>
+                <div class="modal-body">
+                    <div class="popup-grid-scroll">
+                        <form  kendo-validator="validator" ng-submit="" class="form-horizontal">
+                            <fieldset ng-disabled="isView">
+                                <div kendo-grid
+                                     k-data-source="rolesDataSource"
+                                     k-options="rolesGridOptions"
+                                     k-on-change="roleOnChange(data)"
+                                     k-height="300">
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div ng-show="!isView" class="popup-process">
+                        <button class="btn btn-primary" ng-click="roleUpdate($event)"  has-right="{{ right.CREATE }}"  ng-show="isCreate" translate="save">Save</button>
+                    </div>
+                    <button  class="btn btn-default" data-dismiss="modal" translate="close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div
+                  kendo-grid="grid"
+                  k-data-source="dataSource"
+                  k-options="gridOptions"
+                  k-on-change="onChange(data)"
+                  k-height="400">
+            </div>
+        </div>
+    </div>
+
+</div>
+

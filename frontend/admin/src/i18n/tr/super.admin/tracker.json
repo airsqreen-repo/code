@@ -1,0 +1,15 @@
+{
+    "tracker": {
+        "title": "Real-time user activities",
+        "singular": "Tracker",
+        "plural": "Trackers`",
+        "management": "Tanımlama",
+        "table": {
+            "userlogin": "Kullanıcı",
+            "ipaddress": "IP Addresi",
+            "userAgent": "Kullanıcı",
+            "page": "İçindeki sayfa",
+            "time": "Zaman"
+        }
+    }
+}

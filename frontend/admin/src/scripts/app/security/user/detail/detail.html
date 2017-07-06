@@ -1,0 +1,107 @@
+<div class="tab-pane" ng-cloak>
+
+    <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label" translate="security.user.label.name">Name</label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="firstname" name="firstname" ng-model="user.firstname" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastname" class="col-sm-2 control-label" translate="security.user.label.surname">Surname</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="lastname" name="lastname" ng-model="user.lastname" required  autocomplete="off">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nickname" class="col-sm-2 control-label" translate="security.user.label.nickname">Nickname</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="nickname" name="nickname" ng-model="user.nickname" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label" translate="security.user.label.email">Email</label>
+
+        <div class="col-sm-4">
+            <input type="email" class="form-control" id="email" name="email" ng-model="user.email" required autocomplete="off">
+            <div ng-show="form.email.$dirty && form.email.$invalid">
+                <p class="help-block"
+                   ng-show="form.email.$error.email" translate="security.user.error.email.invalid">
+                    Your e-mail is invalid.
+                </p>
+                <p class="help-block"
+                   ng-show="form.email.$error.minlength" translate="security.user.error.email.minlength">
+                    Your e-mail is required to be at least 2 characters.
+                </p>
+                <p class="help-block"
+                   ng-show="form.email.$error.maxlength" translate="security.user.error.email.maxlength">
+                    Your e-mail cannot be longer than 150 characters.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="password" translate="security.user.label.password"></label>
+        <div class="col-sm-4">
+            <input type="password" class="form-control" name="password" id="password"
+                   ng-model="user.tempPassword" ng-minlength="6" ng-maxlength="50"  ng-required='isCreate' >
+
+            <div ng-show="form.password.$dirty && form.password.$invalid">
+
+                <p class="help-block"
+                   ng-show="form.password.$error.minlength" translate="security.user.error.password.minlength">
+                    Your password is required to be at least 6 characters.
+                </p>
+                <p class="help-block"
+                   ng-show="form.password.$error.maxlength" translate="security.user.error.password.maxlength">
+                    Your password cannot be longer than 60 characters.
+                </p>
+            </div>
+
+            <br>
+
+            <input type="password" class="form-control" name="confirmPassword" id="repeatPassword" placeholder=""
+                   ng-model="user.tempPassword_re" ng-minlength="6" ng-maxlength="50"  ng-required='isCreate' >
+
+            <div ng-show="form.confirmPassword.$dirty && form.confirmPassword.$invalid">
+                <p class="help-block"
+                   ng-show="form.confirmPassword.$error.minlength" translate="security.user.error.confirmpassword.minlength">
+                    Your confirmation password is required to be at least 6 characters.
+                </p>
+                <p class="help-block"
+                   ng-show="form.confirmPassword.$error.maxlength" translate="security.user.error.confirmpassword.maxlength">
+                    Your confirmation password cannot be longer than 60 characters.
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <password-strength-bar password-to-check="user.tempPassword"></password-strength-bar>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="activated" translate="security.user.label.activated"></label>
+        <div class="col-sm-2">
+            <input id="activated" type="checkbox" ng-model="user.activated" ng-true-value="true" ng-false-value="false" class="labelCheck "/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="dataStatus" class="col-sm-2 control-label" translate="security.user.label.status">User Status</label>
+        <div class="col-sm-2">
+            <select kendo-drop-down-list ng-model="user.dataStatus" name="dataStatus" id="dataStatus"
+                    k-data-text-field="'text'"
+                    k-data-value-field="'value'"
+                    k-data-source="dataStatusDataSource"
+                    style="  width: 156px;">
+            </select>
+
+        </div>
+    </div>
+
+</div>

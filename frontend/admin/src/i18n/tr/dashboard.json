@@ -1,0 +1,10 @@
+{
+    "main": {
+        "appName": "AirSqreen",
+        "title": "Hoşgeldin, AirSqreen!",
+        "subtitle": "Anasayfa",
+        "logged": {
+            "message": "Kullanıcı olarak girdiniz \"{{username}}\"."
+        }
+    }
+}

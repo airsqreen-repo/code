@@ -1,0 +1,19 @@
+{
+    "superAdmin": {
+        "menu": {
+            "singular": "Menü",
+            "plural": "Menüler",
+            "management": "Yönetim",
+            "searchPlaceHolder": "Menüye göre ara",
+            "label": {
+                "parentMenu": "Ana Menü",
+                "textKey": "İsim",
+                "stateLink": "Link",
+                "menuType": "Tip",
+                "menuIcon": "İkon",
+                "isLeaf": "Dip",
+                "name": "İsim"
+            }
+        }
+    }
+}

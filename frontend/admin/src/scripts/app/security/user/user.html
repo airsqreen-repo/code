@@ -1,0 +1,47 @@
+<script id="comboTemplate" type="text/x-kendo-template">
+    <span class="k-state-default">#= data.text#</span>
+    <span class="k-state-default">##</span>
+</script>
+
+<div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form ng-submit="search(userSearch)" novalidate class="form-inline">
+                <fieldset ng-disabled="!right">
+                    <div class="form-group">
+                        <label for="email" translate="security.user.label.email"></label>
+                        <input type="text" class="form-control input-sm" id="email" name="email" ng-model="userSearch.email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" translate="security.user.label.name"></label>
+                        <input type="text" class="form-control input-sm" id="firstname" name="firstname" ng-model="userSearch.firstname" >
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" translate="security.user.label.surname"></label>
+                        <input type="text" class="form-control input-sm" id="lastname" name="lastname" ng-model="userSearch.lastname" >
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default" translate="search" type="submit">Search</button>
+                        <button class="btn btn-default" ng-click="clearSearch()" translate="clearSearch">Clear Search</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        <div kendo-tool-bar k-options="toolbarOptions"></div>
+        <div
+                kendo-grid-checkbox
+                id="grid"
+                kendo-grid="grid"
+                data-role="grid"
+                k-data-source="data"
+                k-data-binding="dataBinding"
+                k-options="gridOptions"
+                k-on-change="onChange(data)"
+        >
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+    "activate": {
+        "title": "Aktivasyon",
+        "messages": {
+            "success": "<strong>Kullanıcı aktif edildi.</strong> Lütfen <a href=\"#/login\">giriş yapın</a>.",
+            "error": "<strong>Kullanıcı aktif edilemedi.</strong> Lütfen, kaydolmak için kayıt formunu kulanın."
+        }
+    }
+}
+

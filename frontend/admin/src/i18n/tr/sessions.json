@@ -1,0 +1,15 @@
+{
+    "sessions": {
+        "title": "[<b>{{username}}</b>] için aktif oturum",
+        "table": {
+            "ipaddress": "IP adresi",
+            "useragent": "Kullanıcı",
+            "date": "Tarih",
+            "button": "Geçersizleştir"
+        },
+        "messages": {
+            "success": "<strong>Oturumunuz geçersiz!</strong>",
+            "error": "<strong>Bir hata oluştu!</strong> Oturum bilgisi doğrulanamadı!"
+        }
+    }
+}

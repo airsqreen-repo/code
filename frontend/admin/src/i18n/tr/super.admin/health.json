@@ -1,0 +1,31 @@
+{
+    "health": {
+        "singular": "Health",
+        "plural": "Healths",
+        "management": "Tanımlama",
+        "refresh": {
+            "button": "Güncelle"
+        },
+        "stacktrace": "Stacktrace",
+        "details": {
+            "details": "Detaylar",
+            "properties": "Özellikler",
+            "name": "İsim",
+            "value": "Değer",
+            "error": "Hata"
+        },
+        "indicator": {
+            "diskSpace": "Disk alanı",
+            "mail": "E-mail",
+            "db": "Veritabanı"
+        },
+        "table": {
+            "service": "Servis İsmi",
+            "status": "Durum"
+        },
+        "status": {
+            "UP": "Yukarı",
+            "DOWN": "Aşağı"
+        }
+    }
+}

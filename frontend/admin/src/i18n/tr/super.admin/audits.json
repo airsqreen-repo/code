@@ -1,0 +1,30 @@
+{
+    "audits": {
+        "title": "Denetleme Yönetimi",
+        "singular": "Denetleme",
+        "plural": "Denetlemeler",
+        "management": "Tanımlama",
+        "filter": {
+            "title": "Tarihe göre filtrele",
+            "from": "from",
+            "to": "to",
+            "button": {
+                "weeks": "haftalar",
+                "today": "bugün",
+                "clear": "temizle",
+                "close": "Kapat"
+            }
+        },
+        "table": {
+            "header": {
+                "principal": "Kullanıcı",
+                "date": "Tarih",
+                "status": "Eyalet",
+                "data": "Extra data"
+            },
+            "data": {
+                "remoteAddress": "Remote Address:"
+            }
+        }
+    }
+}

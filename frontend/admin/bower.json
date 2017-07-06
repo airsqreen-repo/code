@@ -1,0 +1,44 @@
+{
+  "name": "solen",
+  "version": "1.0.0",
+  "appPath": "src/bower_components",
+  "testPath": "test/javascript/spec",
+  "dependencies": {
+    "bootstrap": "latest",
+    "angular-bootstrap": "0.14.3",
+    "stomp-websocket": "2.3.4",
+    "sockjs-client": "0.3.4",
+    "modernizr": "2.8.3",
+    "jquery": "2.1.3",
+    "json3": "3.3.2",
+    "angular-ui-router": "0.2.13",
+    "angular": "1.4.0",
+    "angular-animate": "1.4.1",
+    "angular-resource": "1.4.1",
+    "angular-cookies": "1.4.1",
+    "angular-sanitize": "1.4.1",
+    "angular-i18n": "1.4.1",
+    "angular-translate": "2.7.0",
+    "angular-translate-storage-cookie": "2.7.0",
+    "angular-translate-loader-partial": "2.7.0",
+    "angular-dynamic-locale": "0.1.27",
+    "angular-local-storage": "0.2.0",
+    "angular-cache-buster": "0.4.3",
+    "ngInfiniteScroll": "1.2.0",
+    "lodash": "~3.2.0",
+    "font-awesome-less": "~0.1.0",
+    "ng-sortable": "~1.3.0",
+    "angular-bcrypt": "~1.0.0",
+    "angular-ui-mask": "1.4.2",
+    "ng-file-upload": "8.0.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.1",
+    "angular-scenario": "1.4.1"
+  },
+  "resolutions": {
+    "angular": "1.4.1",
+    "angular-cookies": "1.4.1",
+    "jquery": "2.1.3"
+  }
+}

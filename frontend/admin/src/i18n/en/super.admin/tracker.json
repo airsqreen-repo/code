@@ -1,0 +1,15 @@
+{
+    "tracker": {
+        "title": "Real-time user activities",
+        "singular": "Tracker",
+        "plural": "Trackers`",
+        "management": "Management",
+        "table": {
+            "userlogin": "User",
+            "ipaddress": "IP Address",
+            "userAgent": "User agent",
+            "page": "Current page",
+            "time": "Time"
+        }
+    }
+}

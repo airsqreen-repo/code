@@ -1,0 +1,13 @@
+{
+    "logs": {
+        "singular": "Log",
+        "plural": "Loglar",
+        "management": "Yönetim",
+        "nbloggers": "There are {{ total }} loggers.",
+        "filter": "Filtre",
+        "table": {
+            "name": "İsim",
+            "level": "Level"
+        }
+    }
+}

@@ -1,0 +1,23 @@
+<div ng-cloak>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 translate="main.title">Welcome, Java Hipster!</h1>
+            <p class="lead" translate="main.subtitle">This is your homepage ddd</p>
+
+            <div ng-switch="isAuthenticated()">
+                <div class="alert alert-success" ng-switch-when="true" translate="main.logged.message" translate-values="{username: '{{account.email}}'}">
+                    You are logged in as user "{{account.email}}".
+                </div>
+
+
+                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
+                    If you want to <a href="#/login">authenticate</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
+                </div>
+
+                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
+                    You don't have an account yet? <a href="#/register">Register a new account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

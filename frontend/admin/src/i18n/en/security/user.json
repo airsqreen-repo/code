@@ -1,0 +1,59 @@
+{
+    "security": {
+        "user": {
+            "singular":"User",
+            "plural":"Users",
+            "management":"Management",
+            "title": "User Management",
+            "searchPlaceHolder": "Searching by name, surname, username and email...",
+            "detail": "Detail",
+            "roles": "Roles",
+            "profiles": "Profil",
+            "showBtn": "<i class='fa fa-user'></i>" ,
+            "label": {
+                "name": "Name",
+                "surname": "Surname",
+                "username": "Username",
+                "nickname": "Nickname",
+                "email": "E-mail",
+                "password": "Password",
+                "repeatPassword": "Repeat Password",
+
+                "status": "Status",
+                "role":{
+                    "name":"Role Name"
+                },
+                "activated": "Activeted",
+                "enabled": "Enabled",
+                "credentialsExpired": "Credentials Expired",
+                "accountExpired": "Account Expired",
+                "accountLocked": "Account Locked",
+                "passportIssuedAt": "Passport Issued at",
+                "passportIssuedBy": "Passport Issued By",
+                "passportNo": "Passport No",
+                "passportValidUntil": "Passport Valid Until",
+                "passwordHint": "Password Hint",
+                "phoneNumber": "Phone Number",
+                "profileImage": "Profile Image"
+            },
+            "error":{
+                "password": {
+                    "minlength": "Your password is required to be at least 6 characters.",
+                    "maxlength": "Your password cannot be longer than 60 characters.",
+                    "strength": "Password strength:"
+                },
+                "confirmpassword": {
+                    "minlength": "Your confirmation password is required to be at least 5 characters.",
+                    "maxlength": "Your confirmation password cannot be longer than 60 characters."
+                },
+                "email": {
+                    "invalid": "Your e-mail is invalid.",
+                    "minlength": "Your e-mail is required to be at least 2 characters.",
+                    "maxlength": "Your e-mail cannot be longer than 150 characters."
+                }
+            },
+            "roleList":"Roles",
+            "profilesList": "Profil"
+        }
+    }
+}

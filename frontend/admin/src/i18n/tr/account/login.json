@@ -1,0 +1,19 @@
+{
+    "login": {
+        "title": "Giriş Yapın",
+        "form": {
+            "password": "Şifre",
+            "password.placeholder": "Şifre",
+            "rememberme": "Beni hatırla",
+            "button": "Giriş"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Giriş başarısız!</strong> E-mail ve şifrenizi kontrol ettikten sonra tekrar deneyiniz."
+            }
+        },
+        "password" : {
+            "forgot": "Şifrenizi mi unuttunuz?"
+        }
+    }
+}

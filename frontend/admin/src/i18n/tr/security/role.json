@@ -1,0 +1,22 @@
+{
+  "security": {
+    "role": {
+      "singular":"Role",
+      "plural":"Roles",
+      "management":"Management",
+      "title": "Role Management",
+      "searchPlaceHolder": "Searching by name...",
+      "detail": "Detail",
+      "rights": "Rights",
+      "right": "Right",
+      "label": {
+        "name": "Name",
+        "status": "Status",
+        "right":{
+          "name":"Right Name"
+        }
+      },
+      "rightList":"Rights"
+    }
+  }
+}
