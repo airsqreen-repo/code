@@ -69,7 +69,7 @@ public class UserRoleResource {
             return new ResponseEntity<>(assembler.toResource(users), HttpStatus.OK);
         } catch (Exception ex) {
 
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ALL_USERS, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ALL_USERS, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("userRoleService.getAllUsers", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -87,7 +87,7 @@ public class UserRoleResource {
                             HttpStatus.OK))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_USER_ROLES, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_USER_ROLES, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("userRoleService.get", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }

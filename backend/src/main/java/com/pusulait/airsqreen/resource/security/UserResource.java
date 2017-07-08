@@ -127,7 +127,7 @@ public class UserResource {
 
             return new ResponseEntity<>(assembler.toResource(userService.getAllSearch(userCO, pageable)), HttpStatus.OK);
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.ALL_USER_SEARCH, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.ALL_USER_SEARCH, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("userService.getAllSearch",ex.getMessage()),HttpStatus.CONFLICT);
         }
     }
@@ -146,7 +146,7 @@ public class UserResource {
                             HttpStatus.OK))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_USER, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_USER, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("userService.get", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -190,7 +190,7 @@ public class UserResource {
                                 mailService.sendActivationEmail(user);
                                 return new ResponseEntity<>(HttpStatus.CREATED);
                             } catch (Exception ex){
-                                systemErrorService.save(new SystemErrorDTO(ErrorType.REGISTER, Constants.ANONYMOUS_ACCOUNT ));
+                                systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.REGISTER, Constants.ANONYMOUS_ACCOUNT ));
                                 return new ResponseEntity<>(new ErrorDTO("userService.register", ex.getMessage()), HttpStatus.CONFLICT);
                             }
                         })

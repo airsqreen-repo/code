@@ -11,12 +11,22 @@ public class SystemErrorDTO {
 
     private Long id;
     private ErrorType errorType;
+    private String errorDescription;
     private String username;
 
-    public SystemErrorDTO(ErrorType errorType, String username){
+   /* public SystemErrorDTO(ErrorType errorType, String username){
         this.errorType = errorType;
         this.username = username;
+
+    }*/
+
+    public SystemErrorDTO(String errorDescription,ErrorType errorType, String username){
+        this.errorType = errorType;
+        this.username = username;
+        this.errorDescription = errorDescription;
+
     }
+
 
     SystemErrorDTO(){
     }
@@ -28,6 +38,7 @@ public class SystemErrorDTO {
         systemError.setId(systemErrorDTO.getId());
         systemError.setErrorType(systemErrorDTO.getErrorType());
         systemError.setUsername(systemErrorDTO.getUsername());
+        systemError.setErrorDescription(systemErrorDTO.getErrorDescription());
         return systemError;
 
     }

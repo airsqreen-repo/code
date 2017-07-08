@@ -31,6 +31,10 @@ public class SystemError extends AuditBase implements Serializable {
     @Enumerated(EnumType.STRING)
     private ErrorType errorType;
 
+    @Lob
+    @Column(name = "ERROR_DESCRIPTION")
+    private String errorDescription;
+
     @Column(name = "USERNAME")
     private String username;
 }

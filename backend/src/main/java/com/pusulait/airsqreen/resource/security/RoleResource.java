@@ -113,7 +113,7 @@ public class RoleResource {
                             HttpStatus.OK))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ROLE, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ROLE, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleService.getRole", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -136,7 +136,7 @@ public class RoleResource {
                             HttpStatus.OK))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ROLE, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ROLE, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleService.getRoleWithRights", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -158,7 +158,7 @@ public class RoleResource {
                             HttpStatus.OK))
                     .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception ex){
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ROLE_RIGHT, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ROLE_RIGHT, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleRightService.findByRoleId", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -174,7 +174,7 @@ public class RoleResource {
             return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
 
         } catch (Exception ex) {
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ALL_ROLE, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ALL_ROLE, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleService.getAllRoles", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -189,7 +189,7 @@ public class RoleResource {
             final Page<RoleDTO> page = roleService.findAll(name,dataStatus,pageable);
             return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
         } catch (Exception ex) {
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ALL_ROLE, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ALL_ROLE, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleService.findAllRoles", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
@@ -205,7 +205,7 @@ public class RoleResource {
             return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
 
         } catch (Exception ex) {
-            systemErrorService.save(new SystemErrorDTO(ErrorType.GET_ALL_RIGHT, SecurityUtils.getCurrentLogin()));
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_ALL_RIGHT, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("roleService.getAllRights", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
