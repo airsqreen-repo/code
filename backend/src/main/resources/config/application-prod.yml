@@ -100,3 +100,12 @@ logback:
 upload:
     UPLOAD_DIRECTORY: /Users/ferhatyaban/Sites/uploads/
 
+platform161:
+        api:
+            AppID: arkitekttl
+            AppSecret: b6a85c5236f80e479e46d30c7bf7251d3bf2cac711078b62
+            API_Key: 0c9880e2c20d98f2c9281785098d665e3ee81d7e
+            UserID: dogus.arkitekt
+        endpoints:
+            Auth: https://ui.platform161.com/api/v2/arkitekttl
+            campaigns: https://ui.platform161.com/api/v2/arkitekttl
