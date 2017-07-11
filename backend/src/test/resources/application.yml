@@ -10,7 +10,7 @@ spring:
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:
-        databaseName: starter
+        databaseName: airsqreen
         serverName: localhost
         username: postgres
         password: 1234
@@ -99,4 +99,15 @@ logback:
 
 upload:
     UPLOAD_DIRECTORY: /Users/ferhatyaban/Sites/uploads/
+
+platform161:
+        api:
+            appID: arkitekttl
+            clientID: zplus
+            clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
+            user: airsqreen.api
+            password: program720
+        endpoints:
+            auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
+            campaigns: https://ui.platform161.com/api/v2/arkitekttl
 

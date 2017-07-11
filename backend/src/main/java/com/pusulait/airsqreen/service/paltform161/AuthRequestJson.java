@@ -14,13 +14,13 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 class AuthRequestJson {
-    @JsonProperty(value = "app_id")
-    private String appId;
-    @JsonProperty(value = "api_key")
-    private String apiKey;
-    @JsonProperty(value = "app_secret")
-    private String appSecret;
-    @JsonProperty(value = "user_id")
-    private String userId;
+    @JsonProperty(value = "user")
+    private String user;
+    @JsonProperty(value = "password")
+    private String password;
+    @JsonProperty(value = "client_id")
+    private String clientId;
+    @JsonProperty(value = "client_secret")
+    private String clientSecret;
 
 }

@@ -10,10 +10,12 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 class AuthResponseJson {
-    @JsonProperty(value = "access_token")
-    private String accessToken;
-    private Boolean success;
-    private String error;
-    private String description;
+    @JsonProperty(value = "token")
+    private String token;
+    @JsonProperty(value = "active")
+    private Boolean active;
+    private String result;
+    private String type;
+    private String message;
 
 }

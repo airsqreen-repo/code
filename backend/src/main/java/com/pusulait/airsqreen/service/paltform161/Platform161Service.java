@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by benan on 7/9/2017.
@@ -22,9 +24,10 @@ import javax.inject.Inject;
 public class Platform161Service {
 
     private String appID;
-    private String appSecret;
-    private String apiKey;
-    private String userID;
+    private String clientID;
+    private String clientSecret;
+    private String user;
+    private String password;
     private String authEndPoint;
     private String campaignsEndPoint;
 
@@ -34,12 +37,13 @@ public class Platform161Service {
     @PostConstruct
     public void init() {
 
-        this.appID = env.getProperty("platform161.api.AppID");
-        this.appSecret = env.getProperty("platform161.api.AppSecret");
-        this.apiKey = env.getProperty("platform161.api.API_Key");
-        this.userID = env.getProperty("platform161.api.UserID");
+        this.appID = env.getProperty("platform161.api.appID");
+        this.clientID = env.getProperty("platform161.api.clientID");
+        this.clientSecret = env.getProperty("platform161.api.clientSecret");
+        this.user = env.getProperty("platform161.api.user");
+        this.password = env.getProperty("platform161.api.password");
         //End points
-        this.authEndPoint = env.getProperty("platform161.endpoints.Auth");
+        this.authEndPoint = env.getProperty("platform161.endpoints.auth");
         this.campaignsEndPoint = env.getProperty("platform161.endpoints.campaigns");
         //getAuthToken();
     }
@@ -51,10 +55,10 @@ public class Platform161Service {
 
         AuthRequestJson requestJson = new AuthRequestJson();
 
-        requestJson.setApiKey(this.apiKey);
-        requestJson.setAppId(this.appID);
-        requestJson.setAppSecret(this.appSecret);
-        requestJson.setUserId(this.userID);
+        requestJson.setUser(this.user);
+        requestJson.setPassword(this.password);
+        requestJson.setClientId(this.clientID);
+        requestJson.setClientSecret(this.clientSecret);
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));
@@ -68,11 +72,12 @@ public class Platform161Service {
 
         try {
 
-            responseEntity = restTemplate.exchange(url, HttpMethod.POST, requestEntity, AuthResponseJson.class);
-            if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
+            responseEntity = restTemplate.postForEntity(url, requestEntity, AuthResponseJson.class);
+
+             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
                 AuthResponseJson res = responseEntity.getBody();
-                if (res.getSuccess()) {
-                    result = res.getAccessToken();
+                if (res.getToken() != null) {
+                    result = res.getToken();
                 }
             }
 

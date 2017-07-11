@@ -102,10 +102,11 @@ upload:
 
 platform161:
         api:
-            AppID: arkitekttl
-            AppSecret: b6a85c5236f80e479e46d30c7bf7251d3bf2cac711078b62
-            API_Key: 0c9880e2c20d98f2c9281785098d665e3ee81d7e
-            UserID: dogus.arkitekt
+            appID: arkitekttl
+            clientID: zplus
+            clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
+            user: airsqreen.api
+            password: program720
         endpoints:
-            Auth: https://ui.platform161.com/api/v2/arkitekttl
+            auth: https://arkitekttl.platform161.com/api/v2/access_tokens
             campaigns: https://ui.platform161.com/api/v2/arkitekttl
