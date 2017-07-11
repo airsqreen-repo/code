@@ -1,7 +1,9 @@
 package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -12,7 +14,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -86,6 +90,39 @@ public class Platform161Service {
         }
 
         return result;
+    }
+
+
+
+
+    public List<Campaign> getCampaign(String token) {
+        List<Campaign> campaigns = null;
+        String url = this.campaignsEndPoint;
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setContentType(new MediaType("application", "json"));
+        requestHeaders.set("PFM161-API-AccessToken", token);
+        HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+        ResponseEntity<List<Campaign>> responseEntity = null;
+
+        try {
+            ParameterizedTypeReference<List<Campaign>> responseType = new ParameterizedTypeReference<List<Campaign>>() {};
+            responseEntity =  restTemplate.exchange(url, HttpMethod.GET, requestEntity , responseType);
+
+            if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
+                campaigns = responseEntity.getBody();
+            }
+
+        } catch (RestClientException e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return campaigns;
     }
 
 

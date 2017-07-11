@@ -1,6 +1,7 @@
 package service;
 
 import com.pusulait.airsqreen.Application;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.dto.security.UserDTO;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import com.pusulait.airsqreen.service.security.UserService;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import java.util.List;
 
 /**
  * Created by benan on 5/14/2017.
@@ -31,9 +34,17 @@ public class TestPaltform161 {
     private Platform161Service platform161Service;
 
     @Test
-    public void saveUser(){
+    public void getToken(){
 
         String token=platform161Service.getAuthToken();
         log.debug("token:" + token);
+    }
+
+    @Test
+    public void getCampaigns(){
+        String token=platform161Service.getAuthToken();
+        log.debug("token:" + token);
+        List<Campaign> list=platform161Service.getCampaign(token);
+        log.debug("list:" + list.size());
     }
 }

@@ -35,7 +35,7 @@ public class Campaign {
     private Double media_budget;
     private Boolean unlimited_budget;
     private Long contact_id;
-    private Long daily_cap;
+    private String daily_cap;
     private String pacing;
     private DeliveryType deliveryType;
     private String agency;
