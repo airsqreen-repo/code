@@ -1,0 +1,10 @@
+.idea/
+target/
+*.iml
+iccb-client/target
+siebel-client/target
+subscriber-query-client/target
+trafficmobile-client/target
+deploy/
+
+.DS_Store
