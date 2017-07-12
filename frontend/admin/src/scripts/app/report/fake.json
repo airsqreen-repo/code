@@ -1,0 +1,56 @@
+[
+  {
+    "country": "Spain",
+    "year": "Day 1",
+    "unit": "GWh",
+    "solar": 80
+  },
+  {
+    "country": "Spain",
+    "year": "Day 2",
+    "unit": "GWh",
+    "solar": 150
+  },
+  {
+    "country": "Spain",
+    "year": "Day 3",
+    "unit": "GWh",
+    "solar": 220
+  },
+  {
+    "country": "Spain",
+    "year": "Day 4",
+    "unit": "GWh",
+    "solar": 70
+  },
+  {
+    "country": "Spain",
+    "year": "Day 5",
+    "unit": "GWh",
+    "solar": 350
+  },
+  {
+    "country": "Spain",
+    "year": "Day 6",
+    "unit": "GWh",
+    "solar": 40
+  },
+  {
+    "country": "Spain",
+    "year": "Day 7",
+    "unit": "GWh",
+    "solar": 30
+  },
+  {
+    "country": "Spain",
+    "year": "Day 8",
+    "unit": "GWh",
+    "solar": 80
+  },
+  {
+    "country": "Spain",
+    "year": "Day 9",
+    "unit": "GWh",
+    "solar": 100
+  }
+]

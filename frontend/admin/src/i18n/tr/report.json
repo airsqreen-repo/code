@@ -1,0 +1,30 @@
+
+{
+    "report": {
+      "singular":"Rapor",
+      "plural":"Raporlar",
+      "management":"Yönetimi",
+      "title": "Rapor Yönetimi",
+      "dailyRevenue": "Daily Revenue (last 30 days)",
+      "createReport": "Create Report",
+      "button":{
+        "go":"GO",
+        "exportExcel":"Excel' e aktar"
+      },
+      "search":{
+        "reportType":"Rapor Tipi",
+        "show":"Gösterim",
+        "dates":"Tarihler",
+        "to":"arasında"
+      },
+      "label": {
+        "date":"Date",
+        "screenName":"Screen Name",
+        "cpm":"CPM",
+        "impressions":"Impressions",
+        "revenue":"Revenue"
+      }
+    }
+}
+
+

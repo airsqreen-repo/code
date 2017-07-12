@@ -1,4 +1,4 @@
-,{
+{
     "global": {
         "title": "AirSqreen",
         "subheader": "Administrator Panel",
@@ -30,6 +30,7 @@
                 "apidocs": "API",
                 "database": "Database"
             },
+            "report": "Report",
             "language": "Language"
         },
         "form": {

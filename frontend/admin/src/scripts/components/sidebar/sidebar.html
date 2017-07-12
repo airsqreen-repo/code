@@ -10,47 +10,15 @@
         </div>
     </div>
 
-    <ul class="sidebar-menu">
-        <li treeview>
-            <a href="">
-                <i class="fa fa-lock"></i>
-                <span translate="global.menu.security.title">Security</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a ui-sref="userManagement" translate="global.menu.security.user">User</a></li>
-                <li><a ui-sref="roleManagement" translate="global.menu.security.role">Role</a></li>
-            </ul>
-        </li>
-    </ul>
 
     <ul class="sidebar-menu">
-        <li treeview>
-            <a href="">
-                <i class="fa fa-location-arrow"></i>
-                <span translate="global.menu.admin.title">SüperAdmin</span>
-                <i class="fa fa-angle-left pull-right"></i>
+        <li >
+            <a ui-sref="reportManagement">
+                <i class="fa fa-area-chart"></i>
+                <span translate="global.menu.report">Report</span>
             </a>
-            <ul class="treeview-menu">
-                <li ui-sref-active="active"><a ui-sref="trackerManagement"><span class="glyphicon glyphicon-eye-open"></span>
-                    &nbsp;<span translate="global.menu.admin.tracker">User tracker</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="metricManagement"><span class="glyphicon glyphicon-dashboard"></span>
-                    &#xA0;<span translate="global.menu.admin.metrics">Metrics</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="healthManagement"><span class="glyphicon glyphicon-heart"></span>
-                    &#xA0;<span translate="global.menu.admin.health">Health</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="configurationManagement"><span class="glyphicon glyphicon-list-alt"></span>
-                    &#xA0;<span translate="global.menu.admin.configuration">Configuration</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="auditManagement"><span class="glyphicon glyphicon-bell"></span>
-                    &#xA0;<span translate="global.menu.admin.audits">Audits</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="logManagement"><span class="glyphicon glyphicon-tasks"></span>
-                    &#xA0;<span translate="global.menu.admin.logs">Logs</span></a></li>
-                <li ui-sref-active="active"><a ui-sref="docsManagement"><span class="glyphicon glyphicon-book"></span>
-                    &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
-            </ul>
         </li>
     </ul>
-
-
 
 </section>
 
