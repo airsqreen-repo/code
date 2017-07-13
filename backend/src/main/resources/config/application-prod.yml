@@ -110,3 +110,12 @@ platform161:
         endpoints:
             auth: https://arkitekttl.platform161.com/api/v2/access_tokens
             campaigns: https://ui.platform161.com/api/v2/zplus/campaigns
+
+
+sistem9:
+        api:
+            url: http://172.31.70.229:10037/ServiceCatalog/SiebelServices
+            username: WEB
+            password: WEB
+            application_id: WEB
+            source_system: WEB
