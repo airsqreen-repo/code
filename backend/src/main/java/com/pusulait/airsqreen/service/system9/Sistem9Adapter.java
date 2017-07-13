@@ -1,5 +1,8 @@
 package com.pusulait.airsqreen.service.system9;
 
+import com.sistemdokuzmedya.ObjectFactory;
+import com.sistemdokuzmedya.S9WExSrvc;
+import com.sistemdokuzmedya.WinActionRelease;
 import com.sistemdokuzmedya.WinActionTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.env.Environment;
@@ -27,10 +30,12 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
     private String sourceSys;
 
     private WebServiceTemplate webServiceTemplate;
-    WinActionTemplate port;
+    private S9WExSrvc s9WExSrvc;
+    private WinActionRelease winActionRelease;
+    private ObjectFactory objectFactory;
     //Header header;
 
-    @Inject
+    //@Inject
     private Jaxb2Marshaller marshaller;
 
     @PostConstruct
@@ -41,7 +46,7 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         this.appId = env.getProperty("sistem9.api.application_id");
         this.sourceSys = env.getProperty("sistem9.api.source_system");
         this.setDefaultUri(apiUrl);
-        initJaxbMarshaller();
+      //  initJaxbMarshaller();
 
     }
 
@@ -49,19 +54,20 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         this.setMarshaller(marshaller);
         this.setUnmarshaller(marshaller);
         webServiceTemplate = getWebServiceTemplate();
-        /*ServiceFactory<SiebelServices, SiebelServicesPortType> serviceFactory = new ServiceFactory<SiebelServices, SiebelServicesPortType>();
-        serviceFactory.setCachePort(false);
-        port = serviceFactory.getPort(SiebelServices.class, SiebelServicesPortType.class, apiUrl);
 
-        header = new Header();
-        //header.setRequestId("WEB-000000" + RandomUtil.generateTransactionId());
-        header.setSourceSystem(sourceSys);
-        header.setReplyExpected("Now");
+        WinActionRelease winActionRelease = objectFactory.createWinActionRelease();
 
-        WinActionTemplate credentials = new Credentials();
-        credentials.setActionID(appId);
-        credentials.setUserName(username);
-        credentials.setPassword(password);
-        header.getCredentials().add(credentials);*/
+        winActionRelease.setActionID("");
+        winActionRelease.setDeviceID(1);
+        winActionRelease.setPassword(password);
+        winActionRelease.setUserName(username);
+
+        //s9WExSrvc.setHandlerResolver();
+
+        //s9WExSrvc.getS9WExSrvcSoap().winActionRelease(winActionRelease);
+
+        //s9WExSrvc.setExecutor();
+
+
     }
 }
