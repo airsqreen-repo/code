@@ -165,7 +165,7 @@ angular.module('airSqreenApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasc
             views: {
                 'container@': {
                     templateUrl: 'scripts/app/main/app/app.html',
-                    controller: function (ENV, $rootScope, $scope, $location, $state, Auth, Principal, AppUtils){
+                    controller: function (ENV, $rootScope, $scope, $location, $state, Auth, Principal){
 
                         Principal.identity().then(function(account) {
                             $rootScope.account = account;
@@ -180,20 +180,6 @@ angular.module('airSqreenApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasc
 
                         $scope.isAuthenticated = Principal.isAuthenticated;
 
-
-                        $scope.loadCache = function () {
-                            AppUtils.users(true).then();
-                            AppUtils.groups(true).then();
-                            AppUtils.polls(true).then();
-                            AppUtils.chats(true).then();
-                            AppUtils.productCategories(true).then();
-                            AppUtils.pushMessages(true).then();
-
-                            /*AppUtils.systemMessages();*/
-                        };
-                        if(ENV == 'prod') {
-                            $scope.loadCache();
-                        }
 
                     }
                 }
