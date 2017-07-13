@@ -379,9 +379,9 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: 'prod',
                     VERSION: parseVersionFromPomXml(),
-                    SERVICE_URL: 'http://api.guideofpregnancy.com/',
-                    PUBLIC_URL: 'http://guideofpregnancy.com/',
-                    CDN_URL: 'http://cdn.guideofpregnancy.com/'
+                    SERVICE_URL: 'http://testapi.airsqreen.com/',
+                    PUBLIC_URL: 'http://testapi.airsqreen.com/',
+                    CDN_URL: 'http://testapi.airsqreen.com/'
                 }
             },
             preprod: {
