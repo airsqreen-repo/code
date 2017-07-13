@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.repository;
+package com.pusulait.airsqreen.repository.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import org.springframework.data.jpa.repository.JpaRepository;

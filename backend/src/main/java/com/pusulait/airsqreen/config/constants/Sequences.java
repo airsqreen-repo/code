@@ -8,6 +8,11 @@ public final class Sequences {
 
     private Sequences() {
     }
+
+    public static final String CAMPAIGN_SEQUENCE  = "SEQ_CAMPAIGN_ID";
+    public static final String INVENTORY_SEQUENCE  = "SEQ_INVENTORY_ID";
+
+
     public static final String API_SEQUENCE  = "SEQ_API_ID";
 
     public static final String ADDRESSES_SEQUENCE  = "SEQ_ADDRESSES_ID";

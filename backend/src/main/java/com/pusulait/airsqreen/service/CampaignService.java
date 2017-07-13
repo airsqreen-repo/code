@@ -1,11 +1,8 @@
 package com.pusulait.airsqreen.service;
 
-import com.pusulait.airsqreen.domain.SystemError;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.dto.SystemErrorDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
-import com.pusulait.airsqreen.repository.CampaignRepository;
-import com.pusulait.airsqreen.repository.error.SystemErrorRepository;
+import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

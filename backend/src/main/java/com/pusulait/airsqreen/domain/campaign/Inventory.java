@@ -15,21 +15,21 @@ import java.io.Serializable;
  * Created by benan on 7/13/2017.
  */
 
+
 @Data
-@SQLDelete(sql = "update " + Constants.PREFIX + "CAMPAIGNS SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ? ")
+@SQLDelete(sql = "update " + Constants.PREFIX + "INVENTORIES SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ? ")
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @Entity
-@Table(name = Constants.PREFIX + "CAMPAIGNS")
-public class Campaign extends AuditBase implements Serializable {
+@Table(name = Constants.PREFIX + "INVENTORIES")
+public class Inventory extends AuditBase implements Serializable {
 
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.CAMPAIGN_SEQUENCE)
-    @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 2)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.INVENTORY_SEQUENCE)
+    @SequenceGenerator(name = Sequences.INVENTORY_SEQUENCE, sequenceName = Sequences.INVENTORY_SEQUENCE, allocationSize = 1, initialValue = 2)
     private Long id;
 
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
-
 
 }

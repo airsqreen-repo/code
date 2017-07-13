@@ -16,4 +16,5 @@ public class InventorySource {
     private List<Long> inventory;
     private String domain_filter;
     private List<Long> domains;
+
 }
