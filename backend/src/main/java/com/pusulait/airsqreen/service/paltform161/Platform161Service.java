@@ -1,7 +1,7 @@
 package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -14,10 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by benan on 7/9/2017.
@@ -93,10 +90,8 @@ public class Platform161Service {
     }
 
 
-
-
-    public List<Campaign> getCampaign(String token) {
-        List<Campaign> campaigns = null;
+    public List<CampaignDTO> getCampaign(String token) {
+        List<CampaignDTO> campaignDTOList = null;
         String url = this.campaignsEndPoint;
 
         HttpHeaders requestHeaders = new HttpHeaders();
@@ -108,22 +103,27 @@ public class Platform161Service {
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        ResponseEntity<List<Campaign>> responseEntity = null;
+        ResponseEntity<List<CampaignDTO>> responseEntity = null;
 
         try {
-            ParameterizedTypeReference<List<Campaign>> responseType = new ParameterizedTypeReference<List<Campaign>>() {};
+            ParameterizedTypeReference<List<CampaignDTO>> responseType = new ParameterizedTypeReference<List<CampaignDTO>>() {};
             responseEntity =  restTemplate.exchange(url, HttpMethod.GET, requestEntity , responseType);
 
             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
-                campaigns = responseEntity.getBody();
+                campaignDTOList = responseEntity.getBody();
             }
 
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
 
-        return campaigns;
+        return campaignDTOList;
+    }
+
+    public List<CampaignDTO> getAllCampaigns() {
+        return getCampaign(getAuthToken());
+
     }
 
 
-}
+    }

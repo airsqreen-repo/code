@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.domain.campaign.enums;
+package com.pusulait.airsqreen.domain.dto.campaign.enums;
 
 /**
  * Created by benan on 7/9/2017.

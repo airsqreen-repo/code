@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.domain.campaign;
+package com.pusulait.airsqreen.domain.dto.campaign;
 
 import lombok.Data;
 

@@ -1,13 +1,8 @@
 package service;
 
 import com.pusulait.airsqreen.Application;
-import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.dto.security.UserDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
-import com.pusulait.airsqreen.service.security.UserService;
-import io.github.benas.randombeans.EnhancedRandomBuilder;
-import io.github.benas.randombeans.api.EnhancedRandom;
-import io.github.benas.randombeans.api.Randomizer;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +39,7 @@ public class TestPaltform161 {
     public void getCampaigns(){
         String token=platform161Service.getAuthToken();
         log.debug("token:" + token);
-        List<Campaign> list=platform161Service.getCampaign(token);
+        List<CampaignDTO> list=platform161Service.getCampaign(token);
         log.debug("list:" + list.size());
     }
 }
