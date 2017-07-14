@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.service;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
@@ -40,6 +41,14 @@ public class CampaignService {
        List<Campaign> campaignList = platform161Service.getAllCampaigns().stream().map(CampaignDTO::toEntity).collect(Collectors.toList());
         for(Campaign campaign : campaignList)
             campaignRepository.save(campaign);
+    }
+
+    @Transactional
+    public void savePlt161() {
+
+        List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().map(CampaignDTO::toEntity).collect(Collectors.toList());
+        for(Plt161Campaign plt161Campaign : campaignList.subList(0,5))
+            campaignRepository.save(plt161Campaign);
     }
 
 }

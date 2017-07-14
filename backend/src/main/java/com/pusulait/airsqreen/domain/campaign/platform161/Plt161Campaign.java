@@ -8,6 +8,7 @@ import com.pusulait.airsqreen.domain.dto.campaign.enums.RtbOptimizeType;
 //import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 import com.pusulait.airsqreen.domain.pg_hibernate.StringArrayType;
+import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
@@ -25,8 +26,9 @@ import java.util.List;
 @Table(name = Constants.PREFIX + "PLATFORM_161_CAMPAIGNS")
 @TypeDefs(value = {
         @TypeDef(name = "text", typeClass = StringArrayType.class)
-        ,@TypeDef(name = "longarray", typeClass = LongArrayType.class)
+        , @TypeDef(name = "longarray", typeClass = LongArrayType.class)
 })
+@Data
 public class Plt161Campaign extends Campaign {
 
     private Boolean active;
@@ -67,18 +69,51 @@ public class Plt161Campaign extends Campaign {
     @Type(type = "text")
     @Column(columnDefinition = "text")
     private List<Long> operating_system_ids;
-/*
-    //private List<InventorySource> inventory_sources;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> direct_deal_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> device_type_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> browser_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> language_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> mobile_app_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<String> supply_types;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> shared_channel_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> country_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> region_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<Long> city_ids;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private List<String> rtb_urls;
-*/
+
+    //private List<InventorySource> inventory_sources;
+
 }

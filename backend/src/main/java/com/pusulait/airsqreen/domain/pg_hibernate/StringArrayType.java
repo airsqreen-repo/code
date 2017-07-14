@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -20,80 +21,97 @@ import java.util.StringTokenizer;
  */
 public class StringArrayType implements UserType {
 
-	@Override
+    @Override
     public int[] sqlTypes() {
-		return new int[]{java.sql.Types.OTHER};
-	}
+        return new int[]{java.sql.Types.OTHER};
+    }
 
-	@Override
+    @Override
     public Class returnedClass() {
-		return String[].class;
-	}
+        return String[].class;
+    }
 
-	@Override
-    public boolean equals( Object o, Object o1 ) throws HibernateException {
-		if (o == null && o1 == null)
-			return true;
-		else if (o == null || o1 == null)
-			return false;
-		return Arrays.equals((String[]) o, (String[]) o1);
-	}
+    @Override
+    public boolean equals(Object o, Object o1) throws HibernateException {
+        if (o == null && o1 == null)
+            return true;
+        else if (o == null || o1 == null)
+            return false;
+
+       /* ArrayList<String> arr = new ArrayList( Arrays.asList(o));
+        ArrayList<String>  arr1 = new ArrayList( Arrays.asList(o1));
+
+        String[] strArr = new String[arr.size()];
+        strArr = (String[]) arr.toArray(strArr);
+
+        String[] strArr1 = new String[arr1.size()];
+        strArr1 = (String[]) arr1.toArray(strArr1);
+
+        return Arrays.equals(strArr, strArr1);*/
+
+        return Arrays.equals((String[]) o, (String[]) o1);
+    }
 
     @Override
     public Object nullSafeGet(ResultSet resultSet, String[] strings, SessionImplementor sessionImplementor, Object o) throws HibernateException, SQLException {
 
-		if (strings.length != 1)
-			throw new IllegalArgumentException("strings.length != 1, strings = " + strings);
+        if (strings.length != 1)
+            throw new IllegalArgumentException("strings.length != 1, strings = " + strings);
 
-		String value = resultSet.getString(strings[0]);
+        String value = resultSet.getString(strings[0]);
 
-		if (value == null) {
-			return null;
-		} else if (value.length() < 2) {
-			return new String[]{};
-		} else {
-			StringTokenizer tokenizer = new StringTokenizer(value.substring(1, value.length() - 1), ",");
-			String[] values = new String[tokenizer.countTokens()];
-			int i = 0;
-			while (tokenizer.hasMoreTokens()) {
-				values[i++] = tokenizer.nextToken();
-			}
-			return values;
-		}
-	}
+        if (value == null) {
+            return null;
+        } else if (value.length() < 2) {
+            return new String[]{};
+        } else {
+            StringTokenizer tokenizer = new StringTokenizer(value.substring(1, value.length() - 1), ",");
+            String[] values = new String[tokenizer.countTokens()];
+            int i = 0;
+            while (tokenizer.hasMoreTokens()) {
+                values[i++] = tokenizer.nextToken();
+            }
+            return values;
+        }
+    }
 
     @Override
     public void nullSafeSet(PreparedStatement preparedStatement, Object o, int i, SessionImplementor sessionImplementor) throws HibernateException, SQLException {
 
-		String[] strings = (String[]) o;
+        String[] strings = (String[]) o;
 
-		if (o == null) {
-			preparedStatement.setNull(i, java.sql.Types.OTHER);
-		} else {
-			StringBuffer buffer = new StringBuffer();
-			for (int j = 0; j < strings.length; j++) {
-				buffer.append(strings[j]);
-				if (j < strings.length - 1)
-					buffer.append(",");
-			}
+        if (o == null) {
+            preparedStatement.setNull(i, java.sql.Types.OTHER);
+        } else {
+            StringBuffer buffer = new StringBuffer();
+            for (int j = 0; j < strings.length; j++) {
+                buffer.append(strings[j]);
+                if (j < strings.length - 1)
+                    buffer.append(",");
+            }
 
-			PGobject object = new PGobject();
-			object.setValue("{" + buffer + "}");
-			object.setType("text");
-			preparedStatement.setObject(i, object);
-		}
-	}
+            PGobject object = new PGobject();
+            object.setValue("{" + buffer + "}");
+            object.setType("text");
+            preparedStatement.setObject(i, object);
+        }
+    }
 
-	@Override
-    public Object deepCopy( Object o ) throws HibernateException {
-		if (o == null) return null;
-		return ((String[]) o).clone();
-	}
+    @Override
+    public Object deepCopy(Object o) throws HibernateException {
+        if (o == null || ((ArrayList) o).size() == 0)
+            return null;
 
-	@Override
+        String[] strArr = new String[((ArrayList) o).size()];
+        strArr = (String[]) ((ArrayList) o).toArray(strArr);
+
+        return strArr;
+    }
+
+    @Override
     public boolean isMutable() {
-		return true;
-	}
+        return true;
+    }
 
     @Override
     public int hashCode(Object o) throws HibernateException {
