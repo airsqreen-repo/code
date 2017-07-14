@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.domain.campaign;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -20,6 +21,7 @@ import java.io.Serializable;
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @Entity
 @Table(name = Constants.PREFIX + "CAMPAIGNS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Campaign extends AuditBase implements Serializable {
 
     @Id
@@ -30,6 +32,19 @@ public class Campaign extends AuditBase implements Serializable {
 
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
+
+    @Column(name = "NAME")
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PRICING_TYPR")
+    private PricingType pricingType;
+
+    @Column(name = "OFFER_ID")
+    private Long offerId;
+
+    @Column(name = "TARGET")
+    private String target;
 
 
 }

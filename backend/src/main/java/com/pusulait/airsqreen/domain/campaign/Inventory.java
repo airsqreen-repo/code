@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.domain.campaign;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.security.user.User;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -31,5 +32,13 @@ public class Inventory extends AuditBase implements Serializable {
 
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAMPAIGN_ID", nullable = false, insertable = false, updatable = false)
+    private Campaign campaign;
+
+    @Column(name = "CAMPAIGN_ID")
+    private Long campaignId;
+
 
 }
