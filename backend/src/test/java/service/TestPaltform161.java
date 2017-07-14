@@ -2,6 +2,7 @@ package service;
 
 import com.pusulait.airsqreen.Application;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -28,6 +29,9 @@ public class TestPaltform161 {
     @Autowired
     private Platform161Service platform161Service;
 
+    @Autowired
+    private CampaignService campaignService;
+
     @Test
     public void getToken(){
 
@@ -41,5 +45,10 @@ public class TestPaltform161 {
         log.debug("token:" + token);
         List<CampaignDTO> list=platform161Service.getCampaign(token);
         log.debug("list:" + list.size());
+
+    }
+    @Test
+    public void savePlt161Campaigns(){
+        campaignService.savePlt161();
     }
 }
