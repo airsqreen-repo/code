@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by benan on 7/13/2017.
@@ -37,7 +38,7 @@ public class Campaign extends AuditBase implements Serializable {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "PRICING_TYPR")
+    @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
 
     @Column(name = "OFFER_ID")
@@ -45,6 +46,18 @@ public class Campaign extends AuditBase implements Serializable {
 
     @Column(name = "TARGET")
     private String target;
+
+    @Column(name = "START_ON")
+    private Date startOn;
+
+    @Column(name = "END_ON")
+    private Date endOn;
+
+    @Column(name = "PRICE")
+    private Double price;
+
+    @Column(name = "AGENCY_FEE")
+    private Double agencyFee;
 
 
 }
