@@ -1,3 +1,4 @@
+--create extension hstore;
 ALTER TABLE public.preg_posts DROP CONSTRAINT post_post_type_check;
 
 

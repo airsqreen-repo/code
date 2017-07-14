@@ -28,6 +28,7 @@ public class PusulaHibernateIntegrator implements Integrator {
         registerClass(configuration, new PolygonType());
         registerClass(configuration, new StringArrayType());
         registerClass(configuration, new DoubleStringArrayType());
+        registerClass(configuration, new LongArrayType());
     }
 
     private void registerClass(Configuration configuration, UserType type) {

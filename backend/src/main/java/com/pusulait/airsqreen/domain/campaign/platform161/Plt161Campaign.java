@@ -2,12 +2,17 @@ package com.pusulait.airsqreen.domain.campaign.platform161;
 
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.dto.campaign.InventorySource;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.DeliveryType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.FrequencyCapType;
-import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.RtbOptimizeType;
+//import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
+import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
+import com.pusulait.airsqreen.domain.pg_hibernate.StringArrayType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -18,6 +23,10 @@ import java.util.List;
  */
 @Entity
 @Table(name = Constants.PREFIX + "PLATFORM_161_CAMPAIGNS")
+@TypeDefs(value = {
+        @TypeDef(name = "text", typeClass = StringArrayType.class)
+        ,@TypeDef(name = "longarray", typeClass = LongArrayType.class)
+})
 public class Plt161Campaign extends Campaign {
 
     private Boolean active;
@@ -48,11 +57,18 @@ public class Plt161Campaign extends Campaign {
     private Double booked_budget;
     private Double platform161_tech_fee;
     private String mobile_app_filter;
+
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
+    private List<String> postal_codes;
+
     private String internal_purchase_order_number;
 
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
+    private List<Long> operating_system_ids;
+/*
     //private List<InventorySource> inventory_sources;
-
-  /*  private List<Long> operating_system_ids;
     private List<Long> direct_deal_ids;
     private List<Long> device_type_ids;
     private List<Long> browser_ids;
@@ -63,7 +79,6 @@ public class Plt161Campaign extends Campaign {
     private List<Long> country_ids;
     private List<Long> region_ids;
     private List<Long> city_ids;
-    private List<String> postal_codes;
     private List<String> rtb_urls;
 */
 }
