@@ -54,7 +54,6 @@ public class Plt161Campaign extends Campaign {
     private FrequencyCapType frequencyCapType;
     private Long frequency_cap_count;
     private String shared_channel_filter;
-
     private String postal_code_filter;
     private Double booked_budget;
     private Double platform161_tech_fee;

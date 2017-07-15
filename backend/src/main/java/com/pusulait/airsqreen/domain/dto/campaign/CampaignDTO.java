@@ -80,9 +80,12 @@ public class CampaignDTO {
     public static Plt161Campaign toEntity(CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = new Plt161Campaign();
+
         campaign.setExternalId(campaignDTO.getId());
-        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        campaign.setPricingType(campaignDTO.getPricingType());
+        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
         campaign.setSupply_types(campaignDTO.getSupply_types());
+
         return campaign;
     }
 

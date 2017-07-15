@@ -38,7 +38,7 @@ public class StringArrayType implements UserType {
         else if (o == null || o1 == null)
             return false;
 
-       /* ArrayList<String> arr = new ArrayList( Arrays.asList(o));
+        ArrayList<String> arr = new ArrayList( Arrays.asList(o));
         ArrayList<String>  arr1 = new ArrayList( Arrays.asList(o1));
 
         String[] strArr = new String[arr.size()];
@@ -47,9 +47,9 @@ public class StringArrayType implements UserType {
         String[] strArr1 = new String[arr1.size()];
         strArr1 = (String[]) arr1.toArray(strArr1);
 
-        return Arrays.equals(strArr, strArr1);*/
+        return Arrays.equals(strArr, strArr1);
 
-        return Arrays.equals((String[]) o, (String[]) o1);
+       // return Arrays.equals((String[]) o, (String[]) o1);
     }
 
     @Override
