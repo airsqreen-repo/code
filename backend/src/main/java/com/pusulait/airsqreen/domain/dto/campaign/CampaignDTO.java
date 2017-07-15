@@ -1,6 +1,5 @@
 package com.pusulait.airsqreen.domain.dto.campaign;
 
-import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.DeliveryType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.FrequencyCapType;
@@ -67,7 +66,7 @@ public class CampaignDTO {
     private String mobile_app_filter;
     private Long[] mobile_app_ids;
     private String[] supply_types;
-    private List<InventorySource> inventory_sources;
+    private List<InventorySourceDTO> inventory_sources;
     private Long[] operating_system_ids;
     private Long[] direct_deal_ids;
 
