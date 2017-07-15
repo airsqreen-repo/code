@@ -111,3 +111,5 @@ platform161:
             auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
             campaigns: https://ui.platform161.com/api/v2/zplus/campaigns
             inventories: https://ui.platform161.com/api/v2/zplus/inventory_sources
+            sections: https://ui.platform161.com/api/v2/zplus/sections
+            publishers: https://ui.platform161.com/api/v2/zplus/publishers

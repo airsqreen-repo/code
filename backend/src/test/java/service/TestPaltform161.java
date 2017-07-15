@@ -3,6 +3,8 @@ package service;
 import com.pusulait.airsqreen.Application;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
+import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
+import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +59,35 @@ public class TestPaltform161 {
         log.debug("list:" + list.size());
 
     }
+
+    @Test
+    public void getSections() {
+        String token = platform161Service.getAuthToken();
+        log.debug("token:" + token);
+        List<SectionDTO> list = platform161Service.getSections(token);
+        log.debug("list:" + list.size());
+
+    }
+
+    @Test
+    public void getSection() {
+        String token = platform161Service.getAuthToken();
+        log.debug("token:" + token);
+        SectionDTO sectionDTO = platform161Service.getSection(token,3027210L);
+        log.debug("sectionDTO:" + sectionDTO);
+
+    }
+
+
+    @Test
+    public void getPublishers() {
+        String token = platform161Service.getAuthToken();
+        log.debug("token:" + token);
+        List<PublisherDTO> list = platform161Service.getPublishers(token);
+        log.debug("list:" + list.size());
+
+    }
+
 
 
     @Test
