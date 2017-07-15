@@ -61,57 +61,57 @@ public class Plt161Campaign extends Campaign {
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<String> postal_codes;
+    private String[] postal_codes;
 
     private String internal_purchase_order_number;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> operating_system_ids;
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] operating_system_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] direct_deal_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] device_type_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] browser_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] language_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] mobile_app_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> direct_deal_ids;
+    private String[] supply_types;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] shared_channel_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] country_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] region_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "longarray")
+    private Long[] city_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> device_type_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> browser_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> language_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> mobile_app_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<String> supply_types;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> shared_channel_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> country_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> region_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> city_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<String> rtb_urls;
+    private String[] rtb_urls;
 
     //private List<InventorySource> inventory_sources;
 

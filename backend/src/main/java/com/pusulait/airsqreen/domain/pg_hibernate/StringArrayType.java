@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
@@ -32,24 +31,12 @@ public class StringArrayType implements UserType {
     }
 
     @Override
-    public boolean equals(Object o, Object o1) throws HibernateException {
+    public boolean equals( Object o, Object o1 ) throws HibernateException {
         if (o == null && o1 == null)
             return true;
         else if (o == null || o1 == null)
             return false;
-
-        ArrayList<String> arr = new ArrayList( Arrays.asList(o));
-        ArrayList<String>  arr1 = new ArrayList( Arrays.asList(o1));
-
-        String[] strArr = new String[arr.size()];
-        strArr = (String[]) arr.toArray(strArr);
-
-        String[] strArr1 = new String[arr1.size()];
-        strArr1 = (String[]) arr1.toArray(strArr1);
-
-        return Arrays.equals(strArr, strArr1);
-
-       // return Arrays.equals((String[]) o, (String[]) o1);
+        return Arrays.equals((String[]) o, (String[]) o1);
     }
 
     @Override
@@ -98,14 +85,9 @@ public class StringArrayType implements UserType {
     }
 
     @Override
-    public Object deepCopy(Object o) throws HibernateException {
-        if (o == null || ((ArrayList) o).size() == 0)
-            return null;
-
-        String[] strArr = new String[((ArrayList) o).size()];
-        strArr = (String[]) ((ArrayList) o).toArray(strArr);
-
-        return strArr;
+    public Object deepCopy( Object o ) throws HibernateException {
+        if (o == null) return null;
+        return ((String[]) o).clone();
     }
 
     @Override

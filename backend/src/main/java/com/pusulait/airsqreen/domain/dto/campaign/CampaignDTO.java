@@ -49,27 +49,27 @@ public class CampaignDTO {
     private FrequencyCapType frequencyCapType;
     private Long frequency_cap_count;
     private String targeting_logic;
-    private List<String> rtb_urls;
+    private String[] rtb_urls;
     private String shared_channel_filter;
-    private List<Long> shared_channel_ids;
-    private List<Long> country_ids;
-    private List<Long> region_ids;
-    private List<Long> city_ids;
-    private List<String> postal_codes;
+    private Long[] shared_channel_ids;
+    private Long[] country_ids;
+    private Long[] region_ids;
+    private Long[] city_ids;
+    private String[] postal_codes;
     private String postal_code_filter;
     private Double booked_budget;
     private Double agency_fee;
     private Double platform161_tech_fee;
     private String internal_purchase_order_number;
-    private List<Long> device_type_ids;
-    private List<Long> browser_ids;
-    private List<Long> language_ids;
+    private Long[] device_type_ids;
+    private Long[] browser_ids;
+    private Long[] language_ids;
     private String mobile_app_filter;
-    private List<Long> mobile_app_ids;
-    private List<String> supply_types;
+    private Long[] mobile_app_ids;
+    private String[] supply_types;
     private List<InventorySource> inventory_sources;
-    private List<Long> operating_system_ids;
-    private List<Long> direct_deal_ids;
+    private Long[] operating_system_ids;
+    private Long[] direct_deal_ids;
 
     public static CampaignDTO toDTO(Plt161Campaign campaign) {
 
@@ -80,12 +80,9 @@ public class CampaignDTO {
     public static Plt161Campaign toEntity(CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = new Plt161Campaign();
-
         campaign.setExternalId(campaignDTO.getId());
-        campaign.setPricingType(campaignDTO.getPricingType());
-        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+       // campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
         campaign.setSupply_types(campaignDTO.getSupply_types());
-
         return campaign;
     }
 
