@@ -80,7 +80,6 @@ public class CampaignDTO {
 
         Plt161Campaign campaign = new Plt161Campaign();
         campaign.setExternalId(campaignDTO.getId());
-        campaign.setSupply_types(campaignDTO.getSupply_types());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
         campaign.setAdvertiser_id(campaignDTO.getAdvertiser_id());
@@ -112,11 +111,12 @@ public class CampaignDTO {
         campaign.setShared_channel_filter(campaignDTO.getShared_channel_filter());
         campaign.setStartOn(campaignDTO.getStart_on());
 
-        //campaign.setSupply_types(campaignDTO.getSupply_types());
+
+        campaign.setSupply_types(campaignDTO.getSupply_types());
         //campaign.setRtb_urls(campaignDTO.getRtb_urls());
 
         //campaign.setCity_ids(campaignDTO.getCity_ids());
-        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
         //campaign.setCountry_ids(campaignDTO.getCountry_ids());
         //campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
         //campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());

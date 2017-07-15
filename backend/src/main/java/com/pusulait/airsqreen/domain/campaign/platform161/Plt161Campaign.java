@@ -59,6 +59,9 @@ public class Plt161Campaign extends Campaign {
     private Double platform161_tech_fee;
     private String mobile_app_filter;
 
+    @Column(name = "OFFER_ID")
+    private Long offerId;
+
     @Type(type = "text")
     @Column(columnDefinition = "text")
     private String[] postal_codes;
