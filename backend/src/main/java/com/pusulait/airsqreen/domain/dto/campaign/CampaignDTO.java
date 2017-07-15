@@ -81,7 +81,7 @@ public class CampaignDTO {
 
         Plt161Campaign campaign = new Plt161Campaign();
         campaign.setExternalId(campaignDTO.getId());
-       // campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
         campaign.setSupply_types(campaignDTO.getSupply_types());
         return campaign;
     }
