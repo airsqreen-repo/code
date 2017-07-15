@@ -77,7 +77,7 @@ public class Platform161Service {
         requestHeaders.setContentType(new MediaType("application", "json"));
         HttpEntity<AuthRequestJson> requestEntity = new HttpEntity<AuthRequestJson>(requestJson, requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<AuthResponseJson> responseEntity = null;
 
         try {
@@ -107,7 +107,7 @@ public class Platform161Service {
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<List<CampaignDTO>> responseEntity = null;
 
         try {
@@ -134,7 +134,7 @@ public class Platform161Service {
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<List<InventorySourceDTO2>> responseEntity = null;
 
         try {
@@ -170,7 +170,7 @@ public class Platform161Service {
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<List<SectionDTO>> responseEntity = null;
 
         try {
@@ -196,7 +196,7 @@ public class Platform161Service {
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<List<PublisherDTO>> responseEntity = null;
 
         try {
@@ -215,12 +215,7 @@ public class Platform161Service {
         return publisherDTOList;
     }
 
-    private RestTemplate prepareRestTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        return restTemplate;
-    }
+
 
     public SectionDTO getSection(String token,Long sectionId ) {
         SectionDTO sectionDTO = null;
@@ -229,7 +224,7 @@ public class Platform161Service {
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
-        RestTemplate restTemplate = prepareRestTemplate();
+        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
         ResponseEntity<SectionDTO> responseEntity = null;
 
         try {

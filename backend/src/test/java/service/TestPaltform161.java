@@ -52,6 +52,11 @@ public class TestPaltform161 {
     }
 
     @Test
+    public void savePlt161Campaigns() {
+        campaignService.savePlt161();
+    }
+
+    @Test
     public void getInventories() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
@@ -90,10 +95,7 @@ public class TestPaltform161 {
 
 
 
-    @Test
-    public void savePlt161Campaigns() {
-        campaignService.savePlt161();
-    }
+
 
 }
 
