@@ -2,6 +2,8 @@ package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -31,6 +33,7 @@ public class Platform161Service {
     private String password;
     private String authEndPoint;
     private String campaignsEndPoint;
+    private String inventoriesEndPoint;
 
     @Inject
     private Environment env;
@@ -46,6 +49,7 @@ public class Platform161Service {
         //End points
         this.authEndPoint = env.getProperty("platform161.endpoints.auth");
         this.campaignsEndPoint = env.getProperty("platform161.endpoints.campaigns");
+        this.inventoriesEndPoint = env.getProperty("platform161.endpoints.inventories");
         //getAuthToken();
     }
 
@@ -75,7 +79,7 @@ public class Platform161Service {
 
             responseEntity = restTemplate.postForEntity(url, requestEntity, AuthResponseJson.class);
 
-             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
+            if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
                 AuthResponseJson res = responseEntity.getBody();
                 if (res.getToken() != null) {
                     result = res.getToken();
@@ -106,8 +110,9 @@ public class Platform161Service {
         ResponseEntity<List<CampaignDTO>> responseEntity = null;
 
         try {
-            ParameterizedTypeReference<List<CampaignDTO>> responseType = new ParameterizedTypeReference<List<CampaignDTO>>() {};
-            responseEntity =  restTemplate.exchange(url, HttpMethod.GET, requestEntity , responseType);
+            ParameterizedTypeReference<List<CampaignDTO>> responseType = new ParameterizedTypeReference<List<CampaignDTO>>() {
+            };
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
 
             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
                 campaignDTOList = responseEntity.getBody();
@@ -120,10 +125,46 @@ public class Platform161Service {
         return campaignDTOList;
     }
 
+    public List<InventorySourceDTO2> getInventory(String token) {
+        List<InventorySourceDTO2> inventoryDTOList = null;
+        String url = this.inventoriesEndPoint;
+
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setContentType(new MediaType("application", "json"));
+        requestHeaders.set("PFM161-API-AccessToken", token);
+        HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+        ResponseEntity<List<InventorySourceDTO2>> responseEntity = null;
+
+        try {
+            ParameterizedTypeReference<List<InventorySourceDTO2>> responseType = new ParameterizedTypeReference<List<InventorySourceDTO2>>() {
+            };
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
+
+            if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
+                inventoryDTOList = responseEntity.getBody();
+            }
+
+        } catch (RestClientException e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return inventoryDTOList;
+    }
+
     public List<CampaignDTO> getAllCampaigns() {
         return getCampaign(getAuthToken());
 
     }
 
+    public List<InventorySourceDTO2> getAllInventories() {
+        return getInventory(getAuthToken());
 
     }
+
+
+}

@@ -110,3 +110,4 @@ platform161:
         endpoints:
             auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
             campaigns: https://ui.platform161.com/api/v2/zplus/campaigns
+            inventories: https://ui.platform161.com/api/v2/zplus/inventory_sources
