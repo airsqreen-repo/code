@@ -6,6 +6,7 @@ import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.service.CampaignService;
+import com.pusulait.airsqreen.service.InventoryService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -35,6 +36,9 @@ public class TestPaltform161 {
     @Autowired
     private CampaignService campaignService;
 
+    @Autowired
+    private InventoryService inventoryService;
+
     @Test
     public void getToken() {
 
@@ -57,13 +61,19 @@ public class TestPaltform161 {
     }
 
     @Test
-    public void getInventories() {
+    public void getInventorySources() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
         List<InventorySourceDTO2> list = platform161Service.getInventory(token);
         log.debug("list:" + list.size());
 
     }
+
+    @Test
+    public void saveInventorySources() {
+        inventoryService.saveInventorySources();
+    }
+
 
     @Test
     public void getSections() {

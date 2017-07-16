@@ -78,7 +78,7 @@ public class CampaignDTO {
 
     public static Plt161Campaign toEntity(CampaignDTO campaignDTO) {
 
-        Plt161Campaign campaign = new Plt161Campaign();
+    Plt161Campaign campaign = new Plt161Campaign();
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
@@ -127,6 +127,6 @@ public class CampaignDTO {
         //campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
 
         return campaign;
-    }
+}
 
 }

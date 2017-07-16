@@ -15,6 +15,7 @@ public final class Sequences {
 
     public static final String INVENTORY_SEQUENCE  = "SEQ_INVENTORY_ID";
 
+    public static final String INVENTORY_SOURCE2_SEQUENCE  = "SEQ_INVENTORY_SOURCE2_ID";
 
     public static final String API_SEQUENCE  = "SEQ_API_ID";
 
