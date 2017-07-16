@@ -1,5 +1,8 @@
 package com.pusulait.airsqreen.domain.dto.section;
 
+import com.pusulait.airsqreen.domain.campaign.Section;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import lombok.Data;
 
@@ -25,5 +28,26 @@ public class SectionDTO {
     private Long[] filtered_campaign_ids;
     private String[] excluded_pricing_types;
     private Boolean shared;
+
+
+    public static Section toEntity(SectionDTO sectionDTO) {
+
+        Section section = new Section();
+
+        section.setName(sectionDTO.getName());
+        section.setPrice(sectionDTO.getPrice());
+        section.setPricingType(sectionDTO.getPricingType());
+        section.setPublisher_id(sectionDTO.getPublisher_id());
+        section.setSite_id(sectionDTO.getSite_id());
+        section.setSize_ids(sectionDTO.getSize_ids());
+        section.setAdvertiser_filter(sectionDTO.getAdvertiser_filter());
+        section.setFiltered_advertiser_ids(sectionDTO.getFiltered_advertiser_ids());
+        section.setCampaign_filter(sectionDTO.getCampaign_filter());
+        section.setFiltered_campaign_ids(sectionDTO.getFiltered_campaign_ids());
+        //section.setExcluded_pricing_types(sectionDTO.getExcluded_pricing_types());
+        section.setShared(sectionDTO.getShared());
+
+        return section;
+    }
 
 }

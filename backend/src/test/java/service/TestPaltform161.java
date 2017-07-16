@@ -7,6 +7,7 @@ import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.InventoryService;
+import com.pusulait.airsqreen.service.SectionService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -38,6 +39,9 @@ public class TestPaltform161 {
 
     @Autowired
     private InventoryService inventoryService;
+
+    @Autowired
+    private SectionService sectionService;
 
     @Test
     public void getToken() {
@@ -82,6 +86,11 @@ public class TestPaltform161 {
         List<SectionDTO> list = platform161Service.getSections(token);
         log.debug("list:" + list.size());
 
+    }
+
+    @Test
+    public void saveSections() {
+        sectionService.saveSections();
     }
 
     @Test

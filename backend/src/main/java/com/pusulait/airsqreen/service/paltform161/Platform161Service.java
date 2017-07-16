@@ -189,6 +189,10 @@ public class Platform161Service {
         return sectionDTOList;
     }
 
+    public List<SectionDTO> getAllSections() {
+        return getSections(getAuthToken());
+    }
+
     public List<PublisherDTO> getPublishers(String token) {
         List<PublisherDTO> publisherDTOList = null;
         String url = this.publishersEndPoint;
