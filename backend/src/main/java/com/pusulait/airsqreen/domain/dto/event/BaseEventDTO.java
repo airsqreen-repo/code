@@ -1,13 +1,10 @@
 package com.pusulait.airsqreen.domain.dto.event;
 
-import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.enums.EventType;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
