@@ -80,8 +80,52 @@ public class CampaignDTO {
 
         Plt161Campaign campaign = new Plt161Campaign();
         campaign.setExternalId(campaignDTO.getId());
-        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        campaign.setPricingType(campaignDTO.getPricingType());
+        campaign.setActive(campaignDTO.getActive());
+        campaign.setAdvertiser_id(campaignDTO.getAdvertiser_id());
+        campaign.setAgency(campaignDTO.getAgency());
+        campaign.setArchived(campaignDTO.getArchived());
+        campaign.setBooked_budget(campaignDTO.getBooked_budget());
+        campaign.setCampaign_manager_id(campaignDTO.getCampaign_manager_id());
+        campaign.setDaily_cap(campaignDTO.getDaily_cap());
+        campaign.setDeliveryType(campaignDTO.getDeliveryType());
+        campaign.setEndOn(campaignDTO.getEnd_on());
+        campaign.setFrequency_cap(campaignDTO.getFrequency_cap());
+        campaign.setFrequency_cap_count(campaignDTO.getFrequency_cap_count());
+        campaign.setAgencyFee(campaignDTO.getAgency_fee());
+        campaign.setInternal_purchase_order_number(campaignDTO.getInternal_purchase_order_number());
+        //campaign.setInventorySources(campaignDTO.getInventory_sources());
+        campaign.setInternal_purchase_order_number(campaignDTO.getInternal_purchase_order_number());
+        campaign.setTarget(campaignDTO.getTargeting_logic());
+        campaign.setManaged(campaignDTO.getManaged());
+        campaign.setMedia_budget(campaignDTO.getMedia_budget());
+        campaign.setMinimum_ctr_percentage(campaignDTO.getMinimum_ctr_percentage());
+        campaign.setMobile_app_filter(campaignDTO.getMobile_app_filter());
+        campaign.setMedia_plan_id(campaignDTO.getMedia_plan_id());
+        campaign.setName(campaignDTO.getName());
+        campaign.setOfferId(campaignDTO.getOffer_id());
+
+        campaign.setRtbOptimizeType(campaignDTO.getRtbOptimizeType());
+        campaign.setRtb_optimize_conversion_id(campaignDTO.getRtb_optimize_conversion_id());
+        campaign.setSales_manager_id(campaignDTO.getSales_manager_id());
+        campaign.setShared_channel_filter(campaignDTO.getShared_channel_filter());
+        campaign.setStartOn(campaignDTO.getStart_on());
+
+
         campaign.setSupply_types(campaignDTO.getSupply_types());
+        //campaign.setRtb_urls(campaignDTO.getRtb_urls());
+
+        //campaign.setCity_ids(campaignDTO.getCity_ids());
+        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        //campaign.setCountry_ids(campaignDTO.getCountry_ids());
+        //campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
+        //campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
+        //campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
+        //campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
+        //campaign.setRegion_ids(campaignDTO.getRegion_ids());
+        //campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
+        //campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+
         return campaign;
     }
 

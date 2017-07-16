@@ -13,6 +13,7 @@ import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+
 /**
  * Created by benan on 7/13/2017.
  */
@@ -46,7 +47,7 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         this.appId = env.getProperty("sistem9.api.application_id");
         this.sourceSys = env.getProperty("sistem9.api.source_system");
         this.setDefaultUri(apiUrl);
-      //  initJaxbMarshaller();
+        //  initJaxbMarshaller();
 
     }
 
@@ -62,11 +63,7 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         winActionRelease.setPassword(password);
         winActionRelease.setUserName(username);
 
-        //s9WExSrvc.setHandlerResolver();
-
-        //s9WExSrvc.getS9WExSrvcSoap().winActionRelease(winActionRelease);
-
-        //s9WExSrvc.setExecutor();
+        String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(), winActionRelease.getDeviceID());
 
 
     }

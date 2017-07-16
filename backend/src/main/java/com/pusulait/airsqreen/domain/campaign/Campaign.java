@@ -41,9 +41,6 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
 
-    @Column(name = "OFFER_ID")
-    private Long offerId;
-
     @Column(name = "TARGET")
     private String target;
 
