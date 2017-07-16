@@ -13,4 +13,6 @@ import org.springframework.stereotype.Repository;
 @RepositoryRestResource(exported = false)
 public interface Sistem9PushEventRepository extends JpaRepository<Sistem9PushEvent, Long> {
 
+
+
 }

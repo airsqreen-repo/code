@@ -19,5 +19,6 @@ public class BaseEventDTO extends AuditBase implements Serializable {
     private EventType eventType;
     private EventStatus eventStatus;
     private Date expireDate;
+    private Date runDate;
 
 }

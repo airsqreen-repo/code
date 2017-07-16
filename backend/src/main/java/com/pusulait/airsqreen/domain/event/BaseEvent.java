@@ -39,4 +39,7 @@ public class BaseEvent extends AuditBase implements Serializable {
     @Column(name = "EXPIRE_DATE")
     private Date expireDate;
 
+    @Column(name = "RUN_DATE")
+    private Date runDate;
+
 }
