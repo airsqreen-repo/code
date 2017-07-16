@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.domain.dto.event;
+package com.pusulait.airsqreen.domain.event;
 
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
