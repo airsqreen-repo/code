@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pusulait.airsqreen.config.constants.ServiceConstants;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
@@ -35,10 +36,7 @@ public class Platform161Service {
     private String user;
     private String password;
     private String authEndPoint;
-    private String campaignsEndPoint;
-    private String inventoriesEndPoint;
-    private String sectionsEndPoint;
-    private String publishersEndPoint;
+    private String servicesEndPoint;
 
     @Inject
     private Environment env;
@@ -53,10 +51,8 @@ public class Platform161Service {
         this.password = env.getProperty("platform161.api.password");
         //End points
         this.authEndPoint = env.getProperty("platform161.endpoints.auth");
-        this.campaignsEndPoint = env.getProperty("platform161.endpoints.campaigns");
-        this.inventoriesEndPoint = env.getProperty("platform161.endpoints.inventories");
-        this.sectionsEndPoint = env.getProperty("platform161.endpoints.sections");
-        this.publishersEndPoint = env.getProperty("platform161.endpoints.publishers");
+        this.servicesEndPoint = env.getProperty("platform161.endpoints.services");
+
         //getAuthToken();
     }
 
@@ -102,7 +98,7 @@ public class Platform161Service {
     public List<CampaignDTO> getCampaign(String token) {
 
         List<CampaignDTO> campaignDTOList = null;
-        String url = this.campaignsEndPoint;
+        String url = this.servicesEndPoint + ServiceConstants.CAMPAIGNS;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
@@ -129,7 +125,8 @@ public class Platform161Service {
     public List<InventorySourceDTO2> getInventory(String token) {
 
         List<InventorySourceDTO2> inventoryDTOList = null;
-        String url = this.inventoriesEndPoint;
+        String url = this.servicesEndPoint + ServiceConstants.INVENTORIES;
+
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
@@ -165,7 +162,7 @@ public class Platform161Service {
 
     public List<SectionDTO> getSections(String token) {
         List<SectionDTO> sectionDTOList = null;
-        String url = this.sectionsEndPoint;
+        String url = this.servicesEndPoint + ServiceConstants.SECTIONS;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
@@ -195,7 +192,8 @@ public class Platform161Service {
 
     public List<PublisherDTO> getPublishers(String token) {
         List<PublisherDTO> publisherDTOList = null;
-        String url = this.publishersEndPoint;
+        String url = this.servicesEndPoint + ServiceConstants.PUBLISHERS;
+
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
@@ -225,7 +223,8 @@ public class Platform161Service {
 
     public SectionDTO getSection(String token,Long sectionId ) {
         SectionDTO sectionDTO = null;
-        String url = this.sectionsEndPoint + "/" + sectionId;
+        String url = this.servicesEndPoint + ServiceConstants.SECTIONS + "/" + sectionId;;
+
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
