@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.service;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.Publisher;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
@@ -41,11 +42,11 @@ public class PublisherService {
     @Transactional
     public void updatePublisher(PublisherDTO publisherDTO) {
 
-        Optional<Publisher> publisherOptional  = publisherRepository.findById(publisherDTO.getId());
+        Optional<Plt161Publisher> publisherOptional  = publisherRepository.findById(publisherDTO.getId());
 
         if(publisherOptional.isPresent()){
 
-            Publisher publisher = publisherOptional.get();
+            Plt161Publisher publisher = publisherOptional.get();
             publisher = PublisherDTO.toEntity(publisherDTO,publisher);
             publisherRepository.save(publisher);
 

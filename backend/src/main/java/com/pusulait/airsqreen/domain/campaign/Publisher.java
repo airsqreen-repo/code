@@ -18,6 +18,7 @@ import java.io.Serializable;
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @Entity
 @Table(name = Constants.PREFIX + "PUBLISHERS")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Publisher extends AuditBase implements Serializable {
 
     @Id
@@ -32,98 +33,6 @@ public class Publisher extends AuditBase implements Serializable {
     @Column(name = "CODE")
     private String code;
 
-    @Column(name="FILTER_ANOMALIES")
-    private Boolean filter_anomalies;
-
-    @Column
-    private Long db_cr_number;
-
-    @Column
-    private Long credit_limit;
-
-    @Column
-    private String email;
-
-    @Column
-    private String address;
-
-    @Column
-    private String postal_code;
-
-    @Column
-    private String city;
-
-    @Column
-    private String region;
-
-    @Column
-    private String phone;
-
-    @Column
-    private String mobile;
-
-    @Column
-    private String fax;
-
-    @Column
-    private Long country_id;
-
-    @Column
-    private Boolean use_business_address_for_billing;
-
-    @Column
-    private String billing_address;
-
-    @Column
-    private String billing_postal_code;
-
-    @Column
-    private String billing_city;
-
-    @Column
-    private String billing_region;
-
-    @Column
-    private String billing_phone;
-
-    @Column
-    private String billing_mobile;
-
-    @Column
-    private String billing_fax;
-
-    @Column
-    private String billing_email;
-
-    @Column
-    private Long billing_country_id;
-
-    @Column
-    private String custom_impression_html;
-
-    @Column
-    private String agency_filter;
-
-    @Column
-    private Long[] filtered_agency_ids;
-
-    @Column
-    private String advertiser_filter;
-
-    @Column
-    private Long[] filtered_advertiser_ids;
-
-    @Column
-    private Long[] excluded_offer_ids;
-
-    @Column
-    private String[] excluded_pricing_types;
-
-    @Column
-    private Long[] site_ids;
-
-    @Column
-    private Long[] section_ids;
 
 
 }

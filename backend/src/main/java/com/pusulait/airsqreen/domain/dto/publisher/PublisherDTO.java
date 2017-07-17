@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.domain.dto.publisher;
 
 import com.pusulait.airsqreen.domain.campaign.Publisher;
 import com.pusulait.airsqreen.domain.campaign.Section;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import lombok.Data;
 
@@ -45,9 +46,9 @@ public class PublisherDTO {
     private Long[] site_ids;
     private Long[] section_ids;
 
-    public static Publisher toEntity(PublisherDTO publisherDTO) {
+    public static Plt161Publisher toEntity(PublisherDTO publisherDTO) {
 
-        Publisher publisher = new Publisher();
+        Plt161Publisher publisher = new Plt161Publisher();
 
         publisher.setName(publisherDTO.getName());
         publisher.setCode(publisherDTO.getCode());
@@ -86,9 +87,9 @@ public class PublisherDTO {
         return publisher;
     }
 
-    public static Publisher toEntity(PublisherDTO publisherDTO,Publisher publisher) {
+    public static Plt161Publisher toEntity(PublisherDTO publisherDTO,Plt161Publisher publisher) {
 
-        publisher = new Publisher();
+        publisher = new Plt161Publisher();
 
         publisher.setName(publisherDTO.getName());
         publisher.setCode(publisherDTO.getCode());

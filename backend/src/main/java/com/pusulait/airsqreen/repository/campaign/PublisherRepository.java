@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.repository.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.Publisher;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,6 +16,6 @@ import java.util.Optional;
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
     @Query("select u from Publisher u where u.id = :id")
-    Optional<Publisher> findById(@Param(value = "id") Long id);
+    Optional<Plt161Publisher> findById(@Param(value = "id") Long id);
 
 }
