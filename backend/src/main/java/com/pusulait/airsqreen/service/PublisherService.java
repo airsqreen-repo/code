@@ -50,6 +50,14 @@ public class PublisherService {
             publisherRepository.save(publisher);
 
         }
+    }
+
+    @Transactional
+    public void updatePublishers() {
+
+        List<Publisher> publisherList = platform161Service.getAllPublishers().stream().map(PublisherDTO::toEntity).collect(Collectors.toList());
+
+        platform161Service.getAllPublishers().forEach(publisherDTO -> updatePublisher(publisherDTO));
 
 
     }
