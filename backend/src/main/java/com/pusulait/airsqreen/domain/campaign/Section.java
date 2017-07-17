@@ -38,36 +38,5 @@ public class Section extends AuditBase implements Serializable {
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
 
-    @Column(name = "PUBLISHER_ID")
-    private Long publisher_id;// (Number) — The ID of the publisher that owns the section.
-
-    @Column(name = "SITE_ID")
-    private Long site_id;// (Number) — The ID of the the site this section belongs to.
-
-    @Type(type = "text")
-    @Column(name = "SIZE_IDS", columnDefinition = "text")
-    private Long[] size_ids;
-
-    @Column(name = "ADVERTISER_FILTER")
-    private String advertiser_filter;
-
-    @Type(type = "text")
-    @Column(name = "FILTERED_ADVERTISER_IDS", columnDefinition = "text")
-    private Long[] filtered_advertiser_ids;
-
-    @Column(name = "CAMPAIGN_FILTER")
-    private String campaign_filter;
-
-    @Type(type = "text")
-    @Column(name = "FILTERED_CAMPAIGN_IDS", columnDefinition = "text")
-    private Long[] filtered_campaign_ids;
-
-//    @Type(type = "text")
-//    @Column(name = "EXCLUDED_PRICING_TYPES", columnDefinition = "text")
-//    private String[] excluded_pricing_types;
-
-    @Column(name = "SHARED")
-    private Boolean shared;
-
 
 }

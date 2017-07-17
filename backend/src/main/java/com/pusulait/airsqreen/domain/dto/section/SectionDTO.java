@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.domain.dto.section;
 
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Section;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import lombok.Data;
@@ -30,9 +31,9 @@ public class SectionDTO {
     private Boolean shared;
 
 
-    public static Section toEntity(SectionDTO sectionDTO) {
+    public static Plt161Section toEntity(SectionDTO sectionDTO) {
 
-        Section section = new Section();
+        Plt161Section section = new Plt161Section();
 
         section.setName(sectionDTO.getName());
         section.setPrice(sectionDTO.getPrice());
