@@ -13,11 +13,10 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by benan on 7/14/2017.
@@ -92,17 +91,19 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private Long[] mobile_app_ids;
 
-//    @Type(type = "text")
-//    @Column(columnDefinition = "text")
-//    private String[] supply_types;
+    @Column
+    private String supply_types;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
     private Long[] shared_channel_ids;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private Long[] country_ids;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private Long[] country_ids;
+
+    @Column
+    private String country_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")

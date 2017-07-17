@@ -8,8 +8,11 @@ import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.RtbOptimizeType;
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by benan on 7/9/2017.
@@ -79,7 +82,7 @@ public class CampaignDTO {
 
     public static Plt161Campaign toEntity(CampaignDTO campaignDTO) {
 
-    Plt161Campaign campaign = new Plt161Campaign();
+        Plt161Campaign campaign = new Plt161Campaign();
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
@@ -113,12 +116,14 @@ public class CampaignDTO {
         campaign.setStartOn(campaignDTO.getStart_on());
 
 
-        //campaign.setSupply_types(campaignDTO.getSupply_types());
+        campaign.setSupply_types(buildString(campaignDTO.getSupply_types()));
+
         //campaign.setRtb_urls(campaignDTO.getRtb_urls());
 
         //campaign.setCity_ids(campaignDTO.getCity_ids());
         //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
-        //campaign.setCountry_ids(campaignDTO.getCountry_ids());
+
+        campaign.setCountry_ids(buildString(campaignDTO.getCountry_ids()));
         //campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
         //campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
         //campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
@@ -128,7 +133,27 @@ public class CampaignDTO {
         //campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
 
         return campaign;
-}
+    }
+
+    // Build a comma seperated value string
+    private static <T> String buildString(T[] values) {
+
+        if (values == null) {
+            return "";
+        }
+
+        StringBuilder stringBuilder = new StringBuilder("");
+
+        for (T value : values) {
+            stringBuilder.append(value);
+            stringBuilder.append(",");
+        }
+
+        String result = stringBuilder.toString();
+
+        return result.substring(0, result.length() - 1);
+
+    }
 
     public static Campaign update(CampaignDTO campaignDTO, Plt161Campaign campaign) {
 
