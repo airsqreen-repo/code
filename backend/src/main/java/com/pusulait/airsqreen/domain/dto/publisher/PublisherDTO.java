@@ -86,4 +86,45 @@ public class PublisherDTO {
         return publisher;
     }
 
+    public static Publisher toEntity(PublisherDTO publisherDTO,Publisher publisher) {
+
+        publisher = new Publisher();
+
+        publisher.setName(publisherDTO.getName());
+        publisher.setCode(publisherDTO.getCode());
+        publisher.setFilter_anomalies(publisherDTO.getFilter_anomalies());
+        publisher.setDb_cr_number(publisherDTO.getDb_cr_number());
+        publisher.setCredit_limit(publisherDTO.getCredit_limit());
+        publisher.setEmail(publisherDTO.getEmail());
+        publisher.setAddress(publisherDTO.getAddress());
+        publisher.setPostal_code(publisherDTO.getPostal_code());
+        publisher.setCity(publisherDTO.getCity());
+        publisher.setRegion(publisherDTO.getRegion());
+        publisher.setPhone(publisherDTO.getPhone());
+        publisher.setMobile(publisherDTO.getMobile());
+        publisher.setFax(publisherDTO.getFax());
+        publisher.setCountry_id(publisherDTO.getCountry_id());
+        publisher.setUse_business_address_for_billing(publisherDTO.getUse_business_address_for_billing());
+        publisher.setBilling_address(publisherDTO.getBilling_address());
+        publisher.setBilling_postal_code(publisherDTO.getBilling_postal_code());
+        publisher.setBilling_city(publisherDTO.getBilling_city());
+        publisher.setBilling_region(publisherDTO.getBilling_region());
+        publisher.setBilling_phone(publisherDTO.getBilling_phone());
+        publisher.setBilling_mobile(publisherDTO.getBilling_mobile());
+        publisher.setBilling_fax(publisherDTO.getBilling_fax());
+        publisher.setBilling_email(publisherDTO.getBilling_email());
+        publisher.setBilling_country_id(publisherDTO.getBilling_country_id());
+        publisher.setCustom_impression_html(publisher.getCustom_impression_html());
+        publisher.setAgency_filter(publisher.getAgency_filter());
+        publisher.setFiltered_agency_ids(publisher.getFiltered_agency_ids());
+        publisher.setAdvertiser_filter(publisher.getAdvertiser_filter());
+        publisher.setFiltered_advertiser_ids(publisher.getFiltered_advertiser_ids());
+        publisher.setExcluded_offer_ids(publisher.getExcluded_offer_ids());
+        publisher.setExcluded_pricing_types(publisher.getExcluded_pricing_types());
+        publisher.setSite_ids(publisher.getSite_ids());
+        publisher.setSection_ids(publisher.getSection_ids());
+
+        return publisher;
+    }
+
 }

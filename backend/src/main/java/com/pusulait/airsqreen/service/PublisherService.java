@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -36,5 +37,30 @@ public class PublisherService {
         for(Publisher publisher : publisherList)
             publisherRepository.save(publisher);
     }
+
+    @Transactional
+    public void updatePublisher(PublisherDTO publisherDTO) {
+
+        Optional<Publisher> publisherOptional  = publisherRepository.findById(publisherDTO.getId());
+
+        if(publisherOptional.isPresent()){
+
+            Publisher publisher = publisherOptional.get();
+            publisher = PublisherDTO.toEntity(publisherDTO,publisher);
+            publisherRepository.save(publisher);
+
+        }
+    }
+
+    @Transactional
+    public void updatePublishers() {
+
+        List<Publisher> publisherList = platform161Service.getAllPublishers().stream().map(PublisherDTO::toEntity).collect(Collectors.toList());
+
+        platform161Service.getAllPublishers().forEach(publisherDTO -> updatePublisher(publisherDTO));
+
+
+    }
+
 
 }
