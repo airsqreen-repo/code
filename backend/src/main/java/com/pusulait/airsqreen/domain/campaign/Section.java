@@ -29,6 +29,9 @@ public class Section extends AuditBase implements Serializable {
     @SequenceGenerator(name = Sequences.SECTION_SEQUENCE, sequenceName = Sequences.SECTION_SEQUENCE, allocationSize = 1, initialValue = 2)
     private Long id;
 
+    @Column(name = "EXTERNAL_ID")
+    private Long externalId;
+
     @Column(name = "NAME")
     private String name; //(String) — The name of section.
 

@@ -35,20 +35,40 @@ public class SectionDTO {
 
         Plt161Section section = new Plt161Section();
 
+        section.setExternalId(sectionDTO.getId());
         section.setName(sectionDTO.getName());
         section.setPrice(sectionDTO.getPrice());
         section.setPricingType(sectionDTO.getPricingType());
         section.setPublisher_id(sectionDTO.getPublisher_id());
-        section.setSite_id(sectionDTO.getSite_id());
-        section.setSize_ids(sectionDTO.getSize_ids());
+        //section.setSite_id(sectionDTO.getSite_id());
+        //section.setSize_ids(sectionDTO.getSize_ids());
         section.setAdvertiser_filter(sectionDTO.getAdvertiser_filter());
-        section.setFiltered_advertiser_ids(sectionDTO.getFiltered_advertiser_ids());
+        //section.setFiltered_advertiser_ids(sectionDTO.getFiltered_advertiser_ids());
         section.setCampaign_filter(sectionDTO.getCampaign_filter());
-        section.setFiltered_campaign_ids(sectionDTO.getFiltered_campaign_ids());
+        //section.setFiltered_campaign_ids(sectionDTO.getFiltered_campaign_ids());
         //section.setExcluded_pricing_types(sectionDTO.getExcluded_pricing_types());
         section.setShared(sectionDTO.getShared());
 
         return section;
     }
 
+    public static Section update(SectionDTO sectionDTO, Plt161Section section) {
+
+        section.setExternalId(sectionDTO.getId());
+        section.setName(sectionDTO.getName());
+        section.setPrice(sectionDTO.getPrice());
+        section.setPricingType(sectionDTO.getPricingType());
+        section.setPublisher_id(sectionDTO.getPublisher_id());
+        //section.setSite_id(sectionDTO.getSite_id());
+        //section.setSize_ids(sectionDTO.getSize_ids());
+        section.setAdvertiser_filter(sectionDTO.getAdvertiser_filter());
+        //section.setFiltered_advertiser_ids(sectionDTO.getFiltered_advertiser_ids());
+        section.setCampaign_filter(sectionDTO.getCampaign_filter());
+        //section.setFiltered_campaign_ids(sectionDTO.getFiltered_campaign_ids());
+        //section.setExcluded_pricing_types(sectionDTO.getExcluded_pricing_types());
+        section.setShared(sectionDTO.getShared());
+
+        return section;
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.service;
 
 import com.pusulait.airsqreen.domain.campaign.InventorySource2;
+import com.pusulait.airsqreen.domain.campaign.Publisher;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Section;
@@ -40,5 +41,32 @@ public class SectionService {
         for (Section section : sectionList)
             sectionRepository.save(section);
     }
+
+    @Transactional
+    public void updateSection(SectionDTO sectionDTO) {
+
+        Optional<Section> sectionOptional = sectionRepository.findByExternalId(sectionDTO.getId());
+
+        if (sectionOptional.isPresent()) {
+
+            Section section = sectionOptional.get();
+
+            if (section instanceof Plt161Section)
+                section = SectionDTO.update(sectionDTO, (Plt161Section) section);
+            // else if (publisher instanceof XXXPublisher)
+            // publisher = PublisherDTO.update(publisherDTO, (XXXPublisher) publisher);
+
+            sectionRepository.save(section);
+
+        }
+    }
+
+    @Transactional
+    public void updateSections() {
+
+        platform161Service.getAllSections().forEach(sectionDTO -> updateSection(sectionDTO));
+
+    }
+
 
 }
