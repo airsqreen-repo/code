@@ -19,6 +19,8 @@ public final class Sequences {
 
     public static final String SECTION_SEQUENCE  = "SEQ_SECTION_ID";
 
+    public static final String PUBLISHER_SEQUENCE  = "SEQ_PUBLISHER_ID";
+
     public static final String API_SEQUENCE  = "SEQ_API_ID";
 
     public static final String ADDRESSES_SEQUENCE  = "SEQ_ADDRESSES_ID";

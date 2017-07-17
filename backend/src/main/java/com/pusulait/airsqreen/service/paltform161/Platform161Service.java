@@ -219,7 +219,9 @@ public class Platform161Service {
         return publisherDTOList;
     }
 
-
+    public List<PublisherDTO> getAllPublishers() {
+        return getPublishers(getAuthToken());
+    }
 
     public SectionDTO getSection(String token,Long sectionId ) {
         SectionDTO sectionDTO = null;

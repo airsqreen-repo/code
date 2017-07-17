@@ -7,6 +7,7 @@ import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.InventoryService;
+import com.pusulait.airsqreen.service.PublisherService;
 import com.pusulait.airsqreen.service.SectionService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,9 @@ public class TestPaltform161 {
 
     @Autowired
     private SectionService sectionService;
+
+    @Autowired
+    private PublisherService publisherService;
 
     @Test
     public void getToken() {
@@ -112,6 +116,11 @@ public class TestPaltform161 {
 
     }
 
+
+    @Test
+    public void savePublishers() {
+        publisherService.savePublishers();
+    }
 
 
 
