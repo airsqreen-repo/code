@@ -31,12 +31,8 @@ import java.util.List;
 @IntegrationTest
 public class TestPaltform161 {
 
-
     @Autowired
     private Platform161Service platform161Service;
-
-    @Autowired
-    private CampaignService campaignService;
 
     @Autowired
     private InventoryService inventoryService;
@@ -58,11 +54,6 @@ public class TestPaltform161 {
         List<CampaignDTO> list = platform161Service.getCampaign(token);
         log.debug("list:" + list.size());
 
-    }
-
-    @Test
-    public void savePlt161Campaigns() {
-        campaignService.savePlt161();
     }
 
     @Test

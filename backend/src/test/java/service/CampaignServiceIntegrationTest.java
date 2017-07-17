@@ -1,7 +1,7 @@
 package service;
 
 import com.pusulait.airsqreen.Application;
-import com.pusulait.airsqreen.service.PublisherService;
+import com.pusulait.airsqreen.service.CampaignService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,24 +19,24 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public class PublisherServiceIntegrationTest {
+public class CampaignServiceIntegrationTest {
 
     @Autowired
-    private PublisherService publisherService;
+    private CampaignService campaignService;
 
     @Test
-    public void savePublishers() {
-        publisherService.savePublishers();
+    public void savePlt161Campaigns() {
+        campaignService.savePlt161(5);
     }
 
     @Test
-    public void updatePublishers() {
+    public void updatePlt161Campaigns() {
         // setup db
-        publisherService.savePublishers();
+        campaignService.savePlt161(5);
 
-        publisherService.updatePublishers();
+        campaignService.updateCampaigns();
+
     }
-
 
 
 }
