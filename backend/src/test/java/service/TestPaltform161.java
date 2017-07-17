@@ -44,9 +44,6 @@ public class TestPaltform161 {
     @Autowired
     private SectionService sectionService;
 
-    @Autowired
-    private PublisherService publisherService;
-
     @Test
     public void getToken() {
 
@@ -113,14 +110,8 @@ public class TestPaltform161 {
         log.debug("token:" + token);
         List<PublisherDTO> list = platform161Service.getPublishers(token);
         log.debug("list:" + list.size());
-
     }
 
-
-    @Test
-    public void savePublishers() {
-        publisherService.savePublishers();
-    }
 
 
 

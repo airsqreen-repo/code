@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
-    @Query("select u from Publisher u where u.id = :id")
-    Optional<Plt161Publisher> findById(@Param(value = "id") Long id);
+    @Query("select u from Publisher u where u.externalId = :id")
+    Optional<Publisher> findByExternalId(@Param(value = "id") Long id);
 
 }

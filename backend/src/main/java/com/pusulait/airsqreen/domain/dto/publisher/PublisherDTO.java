@@ -50,6 +50,7 @@ public class PublisherDTO {
 
         Plt161Publisher publisher = new Plt161Publisher();
 
+        publisher.setExternalId(publisherDTO.getId());
         publisher.setName(publisherDTO.getName());
         publisher.setCode(publisherDTO.getCode());
         publisher.setFilter_anomalies(publisherDTO.getFilter_anomalies());
@@ -87,9 +88,7 @@ public class PublisherDTO {
         return publisher;
     }
 
-    public static Plt161Publisher toEntity(PublisherDTO publisherDTO,Plt161Publisher publisher) {
-
-        publisher = new Plt161Publisher();
+    public static Plt161Publisher update(PublisherDTO publisherDTO, Plt161Publisher publisher) {
 
         publisher.setName(publisherDTO.getName());
         publisher.setCode(publisherDTO.getCode());

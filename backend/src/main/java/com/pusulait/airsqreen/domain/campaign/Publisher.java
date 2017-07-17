@@ -27,6 +27,9 @@ public class Publisher extends AuditBase implements Serializable {
     @SequenceGenerator(name = Sequences.PUBLISHER_SEQUENCE, sequenceName = Sequences.PUBLISHER_SEQUENCE, allocationSize = 1, initialValue = 2)
     private Long id;
 
+    @Column(name = "EXTERNAL_ID")
+    private Long externalId;
+
     @Column(name = "NAME")
     private String name;
 

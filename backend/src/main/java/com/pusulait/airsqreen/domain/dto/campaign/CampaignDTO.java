@@ -112,7 +112,7 @@ public class CampaignDTO {
         campaign.setStartOn(campaignDTO.getStart_on());
 
 
-        campaign.setSupply_types(campaignDTO.getSupply_types());
+        //campaign.setSupply_types(campaignDTO.getSupply_types());
         //campaign.setRtb_urls(campaignDTO.getRtb_urls());
 
         //campaign.setCity_ids(campaignDTO.getCity_ids());

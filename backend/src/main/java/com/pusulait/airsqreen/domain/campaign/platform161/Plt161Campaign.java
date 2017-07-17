@@ -62,9 +62,9 @@ public class Plt161Campaign extends Campaign {
     @Column(name = "OFFER_ID")
     private Long offerId;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] postal_codes;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] postal_codes;
 
     private String internal_purchase_order_number;
 
@@ -92,9 +92,9 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private Long[] mobile_app_ids;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] supply_types;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] supply_types;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
@@ -112,9 +112,9 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private Long[] city_ids;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] rtb_urls;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] rtb_urls;
 
     //private List<InventorySource> inventory_sources;
 
