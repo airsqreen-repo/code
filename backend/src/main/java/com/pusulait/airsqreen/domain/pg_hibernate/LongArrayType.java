@@ -77,14 +77,14 @@ public class LongArrayType implements UserType {
 	@Override
     public Object deepCopy( Object o ) throws HibernateException {
         if (o == null) return null;
+        else if(o instanceof BigDecimal[])
+        {
+            BigDecimal[] array = (BigDecimal[]) o;
+            return array.clone();
+        }
         else if(o instanceof Long[])
         {
             Long[] array = (Long[]) o;
-            return array.clone();
-        }
-        else if(o instanceof long[])
-        {
-            long[] array = (long[]) o;
             return array.clone();
         } else {
             throw new IllegalArgumentException("Invalid type to copy: " + o.getClass().getName());

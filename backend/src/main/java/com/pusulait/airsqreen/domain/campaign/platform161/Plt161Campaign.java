@@ -5,7 +5,6 @@ import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.DeliveryType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.FrequencyCapType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.RtbOptimizeType;
-//import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 import com.pusulait.airsqreen.domain.pg_hibernate.StringArrayType;
 import lombok.Data;
@@ -13,10 +12,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
-import java.util.Set;
+
+//import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 
 /**
  * Created by benan on 7/14/2017.
@@ -25,7 +26,7 @@ import java.util.Set;
 @Table(name = Constants.PREFIX + "PLATFORM_161_CAMPAIGNS")
 @TypeDefs(value = {
         @TypeDef(name = "text", typeClass = StringArrayType.class)
-        , @TypeDef(name = "text", typeClass = LongArrayType.class)
+       , @TypeDef(name = "longarray", typeClass = LongArrayType.class)
 })
 @Data
 public class Plt161Campaign extends Campaign {
@@ -61,61 +62,63 @@ public class Plt161Campaign extends Campaign {
     @Column(name = "OFFER_ID")
     private Long offerId;
 
-//    @Type(type = "text")
-//    @Column(columnDefinition = "text")
-//    private String[] postal_codes;
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
+    private String[] postal_codes;
 
     private String internal_purchase_order_number;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] operating_system_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] direct_deal_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] device_type_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] browser_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] language_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] mobile_app_ids;
 
-    @Column
-    private String supply_types;
-
+    /* @Column
+     private String supply_types;
+ */
     @Type(type = "text")
+    @Column(columnDefinition = "text")
+    private String[] supply_types;
+
+
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] shared_channel_ids;
 
-//    @Type(type = "text")
-//    @Column(columnDefinition = "text")
-//    private Long[] country_ids;
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] country_ids;
 
-    @Column
-    private String country_ids;
-
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] region_ids;
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] city_ids;
 
-//    @Type(type = "text")
-//    @Column(columnDefinition = "text")
-//    private String[] rtb_urls;
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
+    private String[] rtb_urls;
 
     //private List<InventorySource> inventory_sources;
 

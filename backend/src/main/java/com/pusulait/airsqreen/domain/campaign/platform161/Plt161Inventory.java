@@ -27,7 +27,7 @@ import java.util.List;
 public class Plt161Inventory extends Inventory {
 
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private List<Long> inventory;
 
@@ -35,7 +35,7 @@ public class Plt161Inventory extends Inventory {
     private String domain_filter;
 
 
-    @Type(type = "text")
+    @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private List<Long> domains;
 

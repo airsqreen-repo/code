@@ -5,11 +5,11 @@ package com.pusulait.airsqreen.domain.campaign.platform161;
  */
 
 import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.Publisher;
 import com.pusulait.airsqreen.domain.pg_hibernate.LongArrayType;
 import com.pusulait.airsqreen.domain.pg_hibernate.StringArrayType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
@@ -21,7 +21,8 @@ import javax.persistence.Table;
 @Table(name = Constants.PREFIX + "PLATFORM_161_PUBLISHERS")
 @TypeDefs(value = {
         @TypeDef(name = "text", typeClass = StringArrayType.class)
-        , @TypeDef(name = "text", typeClass = LongArrayType.class)})
+        , @TypeDef(name = "longarray", typeClass = LongArrayType.class)
+        })
 @Data
 public class Plt161Publisher extends Publisher {
 
@@ -97,25 +98,31 @@ public class Plt161Publisher extends Publisher {
     @Column
     private String agency_filter;
 
-    @Column
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
     private Long[] filtered_agency_ids;
 
     @Column
     private String advertiser_filter;
 
-    @Column
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
     private Long[] filtered_advertiser_ids;
 
-    @Column
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
     private Long[] excluded_offer_ids;
 
-    @Column
+    @Type(type = "text")
+    @Column(columnDefinition = "text")
     private String[] excluded_pricing_types;
 
-    @Column
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
     private Long[] site_ids;
 
-    @Column
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
     private Long[] section_ids;
 
 

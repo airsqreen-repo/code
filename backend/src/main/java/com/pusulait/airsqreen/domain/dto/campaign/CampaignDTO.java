@@ -114,29 +114,24 @@ public class CampaignDTO {
         campaign.setSales_manager_id(campaignDTO.getSales_manager_id());
         campaign.setShared_channel_filter(campaignDTO.getShared_channel_filter());
         campaign.setStartOn(campaignDTO.getStart_on());
-
-
-        campaign.setSupply_types(buildString(campaignDTO.getSupply_types()));
-
-        //campaign.setRtb_urls(campaignDTO.getRtb_urls());
-
-        //campaign.setCity_ids(campaignDTO.getCity_ids());
-        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
-
-        campaign.setCountry_ids(buildString(campaignDTO.getCountry_ids()));
-        //campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
-        //campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
-        //campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
-        //campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
-        //campaign.setRegion_ids(campaignDTO.getRegion_ids());
-        //campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
-        //campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+        campaign.setSupply_types(campaignDTO.getSupply_types());
+        campaign.setCountry_ids(campaignDTO.getCountry_ids());
+        campaign.setRtb_urls(campaignDTO.getRtb_urls());
+        campaign.setCity_ids(campaignDTO.getCity_ids());
+        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
+        campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
+        campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
+        campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
+        campaign.setRegion_ids(campaignDTO.getRegion_ids());
+        campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
+        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
 
         return campaign;
     }
 
     // Build a comma seperated value string
-    private static <T> String buildString(T[] values) {
+   /* private static <T> String buildString(T[] values) {
 
         if (values == null) {
             return "";
@@ -153,7 +148,7 @@ public class CampaignDTO {
 
         return result.substring(0, result.length() - 1);
 
-    }
+    }*/
 
     public static Campaign update(CampaignDTO campaignDTO, Plt161Campaign campaign) {
 
@@ -190,19 +185,19 @@ public class CampaignDTO {
         campaign.setStartOn(campaignDTO.getStart_on());
 
 
-        //campaign.setSupply_types(campaignDTO.getSupply_types());
-        //campaign.setRtb_urls(campaignDTO.getRtb_urls());
+        campaign.setSupply_types(campaignDTO.getSupply_types());
+        campaign.setRtb_urls(campaignDTO.getRtb_urls());
 
-        //campaign.setCity_ids(campaignDTO.getCity_ids());
-        //campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
-        //campaign.setCountry_ids(campaignDTO.getCountry_ids());
-        //campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
-        //campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
-        //campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
-        //campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
-        //campaign.setRegion_ids(campaignDTO.getRegion_ids());
-        //campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
-        //campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+        campaign.setCity_ids(campaignDTO.getCity_ids());
+        campaign.setDirect_deal_ids(campaignDTO.getDirect_deal_ids());
+        campaign.setCountry_ids(campaignDTO.getCountry_ids());
+        campaign.setBrowser_ids(campaignDTO.getBrowser_ids());
+        campaign.setDevice_type_ids(campaignDTO.getDevice_type_ids());
+        campaign.setLanguage_ids(campaignDTO.getLanguage_ids());
+        campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
+        campaign.setRegion_ids(campaignDTO.getRegion_ids());
+        campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
+        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
 
         return campaign;
     }

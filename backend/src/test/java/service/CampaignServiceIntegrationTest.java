@@ -26,7 +26,7 @@ public class CampaignServiceIntegrationTest {
 
     @Test
     public void savePlt161Campaigns() {
-        campaignService.savePlt161(5);
+        campaignService.savePlt161();
     }
 
     @Test
