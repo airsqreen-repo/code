@@ -37,6 +37,9 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "ACTIVE")
+    private Boolean active;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;

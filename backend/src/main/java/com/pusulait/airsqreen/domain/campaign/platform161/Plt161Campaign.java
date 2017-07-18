@@ -31,7 +31,6 @@ import java.util.Date;
 @Data
 public class Plt161Campaign extends Campaign {
 
-    private Boolean active;
     private Boolean archived;
     private Long sales_manager_id;
     private Long campaign_manager_id;
@@ -62,63 +61,64 @@ public class Plt161Campaign extends Campaign {
     @Column(name = "OFFER_ID")
     private Long offerId;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] postal_codes;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] postal_codes;
 
     private String internal_purchase_order_number;
 
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] operating_system_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] direct_deal_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] device_type_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] browser_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] language_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] mobile_app_ids;
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] operating_system_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] direct_deal_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] device_type_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] browser_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] language_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] mobile_app_ids;
 
     /* @Column
      private String supply_types;
  */
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] supply_types;
 
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] shared_channel_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] country_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] region_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] city_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private String[] rtb_urls;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] supply_types;
+//
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] shared_channel_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] country_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] region_ids;
+//
+//    @Type(type = "longarray")
+//    @Column(columnDefinition = "text")
+//    private Long[] city_ids;
+//
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] rtb_urls;
 
     //private List<InventorySource> inventory_sources;
 

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,5 +20,8 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
     @Query("select c from Campaign c where c.externalId = :id")
     Optional<Campaign> findByExternalId(@Param(value = "id") Long id);
+
+    @Query("select c from Campaign c where c.active = true")
+    List<Campaign> findAllActive();
 
 }
