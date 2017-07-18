@@ -109,8 +109,7 @@ platform161:
             password: program720
         endpoints:
             auth: https://arkitekttl.platform161.com/api/v2/access_tokens
-            campaigns: https://ui.platform161.com/api/v2/zplus/campaigns
-
+            services: https://ui.platform161.com/api/v2/zplus/
 
 sistem9:
         api:

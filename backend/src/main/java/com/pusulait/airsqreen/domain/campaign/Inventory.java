@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by benan on 7/13/2017.
@@ -22,6 +23,7 @@ import java.io.Serializable;
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @Entity
 @Table(name = Constants.PREFIX + "INVENTORIES")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Inventory extends AuditBase implements Serializable {
 
     @Id
@@ -39,6 +41,12 @@ public class Inventory extends AuditBase implements Serializable {
 
     @Column(name = "CAMPAIGN_ID")
     private Long campaignId;
+
+    @Column(name = "PRICE")
+    private Double price;
+
+    @Column(name = "BUDGET")
+    private Double budget;
 
 
 }

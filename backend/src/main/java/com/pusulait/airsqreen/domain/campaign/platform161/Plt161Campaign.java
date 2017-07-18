@@ -13,11 +13,10 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by benan on 7/14/2017.
@@ -26,7 +25,7 @@ import java.util.List;
 @Table(name = Constants.PREFIX + "PLATFORM_161_CAMPAIGNS")
 @TypeDefs(value = {
         @TypeDef(name = "text", typeClass = StringArrayType.class)
-        , @TypeDef(name = "longarray", typeClass = LongArrayType.class)
+        , @TypeDef(name = "text", typeClass = LongArrayType.class)
 })
 @Data
 public class Plt161Campaign extends Campaign {
@@ -54,65 +53,69 @@ public class Plt161Campaign extends Campaign {
     private FrequencyCapType frequencyCapType;
     private Long frequency_cap_count;
     private String shared_channel_filter;
-
     private String postal_code_filter;
     private Double booked_budget;
     private Double platform161_tech_fee;
     private String mobile_app_filter;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<String> postal_codes;
+    @Column(name = "OFFER_ID")
+    private Long offerId;
+
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] postal_codes;
 
     private String internal_purchase_order_number;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> operating_system_ids;
+    private Long[] operating_system_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> direct_deal_ids;
+    private Long[] direct_deal_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> device_type_ids;
+    private Long[] device_type_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> browser_ids;
+    private Long[] browser_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> language_ids;
+    private Long[] language_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> mobile_app_ids;
+    private Long[] mobile_app_ids;
+
+    @Column
+    private String supply_types;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<String> supply_types;
+    private Long[] shared_channel_ids;
+
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private Long[] country_ids;
+
+    @Column
+    private String country_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> shared_channel_ids;
+    private Long[] region_ids;
 
     @Type(type = "text")
     @Column(columnDefinition = "text")
-    private List<Long> country_ids;
+    private Long[] city_ids;
 
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> region_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<Long> city_ids;
-
-    @Type(type = "text")
-    @Column(columnDefinition = "text")
-    private List<String> rtb_urls;
+//    @Type(type = "text")
+//    @Column(columnDefinition = "text")
+//    private String[] rtb_urls;
 
     //private List<InventorySource> inventory_sources;
 

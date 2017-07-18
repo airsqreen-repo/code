@@ -22,8 +22,8 @@ public class LongArrayType implements UserType {
 	}
 
 	@Override
-    public Class<BigDecimal[]> returnedClass() {
-		return BigDecimal[].class;
+    public Class<Long[]> returnedClass() {
+		return Long[].class;
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class LongArrayType implements UserType {
 		if(o1 instanceof long[] && o2 instanceof long[]) {
 		    return Arrays.equals(((long[]) o1), ((long[])o2));
 		} else {
-		    return Arrays.equals((BigDecimal[]) o1, (BigDecimal[]) o2);
+		    return Arrays.equals((Long[]) o1, (Long[]) o2);
 		}
 	}
 
@@ -60,8 +60,8 @@ public class LongArrayType implements UserType {
         // use JDBC array type, which is fairly new, so tread carefully
         if (o == null) {
 			preparedStatement.setNull(i, java.sql.Types.ARRAY);
-		} else if(o instanceof BigDecimal[]){
-		    BigDecimal[] myArray = (BigDecimal[]) o;
+		} else if(o instanceof Long[]){
+		    Long[] myArray = (Long[]) o;
             Array inArray = preparedStatement.getConnection().createArrayOf("numeric", myArray);
             preparedStatement.setArray(i, inArray);
 		}
@@ -77,9 +77,9 @@ public class LongArrayType implements UserType {
 	@Override
     public Object deepCopy( Object o ) throws HibernateException {
         if (o == null) return null;
-        else if(o instanceof BigDecimal[])
+        else if(o instanceof Long[])
         {
-            BigDecimal[] array = (BigDecimal[]) o;
+            Long[] array = (Long[]) o;
             return array.clone();
         }
         else if(o instanceof long[])
@@ -117,9 +117,9 @@ public class LongArrayType implements UserType {
     }
 
     private static Object[] wrap(long[] longArray) {
-        BigDecimal[] result = new BigDecimal[longArray.length];
+        Long[] result = new Long[longArray.length];
         for (int i = 0; i < longArray.length; i++) {
-            result[i] = BigDecimal.valueOf(longArray[i]);
+            result[i] = Long.valueOf(longArray[i]);
         }
         return result;
     }

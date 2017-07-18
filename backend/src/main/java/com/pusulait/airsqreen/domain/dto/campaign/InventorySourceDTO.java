@@ -6,9 +6,12 @@ import java.util.List;
 
 /**
  * Created by benan on 7/9/2017.
+ *
+ * Documentation/doc/app-api/Api/V2/Campaigns.html
+ *
  */
 @Data
-public class InventorySource {
+public class InventorySourceDTO {
 
     private Long id;
     private Double price;
