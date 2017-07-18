@@ -1,9 +1,13 @@
 package com.pusulait.airsqreen.service.cron;
 
+import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
+import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
+import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -22,6 +26,7 @@ import java.util.List;
 @Transactional
 public class EventService {
 
+    private CampaignRepository campaignRepository;
 
     @Autowired
     private Sistem9PushEventService sistem9PushEventService;
@@ -33,22 +38,37 @@ public class EventService {
 
     private void generateSistem9Events() {
 
+        List<Campaign> allCampaigns = campaignRepository.findAll();
 
-        List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
+        for (Campaign campaign : allCampaigns) {
 
-        for (int i = 0; i < calculateEventSize(); i++) {
+            if (new Date().before(campaign.getStartOn()) ||
+                    new Date().after(campaign.getEndOn())) {
+                continue;
+            }
 
-            Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
+            // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
+            // Remaining budget nasıl hesaplayacağız?
 
-            pushEventDTO.setPassword("");
-            pushEventDTO.setUsername("");
-            pushEventDTO.setEventStatus(EventStatus.WAITING);
-            pushEventDTO.setSlaveId(1L);
-            pushEventDTO.setExpireDate(null);
-            pushEventDTO.setRunDate(calculateRunDate());
-            pushEventDTO.setDeviceId(calculateDeviceId());
-            pushEventDTO.setActionId(calculateActionId());
-            sistem9PushEventService.save(pushEventDTO);
+
+            List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
+
+            for (int i = 0; i < calculateEventSize(); i++) {
+
+                Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
+
+                pushEventDTO.setPassword("");
+                pushEventDTO.setUsername("");
+                pushEventDTO.setEventStatus(EventStatus.WAITING);
+                pushEventDTO.setSlaveId(1L);
+                pushEventDTO.setExpireDate(null);
+                pushEventDTO.setRunDate(calculateRunDate());
+                pushEventDTO.setDeviceId(calculateDeviceId());
+                pushEventDTO.setActionId(calculateActionId());
+                sistem9PushEventService.save(pushEventDTO);
+            }
+
+
         }
 
 
