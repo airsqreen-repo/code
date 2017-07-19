@@ -1,5 +1,6 @@
 package com.pusulait.airsqreen.service.system9;
 
+import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.sistemdokuzmedya.ObjectFactory;
 import com.sistemdokuzmedya.S9WExSrvc;
 import com.sistemdokuzmedya.WinActionRelease;
@@ -65,6 +66,15 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
 
         String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(), winActionRelease.getDeviceID());
 
+    }
 
+
+    public void push(Sistem9PushEvent event) {
+
+        //TODO: Sistem9 test makinesinin bilgilerini alınca bu kısım netleşir
+
+        // airsqreenclients projesinde
+        // com.sistemdokuzmedya.Main metodunda örnek çağrı var
+        
     }
 }

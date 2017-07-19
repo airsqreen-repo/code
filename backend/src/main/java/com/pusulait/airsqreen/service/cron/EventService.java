@@ -8,6 +8,7 @@ import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import com.pusulait.airsqreen.service.CampaignService;
+import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -34,7 +35,13 @@ public class EventService {
     private CampaignRepository campaignRepository;
 
     @Autowired
+    private Sistem9PushEventRepository sistem9PushEventRepository;
+
+    @Autowired
     private Sistem9PushEventService sistem9PushEventService;
+
+    @Autowired
+    private Sistem9Adapter sistem9Adapter;
 
     //TODO: galiba saatlik değil de günlük gösterimleri hesaplamalıyız.
     // örneğin her gün 2:30 da
@@ -149,8 +156,17 @@ public class EventService {
     @Scheduled(cron = "0 0 0 1 * ?")
     public void pushEvents() {
 
+        List<Sistem9PushEvent> events = sistem9PushEventRepository.findAll();
+
+        for (Sistem9PushEvent event : events) {
+
+            if (event.getEventStatus().equals(EventStatus.WAITING) ||
+                    event.getEventStatus().equals(EventStatus.ERROR)) {
+
+                sistem9Adapter.push(event);
+            }
+        }
 
     }
-
 
 }
