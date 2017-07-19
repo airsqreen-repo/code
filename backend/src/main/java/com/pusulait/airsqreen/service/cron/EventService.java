@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by benan on 7/16/2017.
@@ -108,7 +109,7 @@ public class EventService {
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
-                pushEventDTO.setRunDate(screenStartDate.toDate());
+                pushEventDTO.setRunDate(screenStartDate.plusMinutes(minutes).toDate());
                 pushEventDTO.setDeviceId(calculateDeviceId());
                 pushEventDTO.setActionId(calculateActionId());
                 sistem9PushEventService.save(pushEventDTO);
@@ -128,18 +129,21 @@ public class EventService {
 
     private Integer calculateDeviceId() {
         //burada hangi device seçilecek o random belirlenecek
-        return 0;
+        // TODO: elimizdeki device id'ler hangileri?
+
+        return new Random().nextInt();
+
     }
 
-    private Date calculateRunDate() {
-        return new Date();
-    }
+//    private Date calculateRunDate() {
+//        return new Date();
+//    }
 
-    private Integer calculateEventSize() {
-        // burda bu saat diliminde toplam kaç event ihtiyacımız var
-
-        return 100;
-    }
+//    private Integer calculateEventSize() {
+//        // burda bu saat diliminde toplam kaç event ihtiyacımız var
+//
+//        return 100;
+//    }
 
 
     @Scheduled(cron = "0 0 0 1 * ?")
