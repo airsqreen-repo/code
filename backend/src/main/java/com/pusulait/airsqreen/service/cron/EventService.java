@@ -38,7 +38,7 @@ public class EventService {
 
     private void generateSistem9Events() {
 
-        List<Campaign> allCampaigns = campaignRepository.findAll();
+        List<Campaign> allCampaigns = campaignRepository.findAllActive();
 
         for (Campaign campaign : allCampaigns) {
 
