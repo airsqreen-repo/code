@@ -59,7 +59,6 @@ public class EventService {
         List<CampaignDTO> allCampaigns = entityManager.createNamedQuery("findAllActive").getResultList();
 
 
-
         for (CampaignDTO campaign : allCampaigns) {
 
             // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
