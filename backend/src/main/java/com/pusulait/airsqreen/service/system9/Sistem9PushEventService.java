@@ -1,10 +1,7 @@
 package com.pusulait.airsqreen.service.system9;
 
-import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
-import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

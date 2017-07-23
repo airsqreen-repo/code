@@ -12,7 +12,7 @@ import java.util.Date;
  * Created by benan on 7/16/2017.
  */
 @Data
-public class BaseEventDTO extends AuditBase implements Serializable {
+public class BaseEventDTO implements Serializable {
 
     private Long id;
     private Long slaveId;
@@ -20,5 +20,7 @@ public class BaseEventDTO extends AuditBase implements Serializable {
     private EventStatus eventStatus;
     private Date expireDate;
     private Date runDate;
+
+
 
 }

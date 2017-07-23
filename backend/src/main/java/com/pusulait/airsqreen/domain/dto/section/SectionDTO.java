@@ -1,13 +1,9 @@
 package com.pusulait.airsqreen.domain.dto.section;
 
 import com.pusulait.airsqreen.domain.campaign.Section;
-import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Section;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * Created by benan on 7/15/2017.

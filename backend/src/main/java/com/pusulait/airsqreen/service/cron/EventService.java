@@ -1,16 +1,14 @@
 package com.pusulait.airsqreen.service.cron;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
-import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
-import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +16,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by benan on 7/16/2017.
@@ -32,6 +29,7 @@ import java.util.Random;
 @Transactional
 public class EventService {
 
+    @Autowired
     private CampaignRepository campaignRepository;
 
     @Autowired
@@ -43,6 +41,9 @@ public class EventService {
     @Autowired
     private Sistem9Adapter sistem9Adapter;
 
+    @Autowired
+    private EntityManager entityManager;
+
     //TODO: galiba saatlik değil de günlük gösterimleri hesaplamalıyız.
     // örneğin her gün 2:30 da
     // cron = "30 2 * * * ?"
@@ -51,16 +52,15 @@ public class EventService {
         generateSistem9Events();
     }
 
-    private void generateSistem9Events() {
+    public void generateSistem9Events() {
 
-        List<Campaign> allCampaigns = campaignRepository.findAllActive();
+        //List<Campaign> allCampaigns = campaignRepository.findAllActive();
 
-        for (Campaign campaign : allCampaigns) {
+        List<CampaignDTO> allCampaigns = entityManager.createNamedQuery("findAllActive").getResultList();
 
-            if (new Date().before(campaign.getStartOn()) ||
-                    new Date().after(campaign.getEndOn())) {
-                continue;
-            }
+
+
+        for (CampaignDTO campaign : allCampaigns) {
 
             // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
             // Remaining budget nasıl hesaplayacağız?
@@ -70,14 +70,13 @@ public class EventService {
             BigDecimal pricePerShow = BigDecimal.ONE;
 
             // toplam gösterim sayısı: 30000
-            Long nShow = budget.divide(pricePerShow).longValue();
+            Integer nShow = budget.divide(pricePerShow).intValue();
 
             // days = 30 gün olsun
-            int days = Days.daysBetween(new LocalDate(campaign.getStartOn()),
-                    new LocalDate(campaign.getEndOn())).getDays();
+            Integer days = Days.daysBetween(new LocalDate(campaign.getStartOn()),new LocalDate(campaign.getEndOn())).getDays();
 
             // günde 1000 gösterim
-            Long showPerDay = nShow / days;
+            Integer showPerDay = nShow / days;
 
             //TODO: Kaç ekrana dağıtacağını nasıl anlayacağız?
             // Bunlar hangi ekranlar? (device_id?)
@@ -87,24 +86,24 @@ public class EventService {
             //TODO: Elimizde hangi ekranlar olduğunu nerden anlayacağız?
 
             // her ekran günde 100 gösterim yapacak
-            Long dailyShowPerScreen = showPerDay / numberOfScreens;
+            Integer dailyShowPerScreen = showPerDay / numberOfScreens;
 
             //TODO: available hours nereden geliyor?
             int hoursAvailablePerScreen = 6;
 
-            int minutesPerScreen = hoursAvailablePerScreen * 60;
+            int secondsPerScreen = hoursAvailablePerScreen * 60 * 60;
 
             // 360 / 100 = 4 dakikada 1 gösterim
-            long nMinutesToShow = minutesPerScreen / dailyShowPerScreen;
+            Integer period = (secondsPerScreen / dailyShowPerScreen);
 
             // 60 / 4 = 12    (1 saatte 12 gösterim eder)
-            long showPerHour = 60 / nMinutesToShow;
+            long showPerHour = dailyShowPerScreen / hoursAvailablePerScreen;
 
 
             List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
 
             // Ekranın available olduğu an
-            DateTime screenStartDate = new DateTime(new Date());
+            Date screenStartDate = new Date();
 
             int minutes = 0;
             for (int i = 0; i < showPerHour; i++) {
@@ -116,18 +115,14 @@ public class EventService {
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
-                pushEventDTO.setRunDate(screenStartDate.plusMinutes(minutes).toDate());
+                pushEventDTO.setRunDate(setRunDate(i, period,screenStartDate));
                 pushEventDTO.setDeviceId(calculateDeviceId());
                 pushEventDTO.setActionId(calculateActionId());
                 sistem9PushEventService.save(pushEventDTO);
 
-                minutes += nMinutesToShow;
+                minutes += period;
             }
-
-
         }
-
-
     }
 
     private String calculateActionId() {
@@ -142,9 +137,22 @@ public class EventService {
 
     }
 
-//    private Date calculateRunDate() {
-//        return new Date();
-//    }
+    private Date setRunDate(Integer  pushNo, Integer period,Date screenStartDate) {
+
+        Long timeInDay = pushNo * period + screenStartDate.getTime();
+        Long hour = timeInDay / 3600 ;
+        Long minute = timeInDay % 60;
+        Long second = timeInDay % 3600;
+
+        Calendar c1 = Calendar.getInstance();
+        c1.setTimeInMillis(new Date().getTime());
+        c1.set(Calendar.HOUR_OF_DAY, hour.intValue());
+        c1.set(Calendar.MINUTE, minute.intValue());
+        c1.set(Calendar.SECOND, second.intValue());
+
+        return c1.getTime();
+
+    }
 
 //    private Integer calculateEventSize() {
 //        // burda bu saat diliminde toplam kaç event ihtiyacımız var
@@ -156,17 +164,12 @@ public class EventService {
     @Scheduled(cron = "0 0 0 1 * ?")
     public void pushEvents() {
 
-        List<Sistem9PushEvent> events = sistem9PushEventRepository.findAll();
+        List<Sistem9PushEvent> weeklyPushEventList = sistem9PushEventRepository.findWaitingEvents();
 
-        for (Sistem9PushEvent event : events) {
-
-            if (event.getEventStatus().equals(EventStatus.WAITING) ||
-                    event.getEventStatus().equals(EventStatus.ERROR)) {
-
-                sistem9Adapter.push(event);
-            }
+        for (Sistem9PushEvent event : weeklyPushEventList) {
+            sistem9Adapter.push(event);
         }
-
     }
+
 
 }

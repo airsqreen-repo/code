@@ -2,7 +2,7 @@ package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.ServiceConstants;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
@@ -92,19 +92,19 @@ public class Platform161Service {
     }
 
 
-    public List<CampaignDTO> getCampaign(String token) {
+    public List<Plt161CampaignDTO> getCampaign(String token) {
 
-        List<CampaignDTO> campaignDTOList = null;
+        List<Plt161CampaignDTO> campaignDTOList = null;
         String url = this.servicesEndPoint + ServiceConstants.CAMPAIGNS;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
         RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
-        ResponseEntity<List<CampaignDTO>> responseEntity = null;
+        ResponseEntity<List<Plt161CampaignDTO>> responseEntity = null;
 
         try {
-            ParameterizedTypeReference<List<CampaignDTO>> responseType = new ParameterizedTypeReference<List<CampaignDTO>>() {
+            ParameterizedTypeReference<List<Plt161CampaignDTO>> responseType = new ParameterizedTypeReference<List<Plt161CampaignDTO>>() {
             };
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
 
@@ -147,7 +147,7 @@ public class Platform161Service {
         return inventoryDTOList;
     }
 
-    public List<CampaignDTO> getAllCampaigns() {
+    public List<Plt161CampaignDTO> getAllCampaigns() {
         return getCampaign(getAuthToken());
 
     }

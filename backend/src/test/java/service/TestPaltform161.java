@@ -1,13 +1,11 @@
 package service;
 
 import com.pusulait.airsqreen.Application;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
-import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.InventoryService;
-import com.pusulait.airsqreen.service.PublisherService;
 import com.pusulait.airsqreen.service.SectionService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +49,7 @@ public class TestPaltform161 {
     public void getCampaigns() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
-        List<CampaignDTO> list = platform161Service.getCampaign(token);
+        List<Plt161CampaignDTO> list = platform161Service.getCampaign(token);
         log.debug("list:" + list.size());
 
     }

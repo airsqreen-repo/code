@@ -8,6 +8,7 @@ import com.pusulait.airsqreen.domain.enums.EventType;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,8 +18,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = Constants.PREFIX + "EVENTS")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "EVENT_TYPE", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class BaseEvent extends AuditBase implements Serializable {
 
     @Id
@@ -30,7 +30,9 @@ public class BaseEvent extends AuditBase implements Serializable {
     @Column(name = "SLAVE_ID")
     private Long slaveId;
 
-    @Column(name = "EVENT_TYPE",insertable = false,updatable = false)
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "EVENT_TYPE")
     private EventType eventType;
 
     @Column(name = "EVENT_STATUS")

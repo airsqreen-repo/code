@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.domain.campaign;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
@@ -23,6 +24,9 @@ import java.util.Date;
 @Entity
 @Table(name = Constants.PREFIX + "CAMPAIGNS")
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "findAllActive", query = "select * from AIR_CampaignS  where active = true and now() between start_On and end_On")
+})
 public class Campaign extends AuditBase implements Serializable {
 
     @Id
@@ -47,9 +51,11 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "TARGET")
     private String target;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "START_ON")
     private Date startOn;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "END_ON")
     private Date endOn;
 
