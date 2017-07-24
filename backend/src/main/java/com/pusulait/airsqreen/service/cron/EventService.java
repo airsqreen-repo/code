@@ -1,6 +1,5 @@
 package com.pusulait.airsqreen.service.cron;
 
-import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
@@ -9,6 +8,7 @@ import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.*;
 
 /**
  * Created by benan on 7/16/2017.
  */
-
+@Slf4j
 @Service
 @Transactional
 public class EventService {
@@ -56,10 +57,21 @@ public class EventService {
 
         //List<Campaign> allCampaigns = campaignRepository.findAllActive();
 
-        List<CampaignDTO> allCampaigns = entityManager.createNamedQuery("findAllActive").getResultList();
+        List<Object[]> objects = entityManager.createNamedQuery("findAllActive").getResultList();
+        List<CampaignDTO> activeCampaigns = new ArrayList<>();
+
+        for (Object o[] : objects){
+
+            CampaignDTO campaignDTO = new CampaignDTO();
+            campaignDTO.setId(((BigInteger) o[0] ).longValue());
+            campaignDTO.setName((String) o[11]);
+            campaignDTO.setStartOn((Timestamp)o[14]);
+            campaignDTO.setEndOn((Timestamp)o[9]);
+            activeCampaigns.add(campaignDTO);
+        }
 
 
-        for (CampaignDTO campaign : allCampaigns) {
+        for (CampaignDTO campaign : activeCampaigns) {
 
             // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
             // Remaining budget nasıl hesaplayacağız?
@@ -72,7 +84,7 @@ public class EventService {
             Integer nShow = budget.divide(pricePerShow).intValue();
 
             // days = 30 gün olsun
-            Integer days = Days.daysBetween(new LocalDate(campaign.getStartOn()),new LocalDate(campaign.getEndOn())).getDays();
+            Integer days = Days.daysBetween(new LocalDate(campaign.getStartOn()), new LocalDate(campaign.getEndOn())).getDays();
 
             // günde 1000 gösterim
             Integer showPerDay = nShow / days;
@@ -114,7 +126,7 @@ public class EventService {
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
-                pushEventDTO.setRunDate(setRunDate(i, period,screenStartDate));
+                pushEventDTO.setRunDate(setRunDate(i, period, screenStartDate));
                 pushEventDTO.setDeviceId(calculateDeviceId());
                 pushEventDTO.setActionId(calculateActionId());
                 sistem9PushEventService.save(pushEventDTO);
@@ -136,10 +148,10 @@ public class EventService {
 
     }
 
-    private Date setRunDate(Integer  pushNo, Integer period,Date screenStartDate) {
+    private Date setRunDate(Integer pushNo, Integer period, Date screenStartDate) {
 
         Long timeInDay = pushNo * period + screenStartDate.getTime();
-        Long hour = timeInDay / 3600 ;
+        Long hour = timeInDay / 3600;
         Long minute = timeInDay % 60;
         Long second = timeInDay % 3600;
 

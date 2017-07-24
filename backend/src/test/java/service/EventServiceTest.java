@@ -1,4 +1,4 @@
-package service;
+/*package service;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
@@ -26,10 +26,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-/**
- * Author: Bahadir Konu (bahadir.konu@comu.edu.tr)
- * Date: 7/19/2017
- */
+
 @RunWith(MockitoJUnitRunner.class)
 public class EventServiceTest {
 
@@ -111,3 +108,4 @@ public class EventServiceTest {
     }
 
 }
+*/
