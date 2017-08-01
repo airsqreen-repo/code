@@ -1,14 +1,8 @@
 package com.pusulait.airsqreen.service;
 
-import com.pusulait.airsqreen.domain.campaign.InventorySource2;
-import com.pusulait.airsqreen.domain.campaign.Publisher;
 import com.pusulait.airsqreen.domain.campaign.Section;
-import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Section;
-import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
-import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
-import com.pusulait.airsqreen.repository.campaign.InventorySource2Repository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;

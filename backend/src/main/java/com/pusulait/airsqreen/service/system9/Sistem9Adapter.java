@@ -64,7 +64,7 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         winActionRelease.setPassword(password);
         winActionRelease.setUserName(username);
 
-        String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(), winActionRelease.getDeviceID());
+        String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(),       winActionRelease.getDeviceID());
 
     }
 

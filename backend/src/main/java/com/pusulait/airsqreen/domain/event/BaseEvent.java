@@ -28,7 +28,7 @@ public class BaseEvent extends AuditBase implements Serializable {
     private Long id;
 
     @Column(name = "SLAVE_ID")
-    private Long slaveId;
+    private Long slaveId = 1L;
 
     @NotNull
     @Enumerated(EnumType.STRING)

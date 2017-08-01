@@ -25,7 +25,7 @@ import java.util.Date;
 @Table(name = Constants.PREFIX + "CAMPAIGNS")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "findAllActive", query = "select * from AIR_CampaignS  where active = true and now() between start_On and end_On")
+        @NamedNativeQuery(name = "findAllActive", query = "select * from AIR_Campaigns  where active = true and now() between start_On and end_On")
 })
 public class Campaign extends AuditBase implements Serializable {
 
@@ -65,5 +65,6 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "AGENCY_FEE")
     private Double agencyFee;
 
+    //private List<InventorySource> inventory_sources;
 
 }

@@ -92,7 +92,7 @@ public class EventService {
             //TODO: Kaç ekrana dağıtacağını nasıl anlayacağız?
             // Bunlar hangi ekranlar? (device_id?)
             int numberOfScreens = 10;
-
+            // bütün devicelar için insert olmalı
 
             //TODO: Elimizde hangi ekranlar olduğunu nerden anlayacağız?
 
