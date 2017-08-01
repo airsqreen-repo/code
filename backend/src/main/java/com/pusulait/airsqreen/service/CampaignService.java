@@ -53,8 +53,9 @@ public class CampaignService {
             campaignList = campaignList.subList(0, recordCount);
         }
 
-        for (Plt161Campaign plt161Campaign : campaignList)
+        for (Plt161Campaign plt161Campaign : campaignList){
             campaignRepository.save(plt161Campaign);
+        }
     }
 
     @Transactional
@@ -72,11 +73,13 @@ public class CampaignService {
 
             Campaign campaign = campaignOptional.get();
 
-            if (campaign instanceof Plt161Campaign)
+            if (campaign instanceof Plt161Campaign) {
                 campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
-            // else if (campaign instanceof XXXCampaign)
-            // campaign = ...
-
+                if(campaign.getLastModifiedDate().before(campaignDTO.getEndOn())){  // TODO son update tarihi nerden?
+                    campaignRepository.delete(campaign.getId());
+                    save(campaignDTO);
+                }
+            }
             campaignRepository.save(campaign);
 
         }
