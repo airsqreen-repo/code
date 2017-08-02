@@ -23,6 +23,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private Boolean active;
     private Boolean archived;
     private Date start_on;
+    private Date updated_at;
     private Date end_on;
     private Long sales_manager_id;
     private Long campaign_manager_id;
@@ -67,6 +68,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private List<InventorySourceDTO> inventory_sources;
     private Long[] operating_system_ids;
     private Long[] direct_deal_ids;
+    private Long[] filtered_section_ids;
+
+
 
     public static Plt161CampaignDTO toDTO(Plt161Campaign campaign) {
 
@@ -120,6 +124,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setRegion_ids(campaignDTO.getRegion_ids());
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
         campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+        campaign.setUpdated_at(campaignDTO.getUpdated_at());
+        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
 
         return campaign;
     }
@@ -192,7 +198,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setRegion_ids(campaignDTO.getRegion_ids());
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
         campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
-
+        campaign.setUpdated_at(campaignDTO.getUpdated_at());
+        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
         return campaign;
     }
 }

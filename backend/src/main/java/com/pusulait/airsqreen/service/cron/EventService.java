@@ -179,6 +179,8 @@ public class EventService {
 
         for (Sistem9PushEvent event : weeklyPushEventList) {
             sistem9Adapter.push(event);
+            event.setEventStatus(EventStatus.DONE);
+            sistem9PushEventRepository.save(event);
         }
     }
 

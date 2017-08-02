@@ -57,6 +57,11 @@ public class Plt161Campaign extends Campaign {
     private Double booked_budget;
     private Double platform161_tech_fee;
     private String mobile_app_filter;
+    private Date updated_at;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] filtered_section_ids;
 
     @Column(name = "OFFER_ID")
     private Long offerId;

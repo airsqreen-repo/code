@@ -74,15 +74,16 @@ public class CampaignService {
             Campaign campaign = campaignOptional.get();
 
             if (campaign instanceof Plt161Campaign) {
+                Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
                 campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
-                if(campaign.getLastModifiedDate().before(campaignDTO.getEndOn())){  // TODO son update tarihi nerden?
+                if(plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())){
                     //todo SECTION IDLER NERDEN GELİYO. GELENLER YOK İSE 0 DAN ÇEKİLİP KAYDEDİKECEK BUNA BAĞLANACAK. YOKSA DİREK BAĞLANACAK.
+
                     campaignRepository.delete(campaign.getId());
                     save(campaignDTO);
                 }
             }
             campaignRepository.save(campaign);
-
         }
     }
 

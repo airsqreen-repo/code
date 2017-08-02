@@ -5,14 +5,19 @@ import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
+import com.pusulait.airsqreen.domain.security.user.UserRole;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by benan on 7/13/2017.
@@ -32,9 +37,12 @@ public class Campaign extends AuditBase implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.CAMPAIGN_SEQUENCE)
-    @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 2)
+    @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
+   /* @Column(name = "UNIQUE_CAMPAING_UID")
+    private String uniqueCampaignUId; // SEQ KULLANARAK 8 KARAKTERLİ UYDURACAM
+*/
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
 
@@ -65,6 +73,11 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "AGENCY_FEE")
     private Double agencyFee;
 
-    //private List<InventorySource> inventory_sources;
+
+    @JsonIgnore
+    @RestResource(exported = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "campaign")
+    private List<CampaignSection> campaignSections = new ArrayList<>();
+
 
 }
