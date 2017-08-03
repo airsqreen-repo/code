@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Table(name = Constants.PREFIX + "PLATFORM_USERS")
 @SQLDelete(sql="update " + Constants.PREFIX +"PLATFORM_USERS SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ?")
 @Where(clause = "DATA_STATUS <> 'DELETED'")
-public class PlatformUsers extends AuditBase implements Serializable {
+public class PlatformUser extends AuditBase implements Serializable {
 
     private static final long serialVersionUID = -687874117917352477L;
 
@@ -32,8 +32,8 @@ public class PlatformUsers extends AuditBase implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "USER")
-    private String user;
+    @Column(name = "USERNAME")
+    private String username;
 
     @NotNull
     @Column(name = "PASSWORD")

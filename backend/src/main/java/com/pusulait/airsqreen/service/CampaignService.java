@@ -96,14 +96,14 @@ public class CampaignService {
 
                         Section section = sectionRepository.findOne(sectionId);
 
-                        if(section == null){
+                       /* if(section == null){
 
                             SectionDTO sectionDTO = platform161Service.getSection(null,sectionId);
                             section = sectionService.save(sectionDTO);
                             CampaignSection campaignSection = new CampaignSection();
                             campaignSection.setCampaign(campaign);
                             campaignSection.setSection(section);
-                        }
+                        }*/
 
                         CampaignSection campaignSection = new CampaignSection();
                         campaignSection.setCampaign(campaign);

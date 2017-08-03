@@ -4,12 +4,10 @@ import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.DeliveryType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.FrequencyCapType;
-import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.RtbOptimizeType;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by benan on 7/9/2017.
@@ -65,10 +63,11 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private String mobile_app_filter;
     private Long[] mobile_app_ids;
     private String[] supply_types;
-    private List<InventorySourceDTO> inventory_sources;
     private Long[] operating_system_ids;
     private Long[] direct_deal_ids;
     private Long[] filtered_section_ids;
+    private Long[] targeting_weekday_ids;
+    private Long[] targeting_hour_ids;
 
 
 
@@ -81,6 +80,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
     public static Plt161Campaign toEntity(Plt161CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = new Plt161Campaign();
+        campaign.setTargeting_hour_ids(campaignDTO.getTargeting_hour_ids());
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
@@ -152,6 +153,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
 
     public static Campaign update(Plt161CampaignDTO campaignDTO, Plt161Campaign campaign) {
 
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
+        campaign.setExternalId(campaignDTO.getId());
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());

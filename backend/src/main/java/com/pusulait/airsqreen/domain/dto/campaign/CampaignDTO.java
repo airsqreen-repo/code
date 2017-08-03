@@ -16,6 +16,8 @@ public class CampaignDTO {
 
     private Long externalId;
 
+    private String uniqueCampaignUId;
+
     private String name;
 
     private Boolean active;
