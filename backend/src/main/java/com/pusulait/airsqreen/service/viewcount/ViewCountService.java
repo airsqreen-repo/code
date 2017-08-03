@@ -22,15 +22,19 @@ public interface ViewCountService {
 
     /**
      * Takip anahtarini doner.
-     * Tum alanlar zorunludur.
+     * backendTrackUrl haric diger alanlar zorunludur.
+     *
+     * backendTrackUrl dis sistemde de sayilmasini onaylatmak icin
+     * kullanilacaktir. backendTrackUrl NULL olabilir.
      *
      * @param compaignId
      * @param deviceId
      * @param actionId
      * @param sectionId
+     * @param backendTrackUrl
      * @return
      */
-    String save(String compaignId, String deviceId, String actionId, String sectionId);
+    String save(String compaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl);
 
     /**
      * Daha once kaydi olusan anahtari getirmek icin kullanilir.
