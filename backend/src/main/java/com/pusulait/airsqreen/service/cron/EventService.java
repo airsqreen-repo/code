@@ -162,7 +162,7 @@ public class EventService {
                 pushEventDTO.setExpireDate(null);
                 pushEventDTO.setRunDate(setRunDate(i, 0, screenStartDate));
                 pushEventDTO.setDeviceId(calculateDeviceId(i, deviceIdList));
-                pushEventDTO.setActionId(calculateActionId());
+                //pushEventDTO.setActionId(calculateActionId());
                 sistem9PushEventService.save(pushEventDTO);
 
                 minutes += 0;
