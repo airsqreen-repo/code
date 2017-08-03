@@ -13,6 +13,7 @@ public final class Sequences {
     public static final String EVENT_SEQUENCE  = "SEQ_EVENT_ID";
 
     public static final String DEVICE_SEQUENCE = "DEVICE_SEQUENCE";
+    public static final String DEVICE_CONSTRAINT_SEQUENCE = "DEVICE_CONSTRAINT_SEQUENCE";
 
     public static final String INVENTORY_SEQUENCE  = "SEQ_INVENTORY_ID";
 

@@ -30,8 +30,8 @@ public class DeviceConstraint extends AuditBase implements Serializable {
 
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.DEVICE_SEQUENCE)
-    @SequenceGenerator(name = Sequences.DEVICE_SEQUENCE, sequenceName = Sequences.DEVICE_SEQUENCE, allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.DEVICE_CONSTRAINT_SEQUENCE)
+    @SequenceGenerator(name = Sequences.DEVICE_CONSTRAINT_SEQUENCE, sequenceName = Sequences.DEVICE_CONSTRAINT_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
 

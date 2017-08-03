@@ -42,3 +42,25 @@ INSERT INTO "public"."oauth_access_token" ("token_id", "token", "authentication_
 
 
 UPDATE "public"."preg_users" SET "user_profile_id"='27325' WHERE ("id"='1')
+
+INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
+                        VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Zorlu AVM Giriş');
+
+INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
+VALUES (2, 'system', now(), 'ACTIVE', 'system', now(), 0, '128931', 'Zorlu AVM Orta Kat');
+
+
+INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
+VALUES (3, 'system', now(), 'ACTIVE', 'system', now(), 0, '1231242', 'Akmerkez 1');
+
+INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
+VALUES (4, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Akmerkez 2');
+
+INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
+VALUES (5, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Akmerkez 3');
+
+
+
+INSERT INTO public.air_device_constraints(id, create_user, create_date, data_status, update_user, update_date,version, device_constraint_filter,device_constraint_type, filter_detail,device_id)
+VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, '?','EXCLUDE', 00.00-00.15,01.00-01.15 ,1);
+
