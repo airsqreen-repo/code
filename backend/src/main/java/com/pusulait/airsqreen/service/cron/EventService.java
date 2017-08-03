@@ -75,6 +75,9 @@ public class EventService {
 
             // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
             // Remaining budget nasıl hesaplayacağız?
+
+
+
             BigDecimal budget = BigDecimal.valueOf(30000);
 
             // 1 CPM = 1000 TL, 1 gösterim 1 TL
@@ -121,8 +124,6 @@ public class EventService {
 
                 Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
 
-                pushEventDTO.setPassword("");
-                pushEventDTO.setUsername("");
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
@@ -140,11 +141,11 @@ public class EventService {
         return "";
     }
 
-    private Integer calculateDeviceId() {
+    private Long calculateDeviceId() {
         //burada hangi device seçilecek o random belirlenecek
         // TODO: elimizdeki device id'ler hangileri?
 
-        return new Random().nextInt();
+        return new Random().nextLong();
 
     }
 

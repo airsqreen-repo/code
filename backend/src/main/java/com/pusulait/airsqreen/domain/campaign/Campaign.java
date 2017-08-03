@@ -40,9 +40,9 @@ public class Campaign extends AuditBase implements Serializable {
     @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
-   /* @Column(name = "UNIQUE_CAMPAING_UID")
-    private String uniqueCampaignUId; // SEQ KULLANARAK 8 KARAKTERLİ UYDURACAM
-*/
+    @Column(name = "UNIQUE_CAMPAING_UID")
+    private String uniqueCampaignUId; // PLT161 + externalId
+
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
 
@@ -73,11 +73,7 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "AGENCY_FEE")
     private Double agencyFee;
 
-
-    @JsonIgnore
-    @RestResource(exported = false)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "campaign")
     private List<CampaignSection> campaignSections = new ArrayList<>();
-
 
 }

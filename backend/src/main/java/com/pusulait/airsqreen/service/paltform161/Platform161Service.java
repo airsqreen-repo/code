@@ -3,7 +3,6 @@ package com.pusulait.airsqreen.service.paltform161;
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.ServiceConstants;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
-import com.pusulait.airsqreen.domain.dto.campaign.InventorySourceDTO2;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.util.RestPlatfrom161Util;
@@ -119,41 +118,9 @@ public class Platform161Service {
         return campaignDTOList;
     }
 
-    public List<InventorySourceDTO2> getInventory(String token) {
-
-        List<InventorySourceDTO2> inventoryDTOList = null;
-        String url = this.servicesEndPoint + ServiceConstants.INVENTORIES;
-
-
-        HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
-        HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
-
-        RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
-        ResponseEntity<List<InventorySourceDTO2>> responseEntity = null;
-
-        try {
-            ParameterizedTypeReference<List<InventorySourceDTO2>> responseType = new ParameterizedTypeReference<List<InventorySourceDTO2>>() {
-            };
-            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
-
-            if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
-                inventoryDTOList = responseEntity.getBody();
-            }
-
-        } catch (RestClientException e) {
-            log.error(e.getMessage(), e);
-        }
-
-        return inventoryDTOList;
-    }
 
     public List<Plt161CampaignDTO> getAllCampaigns() {
         return getCampaign(getAuthToken());
-
-    }
-
-    public List<InventorySourceDTO2> getAllInventories() {
-        return getInventory(getAuthToken());
 
     }
 

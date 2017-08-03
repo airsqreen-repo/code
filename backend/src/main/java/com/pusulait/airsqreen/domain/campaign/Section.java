@@ -26,7 +26,7 @@ public class Section extends AuditBase implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = Sequences.SECTION_SEQUENCE)
-    @SequenceGenerator(name = Sequences.SECTION_SEQUENCE, sequenceName = Sequences.SECTION_SEQUENCE, allocationSize = 1, initialValue = 2)
+    @SequenceGenerator(name = Sequences.SECTION_SEQUENCE, sequenceName = Sequences.SECTION_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
     @Column(name = "EXTERNAL_ID")
@@ -40,6 +40,7 @@ public class Section extends AuditBase implements Serializable {
 
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
+
 
 
 }

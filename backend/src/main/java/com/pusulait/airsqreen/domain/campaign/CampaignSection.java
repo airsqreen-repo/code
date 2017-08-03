@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.domain.campaign;
 
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
 import com.pusulait.airsqreen.domain.security.user.Role;
 import com.pusulait.airsqreen.domain.security.user.User;
 import lombok.Data;
@@ -46,6 +47,19 @@ public class CampaignSection extends AuditBase {
     @Column(name = "SECTION_ID")
     private Long sectionId;
 
+    @Column(name = "DEVICE_ID")
+    private Long deviceId;
+
+    @ManyToOne
+    @JoinColumn(name = "DEVICE_ID",  insertable = false, updatable = false)
+    private Device device;
+
+    @Column(name = "ACTOIN_ID")
+    private Long actionId;
+
+
+    @Column(name = "KEY")
+    private String key;
 
 }
 
