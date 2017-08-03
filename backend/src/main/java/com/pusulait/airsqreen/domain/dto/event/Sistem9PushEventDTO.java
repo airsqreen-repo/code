@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 @Data
 public class Sistem9PushEventDTO extends BaseEventDTO {
 
-    private String actionId;
     private Long deviceId;
     private Long platformUserId;
     private Long campaignSectionId;
@@ -25,7 +24,6 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
         Sistem9PushEvent entity = new Sistem9PushEvent();
         entity.setDeviceId(dto.getDeviceId());
         entity.setPlatformUserId(dto.getPlatformUserId());
-        entity.setActionId(dto.getActionId());
         entity.setEventStatus(dto.getEventStatus());
         entity.setExpireDate(dto.getExpireDate());
         entity.setEventType(dto.getEventType());
@@ -38,7 +36,6 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
     public static Sistem9PushEventDTO toDTO(Sistem9PushEvent entity){
 
         Sistem9PushEventDTO dto = new Sistem9PushEventDTO();
-        dto.setActionId(entity.getActionId());
         dto.setDeviceId(entity.getDeviceId());
         dto.setPlatformUserId(entity.getPlatformUserId());
         dto.setEventStatus(entity.getEventStatus());

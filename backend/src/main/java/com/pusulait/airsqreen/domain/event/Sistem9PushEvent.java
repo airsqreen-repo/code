@@ -39,7 +39,5 @@ public class Sistem9PushEvent extends BaseEvent {
     @Column(name = "DEVICE_ID")
     private Long deviceId;
 
-    @Column(name = "ACTION_ID")
-    private String actionId;
 
 }

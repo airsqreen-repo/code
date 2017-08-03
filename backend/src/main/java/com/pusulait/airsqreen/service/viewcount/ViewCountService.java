@@ -2,6 +2,9 @@ package com.pusulait.airsqreen.service.viewcount;
 
 import com.pusulait.airsqreen.domain.dto.viewcount.ViewCountDTO;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by yildizib on 03/08/2017.
  */
@@ -36,7 +39,7 @@ public interface ViewCountService {
      * @param sectionId
      * @return
      */
-    String getTrackToken(tring compaignId, String sectionId);
+    String getTrackToken(String compaignId, String sectionId);
 
     /**
      * Gosterim adedini verilen anahtara gore arttirir.

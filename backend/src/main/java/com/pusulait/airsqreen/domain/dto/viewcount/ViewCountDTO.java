@@ -1,5 +1,7 @@
 package com.pusulait.airsqreen.domain.dto.viewcount;
 
+import java.util.Date;
+
 /**
  * Created by yildizib on 03/08/2017.
  */

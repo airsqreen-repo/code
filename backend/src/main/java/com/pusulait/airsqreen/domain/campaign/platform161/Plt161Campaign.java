@@ -125,6 +125,14 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private String[] rtb_urls;
 
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] targeting_weekday_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] targeting_hour_ids;
+
     //private List<InventorySource> inventory_sources;
 
 }

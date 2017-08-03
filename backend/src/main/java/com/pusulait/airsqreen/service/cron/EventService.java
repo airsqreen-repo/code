@@ -1,14 +1,19 @@
 package com.pusulait.airsqreen.service.cron;
 
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.CampaignSection;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
+import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
+import com.pusulait.airsqreen.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
@@ -29,6 +31,10 @@ import java.util.*;
 @Service
 @Transactional
 public class EventService {
+
+
+    @Autowired
+    private CampaignSectionRepository campaignSectionRepository;
 
     @Autowired
     private CampaignRepository campaignRepository;
@@ -55,9 +61,9 @@ public class EventService {
 
     public void generateSistem9Events() {
 
-        //List<Campaign> allCampaigns = campaignRepository.findAllActive();
+        List<Campaign> activeCampaigns = campaignRepository.findAllActive();
 
-        List<Object[]> objects = entityManager.createNamedQuery("findAllActive").getResultList();
+        /*List<Object[]> objects = entityManager.createNamedQuery("findAllActive").getResultList();
         List<CampaignDTO> activeCampaigns = new ArrayList<>();
 
         for (Object o[] : objects){
@@ -68,53 +74,80 @@ public class EventService {
             campaignDTO.setStartOn((Timestamp)o[14]);
             campaignDTO.setEndOn((Timestamp)o[9]);
             activeCampaigns.add(campaignDTO);
-        }
+        }*/
 
 
-        for (CampaignDTO campaign : activeCampaigns) {
+        for (Campaign campaign : activeCampaigns) {
 
-            // TODO: Bütçeden eksilterek gideceğiz. Budget nereden gelecek?
-            // Remaining budget nasıl hesaplayacağız?
+            Double paidBudget = Double.valueOf(10000); // ibonun servisinden gelecek
 
+            Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
 
+            Double remainingBudget = plt161Campaign.getMedia_budget() - (paidBudget);
 
-            BigDecimal budget = BigDecimal.valueOf(30000);
+            if (remainingBudget <= 0) {
+                return; // para kalmadıysa yapacak da bişi yok
+            }
 
-            // 1 CPM = 1000 TL, 1 gösterim 1 TL
-            BigDecimal pricePerShow = BigDecimal.ONE;
+            Double pricePerShow = null;
+
+            for (CampaignSection campaignSection : campaign.getCampaignSections()) {
+                pricePerShow = campaignSection.getSection().getPrice();
+            }
 
             // toplam gösterim sayısı: 30000
-            Integer nShow = budget.divide(pricePerShow).intValue();
+            Double nShowDouble = (remainingBudget / pricePerShow);
+            Integer nShow = nShowDouble.intValue();
+
 
             // days = 30 gün olsun
             Integer days = Days.daysBetween(new LocalDate(campaign.getStartOn()), new LocalDate(campaign.getEndOn())).getDays();
 
+            Integer totalRemainingWorkingMinutes = null;
+
+            boolean inWeekDay = isInWeekDay(plt161Campaign, new Date());
+
+            if (!inWeekDay) {
+                return;
+            }
+
+            Boolean isLastDay = DateUtil.isInSameDay(campaign.getEndOn(),new Date());
+
+            int dailyHourCount = plt161Campaign.getTargeting_hour_ids().length;
+            int notAvailableHourCount = dailyHourCount -  calculateHour(plt161Campaign,new Date(),isLastDay);
+            int totalHour = 0;
+
+            for (DateTime date = new DateTime(); date.isBefore(new DateTime(campaign.getEndOn())); date = date.plusDays(1)) {
+                if (isInWeekDay(plt161Campaign, date.toDate())) {
+                    totalHour += dailyHourCount;
+                }
+            }
+            totalHour -= notAvailableHourCount;
+
             // günde 1000 gösterim
-            Integer showPerDay = nShow / days;
+            Integer showPerHour = nShow / totalHour;
 
-            //TODO: Kaç ekrana dağıtacağını nasıl anlayacağız?
-            // Bunlar hangi ekranlar? (device_id?)
-            int numberOfScreens = 10;
+            int numberOfScreens = plt161Campaign.getCampaignSections().size();
             // bütün devicelar için insert olmalı
+            Integer hourlyShowPerScreen = showPerHour / numberOfScreens;
+/*
 
-            //TODO: Elimizde hangi ekranlar olduğunu nerden anlayacağız?
-
-            // her ekran günde 100 gösterim yapacak
-            Integer dailyShowPerScreen = showPerDay / numberOfScreens;
-
-            //TODO: available hours nereden geliyor?
-            int hoursAvailablePerScreen = 6;
-
-            int secondsPerScreen = hoursAvailablePerScreen * 60 * 60;
+            int secondsPerScreen = hourlyShowPerScreen * 60 * 60;
 
             // 360 / 100 = 4 dakikada 1 gösterim
-            Integer period = (secondsPerScreen / dailyShowPerScreen);
+            Integer period = (secondsPerScreen / hourlyShowPerScreen);
 
             // 60 / 4 = 12    (1 saatte 12 gösterim eder)
-            long showPerHour = dailyShowPerScreen / hoursAvailablePerScreen;
-
+            long showPerHour = hourlyShowPerScreen / hoursAvailablePerScreen;
+*/
 
             List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
+
+            List<Long> deviceIdList = new ArrayList<>();
+
+            for(CampaignSection campaignSection : campaign.getCampaignSections()) {
+                deviceIdList.add(campaignSection.getDeviceId());
+            }
 
             // Ekranın available olduğu an
             Date screenStartDate = new Date();
@@ -127,25 +160,84 @@ public class EventService {
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
-                pushEventDTO.setRunDate(setRunDate(i, period, screenStartDate));
-                pushEventDTO.setDeviceId(calculateDeviceId());
+                pushEventDTO.setRunDate(setRunDate(i, 0, screenStartDate));
+                pushEventDTO.setDeviceId(calculateDeviceId(i, deviceIdList));
                 pushEventDTO.setActionId(calculateActionId());
                 sistem9PushEventService.save(pushEventDTO);
 
-                minutes += period;
+                minutes += 0;
             }
         }
     }
+
+    private boolean isInWeekDay(Plt161Campaign plt161Campaign, Date date) {
+
+        Long[] weekDayIds = plt161Campaign.getTargeting_weekday_ids();
+
+        boolean inWeekDay = false;
+
+        if (weekDayIds == null) {
+
+            inWeekDay = true;
+        } else {
+            for (Long weekDayId : weekDayIds) {
+                if (weekDayId.intValue() == DateUtil.getDayOfWeek(date)) {
+                    inWeekDay = true;
+                }
+            }
+        }
+        return inWeekDay;
+    }
+
+    private boolean isInDayHour(Plt161Campaign plt161Campaign, Date date) {
+
+        Long[] dayHourIds = plt161Campaign.getTargeting_hour_ids();
+
+        boolean inDayHour = false;
+
+        if (dayHourIds == null) {
+
+            inDayHour = true;
+        } else {
+            for (Long dayHourId : dayHourIds) {
+                if (dayHourId.intValue() == DateUtil.getHourOfDate(date)) {
+                    inDayHour = true;
+                }
+            }
+        }
+        return inDayHour;
+    }
+
+    private Integer calculateHour(Plt161Campaign plt161Campaign, Date date,Boolean isLastDay) {
+
+        if(!isInDayHour(plt161Campaign,date)){
+            return 0;
+        }
+
+        Integer campaignEndHour = DateUtil.getHourOfDate(plt161Campaign.getEndOn());
+        Integer hour = DateUtil.getHourOfDate(new Date());
+        Long[] dayHourIds = plt161Campaign.getTargeting_hour_ids();
+        int workableHourCount = 0;
+
+        for(Long dayHourId : dayHourIds){
+            if (hour < dayHourId && !isLastDay){
+                workableHourCount++;
+            }
+            else if(campaignEndHour > dayHourId && hour < dayHourId ){
+                workableHourCount++;
+            }
+        }
+        return workableHourCount;
+    }
+
 
     private String calculateActionId() {
         return "";
     }
 
-    private Long calculateDeviceId() {
-        //burada hangi device seçilecek o random belirlenecek
-        // TODO: elimizdeki device id'ler hangileri?
+    private Long calculateDeviceId(int i,List<Long> deviceIdList) {
 
-        return new Random().nextLong();
+        return deviceIdList.get(i % deviceIdList.size());
 
     }
 

@@ -66,6 +66,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private Long[] operating_system_ids;
     private Long[] direct_deal_ids;
     private Long[] filtered_section_ids;
+    private Long[] targeting_weekday_ids;
+    private Long[] targeting_hour_ids;
 
 
 
@@ -78,6 +80,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
     public static Plt161Campaign toEntity(Plt161CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = new Plt161Campaign();
+        campaign.setTargeting_hour_ids(campaignDTO.getTargeting_hour_ids());
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
@@ -149,6 +153,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
 
     public static Campaign update(Plt161CampaignDTO campaignDTO, Plt161Campaign campaign) {
 
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
+        campaign.setExternalId(campaignDTO.getId());
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());

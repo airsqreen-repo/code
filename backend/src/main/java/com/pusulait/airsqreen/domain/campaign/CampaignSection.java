@@ -19,7 +19,6 @@ import javax.persistence.*;
 
 @Data
 @Entity
-
 @Table(name = Constants.PREFIX + "CAMPAIGN_SECTIONS")
 @SQLDelete(sql = "update " + Constants.PREFIX + "CAMPAIGN_SECTIONS SET DATA_STATUS = 'DELETED' WHERE id = ? AND version = ?")
 @Where(clause = "DATA_STATUS <> 'DELETED'")
