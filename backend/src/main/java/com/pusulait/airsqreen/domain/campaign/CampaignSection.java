@@ -24,7 +24,6 @@ import javax.persistence.*;
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @ToString(exclude = {"campaign","section"})
 @EqualsAndHashCode(exclude = {"campaign","section"})
-
 public class CampaignSection extends AuditBase {
 
     @Id

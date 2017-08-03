@@ -36,6 +36,13 @@ public class SectionService {
             sectionRepository.save(section);
     }
 
+
+    @Transactional
+    public Section save(SectionDTO sectionDTO) {
+            return sectionRepository.save(SectionDTO.toEntity(sectionDTO));
+    }
+
+
     @Transactional
     public void updateSection(SectionDTO sectionDTO) {
 

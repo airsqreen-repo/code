@@ -219,6 +219,10 @@ public class Platform161Service {
     }
 
     public SectionDTO getSection(String token,Long sectionId ) {
+
+        if(token == null)
+            token = getAuthToken();
+
         SectionDTO sectionDTO = null;
         String url = this.servicesEndPoint + ServiceConstants.SECTIONS + "/" + sectionId;;
 
