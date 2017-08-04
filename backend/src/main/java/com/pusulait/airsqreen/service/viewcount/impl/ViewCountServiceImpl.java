@@ -51,6 +51,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         result = getToken(campaignId, deviceId, actionId, sectionId);
         //
         ViewCount viewCount = new ViewCount(result, campaignId, deviceId, actionId, sectionId, null);
+        viewCount.setTotalCount(1L);
         viewCountRepository.save(viewCount);
         //
         ViewCountLog viewCountLog = new ViewCountLog(viewCount.getId(), null);
@@ -61,19 +62,25 @@ public class ViewCountServiceImpl implements ViewCountService {
 
     @Override
     public String getTrackToken(String campaignId, String sectionId) throws NullPointerException {
-        String result = null;
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId   NULL veya bos olamaz!");
         }
-        return result;
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
+        return viewCount == null ? null : viewCount.getTrackingToken();
     }
 
     @Transactional
     @Override
-    public void incrementViewCount(String trackToken) throws NullPointerException {
+    public synchronized void incrementViewCount(String trackToken) throws NullPointerException {
         if (checkParams(trackToken)) {
             throw new NullPointerException("token   NULL veya bos olamaz!");
         }
+        ViewCount viewCount = viewCountRepository.findByTrackingToken(trackToken);
+        viewCount.setTotalCount(viewCount.getTotalCount() + 1);
+        viewCountRepository.save(viewCount);
+        //
+        ViewCountLog viewCountLog = new ViewCountLog(viewCount.getId(), null);
+        viewCountLogRespository.save(viewCountLog);
     }
 
     @Override

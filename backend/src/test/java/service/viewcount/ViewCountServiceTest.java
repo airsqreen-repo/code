@@ -26,7 +26,11 @@ public class ViewCountServiceTest {
 
     @Test
     public void test() {
-        viewCountService.save("dfasdf", "dsfasdfsdf", "sfdasdf", "sadfasf", null);
+        //viewCountService.save("dfasdf", "dfasdf", "sfdasdf", "sadfasf", null);
+        String token = viewCountService.getTrackToken("dfasdf", "sadfasf");
+        for (int i = 0; i < 100; i++) {
+            viewCountService.incrementViewCount(token);
+        }
     }
 
 }
