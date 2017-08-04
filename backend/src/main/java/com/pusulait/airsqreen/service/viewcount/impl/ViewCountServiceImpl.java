@@ -18,18 +18,18 @@ public class ViewCountServiceImpl implements ViewCountService {
 
     @Transactional
     @Override
-    public String save(String compaignId, String sectionId) {
+    public String save(String campaignId, String sectionId) {
         return null;
     }
 
     @Transactional
     @Override
-    public String save(String compaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl) {
+    public String save(String campaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl) {
         return null;
     }
 
     @Override
-    public String getTrackToken(String compaignId, String sectionId) {
+    public String getTrackToken(String campaignId, String sectionId) {
         return null;
     }
 
@@ -45,7 +45,7 @@ public class ViewCountServiceImpl implements ViewCountService {
     }
 
     @Override
-    public List<ViewCountDTO> getTotalCount(String compaignId, String sectionId) {
+    public List<ViewCountDTO> getTotalCount(String campaignId, String sectionId) {
         return null;
     }
 
@@ -55,7 +55,7 @@ public class ViewCountServiceImpl implements ViewCountService {
     }
 
     @Override
-    public List<ViewCountDTO> getTotalCountWithDateRange(String compaignId, String sectionId, Date start, Date end) {
+    public List<ViewCountDTO> getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end) {
         return null;
     }
 }
