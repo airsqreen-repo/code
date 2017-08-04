@@ -14,11 +14,11 @@ public interface ViewCountService {
      * Takip anahtarini doner.
      * device, action id degerleri tablolardan alinir.
      *
-     * @param compaignId
+     * @param campaignId
      * @param sectionId
      * @return
      */
-    String save(String compaignId, String sectionId);
+    String save(String campaignId, String sectionId);
 
     /**
      * Takip anahtarini doner.
@@ -27,23 +27,23 @@ public interface ViewCountService {
      * backendTrackUrl dis sistemde de sayilmasini onaylatmak icin
      * kullanilacaktir. backendTrackUrl NULL olabilir.
      *
-     * @param compaignId
+     * @param campaignId
      * @param deviceId
      * @param actionId
      * @param sectionId
      * @param backendTrackUrl
      * @return
      */
-    String save(String compaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl);
+    String save(String campaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl);
 
     /**
      * Daha once kaydi olusan anahtari getirmek icin kullanilir.
      *
-     * @param compaignId
+     * @param campaignId
      * @param sectionId
      * @return
      */
-    String getTrackToken(String compaignId, String sectionId);
+    String getTrackToken(String campaignId, String sectionId);
 
     /**
      * Gosterim adedini verilen anahtara gore arttirir.
@@ -63,11 +63,11 @@ public interface ViewCountService {
     /**
      * Verilen kampanya ve bolum ID sine gore toplam gosterimi doner.
      *
-     * @param compaignId
+     * @param campaignId
      * @param sectionId
      * @return
      */
-    List<ViewCountDTO> getTotalCount(String compaignId, String sectionId);
+    List<ViewCountDTO> getTotalCount(String campaignId, String sectionId);
 
     /**
      * Verilen takip anahtarina ve tarih araligina gore toplam gosterimi doner.
@@ -82,13 +82,13 @@ public interface ViewCountService {
     /**
      * Verilen kampanya ve bolum ID sine ve tarih araligina gore toplam gosterimi doner.
      *
-     * @param compaignId
+     * @param campaignId
      * @param sectionId
      * @param start
      * @param end
      * @return
      */
-    List<ViewCountDTO> getTotalCountWithDateRange(String compaignId, String sectionId, Date start, Date end);
+    List<ViewCountDTO> getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end);
 
 
 }
