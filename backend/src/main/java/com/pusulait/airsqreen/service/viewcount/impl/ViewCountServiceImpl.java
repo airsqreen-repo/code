@@ -2,7 +2,9 @@ package com.pusulait.airsqreen.service.viewcount.impl;
 
 import com.pusulait.airsqreen.domain.dto.viewcount.ViewCountDTO;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -10,13 +12,17 @@ import java.util.List;
 /**
  * Created by yildizib on 03/08/2017.
  */
+@Slf4j
 @Service("viewCountService")
 public class ViewCountServiceImpl implements ViewCountService {
+
+    @Transactional
     @Override
     public String save(String compaignId, String sectionId) {
         return null;
     }
 
+    @Transactional
     @Override
     public String save(String compaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl) {
         return null;
@@ -27,6 +33,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         return null;
     }
 
+    @Transactional
     @Override
     public void incrementViewCount(String trackToken) {
 

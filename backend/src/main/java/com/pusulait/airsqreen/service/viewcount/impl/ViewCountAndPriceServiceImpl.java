@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.service.viewcount.impl;
 
 import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 /**
  * Created by yildizib on 03/08/2017.
  */
+@Slf4j
 @Service("viewCountAndPriceService")
 public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implements ViewCountAndPriceService {
     @Override

@@ -42,20 +42,20 @@ public class ViewCount extends AuditBase {
     @SequenceGenerator(name = "SEQ_VIEW_COUNT_ID", sequenceName = "SEQ_VIEW_COUNT_ID", allocationSize = 1, initialValue = 2)
     private Long id;
 
-    @Column(name = "CAMPAIGN_ID")
+    @Column(name = "CAMPAIGN_ID", nullable = false)
     private String campaignId;
-    @Column(name = "CMPGN_SCTN_ID")
+    @Column(name = "CMPGN_SCTN_ID", nullable = false)
     private String campaignSectionId;
-    @Column(name = "DEVICE_ID")
+    @Column(name = "DEVICE_ID", nullable = false)
     private String deviceId;
-    @Column(name = "ACTION_ID")
+    @Column(name = "ACTION_ID", nullable = false)
     private String actionId;
-    @Column(name = "TRKNG_TOKEN")
+    @Column(name = "TRKNG_TOKEN", nullable = false)
     private String trackingToken;
     @Column(name = "BCKND_SND_TRC_URL", length = 1500)
     private String backendTrackUrl;
     @Column(name = "TOTAL_COUNT")
-    private Long totalCount;
+    private Long totalCount = 0L;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "viewCount")
