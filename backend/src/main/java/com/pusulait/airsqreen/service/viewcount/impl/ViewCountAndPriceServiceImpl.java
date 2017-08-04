@@ -16,7 +16,7 @@ import static com.pusulait.airsqreen.util.ViewCountUtil.getUnitPrice;
 @Service("viewCountAndPriceService")
 public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implements ViewCountAndPriceService {
     @Override
-    public Double getTotalSpended(String trackToken) {
+    public Double getTotalSpended(String trackToken) throws NullPointerException {
         Double result = null;
         Double unitPrice = getUnitPrice(null, null);
         if (checkParams(trackToken)) {
@@ -26,7 +26,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpended(String campaignId, String sectionId) {
+    public Double getTotalSpended(String campaignId, String sectionId) throws NullPointerException {
         Double result = null;
         Double unitPrice = getUnitPrice(campaignId, sectionId);
         if (checkParams(campaignId, sectionId)) {
@@ -36,7 +36,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpendedWithDateRange(String trackToken, Date start, Date end) {
+    public Double getTotalSpendedWithDateRange(String trackToken, Date start, Date end) throws NullPointerException {
         Double result = null;
         Double unitPrice = getUnitPrice(null, null);
         if (checkParams(trackToken, start, end)) {
@@ -46,7 +46,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpended(String campaignId, String sectionId, Date start, Date end) {
+    public Double getTotalSpended(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
         Double result = null;
         Double unitPrice = getUnitPrice(campaignId, sectionId);
         if (checkParams(campaignId, sectionId, start, end)) {

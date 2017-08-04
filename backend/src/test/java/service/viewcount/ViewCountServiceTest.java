@@ -26,7 +26,7 @@ public class ViewCountServiceTest {
 
     @Test
     public void test() {
-        viewCountService.getTotalCount("sdfasdfsdf");
+        viewCountService.save("dfasdf", "dsfasdfsdf", "sfdasdf", "sadfasf", null);
     }
 
 }

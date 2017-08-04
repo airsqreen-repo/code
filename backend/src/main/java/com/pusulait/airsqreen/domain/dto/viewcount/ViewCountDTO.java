@@ -11,8 +11,12 @@ import java.util.Date;
 public class ViewCountDTO {
     private String campaignId;
     private String campaignSectionId;
+    private String deviceId;
+    private String actionId;
     private Long totalCount;
     private Double totalSpend;
     private Date startDate;
     private Date endDate;
+    /* ... */
+    private Double unitPrice;
 }
