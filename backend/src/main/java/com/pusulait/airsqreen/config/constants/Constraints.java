@@ -27,29 +27,11 @@ public class Constraints {
    public static final String FK_DESTINATION_COUNTRY = "FK_DESTINATION_COUNTRY";
    public static final String FK_DESTINATION_CITY = "FK_DESTINATION_CITY";
 
+    public static final String UC_VIEW_COUNT_TRCK_TOKEN = "UC_VIEW_COUNT_TRCK_TOKEN";
+    public static final String UC_VIEW_COUNT_GNRL_UQC = "UC_VIEW_COUNT_GNRL_UQC";
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   //
+    //
 
 
 
