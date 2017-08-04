@@ -39,7 +39,7 @@ public class ViewCount extends AuditBase {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_VIEW_COUNT_ID")
-    @SequenceGenerator(name = "SEQ_VIEW_COUNT_ID", sequenceName = "SEQ_VIEW_COUNT_ID", allocationSize = 1, initialValue = 2)
+    @SequenceGenerator(name = "SEQ_VIEW_COUNT_ID", sequenceName = "SEQ_VIEW_COUNT_ID", allocationSize = 1, initialValue = 1)
     private Long id;
 
     @Column(name = "CAMPAIGN_ID", nullable = false)
@@ -60,4 +60,27 @@ public class ViewCount extends AuditBase {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "viewCount")
     private List<ViewCountLog> countLogs;
+
+    /**
+     *
+     */
+    public ViewCount() {
+    }
+
+    /**
+     * @param trackingToken
+     * @param campaignId
+     * @param campaignSectionId
+     * @param deviceId
+     * @param actionId
+     * @param backendTrackUrl
+     */
+    public ViewCount(String trackingToken, String campaignId, String deviceId, String actionId, String campaignSectionId, String backendTrackUrl) {
+        setCampaignId(campaignId);
+        setCampaignSectionId(campaignSectionId);
+        setDeviceId(deviceId);
+        setActionId(actionId);
+        setBackendTrackUrl(backendTrackUrl);
+        setTrackingToken(trackingToken);
+    }
 }

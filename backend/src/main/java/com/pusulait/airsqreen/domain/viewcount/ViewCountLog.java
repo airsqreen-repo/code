@@ -31,7 +31,7 @@ public class ViewCountLog extends AuditBase {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_VIEW_COUNT_LOG_ID")
-    @SequenceGenerator(name = "SEQ_VIEW_COUNT_LOG_ID", sequenceName = "SEQ_VIEW_COUNT_LOG_ID", allocationSize = 1, initialValue = 2)
+    @SequenceGenerator(name = "SEQ_VIEW_COUNT_LOG_ID", sequenceName = "SEQ_VIEW_COUNT_LOG_ID", allocationSize = 1, initialValue = 1)
     private Long Id;
 
     @ManyToOne
@@ -43,5 +43,21 @@ public class ViewCountLog extends AuditBase {
 
     @Column(name = "DESCRIPTION", length = 1000)
     private String description;
+
+    /**
+     *
+     */
+    public ViewCountLog() {
+
+    }
+
+    /**
+     * @param viewCountId
+     * @param description
+     */
+    public ViewCountLog(Long viewCountId, String description) {
+        setViewCountId(viewCountId);
+        setDescription(description);
+    }
 
 }
