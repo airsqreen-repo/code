@@ -18,7 +18,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpended(String compaignId, String sectionId) {
+    public Double getTotalSpended(String campaignId, String sectionId) {
         return null;
     }
 
@@ -28,7 +28,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpended(String compaignId, String sectionId, Date start, Date end) {
+    public Double getTotalSpended(String campaignId, String sectionId, Date start, Date end) {
         return null;
     }
 }
