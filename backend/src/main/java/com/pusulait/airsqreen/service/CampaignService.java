@@ -63,9 +63,6 @@ public class CampaignService {
 
         List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().map(Plt161CampaignDTO::toEntity).collect(Collectors.toList());
 
-        if (recordCount != null) {
-            campaignList = campaignList.subList(0, recordCount);
-        }
 
         for (Plt161Campaign plt161Campaign : campaignList) {
             campaignRepository.save(plt161Campaign);

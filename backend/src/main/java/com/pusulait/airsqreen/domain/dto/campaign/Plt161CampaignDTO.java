@@ -87,6 +87,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
         campaign.setMedia_budget(campaignDTO.getMedia_budget());
+        campaign.setUpdated_at(campaignDTO.getUpdated_at());
+        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
 
         //campaign.setAdvertiser_id(campaignDTO.getAdvertiser_id());
         /*campaign.setAgency(campaignDTO.getAgency());
@@ -126,8 +128,6 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setRegion_ids(campaignDTO.getRegion_ids());
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
         campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());*/
-        campaign.setUpdated_at(campaignDTO.getUpdated_at());
-        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
 
         return campaign;
     }
@@ -153,7 +153,14 @@ public class Plt161CampaignDTO extends CampaignDTO {
     }*/
 
     public static Campaign update(Plt161CampaignDTO campaignDTO, Plt161Campaign campaign) {
+
         campaign.setMedia_budget(campaignDTO.getMedia_budget());
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
+        campaign.setTargeting_hour_ids(campaignDTO.getTargeting_hour_ids());
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
+        campaign.setUpdated_at(campaignDTO.getUpdated_at());
+        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
+        return campaign;
 
         /*campaign.setExternalId(campaignDTO.getId());
         campaign.setExternalId(campaignDTO.getId());
@@ -202,11 +209,6 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
         campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());*/
 
-        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
-        campaign.setTargeting_hour_ids(campaignDTO.getTargeting_hour_ids());
-        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
-        campaign.setUpdated_at(campaignDTO.getUpdated_at());
-        campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
-        return campaign;
+
     }
 }

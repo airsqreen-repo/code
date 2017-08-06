@@ -33,7 +33,21 @@ public class Plt161Campaign extends Campaign {
 
   private Double media_budget;
 
-  /*  private Boolean archived;
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] targeting_weekday_ids;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] targeting_hour_ids;
+
+    private Date updated_at;
+
+    @Type(type = "longarray")
+    @Column(columnDefinition = "text")
+    private Long[] filtered_section_ids;
+
+    /*  private Boolean archived;
     private Long sales_manager_id;
     private Long campaign_manager_id;
     private Long media_plan_id;
@@ -58,11 +72,6 @@ public class Plt161Campaign extends Campaign {
     private Double booked_budget;
     private Double platform161_tech_fee;
     private String mobile_app_filter;*/
-    private Date updated_at;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] filtered_section_ids;
 
  /*   @Column(name = "OFFER_ID")
     private Long offerId;
@@ -126,13 +135,6 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private String[] rtb_urls;
 */
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] targeting_weekday_ids;
-
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] targeting_hour_ids;
 
     //private List<InventorySource> inventory_sources;
 
