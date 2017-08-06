@@ -27,9 +27,9 @@ import static com.pusulait.airsqreen.util.ViewCountUtil.getToken;
 public class ViewCountServiceImpl implements ViewCountService {
 
     @Autowired
-    private ViewCountRepository viewCountRepository;
+    protected ViewCountRepository viewCountRepository;
     @Autowired
-    private ViewCountLogRespository viewCountLogRespository;
+    protected ViewCountLogRespository viewCountLogRespository;
     @Autowired
     protected ViewCountSpendRequirement viewCountSpendRequirement;
 
@@ -127,16 +127,17 @@ public class ViewCountServiceImpl implements ViewCountService {
     }
 
     @Override
-    public List<ViewCountDTO> getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
-        List<ViewCountDTO> result = null;
+    public ViewCountDTO getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
+        ViewCountDTO result = null;
         if (checkParams(campaignId, sectionId, start, end)) {
             throw new NullPointerException("campaignId, sectionId, start, end   NULL veya bos olamaz!");
         }
-        return result;
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
+        return getTotalCountWithDateRange(viewCount.getTrackingToken(), start, end);
     }
 
     @Override
-    public List<ViewCountDTO> getTotalCountWithCampaingId(String campaignId) {
+    public List<ViewCountDTO> getTotalCountWithCampaignId(String campaignId) {
         List<ViewCountDTO> result = null;
         if (checkParams(campaignId)) {
             throw new NullPointerException("campaignId NULL veya bos olamaz!");
@@ -146,6 +147,23 @@ public class ViewCountServiceImpl implements ViewCountService {
             result = new LinkedList<>();
             for (ViewCount viewCount : viewCounts) {
                 ViewCountDTO dto = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getCampaignSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
+                result.add(dto);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public List<ViewCountDTO> getTotalCountWithCampaignId(String campaignId, Date start, Date end) {
+        List<ViewCountDTO> result = null;
+        if (checkParams(campaignId)) {
+            throw new NullPointerException("campaignId NULL veya bos olamaz!");
+        }
+        List<ViewCount> viewCounts = viewCountRepository.findByCampaignId(campaignId);
+        if (viewCounts != null) {
+            result = new LinkedList<>();
+            for (ViewCount viewCount : viewCounts) {
+                ViewCountDTO dto = getTotalCountWithDateRange(viewCount.getTrackingToken(), start, end);
                 result.add(dto);
             }
         }

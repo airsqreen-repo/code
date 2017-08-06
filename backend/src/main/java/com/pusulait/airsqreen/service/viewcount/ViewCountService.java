@@ -88,13 +88,21 @@ public interface ViewCountService {
      * @param end
      * @return
      */
-    List<ViewCountDTO> getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end);
+    ViewCountDTO getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end);
 
     /**
      * @param campaignId
      * @return
      */
-    List<ViewCountDTO> getTotalCountWithCampaingId(String campaignId);
+    List<ViewCountDTO> getTotalCountWithCampaignId(String campaignId);
+
+    /**
+     * @param campaignId
+     * @param start
+     * @param end
+     * @return
+     */
+    List<ViewCountDTO> getTotalCountWithCampaignId(String campaignId, Date start, Date end);
 
 
 }
