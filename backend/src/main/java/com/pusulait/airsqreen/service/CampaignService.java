@@ -67,15 +67,18 @@ public class CampaignService {
             campaignList = campaignList.subList(0, recordCount);
         }
 
-        for (Plt161Campaign plt161Campaign : campaignList){
+        for (Plt161Campaign plt161Campaign : campaignList) {
             campaignRepository.save(plt161Campaign);
 
-            for(Long sectionId : plt161Campaign.getFiltered_section_ids()){
+            for (Long sectionId : plt161Campaign.getFiltered_section_ids()) {
 
                 Section section = sectionRepository.findOne(sectionId);
+
+                section = getAndCreateSection(sectionId, section);
+
                 CampaignSection campaignSection = new CampaignSection();
-                campaignSection.setCampaign(plt161Campaign);
-                campaignSection.setSection(section);
+                campaignSection.setCampaignId(plt161Campaign.getId());
+                campaignSection.setSectionId(section.getId());
                 campaignSectionRepository.save(campaignSection);
             }
         }
@@ -99,16 +102,16 @@ public class CampaignService {
             if (campaign instanceof Plt161Campaign) {
                 Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
                 campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
-                if(plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())){
+                if (plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
 
-                    for(Long sectionId : campaignDTO.getFiltered_section_ids()){
+                    for (Long sectionId : campaignDTO.getFiltered_section_ids()) {
 
-                       Section section = sectionRepository.findOne(sectionId);
-
+                        Section section = sectionRepository.findOne(sectionId);
+                        section = getAndCreateSection(sectionId, section);
                         CampaignSection campaignSection = new CampaignSection();
-                        campaignSection.setCampaign(campaign);
-                        campaignSection.setSection(section);
+                        campaignSection.setCampaignId(campaign.getId());
+                        campaignSection.setSectionId(section.getId());
                         campaignSectionRepository.save(campaignSection);
                     }
 
@@ -118,6 +121,14 @@ public class CampaignService {
             }
             campaignRepository.save(campaign);
         }
+    }
+
+    private Section getAndCreateSection(Long sectionId, Section section) {
+        if (section == null) {
+            SectionDTO sectionDTO = platform161Service.getSection(null, sectionId);
+            section = sectionService.save(sectionDTO);
+        }
+        return section;
     }
 
     @Transactional

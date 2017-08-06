@@ -53,7 +53,7 @@ public class CampaignSection extends AuditBase {
     @JoinColumn(name = "DEVICE_ID",  insertable = false, updatable = false)
     private Device device;
 
-    @Column(name = "ACTOIN_ID")
+    @Column(name = "ACTION_ID")
     private Long actionId;
 
     @Column(name = "KEY")

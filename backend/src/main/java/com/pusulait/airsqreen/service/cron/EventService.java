@@ -50,8 +50,6 @@ public class EventService {
     private ViewCountAndPriceService viewCountAndPriceService;
 
 
-    //TODO: galiba saatlik değil de günlük gösterimleri hesaplamalıyız.
-    // örneğin her gün 2:30 da
     // cron = "30 2 * * * ?"
     @Scheduled(cron = "0 0 1 * * ?")
     public void prepareHourlyRecords() {
@@ -66,40 +64,32 @@ public class EventService {
 
             CampaignSection campaignSection = campaign.getCampaignSections().get(0);
 
-            Double paidBudget = viewCountAndPriceService.getTotalSpent(campaign.getId().toString(),campaignSection.getSectionId().toString());
+            Double paidBudget = viewCountAndPriceService.getTotalSpent(campaign.getId().toString(), campaignSection.getSectionId().toString());
 
             Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
 
             Double remainingBudget = plt161Campaign.getMedia_budget() - (paidBudget);
 
-            if (remainingBudget <= 0) {
+            if (remainingBudget <= 0 || remainingBudget < campaignSection.getSection().getPrice()) {
                 return; // para kalmadıysa yapacak da bişi yok
             }
 
-            Double pricePerShow = null;
+            Double pricePerShow = campaignSection.getSection().getPrice();
 
-            pricePerShow = campaignSection.getSection().getPrice();
-
-            // toplam gösterim sayısı: 30000
             Double nShowDouble = (remainingBudget / pricePerShow);
             Integer nShow = nShowDouble.intValue();
 
 
-            // days = 30 gün olsun
-            Integer days = Days.daysBetween(new LocalDate(campaign.getStartOn()), new LocalDate(campaign.getEndOn())).getDays();
-
-            Integer totalRemainingWorkingMinutes = null;
-
             boolean inWeekDay = isInWeekDay(plt161Campaign, new Date());
 
             if (!inWeekDay) {
-                return;
+                return; // çalışma günü değilmiş.
             }
 
-            Boolean isLastDay = DateUtil.isInSameDay(campaign.getEndOn(),new Date());
+            Boolean isLastDay = DateUtil.isInSameDay(campaign.getEndOn(), new Date());
 
             int dailyHourCount = plt161Campaign.getTargeting_hour_ids().length;
-            int notAvailableHourCount = dailyHourCount -  calculateHour(plt161Campaign,new Date(),isLastDay);
+            int notAvailableHourCount = dailyHourCount - calculateHour(plt161Campaign, new Date(), isLastDay);
             int totalHour = 0;
 
             for (DateTime date = new DateTime(); date.isBefore(new DateTime(campaign.getEndOn())); date = date.plusDays(1)) {
@@ -109,22 +99,12 @@ public class EventService {
             }
             totalHour -= notAvailableHourCount;
 
+            if (totalHour == 0) {
+                return;
+            }
+
             // günde 1000 gösterim
             Integer showPerHour = nShow / totalHour;
-
-            int numberOfScreens = plt161Campaign.getCampaignSections().size();
-            // bütün devicelar için insert olmalı
-            Integer hourlyShowPerScreen = showPerHour / numberOfScreens;
-/*
-
-            int secondsPerScreen = hourlyShowPerScreen * 60 * 60;
-
-            // 360 / 100 = 4 dakikada 1 gösterim
-            Integer period = (secondsPerScreen / hourlyShowPerScreen);
-
-            // 60 / 4 = 12    (1 saatte 12 gösterim eder)
-            long showPerHour = hourlyShowPerScreen / hoursAvailablePerScreen;
-*/
 
             List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
 
@@ -191,9 +171,9 @@ public class EventService {
         return inDayHour;
     }
 
-    private Integer calculateHour(Plt161Campaign plt161Campaign, Date date,Boolean isLastDay) {
+    private Integer calculateHour(Plt161Campaign plt161Campaign, Date date, Boolean isLastDay) {
 
-        if(!isInDayHour(plt161Campaign,date)){
+        if (!isInDayHour(plt161Campaign, date)) {
             return 0;
         }
 
@@ -202,11 +182,10 @@ public class EventService {
         Long[] dayHourIds = plt161Campaign.getTargeting_hour_ids();
         int workableHourCount = 0;
 
-        for(Long dayHourId : dayHourIds){
-            if (hour < dayHourId && !isLastDay){
+        for (Long dayHourId : dayHourIds) {
+            if (hour < dayHourId && !isLastDay) {
                 workableHourCount++;
-            }
-            else if(campaignEndHour > dayHourId && hour < dayHourId ){
+            } else if (campaignEndHour > dayHourId && hour < dayHourId) {
                 workableHourCount++;
             }
         }
@@ -218,7 +197,7 @@ public class EventService {
         return "";
     }
 
-    private Long calculateDeviceId(int i,List<Long> deviceIdList) {
+    private Long calculateDeviceId(int i, List<Long> deviceIdList) {
 
         return deviceIdList.get(i % deviceIdList.size());
 
