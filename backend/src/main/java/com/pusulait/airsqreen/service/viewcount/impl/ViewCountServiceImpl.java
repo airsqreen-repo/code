@@ -33,6 +33,14 @@ public class ViewCountServiceImpl implements ViewCountService {
     @Autowired
     protected ViewCountSpendRequirement viewCountSpendRequirement;
 
+    /**
+     * Buranin apiden alinirken kayit edilmesi gerekir. O sirada token da uretilir.
+     *
+     * @param campaignId
+     * @param sectionId
+     * @return
+     * @throws NullPointerException
+     */
     @Transactional
     @Override
     public String save(String campaignId, String sectionId) throws NullPointerException {
@@ -45,6 +53,17 @@ public class ViewCountServiceImpl implements ViewCountService {
         return save(campaignId, dto.getDeviceId(), dto.getActionId(), sectionId, null);
     }
 
+    /**
+     * Buranin apiden alinirken kayit edilmesi gerekir. O sirada token da uretilir.
+     *
+     * @param campaignId
+     * @param deviceId
+     * @param actionId
+     * @param sectionId
+     * @param backendTrackUrl
+     * @return
+     * @throws NullPointerException
+     */
     @Transactional
     @Override
     public String save(String campaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl) throws NullPointerException {
@@ -56,11 +75,11 @@ public class ViewCountServiceImpl implements ViewCountService {
         result = getToken(campaignId, deviceId, actionId, sectionId);
         //
         ViewCount viewCount = new ViewCount(result, campaignId, deviceId, actionId, sectionId, null);
-        viewCount.setTotalCount(1L);
+        viewCount.setTotalCount(0L);
         viewCountRepository.save(viewCount);
         //
-        ViewCountLog viewCountLog = new ViewCountLog(viewCount.getId(), null);
-        viewCountLogRespository.save(viewCountLog);
+        //ViewCountLog viewCountLog = new ViewCountLog(viewCount.getId(), null);
+        //viewCountLogRespository.save(viewCountLog);
 
         return result;
     }
@@ -74,6 +93,13 @@ public class ViewCountServiceImpl implements ViewCountService {
         return viewCount == null ? null : viewCount.getTrackingToken();
     }
 
+    /**
+     * end poind te inserler burada olacak. Burasi performans icin optimize
+     * edilebilir istenirse. Mesela queue mantigi buraya eklenebilir.
+     *
+     * @param trackToken
+     * @throws NullPointerException
+     */
     @Transactional
     @Override
     public synchronized void incrementViewCount(String trackToken) throws NullPointerException {
