@@ -18,20 +18,20 @@ import static com.pusulait.airsqreen.util.ViewCountUtil.checkParams;
 @Service("viewCountAndPriceService")
 public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implements ViewCountAndPriceService {
     @Override
-    public Double getTotalSpended(String trackToken) throws NullPointerException {
+    public Double getTotalSpent(String trackToken) throws NullPointerException {
         Double result = null;
         if (checkParams(trackToken)) {
             throw new NullPointerException("trackToken NULL veya bos olamaz!");
         }
         ViewCount viewCount = viewCountRepository.findByTrackingToken(trackToken);
         if (viewCount != null) {
-            result = getTotalSpended(viewCount.getCampaignId(), viewCount.getCampaignSectionId());
+            result = getTotalSpent(viewCount.getCampaignId(), viewCount.getCampaignSectionId());
         }
         return result;
     }
 
     @Override
-    public Double getTotalSpended(String campaignId, String sectionId) throws NullPointerException {
+    public Double getTotalSpent(String campaignId, String sectionId) throws NullPointerException {
         Double result = null;
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId  NULL veya bos olamaz!");
@@ -48,7 +48,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpendedWithDateRange(String trackToken, Date start, Date end) throws NullPointerException {
+    public Double getTotalSpentWithDateRange(String trackToken, Date start, Date end) throws NullPointerException {
         Double result = null;
         Double unitPrice = null;
         if (checkParams(trackToken, start, end)) {
@@ -64,14 +64,14 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     }
 
     @Override
-    public Double getTotalSpended(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
+    public Double getTotalSpent(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
         Double result = null;
         if (checkParams(campaignId, sectionId, start, end)) {
             throw new NullPointerException("campaignId, sectionId, start, end   NULL veya bos olamaz!");
         }
         ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
         if (viewCount != null) {
-            result = getTotalSpendedWithDateRange(viewCount.getTrackingToken(), start, end);
+            result = getTotalSpentWithDateRange(viewCount.getTrackingToken(), start, end);
         }
         return result;
     }

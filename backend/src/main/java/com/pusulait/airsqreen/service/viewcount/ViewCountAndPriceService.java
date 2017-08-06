@@ -12,7 +12,7 @@ public interface ViewCountAndPriceService extends ViewCountService {
      * @param trackToken
      * @return
      */
-    Double getTotalSpended(String trackToken);
+    Double getTotalSpent(String trackToken);
 
     /**
      * Verilen kampanya ve bolum Id sine gore toplam harcamayi doner.
@@ -21,7 +21,7 @@ public interface ViewCountAndPriceService extends ViewCountService {
      * @param sectionId
      * @return
      */
-    Double getTotalSpended(String campaignId, String sectionId);
+    Double getTotalSpent(String campaignId, String sectionId);
 
     /**
      * Verilen takip anahtari ve tarih ararligi ile toplam harcama miktarini doner.
@@ -31,7 +31,7 @@ public interface ViewCountAndPriceService extends ViewCountService {
      * @param end
      * @return
      */
-    Double getTotalSpendedWithDateRange(String trackToken, Date start, Date end);
+    Double getTotalSpentWithDateRange(String trackToken, Date start, Date end);
 
     /**
      * Verilen kampanya ve bolum Id sine ve tarih araligina gore toplam harcamayi doner.
@@ -42,5 +42,5 @@ public interface ViewCountAndPriceService extends ViewCountService {
      * @param end
      * @return
      */
-    Double getTotalSpended(String campaignId, String sectionId, Date start, Date end);
+    Double getTotalSpent(String campaignId, String sectionId, Date start, Date end);
 }

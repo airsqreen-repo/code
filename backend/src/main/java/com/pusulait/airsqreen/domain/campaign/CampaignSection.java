@@ -56,7 +56,6 @@ public class CampaignSection extends AuditBase {
     @Column(name = "ACTOIN_ID")
     private Long actionId;
 
-
     @Column(name = "KEY")
     private String key;
 

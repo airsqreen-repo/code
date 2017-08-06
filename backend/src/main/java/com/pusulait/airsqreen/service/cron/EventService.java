@@ -11,6 +11,8 @@ import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
+import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
+import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
 import com.pusulait.airsqreen.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
@@ -32,10 +34,6 @@ import java.util.*;
 @Transactional
 public class EventService {
 
-
-    @Autowired
-    private CampaignSectionRepository campaignSectionRepository;
-
     @Autowired
     private CampaignRepository campaignRepository;
 
@@ -49,7 +47,8 @@ public class EventService {
     private Sistem9Adapter sistem9Adapter;
 
     @Autowired
-    private EntityManager entityManager;
+    private ViewCountAndPriceService viewCountAndPriceService;
+
 
     //TODO: galiba saatlik değil de günlük gösterimleri hesaplamalıyız.
     // örneğin her gün 2:30 da
@@ -63,23 +62,11 @@ public class EventService {
 
         List<Campaign> activeCampaigns = campaignRepository.findAllActive();
 
-        /*List<Object[]> objects = entityManager.createNamedQuery("findAllActive").getResultList();
-        List<CampaignDTO> activeCampaigns = new ArrayList<>();
-
-        for (Object o[] : objects){
-
-            CampaignDTO campaignDTO = new CampaignDTO();
-            campaignDTO.setId(((BigInteger) o[0] ).longValue());
-            campaignDTO.setName((String) o[11]);
-            campaignDTO.setStartOn((Timestamp)o[14]);
-            campaignDTO.setEndOn((Timestamp)o[9]);
-            activeCampaigns.add(campaignDTO);
-        }*/
-
-
         for (Campaign campaign : activeCampaigns) {
 
-            Double paidBudget = Double.valueOf(10000); // ibonun servisinden gelecek
+            CampaignSection campaignSection = campaign.getCampaignSections().get(0);
+
+            Double paidBudget = viewCountAndPriceService.getTotalSpent(campaign.getId().toString(),campaignSection.getSectionId().toString());
 
             Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
 
@@ -91,9 +78,7 @@ public class EventService {
 
             Double pricePerShow = null;
 
-            for (CampaignSection campaignSection : campaign.getCampaignSections()) {
-                pricePerShow = campaignSection.getSection().getPrice();
-            }
+            pricePerShow = campaignSection.getSection().getPrice();
 
             // toplam gösterim sayısı: 30000
             Double nShowDouble = (remainingBudget / pricePerShow);
@@ -145,9 +130,7 @@ public class EventService {
 
             List<Long> deviceIdList = new ArrayList<>();
 
-            for(CampaignSection campaignSection : campaign.getCampaignSections()) {
-                deviceIdList.add(campaignSection.getDeviceId());
-            }
+            deviceIdList.add(campaignSection.getDeviceId());
 
             // Ekranın available olduğu an
             Date screenStartDate = new Date();

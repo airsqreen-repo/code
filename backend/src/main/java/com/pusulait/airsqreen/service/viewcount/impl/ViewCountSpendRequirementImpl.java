@@ -1,7 +1,11 @@
 package com.pusulait.airsqreen.service.viewcount.impl;
 
+import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.dto.viewcount.ViewCountDTO;
+import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.pusulait.airsqreen.util.ViewCountUtil.checkParams;
@@ -11,6 +15,10 @@ import static com.pusulait.airsqreen.util.ViewCountUtil.checkParams;
  */
 @Service("viewCountSpendRequirement")
 public class ViewCountSpendRequirementImpl implements ViewCountSpendRequirement {
+
+    @Autowired
+    private CampaignSectionRepository campaignSectionRepository;
+
 
     /**
      * Toplam harcama hesabinda onemlidir. Birim gosterim maliyetidir.
@@ -43,7 +51,15 @@ public class ViewCountSpendRequirementImpl implements ViewCountSpendRequirement 
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId NULL veya bos olamaz!");
         }
-        //TODO: buraya device id, action id vs bilgileri gelecek.
-        return new ViewCountDTO();
+
+        CampaignSection campaignSection = campaignSectionRepository.findByCampaignAndSectionId(Long.valueOf(campaignId),Long.valueOf(sectionId));
+        ViewCountDTO viewCountDTO = new ViewCountDTO();
+        viewCountDTO.setActionId(campaignSection.getActionId().toString());
+        viewCountDTO.setCampaignId(campaignSection.getCampaignId().toString());
+        viewCountDTO.setCampaignSectionId(campaignSection.getSectionId().toString());
+        viewCountDTO.setDeviceId(campaignSection.getDeviceId().toString());
+        viewCountDTO.setUnitPrice(campaignSection.getSection().getPrice());
+
+        return viewCountDTO;
     }
 }

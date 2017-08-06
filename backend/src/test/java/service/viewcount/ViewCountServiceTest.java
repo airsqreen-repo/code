@@ -34,7 +34,7 @@ public class ViewCountServiceTest {
         //for (int i = 0; i < 100; i++) {
         //    viewCountService.incrementViewCount(token);
         //}
-        viewCountAndPriceService.getTotalSpended("dfsdfdsaf");
+        viewCountAndPriceService.getTotalSpent("dfsdfdsaf");
     }
 
 }

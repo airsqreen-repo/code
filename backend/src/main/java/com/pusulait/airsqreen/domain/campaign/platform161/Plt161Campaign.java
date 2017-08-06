@@ -31,14 +31,15 @@ import java.util.Date;
 @Data
 public class Plt161Campaign extends Campaign {
 
-    private Boolean archived;
+  private Double media_budget;
+
+  /*  private Boolean archived;
     private Long sales_manager_id;
     private Long campaign_manager_id;
     private Long media_plan_id;
     private Boolean must_deliver;
     private Long advertiser_id;
     private Date pace_end_on;
-    private Double media_budget;
     private Boolean unlimited_budget;
     private Long contact_id;
     private String daily_cap;
@@ -56,14 +57,14 @@ public class Plt161Campaign extends Campaign {
     private String postal_code_filter;
     private Double booked_budget;
     private Double platform161_tech_fee;
-    private String mobile_app_filter;
+    private String mobile_app_filter;*/
     private Date updated_at;
 
     @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] filtered_section_ids;
 
-    @Column(name = "OFFER_ID")
+ /*   @Column(name = "OFFER_ID")
     private Long offerId;
 
     @Type(type = "text")
@@ -100,7 +101,7 @@ public class Plt161Campaign extends Campaign {
      private String supply_types;
  */
 
-    @Type(type = "text")
+ /*   @Type(type = "text")
     @Column(columnDefinition = "text")
     private String[] supply_types;
 
@@ -124,7 +125,7 @@ public class Plt161Campaign extends Campaign {
     @Type(type = "text")
     @Column(columnDefinition = "text")
     private String[] rtb_urls;
-
+*/
     @Type(type = "longarray")
     @Column(columnDefinition = "text")
     private Long[] targeting_weekday_ids;

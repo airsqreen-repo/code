@@ -16,12 +16,16 @@ import java.util.Date;
 @Data
 public class Plt161CampaignDTO extends CampaignDTO {
 
-    //private Long externalId;
+    private Date updated_at;
+    private Long[] filtered_section_ids;
+    private Long[] targeting_weekday_ids;
+    private Long[] targeting_hour_ids;
+    private Double media_budget;
+    /*
     private Double price;
     private Boolean active;
     private Boolean archived;
     private Date start_on;
-    private Date updated_at;
     private Date end_on;
     private Long sales_manager_id;
     private Long campaign_manager_id;
@@ -30,7 +34,6 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private Boolean must_deliver;
     private Long advertiser_id;
     private Date pace_end_on;
-    private Double media_budget;
     private Boolean unlimited_budget;
     private Long contact_id;
     private String daily_cap;
@@ -65,10 +68,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private String[] supply_types;
     private Long[] operating_system_ids;
     private Long[] direct_deal_ids;
-    private Long[] filtered_section_ids;
-    private Long[] targeting_weekday_ids;
-    private Long[] targeting_hour_ids;
 
+*/
 
 
     public static Plt161CampaignDTO toDTO(Plt161Campaign campaign) {
@@ -85,8 +86,10 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
-        campaign.setAdvertiser_id(campaignDTO.getAdvertiser_id());
-        campaign.setAgency(campaignDTO.getAgency());
+        campaign.setMedia_budget(campaignDTO.getMedia_budget());
+
+        //campaign.setAdvertiser_id(campaignDTO.getAdvertiser_id());
+        /*campaign.setAgency(campaignDTO.getAgency());
         campaign.setArchived(campaignDTO.getArchived());
         campaign.setBooked_budget(campaignDTO.getBooked_budget());
         campaign.setCampaign_manager_id(campaignDTO.getCampaign_manager_id());
@@ -97,11 +100,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setFrequency_cap_count(campaignDTO.getFrequency_cap_count());
         campaign.setAgencyFee(campaignDTO.getAgency_fee());
         campaign.setInternal_purchase_order_number(campaignDTO.getInternal_purchase_order_number());
-        //campaign.setInventorySources(campaignDTO.getInventory_sources());
         campaign.setInternal_purchase_order_number(campaignDTO.getInternal_purchase_order_number());
         campaign.setTarget(campaignDTO.getTargeting_logic());
         campaign.setManaged(campaignDTO.getManaged());
-        campaign.setMedia_budget(campaignDTO.getMedia_budget());
         campaign.setMinimum_ctr_percentage(campaignDTO.getMinimum_ctr_percentage());
         campaign.setMobile_app_filter(campaignDTO.getMobile_app_filter());
         campaign.setMedia_plan_id(campaignDTO.getMedia_plan_id());
@@ -124,7 +125,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
         campaign.setRegion_ids(campaignDTO.getRegion_ids());
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
-        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());*/
         campaign.setUpdated_at(campaignDTO.getUpdated_at());
         campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
 
@@ -152,9 +153,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
     }*/
 
     public static Campaign update(Plt161CampaignDTO campaignDTO, Plt161Campaign campaign) {
+        campaign.setMedia_budget(campaignDTO.getMedia_budget());
 
-        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
-        campaign.setExternalId(campaignDTO.getId());
+        /*campaign.setExternalId(campaignDTO.getId());
         campaign.setExternalId(campaignDTO.getId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
@@ -174,7 +175,6 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setInternal_purchase_order_number(campaignDTO.getInternal_purchase_order_number());
         campaign.setTarget(campaignDTO.getTargeting_logic());
         campaign.setManaged(campaignDTO.getManaged());
-        campaign.setMedia_budget(campaignDTO.getMedia_budget());
         campaign.setMinimum_ctr_percentage(campaignDTO.getMinimum_ctr_percentage());
         campaign.setMobile_app_filter(campaignDTO.getMobile_app_filter());
         campaign.setMedia_plan_id(campaignDTO.getMedia_plan_id());
@@ -200,7 +200,11 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setOperating_system_ids(campaignDTO.getOperating_system_ids());
         campaign.setRegion_ids(campaignDTO.getRegion_ids());
         campaign.setShared_channel_ids(campaignDTO.getShared_channel_ids());
-        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());
+        campaign.setMobile_app_ids(campaignDTO.getMobile_app_ids());*/
+
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
+        campaign.setTargeting_hour_ids(campaignDTO.getTargeting_hour_ids());
+        campaign.setTargeting_weekday_ids(campaignDTO.getTargeting_weekday_ids());
         campaign.setUpdated_at(campaignDTO.getUpdated_at());
         campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
         return campaign;

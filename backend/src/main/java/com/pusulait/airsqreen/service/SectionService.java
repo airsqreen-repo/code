@@ -32,8 +32,9 @@ public class SectionService {
     public void saveSections() {
 
         List<Section> sectionList = platform161Service.getAllSections().stream().map(SectionDTO::toEntity).collect(Collectors.toList());
-        for (Section section : sectionList)
+        for (Section section : sectionList) {
             sectionRepository.save(section);
+        }
     }
 
 
