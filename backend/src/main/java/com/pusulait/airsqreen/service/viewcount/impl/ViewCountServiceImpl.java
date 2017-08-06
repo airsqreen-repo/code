@@ -6,6 +6,7 @@ import com.pusulait.airsqreen.domain.viewcount.ViewCountLog;
 import com.pusulait.airsqreen.repository.viewcount.ViewCountLogRespository;
 import com.pusulait.airsqreen.repository.viewcount.ViewCountRepository;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
+import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-import static com.pusulait.airsqreen.util.ViewCountUtil.*;
+import static com.pusulait.airsqreen.util.ViewCountUtil.checkParams;
+import static com.pusulait.airsqreen.util.ViewCountUtil.getToken;
 
 /**
  * Created by yildizib on 03/08/2017.
@@ -27,6 +29,8 @@ public class ViewCountServiceImpl implements ViewCountService {
     private ViewCountRepository viewCountRepository;
     @Autowired
     private ViewCountLogRespository viewCountLogRespository;
+    @Autowired
+    protected ViewCountSpendRequirement viewCountSpendRequirement;
 
     @Transactional
     @Override
@@ -36,7 +40,7 @@ public class ViewCountServiceImpl implements ViewCountService {
             throw new NullPointerException("campaignId, sectionId   NULL veya bos olamaz!");
         }
         /* Burada disardaki sectiondan biglileri iceri alir. */
-        dto = getDetail(campaignId, sectionId);
+        dto = viewCountSpendRequirement.getDetail(campaignId, sectionId);
         return save(campaignId, dto.getDeviceId(), dto.getActionId(), sectionId, null);
     }
 
