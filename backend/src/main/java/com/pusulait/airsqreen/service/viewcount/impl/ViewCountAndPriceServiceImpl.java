@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 import static com.pusulait.airsqreen.util.ViewCountUtil.checkParams;
-import static com.pusulait.airsqreen.util.ViewCountUtil.getUnitPrice;
+
 
 /**
  * Created by yildizib on 03/08/2017.
@@ -18,7 +18,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     @Override
     public Double getTotalSpended(String trackToken) throws NullPointerException {
         Double result = null;
-        Double unitPrice = getUnitPrice(null, null);
+        Double unitPrice = viewCountSpendRequirement.getUnitPrice(null, null);
         if (checkParams(trackToken)) {
             throw new NullPointerException("trackToken NULL veya bos olamaz!");
         }
@@ -28,7 +28,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     @Override
     public Double getTotalSpended(String campaignId, String sectionId) throws NullPointerException {
         Double result = null;
-        Double unitPrice = getUnitPrice(campaignId, sectionId);
+        Double unitPrice = viewCountSpendRequirement.getUnitPrice(campaignId, sectionId);
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId  NULL veya bos olamaz!");
         }
@@ -38,7 +38,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     @Override
     public Double getTotalSpendedWithDateRange(String trackToken, Date start, Date end) throws NullPointerException {
         Double result = null;
-        Double unitPrice = getUnitPrice(null, null);
+        Double unitPrice = viewCountSpendRequirement.getUnitPrice(null, null);
         if (checkParams(trackToken, start, end)) {
             throw new NullPointerException("trackToken, start, end   NULL veya bos olamaz!");
         }
@@ -48,7 +48,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     @Override
     public Double getTotalSpended(String campaignId, String sectionId, Date start, Date end) throws NullPointerException {
         Double result = null;
-        Double unitPrice = getUnitPrice(campaignId, sectionId);
+        Double unitPrice = viewCountSpendRequirement.getUnitPrice(campaignId, sectionId);
         if (checkParams(campaignId, sectionId, start, end)) {
             throw new NullPointerException("campaignId, sectionId, start, end   NULL veya bos olamaz!");
         }

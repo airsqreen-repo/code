@@ -1,6 +1,7 @@
 package service.viewcount;
 
 import com.pusulait.airsqreen.Application;
+import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -23,14 +24,17 @@ public class ViewCountServiceTest {
 
     @Autowired
     private ViewCountService viewCountService;
+    @Autowired
+    private ViewCountAndPriceService viewCountAndPriceService;
 
     @Test
     public void test() {
         //viewCountService.save("dfasdf", "dfasdf", "sfdasdf", "sadfasf", null);
-        String token = viewCountService.getTrackToken("dfasdf", "sadfasf");
-        for (int i = 0; i < 100; i++) {
-            viewCountService.incrementViewCount(token);
-        }
+        //String token = viewCountService.getTrackToken("dfasdf", "sadfasf");
+        //for (int i = 0; i < 100; i++) {
+        //    viewCountService.incrementViewCount(token);
+        //}
+        viewCountAndPriceService.getTotalSpended("dfsdfdsaf");
     }
 
 }
