@@ -18,20 +18,21 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
     @Override
     public Double getTotalSpended(String trackToken) throws NullPointerException {
         Double result = null;
-        Double unitPrice = viewCountSpendRequirement.getUnitPrice(null, null);
+        String campaignId = null;
+        String sectionId = null;
         if (checkParams(trackToken)) {
             throw new NullPointerException("trackToken NULL veya bos olamaz!");
         }
-        return result;
+        return getTotalSpended(campaignId, sectionId);
     }
 
     @Override
     public Double getTotalSpended(String campaignId, String sectionId) throws NullPointerException {
         Double result = null;
-        Double unitPrice = viewCountSpendRequirement.getUnitPrice(campaignId, sectionId);
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId  NULL veya bos olamaz!");
         }
+        Double unitPrice = viewCountSpendRequirement.getUnitPrice(campaignId, sectionId);
         return result;
     }
 

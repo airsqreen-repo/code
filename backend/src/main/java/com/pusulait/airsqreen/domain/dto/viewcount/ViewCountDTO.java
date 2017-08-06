@@ -19,4 +19,26 @@ public class ViewCountDTO {
     private Date endDate;
     /* ... */
     private Double unitPrice;
+
+    public ViewCountDTO() {
+
+    }
+
+    public ViewCountDTO(String campaignId, String campaignSectionId, String deviceId, String actionId, Long totalCount) {
+        setCampaignId(campaignId);
+        setCampaignSectionId(campaignSectionId);
+        setDeviceId(deviceId);
+        setActionId(actionId);
+        setTotalCount(totalCount);
+    }
+
+    public ViewCountDTO(String campaignId, String campaignSectionId, String deviceId, String actionId, Long totalCount, Date startDate, Date endDate) {
+        setCampaignId(campaignId);
+        setCampaignSectionId(campaignSectionId);
+        setDeviceId(deviceId);
+        setActionId(actionId);
+        setTotalCount(totalCount);
+        setStartDate(startDate);
+        setEndDate(endDate);
+    }
 }

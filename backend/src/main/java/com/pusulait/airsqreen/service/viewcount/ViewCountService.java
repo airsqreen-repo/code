@@ -58,7 +58,7 @@ public interface ViewCountService {
      * @param token
      * @return
      */
-    List<ViewCountDTO> getTotalCount(String token);
+    ViewCountDTO getTotalCount(String token);
 
     /**
      * Verilen kampanya ve bolum ID sine gore toplam gosterimi doner.
@@ -67,7 +67,7 @@ public interface ViewCountService {
      * @param sectionId
      * @return
      */
-    List<ViewCountDTO> getTotalCount(String campaignId, String sectionId);
+    ViewCountDTO getTotalCount(String campaignId, String sectionId);
 
     /**
      * Verilen takip anahtarina ve tarih araligina gore toplam gosterimi doner.
@@ -77,7 +77,7 @@ public interface ViewCountService {
      * @param end
      * @return
      */
-    List<ViewCountDTO> getTotalCountWithDateRange(String token, Date start, Date end);
+    ViewCountDTO getTotalCountWithDateRange(String token, Date start, Date end);
 
     /**
      * Verilen kampanya ve bolum ID sine ve tarih araligina gore toplam gosterimi doner.
@@ -89,6 +89,12 @@ public interface ViewCountService {
      * @return
      */
     List<ViewCountDTO> getTotalCountWithDateRange(String campaignId, String sectionId, Date start, Date end);
+
+    /**
+     * @param campaignId
+     * @return
+     */
+    List<ViewCountDTO> getTotalCountWithCampaingId(String campaignId);
 
 
 }
