@@ -22,7 +22,9 @@ public class CampaignDTO {
 
     private Boolean active;
 
-    private PricingType pricing_type;
+    private String pricing_type;
+
+    private PricingType pricingType;
 
     private String target;
     private Date start_on;
