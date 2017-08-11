@@ -35,6 +35,7 @@ public class BaseEvent extends AuditBase implements Serializable {
     @Column(name = "EVENT_TYPE")
     private EventType eventType;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "EVENT_STATUS")
     private EventStatus eventStatus;
 

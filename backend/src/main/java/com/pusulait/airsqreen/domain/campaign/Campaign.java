@@ -40,8 +40,6 @@ public class Campaign extends AuditBase implements Serializable {
     @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
-    @Column(name = "UNIQUE_CAMPAING_UID")
-    private String uniqueCampaignUId; // PLT161 + externalId
 
     @Column(name = "EXTERNAL_ID")
     private Long externalId;

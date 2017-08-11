@@ -5,6 +5,7 @@ import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
+import com.pusulait.airsqreen.domain.enums.EventType;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
@@ -121,6 +122,7 @@ public class EventService {
 
                 Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
 
+                pushEventDTO.setEventType(EventType.SISTEM9_PUSH);
                 pushEventDTO.setEventStatus(EventStatus.WAITING);
                 pushEventDTO.setSlaveId(1L);
                 pushEventDTO.setExpireDate(null);
