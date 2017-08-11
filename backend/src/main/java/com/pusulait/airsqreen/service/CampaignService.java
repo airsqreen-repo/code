@@ -8,11 +8,14 @@ import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
+import com.pusulait.airsqreen.domain.viewcount.ViewCount;
 import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
+import com.pusulait.airsqreen.repository.viewcount.ViewCountRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
+import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
 import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +50,10 @@ public class CampaignService {
     @Autowired
     private Platform161Service platform161Service;
 
+
+    /*@Autowired
+    private ViewCountRepository viewCountRepository;
+*/
     @Transactional
     public void save(Plt161CampaignDTO campaignDTO) {
 
@@ -65,14 +72,18 @@ public class CampaignService {
         for (Plt161Campaign plt161Campaign : campaignList) {
 
             campaignRepository.save(plt161Campaign);
+            Section section = null;
             for (Long sectionId : EntityUtil.buildLongArray(plt161Campaign.getFiltered_section_ids())) {
 
                 if (!StringUtils.isEmpty(sectionId)) {
-                    Section section = sectionRepository.findOne(sectionId);
+                    section = sectionRepository.findOne(sectionId);
                     section = getAndCreateSection(sectionId, section);
                     generateCampaignSection(plt161Campaign.getId(), section.getId());
                 }
             }
+            /*if (section != null) {
+                viewCountRepository.save(new ViewCount(plt161Campaign.getExternalId().toString(), section.getId().toString()));
+            }*/
         }
     }
 
@@ -109,7 +120,7 @@ public class CampaignService {
                     save(campaignDTO);
                 }
             }
-           // campaignRepository.save(campaign);
+            // campaignRepository.save(campaign);
         } else {
             save(campaignDTO);
         }

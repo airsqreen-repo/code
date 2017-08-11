@@ -18,7 +18,7 @@ import java.util.Optional;
 @RepositoryRestResource(exported = false)
 public interface CampaignSectionRepository extends JpaRepository<CampaignSection, Long> {
 
-    @Query("select cs from CampaignSection cs where cs.campaignId =:campaignId and cs.sectionId =:sectionId")
+    @Query("select cs from CampaignSection cs where cs.campaign.externalId =:campaignId and cs.sectionId =:sectionId")
     public CampaignSection findByCampaignAndSectionId(@Param(value = "campaignId") Long campaignId, @Param(value = "sectionId") Long sectionId);
 
 }

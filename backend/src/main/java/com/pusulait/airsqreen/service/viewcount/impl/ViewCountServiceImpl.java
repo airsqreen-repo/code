@@ -89,7 +89,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId   NULL veya bos olamaz!");
         }
-        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndSectionId(campaignId, sectionId);
         return viewCount == null ? null : viewCount.getTrackingToken();
     }
 
@@ -121,7 +121,7 @@ public class ViewCountServiceImpl implements ViewCountService {
             throw new NullPointerException("token, start, end  NULL veya bos olamaz!");
         }
         ViewCount viewCount = viewCountRepository.findByTrackingToken(token);
-        result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getCampaignSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
+        result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
         return result;
     }
 
@@ -131,8 +131,8 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (checkParams(campaignId, sectionId)) {
             throw new NullPointerException("campaignId, sectionId   NULL veya bos olamaz!");
         }
-        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
-        result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getCampaignSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndSectionId(campaignId, sectionId);
+        result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
         return result;
     }
 
@@ -146,7 +146,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (viewCount != null) {
             Long viewCountId = viewCount.getId();
             Long totalCount = viewCountLogRespository.findByTrackingTokenWithDateRange(viewCountId, start, end);
-            result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getCampaignSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), totalCount, start, end);
+            result = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), totalCount, start, end);
 
         }
         return result;
@@ -158,7 +158,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (checkParams(campaignId, sectionId, start, end)) {
             throw new NullPointerException("campaignId, sectionId, start, end   NULL veya bos olamaz!");
         }
-        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndSectionId(campaignId, sectionId);
         return getTotalCountWithDateRange(viewCount.getTrackingToken(), start, end);
     }
 
@@ -172,7 +172,7 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (viewCounts != null) {
             result = new LinkedList<>();
             for (ViewCount viewCount : viewCounts) {
-                ViewCountDTO dto = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getCampaignSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
+                ViewCountDTO dto = new ViewCountDTO(viewCount.getCampaignId(), viewCount.getSectionId(), viewCount.getDeviceId(), viewCount.getActionId(), viewCount.getTotalCount());
                 result.add(dto);
             }
         }

@@ -55,7 +55,7 @@ public class ViewCountSpendRequirementImpl implements ViewCountSpendRequirement 
         CampaignSection campaignSection = campaignSectionRepository.findByCampaignAndSectionId(Long.valueOf(campaignId),Long.valueOf(sectionId));
         ViewCountDTO viewCountDTO = new ViewCountDTO();
         viewCountDTO.setActionId(campaignSection.getActionId().toString());
-        viewCountDTO.setCampaignId(campaignSection.getCampaignId().toString());
+        viewCountDTO.setCampaignId(campaignSection.getCampaign().getExternalId().toString());
         viewCountDTO.setCampaignSectionId(campaignSection.getSectionId().toString());
         viewCountDTO.setDeviceId(campaignSection.getDeviceId().toString());
         viewCountDTO.setUnitPrice(campaignSection.getSection().getPrice());

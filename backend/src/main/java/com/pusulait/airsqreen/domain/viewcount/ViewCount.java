@@ -23,11 +23,11 @@ import java.util.List;
 @Entity
 @Table(name = Constants.PREFIX + "VIEW_COUNT", indexes = {
         @Index(name = "index_view_count_with_token", columnList = "TRKNG_TOKEN"),
-        @Index(name = "index_view_count_general", columnList = "CAMPAIGN_ID, CMPGN_SCTN_ID"),
+        @Index(name = "index_view_count_general", columnList = "CAMPAIGN_ID, SECTION_ID"),
         @Index(name = "index_view_count_general1", columnList = "CAMPAIGN_ID, DEVICE_ID, ACTION_ID"),
-        @Index(name = "index_view_count_general2", columnList = "CAMPAIGN_ID, CMPGN_SCTN_ID, UPDATE_DATE, CREATE_DATE, DATA_STATUS")
+        @Index(name = "index_view_count_general2", columnList = "CAMPAIGN_ID, SECTION_ID, UPDATE_DATE, CREATE_DATE, DATA_STATUS")
 }, uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"CAMPAIGN_ID", "CMPGN_SCTN_ID", "DEVICE_ID", "ACTION_ID"}, name = Constraints.UC_VIEW_COUNT_GNRL_UQC),
+        @UniqueConstraint(columnNames = {"CAMPAIGN_ID", "SECTION_ID", "DEVICE_ID", "ACTION_ID"}, name = Constraints.UC_VIEW_COUNT_GNRL_UQC),
         @UniqueConstraint(columnNames = {"TRKNG_TOKEN"}, name = Constraints.UC_VIEW_COUNT_TRCK_TOKEN)
 })
 @Where(clause = "DATA_STATUS <> 'DELETED'")
@@ -44,16 +44,22 @@ public class ViewCount extends AuditBase {
 
     @Column(name = "CAMPAIGN_ID", nullable = false)
     private String campaignId;
-    @Column(name = "CMPGN_SCTN_ID", nullable = false)
-    private String campaignSectionId;
+    
+    @Column(name = "SECTION_ID", nullable = false)
+    private String sectionId;
+    
     @Column(name = "DEVICE_ID", nullable = false)
     private String deviceId;
+    
     @Column(name = "ACTION_ID", nullable = false)
     private String actionId;
+    
     @Column(name = "TRKNG_TOKEN", nullable = false)
     private String trackingToken;
+    
     @Column(name = "BCKND_SND_TRC_URL", length = 1500)
     private String backendTrackUrl;
+    
     @Column(name = "TOTAL_COUNT")
     private Long totalCount = 0L;
 
@@ -67,17 +73,23 @@ public class ViewCount extends AuditBase {
     public ViewCount() {
     }
 
+    public ViewCount(String campaignId, String sectionId) {
+
+        this.campaignId = campaignId;
+        this.sectionId = sectionId;
+    }
+
     /**
      * @param trackingToken
      * @param campaignId
-     * @param campaignSectionId
+     * @param sectionId
      * @param deviceId
      * @param actionId
      * @param backendTrackUrl
      */
-    public ViewCount(String trackingToken, String campaignId, String deviceId, String actionId, String campaignSectionId, String backendTrackUrl) {
+    public ViewCount(String trackingToken, String campaignId, String deviceId, String actionId, String sectionId, String backendTrackUrl) {
         setCampaignId(campaignId);
-        setCampaignSectionId(campaignSectionId);
+        setSectionId(sectionId);
         setDeviceId(deviceId);
         setActionId(actionId);
         setBackendTrackUrl(backendTrackUrl);

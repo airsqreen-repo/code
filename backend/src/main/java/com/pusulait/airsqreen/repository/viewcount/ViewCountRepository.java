@@ -19,7 +19,7 @@ public interface ViewCountRepository extends JpaRepository<ViewCount, Long> {
      * @param sectionId
      * @return
      */
-    ViewCount findByCampaignIdAndCampaignSectionId(String campaignId, String sectionId);
+    ViewCount findByCampaignIdAndSectionId(String campaignId, String sectionId);
 
     /**
      * @param trackToken

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class CampaignSectionDTO {
 
-    private Long campaingId;
+    private Long campaignId;
     private Long sectionId;
     private String trackingToken;
 }

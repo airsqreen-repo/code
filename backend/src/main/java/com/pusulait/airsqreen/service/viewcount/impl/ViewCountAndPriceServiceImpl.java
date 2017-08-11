@@ -25,7 +25,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
         }
         ViewCount viewCount = viewCountRepository.findByTrackingToken(trackToken);
         if (viewCount != null) {
-            result = getTotalSpent(viewCount.getCampaignId(), viewCount.getCampaignSectionId());
+            result = getTotalSpent(viewCount.getCampaignId(), viewCount.getSectionId());
         }
         return result;
     }
@@ -69,7 +69,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
         if (checkParams(campaignId, sectionId, start, end)) {
             throw new NullPointerException("campaignId, sectionId, start, end   NULL veya bos olamaz!");
         }
-        ViewCount viewCount = viewCountRepository.findByCampaignIdAndCampaignSectionId(campaignId, sectionId);
+        ViewCount viewCount = viewCountRepository.findByCampaignIdAndSectionId(campaignId, sectionId);
         if (viewCount != null) {
             result = getTotalSpentWithDateRange(viewCount.getTrackingToken(), start, end);
         }
