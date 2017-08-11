@@ -33,6 +33,4 @@ public class CampaignDTO {
 
     private Double price;
 
-    private Double agencyFee;
-
 }

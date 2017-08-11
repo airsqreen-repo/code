@@ -56,8 +56,8 @@ public class Campaign extends AuditBase implements Serializable {
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
 
-    @Column(name = "TARGET")
-    private String target;
+    //@Column(name = "TARGET")
+    //private String target;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "START_ON")
@@ -69,9 +69,6 @@ public class Campaign extends AuditBase implements Serializable {
 
     @Column(name = "PRICE")
     private Double price;
-
-    @Column(name = "AGENCY_FEE")
-    private Double agencyFee;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "campaign")
     private List<CampaignSection> campaignSections = new ArrayList<>();

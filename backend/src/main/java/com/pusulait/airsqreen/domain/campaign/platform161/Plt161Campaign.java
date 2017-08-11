@@ -41,6 +41,7 @@ public class Plt161Campaign extends Campaign {
     @Column(columnDefinition = "text")
     private Long[] targeting_hour_ids;
 
+    @Column(name ="UPDATED_AT")
     private Date updated_at;
 
     @Type(type = "longarray")

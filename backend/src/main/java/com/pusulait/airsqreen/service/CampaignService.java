@@ -5,7 +5,9 @@ import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
+import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
@@ -61,7 +63,15 @@ public class CampaignService {
     @Transactional
     public void savePlt161(Integer recordCount) {
 
-        List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().map(Plt161CampaignDTO::toEntity).collect(Collectors.toList());
+        List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().
+
+                map(Plt161CampaignDTO::toEntity).collect(Collectors.toList())
+                .stream().filter(CampaignPredicate.pricingTypePredicate(PricingType.CPM))
+                .collect(Collectors.toList());
+
+
+
+
 
 
         for (Plt161Campaign plt161Campaign : campaignList) {

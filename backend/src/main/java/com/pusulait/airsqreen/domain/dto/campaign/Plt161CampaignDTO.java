@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.domain.dto.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import lombok.Data;
 
 import java.util.Date;
@@ -32,9 +33,8 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaignDTO.setFiltered_section_ids(campaign.getFiltered_section_ids());
         campaignDTO.setStart_on(campaign.getStartOn());
         campaignDTO.setEnd_on(campaign.getEndOn());
-        campaignDTO.setAgencyFee(campaign.getAgencyFee());
         campaignDTO.setPrice(campaign.getPrice());
-        campaignDTO.setTarget(campaign.getTarget());
+        //campaignDTO.setTarget(campaign.getTarget());
         return campaignDTO;
     }
 
@@ -51,9 +51,10 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
         campaign.setStartOn(campaignDTO.getStart_on());
         campaign.setEndOn(campaignDTO.getEnd_on());
-        campaign.setAgencyFee(campaignDTO.getAgencyFee());
         campaign.setPrice(campaignDTO.getPrice());
-        campaign.setTarget(campaignDTO.getTarget());
+        //campaign.setTarget(campaignDTO.getTarget());
+        campaign.setName(campaignDTO.getName());
+        campaign.setPricingType(PricingType.convert(campaignDTO.getPricing_type()));
         return campaign;
     }
 
@@ -70,10 +71,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setFiltered_section_ids(campaignDTO.getFiltered_section_ids());
         campaign.setStartOn(campaignDTO.getStart_on());
         campaign.setEndOn(campaignDTO.getEnd_on());
-        campaign.setAgencyFee(campaignDTO.getAgencyFee());
         campaign.setPrice(campaignDTO.getPrice());
-        campaign.setTarget(campaignDTO.getTarget());
-
         return campaign;
 
 
