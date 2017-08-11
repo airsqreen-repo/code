@@ -24,28 +24,18 @@ import java.util.Date;
  */
 @Entity
 @Table(name = Constants.PREFIX + "PLATFORM_161_CAMPAIGNS")
-@TypeDefs(value = {
-        @TypeDef(name = "text", typeClass = StringArrayType.class)
-       , @TypeDef(name = "longarray", typeClass = LongArrayType.class)
-})
 @Data
 public class Plt161Campaign extends Campaign {
 
-  private Double media_budget;
+    private Double media_budget;
 
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] targeting_weekday_ids;
+    private String targeting_weekday_ids;
 
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] targeting_hour_ids;
+    private String targeting_hour_ids;
 
-    @Column(name ="UPDATED_AT")
+    @Column(name = "UPDATED_AT")
     private Date updated_at;
 
-    @Type(type = "longarray")
-    @Column(columnDefinition = "text")
-    private Long[] filtered_section_ids;
+    private String filtered_section_ids;
 
 }

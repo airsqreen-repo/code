@@ -4,6 +4,7 @@ import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
@@ -12,6 +13,8 @@ import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
+import com.pusulait.airsqreen.util.EntityUtil;
+import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,11 +65,13 @@ public class CampaignService {
         for (Plt161Campaign plt161Campaign : campaignList) {
 
             campaignRepository.save(plt161Campaign);
-            for (Long sectionId : plt161Campaign.getFiltered_section_ids()) {
+            for (Long sectionId : EntityUtil.buildLongArray(plt161Campaign.getFiltered_section_ids())) {
 
-                Section section = sectionRepository.findOne(sectionId);
-                section = getAndCreateSection(sectionId, section);
-                generateCampaignSection(plt161Campaign.getId(), section.getId());
+                if (!StringUtils.isEmpty(sectionId)) {
+                    Section section = sectionRepository.findOne(sectionId);
+                    section = getAndCreateSection(sectionId, section);
+                    generateCampaignSection(plt161Campaign.getId(), section.getId());
+                }
             }
         }
     }
@@ -90,9 +95,9 @@ public class CampaignService {
 
             if (campaign instanceof Plt161Campaign) {
                 Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
-                campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
                 if (plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
+                    campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
                     for (Long sectionId : campaignDTO.getFiltered_section_ids()) {
 
                         Section section = sectionRepository.findOne(sectionId);
@@ -104,9 +109,9 @@ public class CampaignService {
                     save(campaignDTO);
                 }
             }
-            campaignRepository.save(campaign);
-        }else {
-                save(campaignDTO);
+           // campaignRepository.save(campaign);
+        } else {
+            save(campaignDTO);
         }
     }
 
@@ -121,9 +126,11 @@ public class CampaignService {
     @Transactional
     public void updateCampaigns() {
 
-        platform161Service.getAllCampaigns()
+        List<Plt161CampaignDTO> campaigns = platform161Service.getAllCampaigns()
                 .stream().filter(CampaignPredicate.pricingTypePredicateDTO(PricingType.CPM))
-                .collect(Collectors.toList()).forEach(campaignDTO -> updateCampaign(campaignDTO));
+                .collect(Collectors.toList());
+
+        campaigns.stream().forEach(campaignDTO -> updateCampaign(campaignDTO));
     }
 
 

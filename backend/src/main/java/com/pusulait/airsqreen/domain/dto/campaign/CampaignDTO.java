@@ -33,4 +33,5 @@ public class CampaignDTO {
 
     private Double price;
 
+
 }

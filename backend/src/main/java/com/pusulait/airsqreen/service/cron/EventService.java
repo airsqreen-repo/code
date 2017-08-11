@@ -14,6 +14,7 @@ import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
 import com.pusulait.airsqreen.util.DateUtil;
+import com.pusulait.airsqreen.util.EntityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
@@ -88,7 +89,7 @@ public class EventService {
 
             Boolean isLastDay = DateUtil.isInSameDay(campaign.getEndOn(), new Date());
 
-            int dailyHourCount = plt161Campaign.getTargeting_hour_ids().length;
+            int dailyHourCount = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
             int notAvailableHourCount = dailyHourCount - calculateHour(plt161Campaign, new Date(), isLastDay);
             int totalHour = 0;
 
@@ -135,7 +136,7 @@ public class EventService {
 
     private boolean isInWeekDay(Plt161Campaign plt161Campaign, Date date) {
 
-        Long[] weekDayIds = plt161Campaign.getTargeting_weekday_ids();
+        Long[] weekDayIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids());
 
         boolean inWeekDay = false;
 
@@ -154,7 +155,7 @@ public class EventService {
 
     private boolean isInDayHour(Plt161Campaign plt161Campaign, Date date) {
 
-        Long[] dayHourIds = plt161Campaign.getTargeting_hour_ids();
+        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
 
         boolean inDayHour = false;
 
@@ -179,7 +180,7 @@ public class EventService {
 
         Integer campaignEndHour = DateUtil.getHourOfDate(plt161Campaign.getEndOn());
         Integer hour = DateUtil.getHourOfDate(new Date());
-        Long[] dayHourIds = plt161Campaign.getTargeting_hour_ids();
+        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
         int workableHourCount = 0;
 
         for (Long dayHourId : dayHourIds) {
