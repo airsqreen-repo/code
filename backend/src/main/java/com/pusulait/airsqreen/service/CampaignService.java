@@ -54,48 +54,30 @@ public class CampaignService {
     @Transactional
     public void save() {
 
-        List<Campaign> campaignList = platform161Service.getAllCampaigns().stream().map(Plt161CampaignDTO::toEntity).collect(Collectors.toList());
-        for (Campaign campaign : campaignList) {
-            campaignRepository.save(campaign);
-        }
-    }
-
-    @Transactional
-    public void savePlt161(Integer recordCount) {
-
         List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().
-
                 map(Plt161CampaignDTO::toEntity).collect(Collectors.toList())
                 .stream().filter(CampaignPredicate.pricingTypePredicate(PricingType.CPM))
                 .collect(Collectors.toList());
 
-
-
-
-
-
         for (Plt161Campaign plt161Campaign : campaignList) {
-            campaignRepository.save(plt161Campaign);
 
+            campaignRepository.save(plt161Campaign);
             for (Long sectionId : plt161Campaign.getFiltered_section_ids()) {
 
                 Section section = sectionRepository.findOne(sectionId);
-
                 section = getAndCreateSection(sectionId, section);
-
-                CampaignSection campaignSection = new CampaignSection();
-                campaignSection.setCampaignId(plt161Campaign.getId());
-                campaignSection.setSectionId(section.getId());
-                campaignSectionRepository.save(campaignSection);
+                generateCampaignSection(plt161Campaign.getId(), section.getId());
             }
         }
     }
 
-    @Transactional
-    public void savePlt161() {
-        // save everything
-        savePlt161(null);
+    private void generateCampaignSection(Long id, Long id2) {
+        CampaignSection campaignSection = new CampaignSection();
+        campaignSection.setCampaignId(id);
+        campaignSection.setSectionId(id2);
+        campaignSectionRepository.save(campaignSection);
     }
+
 
     @Transactional
     public void updateCampaign(Plt161CampaignDTO campaignDTO) {
@@ -111,15 +93,11 @@ public class CampaignService {
                 campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
                 if (plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
-
                     for (Long sectionId : campaignDTO.getFiltered_section_ids()) {
 
                         Section section = sectionRepository.findOne(sectionId);
                         section = getAndCreateSection(sectionId, section);
-                        CampaignSection campaignSection = new CampaignSection();
-                        campaignSection.setCampaignId(campaign.getId());
-                        campaignSection.setSectionId(section.getId());
-                        campaignSectionRepository.save(campaignSection);
+                        generateCampaignSection(campaign.getId(), section.getId());
                     }
 
                     campaignRepository.delete(campaign.getId());
@@ -127,6 +105,8 @@ public class CampaignService {
                 }
             }
             campaignRepository.save(campaign);
+        }else {
+                save(campaignDTO);
         }
     }
 
@@ -141,8 +121,9 @@ public class CampaignService {
     @Transactional
     public void updateCampaigns() {
 
-        platform161Service.getAllCampaigns().forEach(campaignDTO -> updateCampaign(campaignDTO));
-
+        platform161Service.getAllCampaigns()
+                .stream().filter(CampaignPredicate.pricingTypePredicateDTO(PricingType.CPM))
+                .collect(Collectors.toList()).forEach(campaignDTO -> updateCampaign(campaignDTO));
     }
 
 

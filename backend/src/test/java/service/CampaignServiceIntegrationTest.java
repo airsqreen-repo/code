@@ -34,22 +34,17 @@ public class CampaignServiceIntegrationTest {
 
     @Test
     public void savePlt161Campaigns() {
-        campaignService.savePlt161();
+        campaignService.save();
     }
 
     @Test
-    public void updatePlt161Campaigns() {
-        // setup db
-        campaignService.savePlt161(5);
-
+    public void updateCampaigns() {
         campaignService.updateCampaigns();
-
     }
+
 
     @Test
     public void testFindActive() {
-
-        campaignService.savePlt161();
 
         List<Campaign> result = campaignRepository.findAllActive();
 
