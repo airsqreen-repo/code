@@ -60,49 +60,47 @@ public class EventService {
 
     public void generateSistem9Events() {
 
-        List<Campaign> activeCampaigns = campaignRepository.findLiveCampaigns();
+        List<Plt161Campaign> activeCampaigns = campaignRepository.findLiveCampaigns();
 
-        for (Campaign campaign : activeCampaigns) {
+        for (Plt161Campaign plt161Campaign : activeCampaigns) {
 
-            CampaignSection campaignSection = campaign.getCampaignSections().get(0);
+            CampaignSection campaignSection = plt161Campaign.getCampaignSections().get(0);
 
-            Double paidBudget = viewCountAndPriceService.getTotalSpent(campaign.getExternalId().toString(), campaignSection.getSectionId().toString());
-
-            Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
+            Double paidBudget = viewCountAndPriceService.getTotalSpent(plt161Campaign.getExternalId().toString(), campaignSection.getSectionId().toString());
 
             Double remainingBudget = plt161Campaign.getMedia_budget() - (paidBudget);
 
             if (remainingBudget <= 0 || remainingBudget < campaignSection.getSection().getPrice()) {
-                return; // para kalmadıysa yapacak da bişi yok
+                  continue; // para kalmadıysa yapacak da bişi yok
             }
 
-            Double pricePerShow = campaignSection.getSection().getPrice();
+            Double pricePerShow = campaignSection.getSection().getPrice() / 1000;
 
             Double nShowDouble = (remainingBudget / pricePerShow);
             Integer nShow = nShowDouble.intValue();
 
 
-            boolean inWeekDay = isInWeekDay(plt161Campaign, new Date());
+            boolean inWeekDay = DateUtil.isInWeekDay(plt161Campaign, new Date());
 
             if (!inWeekDay) {
-                return; // çalışma günü değilmiş.
+                  continue; // çalışma günü değilmiş.
             }
 
-            Boolean isLastDay = DateUtil.isInSameDay(campaign.getEndOn(), new Date());
+            Boolean isLastDay = DateUtil.isInSameDay(plt161Campaign.getEndOn(), new Date());
 
             int dailyHourCount = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
-            int notAvailableHourCount = dailyHourCount - calculateHour(plt161Campaign, new Date(), isLastDay);
+            int notAvailableHourCount = dailyHourCount - DateUtil.calculateHour(plt161Campaign, new Date(), isLastDay);
             int totalHour = 0;
 
-            for (DateTime date = new DateTime(); date.isBefore(new DateTime(campaign.getEndOn())); date = date.plusDays(1)) {
-                if (isInWeekDay(plt161Campaign, date.toDate())) {
+            for (DateTime date = new DateTime(); date.isBefore(new DateTime(plt161Campaign.getEndOn())); date = date.plusDays(1)) {
+                if (DateUtil.isInWeekDay(plt161Campaign, date.toDate())) {
                     totalHour += dailyHourCount;
                 }
             }
             totalHour -= notAvailableHourCount;
 
             if (totalHour == 0) {
-                return;
+                  continue;
             }
 
             // günde 1000 gösterim
@@ -136,74 +134,12 @@ public class EventService {
         }
     }
 
-    private boolean isInWeekDay(Plt161Campaign plt161Campaign, Date date) {
-
-        Long[] weekDayIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids());
-
-        boolean inWeekDay = false;
-
-        if (weekDayIds == null) {
-
-            inWeekDay = true;
-        } else {
-            for (Long weekDayId : weekDayIds) {
-                if (weekDayId.intValue() == DateUtil.getDayOfWeek(date)) {
-                    inWeekDay = true;
-                }
-            }
-        }
-        return inWeekDay;
-    }
-
-    private boolean isInDayHour(Plt161Campaign plt161Campaign, Date date) {
-
-        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
-
-        boolean inDayHour = false;
-
-        if (dayHourIds == null) {
-
-            inDayHour = true;
-        } else {
-            for (Long dayHourId : dayHourIds) {
-                if (dayHourId.intValue() == DateUtil.getHourOfDate(date)) {
-                    inDayHour = true;
-                }
-            }
-        }
-        return inDayHour;
-    }
-
-    private Integer calculateHour(Plt161Campaign plt161Campaign, Date date, Boolean isLastDay) {
-
-        if (!isInDayHour(plt161Campaign, date)) {
-            return 0;
-        }
-
-        Integer campaignEndHour = DateUtil.getHourOfDate(plt161Campaign.getEndOn());
-        Integer hour = DateUtil.getHourOfDate(new Date());
-        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
-        int workableHourCount = 0;
-
-        for (Long dayHourId : dayHourIds) {
-            if (hour < dayHourId && !isLastDay) {
-                workableHourCount++;
-            } else if (campaignEndHour > dayHourId && hour < dayHourId) {
-                workableHourCount++;
-            }
-        }
-        return workableHourCount;
-    }
 
 
-    private String calculateActionId() {
-        return "";
-    }
+
 
     private Long calculateDeviceId(int i, List<Long> deviceIdList) {
-
         return deviceIdList.get(i % deviceIdList.size());
-
     }
 
     private Date setRunDate(Integer pushNo, Integer period, Date screenStartDate) {
@@ -222,12 +158,6 @@ public class EventService {
         return c1.getTime();
 
     }
-
-//    private Integer calculateEventSize() {
-//        // burda bu saat diliminde toplam kaç event ihtiyacımız var
-//
-//        return 100;
-//    }
 
 
     @Scheduled(cron = "0 0 0 1 * ?")

@@ -41,7 +41,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
         if (countDTO != null && unitPrice != null) {
             Long totalCount = countDTO.getTotalCount();
             if (totalCount != null) {
-                result = totalCount * unitPrice;
+                result = (totalCount * unitPrice) / 1000;
             }
         }
         return result;
@@ -57,7 +57,7 @@ public class ViewCountAndPriceServiceImpl extends ViewCountServiceImpl implement
         ViewCountDTO countDTO = getTotalCountWithDateRange(trackToken, start, end);
         if (countDTO != null) {
             unitPrice = viewCountSpendRequirement.getUnitPrice(countDTO.getCampaignId(), countDTO.getCampaignSectionId());
-            result = countDTO.getTotalCount() * unitPrice;
+            result = (countDTO.getTotalCount() * unitPrice) / 1000;
         }
 
         return result;

@@ -1,5 +1,7 @@
 package com.pusulait.airsqreen.util;
 
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,7 +35,13 @@ public class DateUtil {
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        return cal.get(Calendar.DAY_OF_WEEK);
+        int dayOfWeekInJava = cal.get(Calendar.DAY_OF_WEEK);
+        if(dayOfWeekInJava > 1){
+            return dayOfWeekInJava - 1;
+        }
+        if (dayOfWeekInJava  == 1)
+            return 7;
+        else return 0;
 
     }
 
@@ -55,6 +63,64 @@ public class DateUtil {
 
         return cal.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
 
+    }
+
+    public static boolean isInWeekDay(Plt161Campaign plt161Campaign, Date date) {
+
+        Long[] weekDayIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids());
+
+        boolean inWeekDay = false;
+
+        if (StringUtils.isEmpty(plt161Campaign.getTargeting_weekday_ids())) {
+            inWeekDay = true;
+        } else {
+            for (Long weekDayId : weekDayIds) {
+                if (weekDayId.intValue() == DateUtil.getDayOfWeek(date)) {
+                    inWeekDay = true;
+                }
+            }
+        }
+        return inWeekDay;
+    }
+
+    public static boolean isInDayHour(Plt161Campaign plt161Campaign, Date date) {
+
+        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
+
+        boolean inDayHour = false;
+
+        if (StringUtils.isEmpty(plt161Campaign.getTargeting_hour_ids())) {
+
+            inDayHour = true;
+        } else {
+            for (Long dayHourId : dayHourIds) {
+                if (dayHourId.intValue() == DateUtil.getHourOfDate(date)) {
+                    inDayHour = true;
+                }
+            }
+        }
+        return inDayHour;
+    }
+
+    public static Integer calculateHour(Plt161Campaign plt161Campaign, Date date, Boolean isLastDay) {
+
+        if (!isInDayHour(plt161Campaign, date)) {
+            return 0;
+        }
+
+        Integer campaignEndHour = DateUtil.getHourOfDate(plt161Campaign.getEndOn());
+        Integer hour = DateUtil.getHourOfDate(new Date());
+        Long[] dayHourIds = EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids());
+        int workableHourCount = 0;
+
+        for (Long dayHourId : dayHourIds) {
+            if (hour < dayHourId && !isLastDay) {
+                workableHourCount++;
+            } else if (campaignEndHour > dayHourId && hour < dayHourId) {
+                workableHourCount++;
+            }
+        }
+        return workableHourCount;
     }
 
 
