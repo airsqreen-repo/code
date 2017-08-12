@@ -19,20 +19,29 @@ public class EventUtil {
         return pushEventDTO;
     }
 
-    public static Date setRunDate(Integer pushNo, Integer period, Date screenStartDate) {
+    public static Date setRunDate() {
 
-        Long timeInDay = pushNo * period + screenStartDate.getTime();
-        Long hour = timeInDay / 3600;
-        Long minute = timeInDay % 60;
-        Long second = timeInDay % 3600;
-
+        Long time = new Date().getTime();
         Calendar c1 = Calendar.getInstance();
-        c1.setTimeInMillis(new Date().getTime());
-        c1.set(Calendar.HOUR_OF_DAY, hour.intValue());
-        c1.set(Calendar.MINUTE, minute.intValue());
-        c1.set(Calendar.SECOND, second.intValue());
+        c1.setTimeInMillis(time);
+        c1.set(Calendar.HOUR_OF_DAY, DateUtil.getHourOfDate(new Date()));
+        c1.set(Calendar.MINUTE, 0);
+        c1.set(Calendar.SECOND, 0);
 
         return c1.getTime();
+    }
+
+    public static Date setExpireDate( ) {
+
+        Long time = new Date().getTime();
+        Calendar c1 = Calendar.getInstance();
+        c1.setTimeInMillis(time);
+        c1.set(Calendar.HOUR_OF_DAY, DateUtil.getHourOfDate(new Date()));
+        c1.set(Calendar.MINUTE, 59);
+        c1.set(Calendar.SECOND, 59);
+
+        return c1.getTime();
+
 
     }
 }

@@ -1,5 +1,6 @@
 package com.pusulait.airsqreen.service.cron;
 
+import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
@@ -98,38 +99,47 @@ public class EventService {
                 continue;
             }
 
-            // günde 1000 gösterim
             Integer showPerHour = nShow / totalHour;
 
-            List<Sistem9PushEvent> sistem9PushEventList = new ArrayList<>();
-            // Ekranın available olduğu an
-            Date screenStartDate = new Date();
+            if(!StringUtils.isEmpty(plt161Campaign.getFrequency_cap())) {
 
-            int minutes = 0;
+                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_HOUR) && showPerHour > plt161Campaign.getFrequency_cap()) {
+                    showPerHour = plt161Campaign.getFrequency_cap();
+                }
+                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_DAY) &&
+                        showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap()) {
+                    showPerHour = plt161Campaign.getFrequency_cap() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
+                }
+
+                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_WEEK) &&
+                        showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length
+                                > plt161Campaign.getFrequency_cap()) {
+                    showPerHour = plt161Campaign.getFrequency_cap() /
+                            (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length);
+                }
+            }
+
+
             for (int i = 0; i < showPerHour; i++) {
-
-                minutes = createNewEvents(plt161Campaign, screenStartDate, minutes, i);
+                createNewEvents(plt161Campaign, i);
             }
         }
     }
 
-    private int createNewEvents(Plt161Campaign plt161Campaign, Date screenStartDate, int minutes, int i) {
+    private void createNewEvents(Plt161Campaign plt161Campaign, int i) {
 
         Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
 
         pushEventDTO.setEventType(EventType.SISTEM9_PUSH);
         pushEventDTO.setEventStatus(EventStatus.WAITING);
         pushEventDTO.setSlaveId(1L);
-        pushEventDTO.setExpireDate(null);
-        pushEventDTO.setRunDate(EventUtil.setRunDate(i, 0, screenStartDate));
-        pushEventDTO = EventUtil.setDeviceAndSectionId(pushEventDTO, plt161Campaign,i);
+        pushEventDTO.setExpireDate(EventUtil.setExpireDate());
+        pushEventDTO.setRunDate(EventUtil.setRunDate());
+        pushEventDTO = EventUtil.setDeviceAndSectionId(pushEventDTO, plt161Campaign, i);
 
         sistem9PushEventService.save(pushEventDTO);
 
-        minutes += 0;
-        return minutes;
     }
-
 
 
     @Scheduled(cron = "0 0 0 1 * ?")

@@ -24,6 +24,12 @@ public final class Constants {
     public static final String ANONYMOUS_ACCOUNT = "anonymous";
     public static final String PREFIX = "AIR_";
 
+    public static final String FREQUENCY_MINUTE = "minutes";
+    public static final String FREQUENCY_HOUR = "hours";
+    public static final String FREQUENCY_DAY = "days";
+    public static final String FREQUENCY_WEEK = "weeks";
+
+
 
     public static final String NAME_REGEX = "[a-zA-Z]";
     public static final String PASSWORD_REGEX = "^[A-Za-z\\s-]+$";
