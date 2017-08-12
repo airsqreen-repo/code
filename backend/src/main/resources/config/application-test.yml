@@ -1,0 +1,120 @@
+server:
+    port: 8080
+    tomcat:
+            remote_ip_header: x-forwarded-for
+            protocol_header: x-forwarded-proto
+
+spring:
+    profiles:
+        active: test
+    datasource:
+        dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+        url:
+        databaseName: airsqreen
+        serverName: 35.190.200.190
+        username: postgres
+        password: 1234
+
+    jpa:
+        database-platform: com.pusulait.airsqreen.domain.util.CustomPostgreSQLDialect
+        database: POSTGRESQL
+        openInView: true
+        show_sql: true
+        generate-ddl: true
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+            hikari:
+                    minimumIdle : 10
+                    maximumPoolSize : 30
+                    idleTimeout : 300000
+                    maxLifetime : 600000
+                    connectionTestQuery : select 1
+        properties:
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+            hibernate.cache.use_minimal_puts: true
+            hibernate.cache.hazelcast.use_lite_member: true
+            javax.persistence.validation.mode: NONE
+            hibernate.id.new_generator_mappings: true
+            hibernate.hbm2ddl.import_files: import.sql
+    data:
+        elasticsearch:
+            cluster-name:
+            cluster-nodes: localhost:9200
+    thymeleaf:
+        mode: XHTML
+        cache: true
+
+metrics:
+    jmx.enabled: true
+    spark:
+        enabled: false
+        host: localhost
+        port: 9999
+    graphite:
+        enabled: false
+        host: localhost
+        port: 2003
+        prefix: solen
+
+http:
+    cache:
+        timeToLiveInDays: 31
+
+cache:
+    timeToLiveSeconds: 3600
+    hazelcast:
+        debug: false
+        stickySession: false
+        backupCount: 1
+
+mail:
+    ENV_SPRING_MAIL: mail.
+    defaultHost: smtp.office365.com
+    defaultPropHost: smtp.office365.com
+    from: info@40ayak.com
+    PROP_PORT: 587
+    password: Cbn12345
+    PROP_PROTO: 587
+    PROP_TLS: true
+    PROP_AUTH: auth
+    PROP_SMTP_AUTH: true
+    PROP_STARTTLS: true
+    PROP_TRANSPORT_PROTO: smtp
+    transport.protocol: mail.smtp.port
+    propUser: info@40ayak.com
+    PROP_HOST: smtp.office365.com
+
+mailJet:
+    fromEmail: info@hamilelikrehberi.com
+    fromName: Hamilelik Rehberi
+    apiKey: 056758a4de6699e86ec1c179dc502184
+    apiSecret: 802eeede9692cca1b63a019165eba806
+    baseUrl: http://www.airsqreen.com # Modify according to your server's URL
+
+logback:
+    loglevel: INFO
+
+upload:
+    UPLOAD_DIRECTORY: /Users/ferhatyaban/Sites/uploads/
+
+platform161:
+        api:
+            appID: arkitekttl
+            clientID: zplus
+            clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
+            user: airsqreen.api
+            password: program720
+        endpoints:
+            auth: https://arkitekttl.platform161.com/api/v2/access_tokens
+            services: https://ui.platform161.com/api/v2/zplus/
+
+sistem9:
+        api:
+            url: http://172.31.70.229:10037/ServiceCatalog/SiebelServices
+            username: WEB
+            password: WEB
+            application_id: WEB
+            source_system: WEB
