@@ -104,28 +104,24 @@ public class CampaignService {
     @Transactional
     public void updateCampaign(Plt161CampaignDTO campaignDTO) {
 
-        Optional<Campaign> campaignOptional = campaignRepository.findByExternalId(campaignDTO.getId());
+        Optional<Plt161Campaign> oldPlt161CampaignOptional = campaignRepository.findByExternalId(campaignDTO.getId());
 
-        if (campaignOptional.isPresent()) {
+        if (oldPlt161CampaignOptional.isPresent()) {
 
-            Campaign oldCampaign = campaignOptional.get();
+            Plt161Campaign oldPlt161Campaign = oldPlt161CampaignOptional.get();
 
-            if (oldCampaign instanceof Plt161Campaign) {
-                Plt161Campaign oldPlt161Campaign = (Plt161Campaign) oldCampaign;
                 if (oldPlt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
-                    CampaignSection oldCampaignSection = oldPlt161Campaign.getCampaignSections().get(0);
                     Plt161Campaign newCampaign = save(campaignDTO);
 
                     for (Long sectionId : campaignDTO.getFiltered_section_ids()) {
-
-                        Section section = sectionRepository.findOne(sectionId);
+                        CampaignSection oldCampaignSection =  campaignSectionRepository.findByCampaignAndSectionId(oldPlt161Campaign.getExternalId(),sectionId);
+                        Section section = sectionRepository.findByExternalId(sectionId).get();
                         section = getAndCreateSection(sectionId, section,newCampaign.getPlatformUserId());
                         generateCampaignSection(newCampaign.getId(), section.getId(), oldCampaignSection);
                     }
-                    campaignRepository.delete(oldCampaign.getId());
+                    campaignRepository.delete(oldPlt161Campaign.getId());
                 }
-            }
         } else {
             save(campaignDTO);
         }

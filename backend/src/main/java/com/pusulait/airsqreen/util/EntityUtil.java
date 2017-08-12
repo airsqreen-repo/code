@@ -1,5 +1,8 @@
 package com.pusulait.airsqreen.util;
 
+import com.pusulait.airsqreen.config.constants.Constants;
+import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+
 public class EntityUtil {
 
     // Build a comma seperated value string
@@ -52,6 +55,28 @@ public class EntityUtil {
             return longArray;
         }
 
+    }
+
+    public static Integer evaluateUsingFrequencyInformation(Plt161Campaign plt161Campaign, Integer showPerHour) {
+
+        if (!StringUtils.isEmpty(plt161Campaign.getFrequency_cap())) {
+
+            if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_HOUR) && showPerHour > plt161Campaign.getFrequency_cap()) {
+                showPerHour = plt161Campaign.getFrequency_cap();
+            }
+            if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_DAY) &&
+                    showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap()) {
+                showPerHour = plt161Campaign.getFrequency_cap() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
+            }
+
+            if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_WEEK) &&
+                    showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length
+                            > plt161Campaign.getFrequency_cap()) {
+                showPerHour = plt161Campaign.getFrequency_cap() /
+                        (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length);
+            }
+        }
+        return showPerHour;
     }
 }
 

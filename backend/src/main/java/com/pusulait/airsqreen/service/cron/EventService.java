@@ -17,7 +17,6 @@ import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.EventUtil;
 import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -101,23 +100,7 @@ public class EventService {
 
             Integer showPerHour = nShow / totalHour;
 
-            if(!StringUtils.isEmpty(plt161Campaign.getFrequency_cap())) {
-
-                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_HOUR) && showPerHour > plt161Campaign.getFrequency_cap()) {
-                    showPerHour = plt161Campaign.getFrequency_cap();
-                }
-                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_DAY) &&
-                        showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap()) {
-                    showPerHour = plt161Campaign.getFrequency_cap() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
-                }
-
-                if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_WEEK) &&
-                        showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length
-                                > plt161Campaign.getFrequency_cap()) {
-                    showPerHour = plt161Campaign.getFrequency_cap() /
-                            (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length);
-                }
-            }
+            showPerHour = EntityUtil.evaluateUsingFrequencyInformation(plt161Campaign, showPerHour);
 
 
             for (int i = 0; i < showPerHour; i++) {
@@ -125,6 +108,8 @@ public class EventService {
             }
         }
     }
+
+
 
     private void createNewEvents(Plt161Campaign plt161Campaign, int i) {
 
