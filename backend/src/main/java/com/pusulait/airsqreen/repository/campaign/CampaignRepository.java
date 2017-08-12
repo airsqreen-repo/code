@@ -22,6 +22,9 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long> {
     Optional<Campaign> findByExternalId(@Param(value = "id") Long id);
 
     @Query("select c from Campaign c where c.dataStatus = 'ACTIVE' ")
-    List<Campaign> findAllActive();
+    List<Campaign> findAllActiveCampaigns();
+
+    @Query("select c from Campaign c where now() between c.startOn and c.endOn and c.dataStatus = 'ACTIVE'")
+    List<Campaign> findLiveCampaigns();
 
 }

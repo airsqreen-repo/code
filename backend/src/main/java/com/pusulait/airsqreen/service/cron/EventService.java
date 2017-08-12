@@ -60,7 +60,7 @@ public class EventService {
 
     public void generateSistem9Events() {
 
-        List<Campaign> activeCampaigns = campaignRepository.findAllActive();
+        List<Campaign> activeCampaigns = campaignRepository.findLiveCampaigns();
 
         for (Campaign campaign : activeCampaigns) {
 

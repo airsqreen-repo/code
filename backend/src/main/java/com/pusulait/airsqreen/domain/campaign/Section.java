@@ -38,6 +38,7 @@ public class Section extends AuditBase implements Serializable {
     @Column(name = "PRICE")
     private Double price;// (Number) — The price of section.
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
 

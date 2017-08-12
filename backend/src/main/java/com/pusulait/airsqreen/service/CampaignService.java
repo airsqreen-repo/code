@@ -86,15 +86,16 @@ public class CampaignService {
         }
     }
 
-    private void generateCampaignSection(Long id, Long id2, CampaignSection oldCampaignSection) {
+    private void generateCampaignSection(Long campaignId, Long sectionId, CampaignSection oldCampaignSection) {
 
         CampaignSection campaignSection = new CampaignSection();
-        campaignSection.setCampaignId(id);
-        campaignSection.setSectionId(id2);
+        campaignSection.setCampaignId(campaignId);
+        campaignSection.setSectionId(sectionId);
         if (oldCampaignSection != null) {
-            campaignSection.setDeviceId(campaignSection.getDeviceId());
-            campaignSection.setActionId(campaignSection.getActionId());
-            campaignSection.setKey(campaignSection.getKey());
+            campaignSection.setDeviceId(oldCampaignSection.getDeviceId());
+            campaignSection.setActionId(oldCampaignSection.getActionId());
+            campaignSection.setKey(oldCampaignSection.getKey());
+            campaignSectionRepository.delete(oldCampaignSection);
         }
         campaignSectionRepository.save(campaignSection);
     }
@@ -111,9 +112,9 @@ public class CampaignService {
 
             if (oldCampaign instanceof Plt161Campaign) {
                 Plt161Campaign oldPlt161Campaign = (Plt161Campaign) oldCampaign;
-                CampaignSection oldCampaignSection = oldPlt161Campaign.getCampaignSections().get(0);
                 if (oldPlt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
+                    CampaignSection oldCampaignSection = oldPlt161Campaign.getCampaignSections().get(0);
                     Plt161Campaign newCampaign = save(campaignDTO);
 
                     for (Long sectionId : campaignDTO.getFiltered_section_ids()) {

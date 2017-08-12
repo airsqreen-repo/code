@@ -46,7 +46,7 @@ public class CampaignServiceIntegrationTest {
     @Test
     public void testFindActive() {
 
-        List<Campaign> result = campaignRepository.findAllActive();
+        List<Campaign> result = campaignRepository.findAllActiveCampaigns();
 
     }
 
