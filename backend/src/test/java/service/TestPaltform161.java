@@ -45,7 +45,7 @@ public class TestPaltform161 {
     public void getCampaigns() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
-        List<Plt161CampaignDTO> list = platform161Service.getCampaign(token);
+        List<Plt161CampaignDTO> list = platform161Service.getCampaignList(token);
         log.debug("list:" + list.size());
 
     }

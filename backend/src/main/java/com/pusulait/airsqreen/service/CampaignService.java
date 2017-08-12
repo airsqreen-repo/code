@@ -1,5 +1,6 @@
 package com.pusulait.airsqreen.service;
 
+import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
@@ -71,6 +72,7 @@ public class CampaignService {
 
         for (Plt161Campaign plt161Campaign : campaignList) {
 
+            plt161Campaign.setDataStatus(DataStatus.PASSIVE);
             campaignRepository.save(plt161Campaign);
             Section section = null;
             for (Long sectionId : EntityUtil.buildLongArray(plt161Campaign.getFiltered_section_ids())) {

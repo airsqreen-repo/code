@@ -22,7 +22,7 @@ spring:
         show_sql: true
         generate-ddl: true
         hibernate:
-            ddl-auto: none
+            ddl-auto: update
             naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
             hikari:
                     minimumIdle : 10

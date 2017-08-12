@@ -21,6 +21,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private Long[] hour_ids;
     private Double media_budget;
     private Long platformUserId;
+    private Integer frequency_cap;
+    private String frequency_cap_type;
+    private Integer frequency_cap_count;
 
     public static Plt161CampaignDTO toDTO(Plt161Campaign campaign) {
 
@@ -37,6 +40,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaignDTO.setEnd_on(campaign.getEndOn());
         campaignDTO.setPrice(campaign.getPrice());
         campaignDTO.setPlatformUserId(campaign.getPlatformUserId());
+        campaignDTO.setFrequency_cap(campaign.getFrequency_cap());
+        campaignDTO.setFrequency_cap_type(campaign.getFrequency_cap_type());
+        campaignDTO.setFrequency_cap_count(campaign.getFrequency_cap_count());
         return campaignDTO;
     }
 
@@ -57,6 +63,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setName(campaignDTO.getName());
         campaign.setPricingType(PricingType.convert(campaignDTO.getPricing_type()));
         campaign.setPlatformUserId(campaignDTO.getPlatformUserId());
+        campaign.setFrequency_cap(campaignDTO.getFrequency_cap());
+        campaign.setFrequency_cap_type(campaignDTO.getFrequency_cap_type());
+        campaign.setFrequency_cap_count(campaignDTO.getFrequency_cap_count());
         return campaign;
     }
 
@@ -76,6 +85,9 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setEndOn(campaignDTO.getEnd_on());
         campaign.setPrice(campaignDTO.getPrice());
         campaign.setPlatformUserId(campaignDTO.getPlatformUserId());
+        campaign.setFrequency_cap(campaignDTO.getFrequency_cap());
+        campaign.setFrequency_cap_type(campaignDTO.getFrequency_cap_type());
+        campaign.setFrequency_cap_count(campaignDTO.getFrequency_cap_count());
         return campaign;
 
 

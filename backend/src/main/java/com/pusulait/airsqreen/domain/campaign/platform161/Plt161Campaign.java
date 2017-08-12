@@ -26,10 +26,13 @@ import java.util.Date;
 @Data
 public class Plt161Campaign extends Campaign {
 
+    @Column(name = "media_budget")
     private Double media_budget;
 
+    @Column(name = "targeting_weekday_ids")
     private String targeting_weekday_ids;
 
+    @Column(name = "targeting_hour_ids")
     private String targeting_hour_ids;
 
     @Column(name = "UPDATED_AT")
@@ -44,5 +47,14 @@ public class Plt161Campaign extends Campaign {
 
     @Column(name = "PLATFORM_USER_ID")
     private Long platformUserId;
+
+    @Column(name = "frequency_cap")
+    private Integer frequency_cap;
+
+    @Column(name = "frequency_cap_type")
+    private String frequency_cap_type;
+
+    @Column(name = "frequency_cap_count")
+    private Integer frequency_cap_count;
 
 }

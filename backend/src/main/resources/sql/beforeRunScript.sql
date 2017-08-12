@@ -66,5 +66,5 @@ VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, '?','EXCLUDE', 00.00-0
 
 
 INSERT INTO public.air_platform_users(id, create_user, create_date, data_status, update_user, update_date, version, password, platform_type, secret, service_type, username)
-VALUES   (3, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, 'program720', 'DSP', 'e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30', 'PLATFORM_161', 'airsqreen.api');
+VALUES   (1, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, 'program720', 'DSP', 'e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30', 'PLATFORM_161', 'airsqreen.api');
 

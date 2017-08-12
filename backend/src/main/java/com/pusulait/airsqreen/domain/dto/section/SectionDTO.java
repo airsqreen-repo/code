@@ -15,6 +15,9 @@ public class SectionDTO {
     private String name; //(String) — The name of section.
     private Double price;// (Number) — The price of section.
     private PricingType pricingType;
+    private String pricing_type;
+
+
     private Long publisher_id;// (Number) — The ID of the publisher that owns the section.
     private Long site_id;// (Number) — The ID of the the site this section belongs to.
 
@@ -34,7 +37,7 @@ public class SectionDTO {
         section.setExternalId(sectionDTO.getId());
         section.setName(sectionDTO.getName());
         section.setPrice(sectionDTO.getPrice());
-        section.setPricingType(sectionDTO.getPricingType());
+        section.setPricingType(PricingType.convert(sectionDTO.getPricing_type()));
         section.setPublisher_id(sectionDTO.getPublisher_id());
         //section.setSite_id(sectionDTO.getSite_id());
         //section.setSize_ids(sectionDTO.getSize_ids());

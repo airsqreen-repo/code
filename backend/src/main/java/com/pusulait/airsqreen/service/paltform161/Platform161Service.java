@@ -1,11 +1,11 @@
 package com.pusulait.airsqreen.service.paltform161;
 
-import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.ServiceConstants;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
+import com.pusulait.airsqreen.domain.enums.PlatformType;
+import com.pusulait.airsqreen.domain.enums.ServiceType;
 import com.pusulait.airsqreen.domain.integration.PlatformUser;
 import com.pusulait.airsqreen.repository.plt161.PlatformUserRepository;
 import com.pusulait.airsqreen.util.RestPlatfrom161Util;
@@ -96,7 +96,7 @@ public class Platform161Service {
     }
 
 
-    public List<Plt161CampaignDTO> getCampaign(String token,PlatformUser platformUser) {
+    public List<Plt161CampaignDTO> getCampaignList(String token, PlatformUser platformUser) {
 
         List<Plt161CampaignDTO> campaignDTOList = null;
         String url = this.servicesEndPoint + ServiceConstants.CAMPAIGNS;
@@ -121,10 +121,8 @@ public class Platform161Service {
         }
 
         for(Plt161CampaignDTO campaignDTO : campaignDTOList){
-
-
+                campaignDTO.setPlatformUserId(platformUser.getId());
         }
-
 
         return campaignDTOList;
     }
@@ -132,11 +130,11 @@ public class Platform161Service {
 
     public List<Plt161CampaignDTO> getAllCampaigns() {
 
-        List<PlatformUser> platformUserList = platformUserRepository.findAll();
+        List<PlatformUser> platformUserList = platformUserRepository.findByPlatformTypeAndServiceType(PlatformType.DSP, ServiceType.PLATFORM_161);
         List<Plt161CampaignDTO> plt161CampaignDTOList = new ArrayList<>();
 
         for (PlatformUser platformUser : platformUserList) {
-             plt161CampaignDTOList.addAll(getCampaign(getAuthToken(platformUser),platformUser));
+             plt161CampaignDTOList.addAll(getCampaignList(getAuthToken(platformUser),platformUser));
         }
         return plt161CampaignDTOList;
     }
