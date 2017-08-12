@@ -55,10 +55,10 @@ public class CampaignService {
     private ViewCountRepository viewCountRepository;
 */
     @Transactional
-    public void save(Plt161CampaignDTO campaignDTO) {
+    public Plt161Campaign save(Plt161CampaignDTO campaignDTO) {
 
-        Campaign campaign = Plt161CampaignDTO.toEntity(campaignDTO);
-        campaignRepository.save(campaign);
+        Plt161Campaign campaign = Plt161CampaignDTO.toEntity(campaignDTO);
+        return campaignRepository.save(campaign);
     }
 
     @Transactional
@@ -77,20 +77,23 @@ public class CampaignService {
 
                 if (!StringUtils.isEmpty(sectionId)) {
                     section = sectionRepository.findOne(sectionId);
-                    section = getAndCreateSection(sectionId, section);
-                    generateCampaignSection(plt161Campaign.getId(), section.getId());
+                    section = getAndCreateSection(sectionId, section,plt161Campaign.getPlatformUserId());
+                    generateCampaignSection(plt161Campaign.getId(), section.getId(), null);
                 }
             }
-            /*if (section != null) {
-                viewCountRepository.save(new ViewCount(plt161Campaign.getExternalId().toString(), section.getId().toString()));
-            }*/
         }
     }
 
-    private void generateCampaignSection(Long id, Long id2) {
+    private void generateCampaignSection(Long id, Long id2, CampaignSection oldCampaignSection) {
+
         CampaignSection campaignSection = new CampaignSection();
         campaignSection.setCampaignId(id);
         campaignSection.setSectionId(id2);
+        if (oldCampaignSection != null) {
+            campaignSection.setDeviceId(campaignSection.getDeviceId());
+            campaignSection.setActionId(campaignSection.getActionId());
+            campaignSection.setKey(campaignSection.getKey());
+        }
         campaignSectionRepository.save(campaignSection);
     }
 
@@ -102,33 +105,32 @@ public class CampaignService {
 
         if (campaignOptional.isPresent()) {
 
-            Campaign campaign = campaignOptional.get();
+            Campaign oldCampaign = campaignOptional.get();
 
-            if (campaign instanceof Plt161Campaign) {
-                Plt161Campaign plt161Campaign = (Plt161Campaign) campaign;
-                if (plt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
+            if (oldCampaign instanceof Plt161Campaign) {
+                Plt161Campaign oldPlt161Campaign = (Plt161Campaign) oldCampaign;
+                CampaignSection oldCampaignSection = oldPlt161Campaign.getCampaignSections().get(0);
+                if (oldPlt161Campaign.getUpdated_at().before(campaignDTO.getUpdated_at())) {
 
-                    campaign = Plt161CampaignDTO.update(campaignDTO, (Plt161Campaign) campaign);
+                    Plt161Campaign newCampaign = save(campaignDTO);
+
                     for (Long sectionId : campaignDTO.getFiltered_section_ids()) {
 
                         Section section = sectionRepository.findOne(sectionId);
-                        section = getAndCreateSection(sectionId, section);
-                        generateCampaignSection(campaign.getId(), section.getId());
+                        section = getAndCreateSection(sectionId, section,newCampaign.getPlatformUserId());
+                        generateCampaignSection(newCampaign.getId(), section.getId(), oldCampaignSection);
                     }
-
-                    campaignRepository.delete(campaign.getId());
-                    save(campaignDTO);
+                    campaignRepository.delete(oldCampaign.getId());
                 }
             }
-            // campaignRepository.save(campaign);
         } else {
             save(campaignDTO);
         }
     }
 
-    private Section getAndCreateSection(Long sectionId, Section section) {
+    private Section getAndCreateSection(Long sectionId, Section section,Long platformUserId) {
         if (section == null) {
-            SectionDTO sectionDTO = platform161Service.getSection(null, sectionId);
+            SectionDTO sectionDTO = platform161Service.getSection(null, sectionId,platformUserId);
             section = sectionService.save(sectionDTO);
         }
         return section;

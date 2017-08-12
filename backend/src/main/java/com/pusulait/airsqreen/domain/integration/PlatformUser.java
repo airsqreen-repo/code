@@ -43,7 +43,6 @@ public class PlatformUser extends AuditBase implements Serializable {
     @Column(name = "SECRET")
     private String secret;
 
-
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "PLATFORM_TYPE")

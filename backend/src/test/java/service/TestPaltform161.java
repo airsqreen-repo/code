@@ -34,7 +34,7 @@ public class TestPaltform161 {
     @Autowired
     private SectionService sectionService;
 
-    @Test
+   /* @Test
     public void getToken() {
 
         String token = platform161Service.getAuthToken();
@@ -62,9 +62,9 @@ public class TestPaltform161 {
     @Test
     public void saveSections() {
         sectionService.saveSections();
-    }
+    }*/
 
-    @Test
+  /*  @Test
     public void getSection() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
@@ -72,15 +72,8 @@ public class TestPaltform161 {
         log.debug("sectionDTO:" + sectionDTO);
 
     }
+*/
 
-
-    @Test
-    public void getPublishers() {
-        String token = platform161Service.getAuthToken();
-        log.debug("token:" + token);
-        List<PublisherDTO> list = platform161Service.getPublishers(token);
-        log.debug("list:" + list.size());
-    }
 
 
 

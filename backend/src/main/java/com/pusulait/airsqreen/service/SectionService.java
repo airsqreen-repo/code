@@ -28,14 +28,14 @@ public class SectionService {
     @Autowired
     private SectionRepository sectionRepository;
 
-    @Transactional
+  /*  @Transactional
     public void saveSections() {
 
         List<Section> sectionList = platform161Service.getAllSections().stream().map(SectionDTO::toEntity).collect(Collectors.toList());
         for (Section section : sectionList) {
             sectionRepository.save(section);
         }
-    }
+    }*/
 
 
     @Transactional
@@ -63,12 +63,6 @@ public class SectionService {
         }
     }
 
-    @Transactional
-    public void updateSections() {
-
-        platform161Service.getAllSections().forEach(sectionDTO -> updateSection(sectionDTO));
-
-    }
 
 
 }

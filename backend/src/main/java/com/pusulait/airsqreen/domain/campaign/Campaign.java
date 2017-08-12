@@ -40,7 +40,6 @@ public class Campaign extends AuditBase implements Serializable {
     @SequenceGenerator(name = Sequences.CAMPAIGN_SEQUENCE, sequenceName = Sequences.CAMPAIGN_SEQUENCE, allocationSize = 1, initialValue = 1)
     private Long id;
 
-
     @Column(name = "EXTERNAL_ID")
     private Long externalId;
 
@@ -53,9 +52,6 @@ public class Campaign extends AuditBase implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "PRICING_TYPE")
     private PricingType pricingType;
-
-    //@Column(name = "TARGET")
-    //private String target;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "START_ON")

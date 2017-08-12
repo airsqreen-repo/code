@@ -105,8 +105,6 @@ platform161:
             appID: arkitekttl
             clientID: zplus
             clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
-            user: airsqreen.api
-            password: program720
         endpoints:
             auth: https://arkitekttl.platform161.com/api/v2/access_tokens
             services: https://ui.platform161.com/api/v2/zplus/

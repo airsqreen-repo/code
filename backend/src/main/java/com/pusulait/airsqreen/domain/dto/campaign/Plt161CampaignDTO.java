@@ -20,6 +20,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
     private Long[] weekday_ids;
     private Long[] hour_ids;
     private Double media_budget;
+    private Long platformUserId;
 
     public static Plt161CampaignDTO toDTO(Plt161Campaign campaign) {
 
@@ -35,7 +36,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaignDTO.setStart_on(campaign.getStartOn());
         campaignDTO.setEnd_on(campaign.getEndOn());
         campaignDTO.setPrice(campaign.getPrice());
-        //campaignDTO.setTarget(campaign.getTarget());
+        campaignDTO.setPlatformUserId(campaign.getPlatformUserId());
         return campaignDTO;
     }
 
@@ -55,12 +56,14 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setPrice(campaignDTO.getPrice());
         campaign.setName(campaignDTO.getName());
         campaign.setPricingType(PricingType.convert(campaignDTO.getPricing_type()));
+        campaign.setPlatformUserId(campaignDTO.getPlatformUserId());
         return campaign;
     }
 
 
-    public static Campaign update(Plt161CampaignDTO campaignDTO, Plt161Campaign campaign) {
+    public static Campaign update(Plt161CampaignDTO campaignDTO) {
 
+        Plt161Campaign campaign = new Plt161Campaign();
         campaign.setTargeting_hour_ids(EntityUtil.buildString(campaignDTO.getHour_ids()));
         campaign.setTargeting_weekday_ids(EntityUtil.buildString(campaignDTO.getWeekday_ids()));
         campaign.setExternalId(campaignDTO.getId());
@@ -72,6 +75,7 @@ public class Plt161CampaignDTO extends CampaignDTO {
         campaign.setStartOn(campaignDTO.getStart_on());
         campaign.setEndOn(campaignDTO.getEnd_on());
         campaign.setPrice(campaignDTO.getPrice());
+        campaign.setPlatformUserId(campaignDTO.getPlatformUserId());
         return campaign;
 
 

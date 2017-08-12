@@ -2,11 +2,15 @@ package com.pusulait.airsqreen.service.paltform161;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.ServiceConstants;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
+import com.pusulait.airsqreen.domain.integration.PlatformUser;
+import com.pusulait.airsqreen.repository.plt161.PlatformUserRepository;
 import com.pusulait.airsqreen.util.RestPlatfrom161Util;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.*;
@@ -16,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +39,12 @@ public class Platform161Service {
     private String authEndPoint;
     private String servicesEndPoint;
 
+    @Autowired
+    private PlatformUserRepository platformUserRepository;
+
     @Inject
     private Environment env;
+
 
     @PostConstruct
     public void init() {
@@ -43,23 +52,19 @@ public class Platform161Service {
         this.appID = env.getProperty("platform161.api.appID");
         this.clientID = env.getProperty("platform161.api.clientID");
         this.clientSecret = env.getProperty("platform161.api.clientSecret");
-        this.user = env.getProperty("platform161.api.user");
-        this.password = env.getProperty("platform161.api.password");
-        //End points
         this.authEndPoint = env.getProperty("platform161.endpoints.auth");
         this.servicesEndPoint = env.getProperty("platform161.endpoints.services");
-
-        //getAuthToken();
     }
 
-    @Timed
-    public String getAuthToken() {
+    public String getAuthToken(PlatformUser platformUser) {
+
+        this.user = platformUser.getUsername();
+        this.password = platformUser.getPassword();
 
         String result = null;
         String url = this.authEndPoint;
 
         AuthRequestJson requestJson = new AuthRequestJson();
-
         requestJson.setUser(this.user);
         requestJson.setPassword(this.password);
         requestJson.setClientId(this.clientID);
@@ -91,7 +96,7 @@ public class Platform161Service {
     }
 
 
-    public List<Plt161CampaignDTO> getCampaign(String token) {
+    public List<Plt161CampaignDTO> getCampaign(String token,PlatformUser platformUser) {
 
         List<Plt161CampaignDTO> campaignDTOList = null;
         String url = this.servicesEndPoint + ServiceConstants.CAMPAIGNS;
@@ -115,13 +120,25 @@ public class Platform161Service {
             log.error(e.getMessage(), e);
         }
 
+        for(Plt161CampaignDTO campaignDTO : campaignDTOList){
+
+
+        }
+
+
         return campaignDTOList;
     }
 
 
     public List<Plt161CampaignDTO> getAllCampaigns() {
-        return getCampaign(getAuthToken());
 
+        List<PlatformUser> platformUserList = platformUserRepository.findAll();
+        List<Plt161CampaignDTO> plt161CampaignDTOList = new ArrayList<>();
+
+        for (PlatformUser platformUser : platformUserList) {
+             plt161CampaignDTOList.addAll(getCampaign(getAuthToken(platformUser),platformUser));
+        }
+        return plt161CampaignDTOList;
     }
 
     public List<SectionDTO> getSections(String token) {
@@ -150,9 +167,9 @@ public class Platform161Service {
         return sectionDTOList;
     }
 
-    public List<SectionDTO> getAllSections() {
+    /*public List<SectionDTO> getAllSections() {
         return getSections(getAuthToken());
-    }
+    }*/
 
     public List<PublisherDTO> getPublishers(String token) {
         List<PublisherDTO> publisherDTOList = null;
@@ -181,18 +198,20 @@ public class Platform161Service {
         return publisherDTOList;
     }
 
-    public List<PublisherDTO> getAllPublishers() {
+   /* public List<PublisherDTO> getAllPublishers() {
         return getPublishers(getAuthToken());
-    }
+    }*/
 
-    public SectionDTO getSection(String token,Long sectionId ) {
+    public SectionDTO getSection(String token, Long sectionId,Long platformUserId) {
 
-        if(token == null)
-            token = getAuthToken();
+        if (token == null) {
+            PlatformUser platformUser = platformUserRepository.findOne(platformUserId);
+            token = getAuthToken(platformUser);
+        }
+
 
         SectionDTO sectionDTO = null;
-        String url = this.servicesEndPoint + ServiceConstants.SECTIONS + "/" + sectionId;;
-
+        String url = this.servicesEndPoint + ServiceConstants.SECTIONS + "/" + sectionId;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
@@ -215,8 +234,6 @@ public class Platform161Service {
 
         return sectionDTO;
     }
-
-
 
 
 }
