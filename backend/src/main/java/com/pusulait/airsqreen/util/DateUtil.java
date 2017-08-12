@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.util;
 
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import org.joda.time.DateTime;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -107,6 +108,10 @@ public class DateUtil {
         if (!isInDayHour(plt161Campaign, date)) {
             return 0;
         }
+        if (StringUtils.isEmpty(plt161Campaign.getTargeting_hour_ids())) {
+            String fullWorkingHours = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23";
+            plt161Campaign.setTargeting_hour_ids(fullWorkingHours);
+        }
 
         Integer campaignEndHour = DateUtil.getHourOfDate(plt161Campaign.getEndOn());
         Integer hour = DateUtil.getHourOfDate(new Date());
@@ -123,5 +128,13 @@ public class DateUtil {
         return workableHourCount;
     }
 
+    public static int calculateTotalHour(Plt161Campaign plt161Campaign, int dailyHourCount, int totalHour) {
+        for (DateTime date = new DateTime(); date.isBefore(new DateTime(plt161Campaign.getEndOn())); date = date.plusDays(1)) {
+            if (DateUtil.isInWeekDay(plt161Campaign, date.toDate())) {
+                totalHour += dailyHourCount;
+            }
+        }
+        return totalHour;
+    }
 
 }
