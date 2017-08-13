@@ -50,7 +50,7 @@ public interface ViewCountService {
      *
      * @param trackToken
      */
-    void incrementViewCount(String trackToken);
+    void incrementViewCount(String trackToken) throws InterruptedException;
 
     /**
      * Verilen takip anahtarina gore toplam gosterimi doner.

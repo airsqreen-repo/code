@@ -1,21 +1,22 @@
 package com.pusulait.airsqreen.service.cron;
 
-import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.enums.EventType;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
+import com.pusulait.airsqreen.domain.view.ViewActiveDevice;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
+import com.pusulait.airsqreen.repository.device.DeviceRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
+import com.pusulait.airsqreen.repository.view.ViewActiveDeviceRepository;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
-import com.pusulait.airsqreen.util.DateUtil;
-import com.pusulait.airsqreen.util.EntityUtil;
-import com.pusulait.airsqreen.util.EventUtil;
-import com.pusulait.airsqreen.util.StringUtils;
+import com.pusulait.airsqreen.service.viewcount.ViewCountService;
+import com.pusulait.airsqreen.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -47,8 +48,15 @@ public class EventService {
     @Autowired
     private ViewCountAndPriceService viewCountAndPriceService;
 
+    @Autowired
+    private ViewCountService viewCountService;
 
-    // cron = "30 2 * * * ?"
+    @Autowired
+    private DeviceRepository deviceRepository;
+
+    @Autowired
+    private ViewActiveDeviceRepository viewActiveDeviceRepository;
+
     @Scheduled(cron = "0 0 1 * * ?")
     public void prepareHourlyRecords() {
         generateSistem9Events();
@@ -110,7 +118,6 @@ public class EventService {
     }
 
 
-
     private void createNewEvents(Plt161Campaign plt161Campaign, int i) {
 
         Sistem9PushEventDTO pushEventDTO = new Sistem9PushEventDTO();
@@ -121,23 +128,42 @@ public class EventService {
         pushEventDTO.setExpireDate(EventUtil.setExpireDate());
         pushEventDTO.setRunDate(EventUtil.setRunDate());
         pushEventDTO.setPlatformUserId(plt161Campaign.getPlatformUserId());
-        pushEventDTO = EventUtil.setDeviceAndSectionId(pushEventDTO, plt161Campaign, i);
-
+        pushEventDTO = EventUtil.setDeviceActionAndSectionId(pushEventDTO, plt161Campaign, i);
         sistem9PushEventService.save(pushEventDTO);
 
     }
 
 
     @Scheduled(cron = "0 0 0 1 * ?")
-    public void pushEvents() {
+    public void pushEvents() throws Exception {
 
-        List<Sistem9PushEvent> weeklyPushEventList = sistem9PushEventRepository.findWaitingEvents();
+        List<ViewActiveDevice> deviceList = viewActiveDeviceRepository.findAll();
 
-        for (Sistem9PushEvent event : weeklyPushEventList) {
-            sistem9Adapter.push(event);
-            event.setEventStatus(EventStatus.DONE);
-            sistem9PushEventRepository.save(event);
+        List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
+
+        if (pushEventList.size() > 0) {
+
+            if (controlsPassed(new Plt161Campaign())) {
+
+                for (Sistem9PushEvent event : pushEventList) {
+                    //sistem9Adapter.push(event);
+                    String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                            event.getCampaignSection().getSection().getExternalId().toString());
+
+
+                    viewCountService.incrementViewCount(token);
+                    event.setEventStatus(EventStatus.DONE);
+                    sistem9PushEventRepository.save(event);
+
+
+                }
+            }
         }
+    }
+
+    private Boolean controlsPassed(Plt161Campaign plt161Campaign) {
+
+        return true;
     }
 
 

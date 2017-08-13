@@ -17,7 +17,7 @@ import java.util.List;
 public interface Sistem9PushEventRepository extends JpaRepository<Sistem9PushEvent, Long> {
 
 
-    @Query("select wpe from Sistem9PushEvent wpe where wpe.eventStatus = 'WAITING' and wpe.runDate < now()")
+    @Query("select wpe from Sistem9PushEvent wpe where wpe.eventStatus = 'WAITING' and wpe.runDate < now() and wpe.expireDate > now() ")
     List<Sistem9PushEvent> findWaitingEvents();
 
 }

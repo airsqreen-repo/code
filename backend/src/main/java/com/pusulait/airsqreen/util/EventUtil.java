@@ -10,12 +10,13 @@ import java.util.List;
 
 public class EventUtil {
 
-    public static Sistem9PushEventDTO setDeviceAndSectionId(Sistem9PushEventDTO pushEventDTO, Plt161Campaign plt161Campaign, int i) {
+    public static Sistem9PushEventDTO setDeviceActionAndSectionId(Sistem9PushEventDTO pushEventDTO, Plt161Campaign plt161Campaign, int i) {
 
         List<CampaignSection> campaignSectionList = plt161Campaign.getCampaignSections();
         CampaignSection campaignSection = campaignSectionList.get(i % campaignSectionList.size());
         pushEventDTO.setCampaignSectionId(campaignSection.getId());
         pushEventDTO.setDeviceId(campaignSection.getDeviceId());
+        pushEventDTO.setActionId(campaignSection.getActionId());
         return pushEventDTO;
     }
 

@@ -56,25 +56,19 @@ public class Sistem9Adapter extends WebServiceGatewaySupport {
         this.setMarshaller(marshaller);
         this.setUnmarshaller(marshaller);
         webServiceTemplate = getWebServiceTemplate();
-
-        WinActionRelease winActionRelease = objectFactory.createWinActionRelease();
-
-        winActionRelease.setActionID("");
-        winActionRelease.setDeviceID(1);
-        winActionRelease.setPassword(password);
-        winActionRelease.setUserName(username);
-
-        String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(),       winActionRelease.getDeviceID());
-
     }
 
 
     public void push(Sistem9PushEvent event) {
 
-        //TODO: Sistem9 test makinesinin bilgilerini alınca bu kısım netleşir
+        WinActionRelease winActionRelease = objectFactory.createWinActionRelease();
 
-        // airsqreenclients projesinde
-        // com.sistemdokuzmedya.Main metodunda örnek çağrı var
-        
+        winActionRelease.setActionID(event.getActionId());
+        winActionRelease.setDeviceID(event.getDeviceId().intValue());
+        winActionRelease.setPassword(event.getPlatformUser().getPassword());
+        winActionRelease.setUserName(event.getPlatformUser().getUsername());
+
+        String response = s9WExSrvc.getS9WExSrvcSoap12().winActionRelease(winActionRelease.getUserName(), winActionRelease.getPassword(), winActionRelease.getActionID(),
+                winActionRelease.getDeviceID());
     }
 }

@@ -2,6 +2,8 @@ package com.pusulait.airsqreen.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.Random;
+
 /**
  * Utility class for generating random Strings.
  */
@@ -56,5 +58,11 @@ public final class RandomUtil {
     */
     public static String generateTokenData() {
         return RandomStringUtils.randomAlphanumeric(DEF_COUNT);
+    }
+
+    public static Integer generateRandomNumber(int random){
+
+        Random rand = new Random();
+        return rand.nextInt(random);
     }
 }

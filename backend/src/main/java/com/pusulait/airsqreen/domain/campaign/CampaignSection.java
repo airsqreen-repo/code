@@ -54,7 +54,7 @@ public class CampaignSection extends AuditBase {
     private Device device;
 
     @Column(name = "ACTION_ID")
-    private Long actionId;
+    private String actionId;
 
     @Column(name = "KEY")
     private String key;

@@ -7,6 +7,7 @@ import com.pusulait.airsqreen.repository.viewcount.ViewCountLogRespository;
 import com.pusulait.airsqreen.repository.viewcount.ViewCountRepository;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
+import com.pusulait.airsqreen.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -102,10 +103,12 @@ public class ViewCountServiceImpl implements ViewCountService {
      */
     @Transactional
     @Override
-    public synchronized void incrementViewCount(String trackToken) throws NullPointerException {
+    public synchronized void incrementViewCount(String trackToken) throws NullPointerException,InterruptedException {
         if (checkParams(trackToken)) {
             throw new NullPointerException("token   NULL veya bos olamaz!");
         }
+        Thread.sleep(RandomUtil.generateRandomNumber(5000));
+
         ViewCount viewCount = viewCountRepository.findByTrackingToken(trackToken);
         viewCount.setTotalCount(viewCount.getTotalCount() + 1);
         viewCountRepository.save(viewCount);

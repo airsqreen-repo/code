@@ -17,6 +17,7 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
     private Long deviceId;
     private Long platformUserId;
     private Long campaignSectionId;
+    private String actionId;
 
 
     public static Sistem9PushEvent toEntity(Sistem9PushEventDTO dto){
@@ -30,6 +31,7 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
         entity.setSlaveId(dto.getSlaveId());
         entity.setId(dto.getId());
         entity.setCampaignSectionId(dto.getCampaignSectionId());
+        entity.setActionId(dto.getActionId());
         return entity;
     }
 
@@ -44,6 +46,7 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
         dto.setSlaveId(entity.getSlaveId());
         dto.setId(entity.getId());
         entity.setCampaignSectionId(dto.getCampaignSectionId());
+        entity.setActionId(dto.getActionId());
         return dto;
     }
 
