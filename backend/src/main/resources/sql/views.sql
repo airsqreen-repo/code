@@ -1,7 +1,7 @@
 DROP VIEW public.VIEW_ACTIVE_DEVICES;
 
 CREATE OR REPLACE VIEW public.VIEW_ACTIVE_DEVICES AS
-  select aspe.device_id from
+  select aspe.id,aspe.device_id from
     air_events ae ,
     air_sistem9_push_events aspe
   where

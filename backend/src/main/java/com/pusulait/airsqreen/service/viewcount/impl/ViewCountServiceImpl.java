@@ -3,7 +3,7 @@ package com.pusulait.airsqreen.service.viewcount.impl;
 import com.pusulait.airsqreen.domain.dto.viewcount.ViewCountDTO;
 import com.pusulait.airsqreen.domain.viewcount.ViewCount;
 import com.pusulait.airsqreen.domain.viewcount.ViewCountLog;
-import com.pusulait.airsqreen.repository.viewcount.ViewCountLogRespository;
+import com.pusulait.airsqreen.repository.viewcount.ViewCountLogRepository;
 import com.pusulait.airsqreen.repository.viewcount.ViewCountRepository;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountSpendRequirement;
@@ -30,7 +30,7 @@ public class ViewCountServiceImpl implements ViewCountService {
     @Autowired
     protected ViewCountRepository viewCountRepository;
     @Autowired
-    protected ViewCountLogRespository viewCountLogRespository;
+    protected ViewCountLogRepository viewCountLogRespository;
     @Autowired
     protected ViewCountSpendRequirement viewCountSpendRequirement;
 

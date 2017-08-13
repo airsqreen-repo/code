@@ -37,7 +37,7 @@ public class ViewCountResource {
 
     @Timed
     @RequestMapping(value = Constants.URL_VIEW_COUNT , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> incrementViewCount(@RequestParam(value="token", required=true) String token) throws URISyntaxException {
+    public ResponseEntity<String> incrementViewCount(@RequestParam(value="token", required=true) String token) throws URISyntaxException,InterruptedException {
 
         viewCountService.incrementViewCount(token);
         return new ResponseEntity<>("", HttpStatus.OK);

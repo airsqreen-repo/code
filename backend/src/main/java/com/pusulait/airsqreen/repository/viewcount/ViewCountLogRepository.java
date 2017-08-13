@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Repository
 @RepositoryRestResource(exported = false)
-public interface ViewCountLogRespository extends JpaRepository<ViewCountLog, Long> {
+public interface ViewCountLogRepository extends JpaRepository<ViewCountLog, Long> {
 
     /**
      * @param viewCoundId
