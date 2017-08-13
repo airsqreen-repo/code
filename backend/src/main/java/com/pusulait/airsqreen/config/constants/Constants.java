@@ -68,6 +68,8 @@ public final class Constants {
     public static final String URL_SEARCH = "/search";
 
     public static final String URL_VIEW_COUNT = "/viewcounts";
+    public static final String URL_CAMPAIGN = "/campaigns";
+    public static final String URL_EVENT = "/events";
 
 
 
