@@ -23,9 +23,6 @@ import java.io.Serializable;
 @Where(clause = "DATA_STATUS <> 'DELETED'")
 @Entity
 @Table(name = Constants.PREFIX + "DEVICE_CONSTRAINTS")
-@TypeDefs(value = {
-        @TypeDef(name = "text", typeClass = StringArrayType.class)
-})
 public class DeviceConstraint extends AuditBase implements Serializable {
 
     @Id
@@ -48,8 +45,7 @@ public class DeviceConstraint extends AuditBase implements Serializable {
     @ManyToOne
     private Device device;
 
-    @Type(type = "text")
     @Column(columnDefinition = "text")
-    private String[] filter_detail;
+    private String filter_detail;
 
 }

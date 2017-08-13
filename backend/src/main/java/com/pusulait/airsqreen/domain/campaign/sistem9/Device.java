@@ -3,12 +3,17 @@ package com.pusulait.airsqreen.domain.campaign.sistem9;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.security.user.UserRole;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by benan on 8/2/2017.
@@ -33,5 +38,13 @@ public class Device extends AuditBase implements Serializable {
 
     @Column(name =  "EXTERNAL_DEVICE_ID")
     private String externalDeviceId;
+
+    @JsonIgnore
+    @RestResource(exported = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "device")
+    private List<DeviceConstraint> deviceConstraintList = new ArrayList<>();
+
+
+
 
 }

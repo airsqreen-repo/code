@@ -3,7 +3,10 @@ package com.pusulait.airsqreen.service.cron;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
+import com.pusulait.airsqreen.domain.campaign.sistem9.DeviceConstraint;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
+import com.pusulait.airsqreen.domain.enums.DeviceConstraintFilter;
+import com.pusulait.airsqreen.domain.enums.DeviceConstraintType;
 import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.enums.EventType;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
@@ -137,33 +140,58 @@ public class EventService {
     @Scheduled(cron = "0 0 0 1 * ?")
     public void pushEvents() throws Exception {
 
-        List<ViewActiveDevice> deviceList = viewActiveDeviceRepository.findAll();
+        //List<ViewActiveDevice> deviceList = viewActiveDeviceRepository.findAll();
 
         List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
 
         if (pushEventList.size() > 0) {
 
-            if (controlsPassed(new Plt161Campaign())) {
+            for (Sistem9PushEvent event : pushEventList) {
+                if (viewActiveDeviceRepository.findByDeviceId(event.getDeviceId()).isPresent()) {
+                    if (controlsPassed(event)) {
 
-                for (Sistem9PushEvent event : pushEventList) {
-                    //sistem9Adapter.push(event);
-                    String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
-                            event.getCampaignSection().getSection().getExternalId().toString());
+                        //sistem9Adapter.push(event);
+                        String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                                event.getCampaignSection().getSection().getExternalId().toString());
 
+                        viewCountService.incrementViewCount(token);
+                        event.setEventStatus(EventStatus.DONE);
+                        sistem9PushEventRepository.save(event);
 
-                    viewCountService.incrementViewCount(token);
-                    event.setEventStatus(EventStatus.DONE);
-                    sistem9PushEventRepository.save(event);
-
-
+                    }
                 }
             }
         }
     }
 
-    private Boolean controlsPassed(Plt161Campaign plt161Campaign) {
+    private Boolean controlsPassed(Sistem9PushEvent sistem9PushEvent) {
 
-        return true;
+        Boolean passed = true;
+
+        for (DeviceConstraint deviceConstraint : sistem9PushEvent.getDevice().getDeviceConstraintList()) {
+            if (deviceConstraint.getDeviceConstraintType().equals(DeviceConstraintType.DYNAMIC_TIME_FILTER)) {
+                if (deviceConstraint.getDeviceConstraintFilter().equals(DeviceConstraintFilter.INCLUDE)) {
+
+                    String[] intervalArray = deviceConstraint.getFilter_detail().split("-");
+
+                        if(DateUtil.getMinuteOfDate(new Date()) > Integer.valueOf(intervalArray[0])
+                            &&  DateUtil.getMinuteOfDate(new Date()) < Integer.valueOf(intervalArray[1])){
+                                passed = false;
+                    }
+                }/* else if (deviceConstraint.getDeviceConstraintFilter().equals(DeviceConstraintFilter.EXCLUDE)) {
+
+                    String[] intervalArray = deviceConstraint.getFilter_detail().split("-");
+
+                    if(DateUtil.getMinuteOfDate(new Date()) > Integer.valueOf(intervalArray[0])
+                            &&  DateUtil.getMinuteOfDate(new Date()) < Integer.valueOf(intervalArray[1])){
+                        passed = true;
+                    }
+                }*/
+
+            }
+        }
+
+        return passed;
     }
 
 

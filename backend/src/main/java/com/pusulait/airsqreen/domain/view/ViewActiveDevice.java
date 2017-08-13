@@ -19,4 +19,6 @@ public class ViewActiveDevice implements Serializable {
     @Column(name = "DEVICE_ID")
     private Long deviceId;
 
+
+
 }

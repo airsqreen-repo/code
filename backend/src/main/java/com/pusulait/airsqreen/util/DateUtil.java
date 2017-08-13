@@ -54,6 +54,15 @@ public class DateUtil {
 
     }
 
+    public static Integer getMinuteOfDate(Date date) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.MINUTE);
+
+    }
+
+
     public static Boolean isInSameDay(Date date1, Date date2) {
 
         Calendar cal = Calendar.getInstance();
