@@ -120,6 +120,7 @@ public class EventService {
         pushEventDTO.setSlaveId(1L);
         pushEventDTO.setExpireDate(EventUtil.setExpireDate());
         pushEventDTO.setRunDate(EventUtil.setRunDate());
+        pushEventDTO.setPlatformUserId(plt161Campaign.getPlatformUserId());
         pushEventDTO = EventUtil.setDeviceAndSectionId(pushEventDTO, plt161Campaign, i);
 
         sistem9PushEventService.save(pushEventDTO);

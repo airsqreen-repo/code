@@ -66,14 +66,18 @@ public class EntityUtil {
             }
             if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_DAY) &&
                     showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap_count()) {
-                showPerHour = plt161Campaign.getFrequency_cap_count() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
+
+                showPerHour = (int) Math.ceil( Double.valueOf(plt161Campaign.getFrequency_cap_count()) / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length);
+
             }
 
             if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_WEEK) &&
                     showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length
                             > plt161Campaign.getFrequency_cap_count()) {
-                showPerHour = plt161Campaign.getFrequency_cap_count() /
-                        (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length);
+
+                showPerHour = (int) Math.ceil(  Double.valueOf(plt161Campaign.getFrequency_cap_count()) /
+                        (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length));
+
             }
         }
         return showPerHour;
