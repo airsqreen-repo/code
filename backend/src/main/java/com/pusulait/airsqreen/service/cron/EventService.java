@@ -140,8 +140,6 @@ public class EventService {
     @Scheduled(cron = "0 0 0 1 * ?")
     public void pushEvents() throws Exception {
 
-        //List<ViewActiveDevice> deviceList = viewActiveDeviceRepository.findAll();
-
         List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
 
         if (pushEventList.size() > 0) {
@@ -154,9 +152,9 @@ public class EventService {
                         String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
                                 event.getCampaignSection().getSection().getExternalId().toString());
 
-                        viewCountService.incrementViewCount(token);
                         event.setEventStatus(EventStatus.DONE);
                         sistem9PushEventRepository.save(event);
+                        viewCountService.incrementViewCount(token);
 
                     }
                 }
