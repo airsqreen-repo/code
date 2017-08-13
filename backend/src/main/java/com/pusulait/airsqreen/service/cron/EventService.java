@@ -62,7 +62,7 @@ public class EventService {
 
             CampaignSection campaignSection = plt161Campaign.getCampaignSections().get(0);
 
-            Double paidBudget = viewCountAndPriceService.getTotalSpent(plt161Campaign.getExternalId().toString(), campaignSection.getSectionId().toString());
+            Double paidBudget = viewCountAndPriceService.getTotalSpent(plt161Campaign.getExternalId().toString(), campaignSection.getSection().getExternalId().toString());
 
             Double remainingBudget = plt161Campaign.getMedia_budget() - (paidBudget);
 

@@ -59,20 +59,20 @@ public class EntityUtil {
 
     public static Integer evaluateUsingFrequencyInformation(Plt161Campaign plt161Campaign, Integer showPerHour) {
 
-        if (!StringUtils.isEmpty(plt161Campaign.getFrequency_cap())) {
+        if (!StringUtils.isEmpty(plt161Campaign.getFrequency_cap_count())) {
 
-            if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_HOUR) && showPerHour > plt161Campaign.getFrequency_cap()) {
-                showPerHour = plt161Campaign.getFrequency_cap();
+            if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_HOUR) && showPerHour > plt161Campaign.getFrequency_cap_count()) {
+                showPerHour = plt161Campaign.getFrequency_cap_count();
             }
             if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_DAY) &&
-                    showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap()) {
-                showPerHour = plt161Campaign.getFrequency_cap() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
+                    showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length > plt161Campaign.getFrequency_cap_count()) {
+                showPerHour = plt161Campaign.getFrequency_cap_count() / EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length;
             }
 
             if (plt161Campaign.getFrequency_cap_type().equals(Constants.FREQUENCY_WEEK) &&
                     showPerHour * EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length
-                            > plt161Campaign.getFrequency_cap()) {
-                showPerHour = plt161Campaign.getFrequency_cap() /
+                            > plt161Campaign.getFrequency_cap_count()) {
+                showPerHour = plt161Campaign.getFrequency_cap_count() /
                         (EntityUtil.buildLongArray(plt161Campaign.getTargeting_hour_ids()).length * EntityUtil.buildLongArray(plt161Campaign.getTargeting_weekday_ids()).length);
             }
         }
