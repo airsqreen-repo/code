@@ -10,7 +10,7 @@ spring:
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:
-        databaseName: airsqreen
+        databaseName: testairsqreen
         serverName: 35.190.200.190
         username: postgres
         password: 1234
