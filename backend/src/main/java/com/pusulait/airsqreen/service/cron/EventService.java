@@ -11,6 +11,8 @@ import com.pusulait.airsqreen.domain.enums.EventStatus;
 import com.pusulait.airsqreen.domain.enums.EventType;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.domain.view.ViewActiveDevice;
+import com.pusulait.airsqreen.predicate.DevicePredicate;
+import com.pusulait.airsqreen.predicate.EventPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.device.DeviceRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
@@ -27,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by benan on 7/16/2017.
@@ -137,44 +140,52 @@ public class EventService {
     }
 
 
-    @Scheduled(cron = "0 0 0 1 * ?")
+    //@Scheduled(cron = "0 0 0 1 * ?")
+    @Scheduled(fixedRate = 5 * 1000)
     public void pushEvents() throws Exception {
 
         List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
 
-        if (pushEventList.size() > 0) {
+        List<ViewActiveDevice> activeDevices = viewActiveDeviceRepository.findAll();
 
-            for (Sistem9PushEvent event : pushEventList) {
-                if (viewActiveDeviceRepository.findByDeviceId(event.getDeviceId()).isPresent()) {
-                    if (controlsPassed(event)) {
+        for (ViewActiveDevice viewActiveDevice : activeDevices) {
 
-                        //sistem9Adapter.push(event);
-                        String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
-                                event.getCampaignSection().getSection().getExternalId().toString());
+            Device device = deviceRepository.findOne(viewActiveDevice.getId());
 
-                        event.setEventStatus(EventStatus.DONE);
-                        sistem9PushEventRepository.save(event);
-                        viewCountService.incrementViewCount(token);
+            if (controlsPassed(device)) {
 
-                    }
+                List<Sistem9PushEvent> sistem9PushEventList = pushEventList.stream().filter(EventPredicate.deviceIdPredicate(viewActiveDevice.getDeviceId())).collect(Collectors.toList());
+
+                if (sistem9PushEventList.size() > 0) {
+
+                    Sistem9PushEvent event = sistem9PushEventList.get(RandomUtil.generateRandomNumber(sistem9PushEventList.size() - 1));
+
+                    //sistem9Adapter.push(event);
+                    String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                            event.getCampaignSection().getSection().getExternalId().toString());
+                    event.setEventStatus(EventStatus.DONE);
+                    sistem9PushEventRepository.save(event);
+                    viewCountService.incrementViewCount(token);
                 }
             }
         }
     }
 
-    private Boolean controlsPassed(Sistem9PushEvent sistem9PushEvent) {
+
+    //faz 2 de hem event seçimi uygun devicelar ve device seçimi de uygun deviceların seçimi yapılacak
+    private Boolean controlsPassed(Device device) {
 
         Boolean passed = true;
 
-        for (DeviceConstraint deviceConstraint : sistem9PushEvent.getDevice().getDeviceConstraintList()) {
+        for (DeviceConstraint deviceConstraint : device.getDeviceConstraintList()) {
             if (deviceConstraint.getDeviceConstraintType().equals(DeviceConstraintType.DYNAMIC_TIME_FILTER)) {
                 if (deviceConstraint.getDeviceConstraintFilter().equals(DeviceConstraintFilter.INCLUDE)) {
 
                     String[] intervalArray = deviceConstraint.getFilter_detail().split("-");
 
-                        if(DateUtil.getMinuteOfDate(new Date()) > Integer.valueOf(intervalArray[0])
-                            &&  DateUtil.getMinuteOfDate(new Date()) < Integer.valueOf(intervalArray[1])){
-                                passed = false;
+                    if (DateUtil.getMinuteOfDate(new Date()) > Integer.valueOf(intervalArray[0])
+                            && DateUtil.getMinuteOfDate(new Date()) < Integer.valueOf(intervalArray[1])) {
+                        passed = false;
                     }
                 }/* else if (deviceConstraint.getDeviceConstraintFilter().equals(DeviceConstraintFilter.EXCLUDE)) {
 
