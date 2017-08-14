@@ -150,7 +150,7 @@ public class EventService {
 
         for (ViewActiveDevice viewActiveDevice : activeDevices) {
 
-            Device device = deviceRepository.findOne(viewActiveDevice.getId());
+            Device device = deviceRepository.findOne(viewActiveDevice.getDeviceId());
 
             if (controlsPassed(device)) {
 
@@ -158,14 +158,14 @@ public class EventService {
 
                 if (sistem9PushEventList.size() > 0) {
 
-                    Sistem9PushEvent event = sistem9PushEventList.get(RandomUtil.generateRandomNumber(sistem9PushEventList.size() - 1));
+                    Sistem9PushEvent event = sistem9PushEventList.get(RandomUtil.generateRandomNumber(sistem9PushEventList.size()));
 
                     //sistem9Adapter.push(event);
                     String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
                             event.getCampaignSection().getSection().getExternalId().toString());
                     event.setEventStatus(EventStatus.DONE);
                     sistem9PushEventRepository.save(event);
-                    viewCountService.incrementViewCount(token);
+                    //viewCountService.incrementViewCount(token);
                 }
             }
         }

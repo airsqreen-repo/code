@@ -17,11 +17,9 @@ public class ViewActiveDevice implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", updatable = false, nullable = false)
-    private Long id;
-
-    @Column(name = "DEVICE_ID")
+    @Column(name = "DEVICE_ID", updatable = false, nullable = false)
     private Long deviceId;
+
 
 
 

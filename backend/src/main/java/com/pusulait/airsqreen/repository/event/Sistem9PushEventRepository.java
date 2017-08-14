@@ -17,7 +17,11 @@ import java.util.List;
 public interface Sistem9PushEventRepository extends JpaRepository<Sistem9PushEvent, Long> {
 
 
+    //TODO saatte 1 expire date geçmişleri tablodan silmek lazım
     @Query("select wpe from Sistem9PushEvent wpe where wpe.eventStatus = 'WAITING' and wpe.runDate < now() and wpe.expireDate > now() ")
     List<Sistem9PushEvent> findWaitingEvents();
 
+   /* @Query("select wpe from Sistem9PushEvent wpe where wpe.eventStatus = 'WAITING'")
+    List<Sistem9PushEvent> findWaitingEvents();
+*/
 }
