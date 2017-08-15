@@ -31,7 +31,7 @@ public class EventResource {
     public ResponseEntity<String> saveCampaigns() throws URISyntaxException {
 
         eventService.generateSistem9Events();
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>("generate events called", HttpStatus.OK);
 
     }
 
