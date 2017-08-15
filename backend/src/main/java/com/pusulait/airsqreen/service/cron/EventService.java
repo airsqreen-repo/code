@@ -165,7 +165,7 @@ public class EventService {
                             event.getCampaignSection().getSection().getExternalId().toString());
                     event.setEventStatus(EventStatus.DONE);
                     sistem9PushEventRepository.save(event);
-                    //viewCountService.incrementViewCount(token);
+                    viewCountService.incrementViewCount(token);
                 }
             }
         }
