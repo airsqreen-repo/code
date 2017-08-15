@@ -32,7 +32,7 @@ public class CampaignResource {
     public ResponseEntity<String> saveCampaigns() throws URISyntaxException {
 
         campaignService.save();
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>("save campaign called", HttpStatus.OK);
 
     }
 
@@ -41,7 +41,7 @@ public class CampaignResource {
     public ResponseEntity<String> updateCampaigns() throws URISyntaxException {
 
         campaignService.updateCampaigns();
-        return new ResponseEntity<>("", HttpStatus.OK);
+        return new ResponseEntity<>("update campaign called", HttpStatus.OK);
 
     }
 

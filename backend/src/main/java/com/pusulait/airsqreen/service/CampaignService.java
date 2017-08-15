@@ -21,6 +21,7 @@ import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -100,7 +101,7 @@ public class CampaignService {
         campaignSectionRepository.save(campaignSection);
     }
 
-
+    @Scheduled(cron = "0 0 1 * * ?")
     @Transactional
     public void updateCampaign(Plt161CampaignDTO campaignDTO) {
 
