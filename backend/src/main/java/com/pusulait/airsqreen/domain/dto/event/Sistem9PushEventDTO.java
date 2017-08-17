@@ -33,6 +33,7 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
         entity.setId(dto.getId());
         entity.setCampaignSectionId(dto.getCampaignSectionId());
         entity.setActionId(dto.getActionId());
+        entity.setResult(dto.getResult());
         return entity;
     }
 
@@ -49,6 +50,7 @@ public class Sistem9PushEventDTO extends BaseEventDTO {
         dto.setRunDate(entity.getRunDate());
         entity.setCampaignSectionId(dto.getCampaignSectionId());
         entity.setActionId(dto.getActionId());
+        entity.setResult(dto.getResult());
         return dto;
     }
 

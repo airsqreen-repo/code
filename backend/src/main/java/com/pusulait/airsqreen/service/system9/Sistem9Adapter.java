@@ -51,7 +51,7 @@ public class Sistem9Adapter {
     }
 
 
-    public void pushEvent(Sistem9PushEvent event) throws Exception {
+    public String pushEvent(Sistem9PushEvent event) throws Exception {
 
         if (event != null) {
 
@@ -68,7 +68,10 @@ public class Sistem9Adapter {
             } else {
                 throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
             }
-            String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(), winActionTemplate.getDeviceID());
+            String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(),       winActionTemplate.getDeviceID());
+        return response;
+
         }
+        return null;
     }
 }

@@ -20,6 +20,7 @@ public class BaseEventDTO implements Serializable {
     private EventStatus eventStatus;
     private Date expireDate;
     private Date runDate;
+    private String result;
 
 
 
