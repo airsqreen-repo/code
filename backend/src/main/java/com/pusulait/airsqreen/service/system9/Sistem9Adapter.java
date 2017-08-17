@@ -57,13 +57,13 @@ public class Sistem9Adapter {
 
             WinActionTemplate winActionTemplate = new WinActionTemplate();
             winActionTemplate.setActionID(event.getActionId());
-            winActionTemplate.setDeviceID(event.getDeviceId().intValue());
+            winActionTemplate.setDeviceID(Integer.valueOf(event.getDevice().getExternalDeviceId()));
 
             PlatformUser platformUser = event.getDevice().getPlatformUser();
 
             if (platformUser != null && platformUser.getPlatformType().equals(PlatformType.SSP) && platformUser.getServiceType().equals(ServiceType.SISTEM_9)) {
 
-                winActionTemplate.setPassword(platformUser.getPassword());
+                winActionTemplate.setPassword(event.getCampaignSection().getKey());
                 winActionTemplate.setUserName(platformUser.getUsername());
             } else {
                 throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
