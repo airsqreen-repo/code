@@ -68,8 +68,14 @@ public class Sistem9Adapter {
             } else {
                 throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
             }
-            String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(),       winActionTemplate.getDeviceID());
-        return response;
+            String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(), winActionTemplate.getDeviceID());
+
+            log.debug("Username : " + winActionTemplate.getUserName() +
+                    "password : " + winActionTemplate.getPassword() +
+                    "actionId : " + winActionTemplate.getActionID() +
+                    "deviceid : " + winActionTemplate.getDeviceID() +
+                    "response : " + response);
+            return response;
 
         }
         return null;
