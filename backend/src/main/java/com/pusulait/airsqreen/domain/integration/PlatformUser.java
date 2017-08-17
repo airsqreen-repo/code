@@ -28,7 +28,7 @@ public class PlatformUser extends AuditBase implements Serializable {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PLATFORM_USER_ID")
-    @SequenceGenerator(name = "SEQ_PLATFORM_USER_ID", sequenceName = "SEQ_PLATFORM_USER_ID", allocationSize = 1,initialValue = 2)
+    @SequenceGenerator(name = "SEQ_PLATFORM_USER_ID", sequenceName = "SEQ_PLATFORM_USER_ID", allocationSize = 1,initialValue = 3)
     private Long id;
 
     @NotNull

@@ -111,3 +111,8 @@ platform161:
             auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
             services: https://ui.platform161.com/api/v2/zplus/
 
+sistem9:
+        api:
+            url: http://172.31.70.229:10037/ServiceCatalog/SiebelServices
+            application_id: WEB
+            source_system: WEB

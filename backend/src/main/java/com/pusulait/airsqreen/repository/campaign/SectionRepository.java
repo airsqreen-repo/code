@@ -19,4 +19,6 @@ public interface SectionRepository extends JpaRepository<Section, Long> {
     @Query("select s from Section s where s.externalId = :id")
     Optional<Section> findByExternalId(@Param(value = "id") Long id);
 
+
+
 }

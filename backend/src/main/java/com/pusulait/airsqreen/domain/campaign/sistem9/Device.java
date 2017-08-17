@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.domain.campaign.sistem9;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.config.constants.Sequences;
 import com.pusulait.airsqreen.domain.base.AuditBase;
+import com.pusulait.airsqreen.domain.integration.PlatformUser;
 import com.pusulait.airsqreen.domain.security.user.UserRole;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -38,6 +39,13 @@ public class Device extends AuditBase implements Serializable {
 
     @Column(name =  "EXTERNAL_DEVICE_ID")
     private String externalDeviceId;
+
+    @JoinColumn(name = "PLATFORM_USER_ID", insertable = false, updatable = false)
+    @ManyToOne
+    private PlatformUser platformUser;
+
+    @Column(name = "PLATFORM_USER_ID")
+    private Long platformUserId;
 
     @JsonIgnore
     @RestResource(exported = false)
