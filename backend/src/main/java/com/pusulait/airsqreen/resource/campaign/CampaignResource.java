@@ -27,15 +27,15 @@ public class CampaignResource {
     private CampaignService campaignService;
 
 
-    @Timed
+    /*@Timed
     @RequestMapping(value = Constants.URL_CAMPAIGN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> saveCampaigns() throws URISyntaxException {
 
-        campaignService.save();
-        return new ResponseEntity<>("save campaign called", HttpStatus.OK);
+        campaignService.saveAll();
+        return new ResponseEntity<>("saveAll campaign called", HttpStatus.OK);
 
     }
-
+*/
     @Timed
     @RequestMapping(value = Constants.URL_CAMPAIGN, method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateCampaigns() throws URISyntaxException {

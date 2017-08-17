@@ -1,22 +1,17 @@
 package com.pusulait.airsqreen.service;
 
 import com.pusulait.airsqreen.domain.base.DataStatus;
-import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
-import com.pusulait.airsqreen.domain.viewcount.ViewCount;
 import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
-import com.pusulait.airsqreen.repository.viewcount.ViewCountRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
-import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
 import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +59,7 @@ public class CampaignService {
     }
 
     @Transactional
-    public void save() {
+    public void saveAll() {
 
         List<Plt161Campaign> campaignList = platform161Service.getAllCampaigns().stream().
                 map(Plt161CampaignDTO::toEntity).collect(Collectors.toList())
@@ -101,7 +96,6 @@ public class CampaignService {
         campaignSectionRepository.save(campaignSection);
     }
 
-    @Scheduled(cron = "0 0 1 * * ?")
     @Transactional
     public void updateCampaign(Plt161CampaignDTO campaignDTO) {
 
@@ -137,6 +131,7 @@ public class CampaignService {
     }
 
     @Transactional
+    @Scheduled(cron = "0 0 1 * * ?")
     public void updateCampaigns() {
 
         List<Plt161CampaignDTO> campaigns = platform161Service.getAllCampaigns()
