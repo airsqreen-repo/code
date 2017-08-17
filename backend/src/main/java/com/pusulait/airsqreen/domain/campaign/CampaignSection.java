@@ -59,6 +59,9 @@ public class CampaignSection extends AuditBase {
     @Column(name = "KEY")
     private String key;
 
+    @Column(name = "SSP_PRICE")
+    private Double sspPrice;
+
 }
 
 
