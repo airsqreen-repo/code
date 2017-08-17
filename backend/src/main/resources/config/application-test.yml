@@ -113,6 +113,4 @@ platform161:
 
 sistem9:
         api:
-            url: http://172.31.70.229:10037/ServiceCatalog/SiebelServices
-            application_id: WEB
-            source_system: WEB
+            url: http://s9v.lookscreens.com:78/S9_WExSrvc.asmx
