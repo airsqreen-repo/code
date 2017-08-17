@@ -42,7 +42,6 @@ public class Sistem9Adapter {
 
     private String apiUrl;
     S9WExSrvc service = null;
-    private ObjectFactory objectFactory;
 
     @PostConstruct
     public void init() throws MalformedURLException {
@@ -54,8 +53,7 @@ public class Sistem9Adapter {
 
     public void pushEvent(Sistem9PushEvent event) throws Exception {
 
-        WinActionTemplate winActionTemplate = objectFactory.createWinActionTemplate();
-
+        WinActionTemplate winActionTemplate = new WinActionTemplate();
         winActionTemplate.setActionID(event.getActionId());
         winActionTemplate.setDeviceID(event.getDeviceId().intValue());
 
@@ -68,7 +66,7 @@ public class Sistem9Adapter {
         } else {
             throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
         }
-        String response = service.getS9WExSrvcSoap12().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(),winActionTemplate.getDeviceID());
+        String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(),winActionTemplate.getDeviceID());
 
     }
 }

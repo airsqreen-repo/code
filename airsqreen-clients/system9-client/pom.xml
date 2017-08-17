@@ -14,7 +14,7 @@
         <java.version>1.7</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <build>
+   <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.cxf</groupId>
@@ -42,5 +42,5 @@
         </plugins>
     </build>
 
-
+-->
 </project>
