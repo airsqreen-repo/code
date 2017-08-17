@@ -43,6 +43,14 @@ INSERT INTO "public"."oauth_access_token" ("token_id", "token", "authentication_
 
 
 
+INSERT INTO public.air_platform_users(id, create_user, create_date, data_status, update_user, update_date, version, password, platform_type, secret, service_type, username)
+VALUES   (1, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, 'program720', 'DSP', 'e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30', 'PLATFORM_161', 'airsqreen.api');
+
+
+INSERT INTO public.air_platform_users(id, create_user, create_date, data_status, update_user, update_date, version, password, platform_type, secret, service_type, username)
+VALUES   (2, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, '123', 'SSP', '', 'SISTEM_9', 'S9SERVICES');
+
+
 INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
                         VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Zorlu AVM Giriş');
 
@@ -59,17 +67,7 @@ VALUES (4, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Akmerkez
 INSERT INTO public.air_devices( id, create_user, create_date, data_status, update_user, update_date, version, external_device_id, name)
 VALUES (5, 'system', now(), 'ACTIVE', 'system', now(), 0, 'a12381278', 'Akmerkez 3');
 
-
-
-INSERT INTO public.air_platform_users(id, create_user, create_date, data_status, update_user, update_date, version, password, platform_type, secret, service_type, username)
-VALUES   (1, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, 'program720', 'DSP', 'e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30', 'PLATFORM_161', 'airsqreen.api');
-
-
 INSERT INTO public.air_device_constraints(id, create_user, create_date, data_status, update_user, update_date, version,
                                           device_constraint_filter, device_constraint_type, filter_detail,device_id)
 VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, 'INCLUDE', 'DYNAMIC_TIME_FILTER', '0-15',1);
 
-
-
-INSERT INTO public.air_platform_users(id, create_user, create_date, data_status, update_user, update_date, version, password, platform_type, secret, service_type, username)
-VALUES   (2, 'system',     now(), 'ACTIVE',NULL ,NULL , 0, '123', 'SSP', '', 'SISTEM9', 'S9SERVICES');
