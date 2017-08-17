@@ -160,12 +160,14 @@ public class EventService {
 
                     Sistem9PushEvent event = sistem9PushEventList.get(RandomUtil.generateRandomNumber(sistem9PushEventList.size()));
 
-                    sistem9Adapter.pushEvent(event);
-                    String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
-                            event.getCampaignSection().getSection().getExternalId().toString());
-                    event.setEventStatus(EventStatus.DONE);
-                    sistem9PushEventRepository.save(event);
-                    viewCountService.incrementViewCount(token);
+                    if(event != null) {
+                        sistem9Adapter.pushEvent(event);
+                        String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                                event.getCampaignSection().getSection().getExternalId().toString());
+                        event.setEventStatus(EventStatus.DONE);
+                        sistem9PushEventRepository.save(event);
+                        viewCountService.incrementViewCount(token);
+                    }
                 }
             }
         }
