@@ -53,20 +53,22 @@ public class Sistem9Adapter {
 
     public void pushEvent(Sistem9PushEvent event) throws Exception {
 
-        WinActionTemplate winActionTemplate = new WinActionTemplate();
-        winActionTemplate.setActionID(event.getActionId());
-        winActionTemplate.setDeviceID(event.getDeviceId().intValue());
+        if (event != null) {
 
-        PlatformUser platformUser = event.getDevice().getPlatformUser();
+            WinActionTemplate winActionTemplate = new WinActionTemplate();
+            winActionTemplate.setActionID(event.getActionId());
+            winActionTemplate.setDeviceID(event.getDeviceId().intValue());
 
-        if (platformUser != null && platformUser.getPlatformType().equals(PlatformType.SSP) && platformUser.getServiceType().equals(ServiceType.SISTEM_9)) {
+            PlatformUser platformUser = event.getDevice().getPlatformUser();
 
-            winActionTemplate.setPassword(platformUser.getPassword());
-            winActionTemplate.setUserName(platformUser.getUsername());
-        } else {
-            throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
+            if (platformUser != null && platformUser.getPlatformType().equals(PlatformType.SSP) && platformUser.getServiceType().equals(ServiceType.SISTEM_9)) {
+
+                winActionTemplate.setPassword(platformUser.getPassword());
+                winActionTemplate.setUserName(platformUser.getUsername());
+            } else {
+                throw new Exception("Sistem 9 tanımlı user yok Tanımlı User Yok");
+            }
+            String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(), winActionTemplate.getDeviceID());
         }
-        String response = service.getS9WExSrvcSoap().winActionTemplate(winActionTemplate.getUserName(), winActionTemplate.getPassword(), winActionTemplate.getActionID(),winActionTemplate.getDeviceID());
-
     }
 }

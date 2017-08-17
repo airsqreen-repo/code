@@ -141,10 +141,9 @@ public class EventService {
 
 
     //@Scheduled(cron = "0 0 0 1 * ?")
-    @Scheduled(fixedRate = 50 * 1000)
+    @Scheduled(fixedRate = 5 * 1000)
     public void pushEvents() throws Exception {
 
-       // Thread.sleep(50 * 1000L);
         List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
 
         List<ViewActiveDevice> activeDevices = viewActiveDeviceRepository.findAll();
