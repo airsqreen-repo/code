@@ -3,8 +3,6 @@ package com.pusulait.airsqreen.domain.campaign;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.base.AuditBase;
 import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
-import com.pusulait.airsqreen.domain.security.user.Role;
-import com.pusulait.airsqreen.domain.security.user.User;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
