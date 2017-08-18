@@ -107,6 +107,9 @@ public final class Constants {
 
     public static final String API_URL_SYSTEM_CONFIGURATION= "/api/admin/systemConfigurations";
     public static final String API_URL_API= "/api/admin/apis";
+    public static final String URL_DEVICE = "/devices";
+    public static final String URL_ADMIN_DEVICE = "/admin/devices";
+
 
     public static final String API_URL_CURRENCY = "/api/currencies";
     public static final String API_URL_CURRENCY_RATE = "/api/currency/rates";
