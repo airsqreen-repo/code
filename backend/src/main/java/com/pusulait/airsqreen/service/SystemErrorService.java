@@ -1,7 +1,7 @@
 package com.pusulait.airsqreen.service;
 
-import com.pusulait.airsqreen.domain.SystemError;
-import com.pusulait.airsqreen.domain.dto.SystemErrorDTO;
+import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
+import com.pusulait.airsqreen.domain.error.SystemError;
 import com.pusulait.airsqreen.repository.error.SystemErrorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

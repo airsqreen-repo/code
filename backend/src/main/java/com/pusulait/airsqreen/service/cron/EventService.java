@@ -1,5 +1,6 @@
 package com.pusulait.airsqreen.service.cron;
 
+import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
@@ -162,12 +163,18 @@ public class EventService {
 
                     if(event != null) {
                         String result = sistem9Adapter.pushEvent(event);
-                        event.setResult(result);
-                        String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
-                                event.getCampaignSection().getSection().getExternalId().toString());
-                        event.setEventStatus(EventStatus.DONE);
-                        sistem9PushEventRepository.save(event);
-                        viewCountService.incrementViewCount(token);
+                        if(result.contains(Constants.SISTEM9_SUCCESS_RESULT)) {
+                            event.setResult(result);
+                            String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                                    event.getCampaignSection().getSection().getExternalId().toString());
+                            event.setEventStatus(EventStatus.DONE);
+                            sistem9PushEventRepository.save(event);
+                            viewCountService.incrementViewCount(token);
+                        }else{
+                            event.setResult(result);
+                            event.setEventStatus(EventStatus.ERROR);
+                            sistem9PushEventRepository.save(event);
+                        }
                     }
                 }
             }

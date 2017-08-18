@@ -113,6 +113,5 @@ public final class Constants {
     public static final String URL_LUGGAGE_CANCELLATION = "/luggageCancellations";
     public static final String API_URL_LUGGAGE_CANCELLATION= "/api/admin/luggageCancellations";
     public static final String PLATFORM_161 = "PLT161";
-
-
+    public static final String SISTEM9_SUCCESS_RESULT = "Gönderildi";
 }

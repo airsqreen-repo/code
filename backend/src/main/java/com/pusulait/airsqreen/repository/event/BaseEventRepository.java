@@ -1,6 +1,5 @@
 package com.pusulait.airsqreen.repository.event;
 
-import com.pusulait.airsqreen.domain.SystemError;
 import com.pusulait.airsqreen.domain.event.BaseEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;

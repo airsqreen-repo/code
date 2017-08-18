@@ -1,7 +1,7 @@
-package com.pusulait.airsqreen.domain.dto;
+package com.pusulait.airsqreen.domain.dto.error;
 
-import com.pusulait.airsqreen.domain.SystemError;
 import com.pusulait.airsqreen.domain.enums.ErrorType;
+import com.pusulait.airsqreen.domain.error.SystemError;
 import lombok.Data;
 
 /**
@@ -14,17 +14,10 @@ public class SystemErrorDTO {
     private String errorDescription;
     private String username;
 
-   /* public SystemErrorDTO(ErrorType errorType, String username){
-        this.errorType = errorType;
-        this.username = username;
-
-    }*/
-
     public SystemErrorDTO(String errorDescription,ErrorType errorType, String username){
         this.errorType = errorType;
         this.username = username;
         this.errorDescription = errorDescription;
-
     }
 
 

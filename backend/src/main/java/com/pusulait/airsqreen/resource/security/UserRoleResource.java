@@ -2,8 +2,8 @@ package com.pusulait.airsqreen.resource.security;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.domain.dto.ErrorDTO;
-import com.pusulait.airsqreen.domain.dto.SystemErrorDTO;
+import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
+import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
 import com.pusulait.airsqreen.domain.dto.security.UserRoleDTO;
 import com.pusulait.airsqreen.domain.enums.ErrorType;
 import com.pusulait.airsqreen.security.SecurityUtils;

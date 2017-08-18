@@ -107,12 +107,9 @@ public class ViewCountServiceImpl implements ViewCountService {
         if (checkParams(trackToken)) {
             throw new NullPointerException("token   NULL veya bos olamaz!");
         }
-        Thread.sleep(RandomUtil.generateRandomNumber(5000));
-
         ViewCount viewCount = viewCountRepository.findByTrackingToken(trackToken);
         viewCount.setTotalCount(viewCount.getTotalCount() + 1);
         viewCountRepository.save(viewCount);
-        //
         ViewCountLog viewCountLog = new ViewCountLog(viewCount.getId(), null);
         viewCountLogRespository.save(viewCountLog);
     }

@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.domain;
+package com.pusulait.airsqreen.domain.error;
 
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.base.AuditBase;
@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * Created by benana on 17.11.2016.
  */
 @Data
 @Entity
@@ -27,14 +28,14 @@ public class SystemError extends AuditBase implements Serializable {
     @SequenceGenerator(name = "SEQ_SYSTEM_ERROR_ID", sequenceName = "SEQ_SYSTEM_ERROR_ID", allocationSize = 1, initialValue = 2)
     private Long id;
 
+
     @Column(name = "ERROR_TYPE")
     @Enumerated(EnumType.STRING)
     private ErrorType errorType;
 
-    @Lob
-    @Column(name = "ERROR_DESCRIPTION")
-    private String errorDescription;
-
     @Column(name = "USERNAME")
     private String username;
+
+    @Column(name = "ERROR_DESCRIPTION")
+    private String errorDescription;
 }
