@@ -18,10 +18,12 @@ public class PlatformUserService {
     @Autowired
     private PlatformUserRepository platformUserRepository;
 
+
     @Transactional
-    public void save(PlatformUserDTO platformUserDTO) {
+    public PlatformUserDTO save(PlatformUserDTO platformUserDTO) {
         PlatformUser platformUser = PlatformUserDTO.toEntity(platformUserDTO);
         platformUserRepository.save(platformUser);
+        return PlatformUserDTO.toDTO(platformUser);
     }
 
     @Transactional(readOnly = true)

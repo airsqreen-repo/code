@@ -14,7 +14,7 @@ public enum ErrorType {
     GET_USER,
     REGISTER,
     CREATE_DEVICE,
-    GET_ALL_DEVICES
-
-
+    GET_ALL_DEVICES,
+    CREATE_PLATFORM_USER,
+    GET_ALL_PLATFORM_USERS
 }
