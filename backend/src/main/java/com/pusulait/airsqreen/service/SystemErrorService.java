@@ -23,7 +23,7 @@ public class SystemErrorService {
     @Transactional
     public void save(SystemErrorDTO systemErrorDTO) {
 
-        SystemError systemError = SystemErrorDTO.convertSystemError(systemErrorDTO);
+        SystemError systemError = SystemErrorDTO.toEntity(systemErrorDTO);
         systemErrorRepository.save(systemError);
 
 

@@ -25,7 +25,7 @@ public class SystemErrorDTO {
     }
 
 
-    public static SystemError convertSystemError(SystemErrorDTO systemErrorDTO) {
+    public static SystemError toEntity(SystemErrorDTO systemErrorDTO) {
 
         SystemError systemError = new SystemError();
         systemError.setId(systemErrorDTO.getId());
