@@ -165,11 +165,11 @@ public class EventService {
                         String result = sistem9Adapter.pushEvent(event);
                         if(result.contains(Constants.SISTEM9_SUCCESS_RESULT)) {
                             event.setResult(result);
-                            String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
+                            /*String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
                                     event.getCampaignSection().getSection().getExternalId().toString());
+                            viewCountService.incrementViewCount(token);*/
                             event.setEventStatus(EventStatus.DONE);
                             sistem9PushEventRepository.save(event);
-                            viewCountService.incrementViewCount(token);
                         }else{
                             event.setResult(result);
                             event.setEventStatus(EventStatus.ERROR);
