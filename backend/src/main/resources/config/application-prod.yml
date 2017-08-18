@@ -111,4 +111,4 @@ platform161:
 
 sistem9:
         api:
-            url: http://s9v.lookscreens.com:78/S9_WExSrvc.asmx
+            url: http://www.s9vision.com:78/s9_wexsrvc.asmx
