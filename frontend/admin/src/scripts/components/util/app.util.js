@@ -1,6 +1,6 @@
 
 angular.module('airSqreenApp')
-    .service('AppUtilsService', function ($translate, LANGUAGE,DATA_STATUS ) {
+    .service('AppUtilsService', function ($translate, LANGUAGE,DATA_STATUS,PLATFORM_TYPE, SERVICE_TYPE ) {
 
         this.getLanguages = function () {
             return {
@@ -10,6 +10,17 @@ angular.module('airSqreenApp')
         this.getDataStatus = function () {
             return {
                 data: _.keys(DATA_STATUS).map(function(key) { return { name: $translate.instant(DATA_STATUS[key]), id: key}})
+            };
+        };
+
+        this.getPlatformTypes = function () {
+            return {
+                data: _.keys(PLATFORM_TYPE).map(function(key) { return { name: $translate.instant(PLATFORM_TYPE[key]), id: key}})
+            };
+        };
+        this.getServiceTypes = function () {
+            return {
+                data: _.keys(SERVICE_TYPE).map(function(key) { return { name: $translate.instant(SERVICE_TYPE[key]), id: key}})
             };
         };
 

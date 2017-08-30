@@ -1,5 +1,6 @@
 package com.pusulait.airsqreen.domain.dto.platform;
 
+import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.enums.PlatformType;
 import com.pusulait.airsqreen.domain.enums.ServiceType;
 import com.pusulait.airsqreen.domain.integration.PlatformUser;
@@ -16,6 +17,7 @@ public class PlatformUserDTO implements Serializable {
     private String secret;
     private PlatformType platformType;
     private ServiceType serviceType;
+    private DataStatus dataStatus;
 
 
     public static PlatformUserDTO toDTO(PlatformUser platformUser) {
@@ -27,6 +29,7 @@ public class PlatformUserDTO implements Serializable {
         platformUserDTO.setUsername(platformUser.getUsername());
         platformUserDTO.setSecret(platformUser.getSecret());
         platformUserDTO.setServiceType(platformUser.getServiceType());
+        platformUserDTO.setDataStatus(platformUser.getDataStatus());
         return platformUserDTO;
     }
 
@@ -39,6 +42,7 @@ public class PlatformUserDTO implements Serializable {
         platformUser.setUsername(platformUserDTO.getUsername());
         platformUser.setSecret(platformUserDTO.getSecret());
         platformUser.setServiceType(platformUserDTO.getServiceType());
+        platformUser.setDataStatus(platformUserDTO.getDataStatus());
         return platformUser;
     }
 

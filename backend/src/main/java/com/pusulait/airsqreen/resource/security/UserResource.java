@@ -99,7 +99,7 @@ public class UserResource {
         return Optional.ofNullable(user)
                 .map(newUser -> {
                     return new ResponseEntity<>(
-                            new AccountDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getActivated(), user.getNickname(), new ArrayList<String>(roles)),
+                            new AccountDTO(user.getId(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getActivated(), user.getUsername(), new ArrayList<String>(roles)),
                             HttpStatus.OK);
                 })
                 .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));

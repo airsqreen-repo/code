@@ -31,6 +31,10 @@
                 "apidocs": "API",
                 "database": "Veritabanı"
             },
+            "defination":{
+              "title":"Tanimlamalar",
+              "platformUser": "Platform Kullanicilari"
+            },
             "report": "Rapor",
             "language": "Dil"
         },
@@ -112,9 +116,17 @@
         "active": "Aktif",
         "passive": "Pasif"
     },
-    "languages":{
-      "turkish":"Türkçe",
-      "english":"İngilizce"
+    "data.status": {
+        "active": "Aktif",
+        "passive": "Pasif"
+    },
+    "platformType":{
+      "dsp":"DSP",
+      "ssp":"SSP"
+    },
+    "serviceType":{
+      "platform161":"PLATFORM 161",
+      "sistem9":"SISTEM 9"
     },
     "validation":" girmeniz zorunludur.",
     "footer": "AirSqreen",

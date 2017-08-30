@@ -9,6 +9,13 @@ angular.module('airSqreenApp')
         "TURKISH":"languages.turkish",
         "ENGLISH":"languages.english"
     })
-;
+    .constant('SERVICE_TYPE',{
+        "PLATFORM_161":"serviceType.platform161",
+        "SISTEM_9":"serviceType.sistem9"
+    })
+    .constant('PLATFORM_TYPE',{
+    "DSP":"platformType.dsp",
+    "SSP":"platformType.ssp"
+});
 
 

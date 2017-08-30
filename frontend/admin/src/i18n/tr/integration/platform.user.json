@@ -1,0 +1,17 @@
+{
+    "platformUser": {
+            "singular": "Platform Kullanıcisi",
+            "plural": "Platform Kullanıcılari",
+            "management": "Tanımlama",
+            "title": "Platform Kullanınici Yönetimi",
+            "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
+            "detail": "Detay",
+            "label": {
+                "username": "Kullanıcı Adı",
+                "password": "Sifre",
+                "secret": "Secret",
+                "platformType": "Platform Tipi",
+                "serviceType": "Servis Tipi"
+            }
+    }
+}

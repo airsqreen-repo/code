@@ -156,7 +156,7 @@ public class UserService {
             userViewDTO.setId(user.getId());
             userViewDTO.setFirstname(user.getFirstname());
             userViewDTO.setLastname(user.getLastname());
-            userViewDTO.setNickname(user.getNickname());
+            //userViewDTO.setNickname(user.getNickname());
 
 
             // friend

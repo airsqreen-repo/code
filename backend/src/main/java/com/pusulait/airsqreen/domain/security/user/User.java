@@ -46,10 +46,6 @@ public class User extends AuditBase implements Serializable {
     private String username;
 
     @NotNull
-    @Column(name = "NICKNAME", length = 60)
-    private String nickname;
-
-    @NotNull
     @Size(min = 6, max = 60)
     @Column(name = "PASSWORD",length = 60)
     private String password;
@@ -87,7 +83,6 @@ public class User extends AuditBase implements Serializable {
 
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
-
 
 
     /*ferhat*/
