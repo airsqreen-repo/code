@@ -33,9 +33,7 @@ public class PlatformUserDTO implements Serializable {
         return platformUserDTO;
     }
 
-    public static PlatformUser toEntity(PlatformUserDTO platformUserDTO) {
-
-        PlatformUser platformUser = new PlatformUser();
+    public static PlatformUser toEntity(PlatformUserDTO platformUserDTO, PlatformUser platformUser) {
         platformUser.setPassword(platformUserDTO.getPassword());
         platformUser.setId(platformUserDTO.getId());
         platformUser.setPlatformType(platformUserDTO.getPlatformType());

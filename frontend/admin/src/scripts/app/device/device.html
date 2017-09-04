@@ -1,0 +1,49 @@
+<script id="comboTemplate" type="text/x-kendo-template">
+    <span class="k-state-default">#= data.text#</span>
+    <span class="k-state-default">##</span>
+</script>
+
+<div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form ng-submit="search(deviceSearch)" novalidate class="form-inline">
+                <fieldset ng-disabled="!right">
+                    <div class="form-group">
+                        <label for="name" translate="device.label.name"></label>
+                        <input type="text" class="form-control input-sm" id="name" name="name" ng-model="deviceSearch.name" >
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname" translate="status"></label>
+                        <select kendo-drop-down-list ng-model="deviceSearch.dataStatus" name="dataStatus"
+                                k-data-text-field="'text'"
+                                k-data-value-field="'value'"
+                                k-data-source="dataStatusDataSource"
+                                style="  width: 119px;"
+                                required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default" translate="search" type="submit">Search</button>
+                        <button class="btn btn-default" ng-click="clearSearch()" translate="clearSearch">Clear Search</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+    <div>
+        <div kendo-tool-bar k-options="toolbarOptions"></div>
+        <div
+                kendo-grid-checkbox
+                id="grid"
+                kendo-grid="grid"
+                data-role="grid"
+                k-data-source="data"
+                k-data-binding="dataBinding"
+                k-options="gridOptions"
+                k-on-change="onChange(data)"
+        >
+        </div>
+    </div>
+</div>

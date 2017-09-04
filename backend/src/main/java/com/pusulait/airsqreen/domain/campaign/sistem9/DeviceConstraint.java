@@ -41,9 +41,13 @@ public class DeviceConstraint extends AuditBase implements Serializable {
     @Column(name = "DEVICE_CONSTRAINT_FILTER")
     private DeviceConstraintFilter deviceConstraintFilter;
 
-    @JoinColumn(name = "DEVICE_ID")
+    @JoinColumn(name = "DEVICE_ID", nullable = false, insertable = false, updatable = false)
     @ManyToOne
     private Device device;
+
+    @Column(name = "DEVICE_ID")
+    private Long deviceId;
+
 
     @Column(columnDefinition = "text")
     private String filter_detail;

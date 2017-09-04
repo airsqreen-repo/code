@@ -1,0 +1,63 @@
+<div class="tab-pane" ng-cloak>
+
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label" translate="device.label.name">Name</label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="name" name="name" ng-model="device.name" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="externalDeviceId" class="col-sm-2 control-label" translate="device.label.externalDeviceId">External Device ID</label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="externalDeviceId" name="externalDeviceId" ng-model="device.externalDeviceId" required>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-group">
+        <label for="externalDeviceId" class="col-sm-2 control-label" translate="device.label.platformUser">Platform User</label>
+
+        <div class="col-sm-2">
+
+            <input  kendo-auto-complete="platformUser"
+                    id="platformUser"
+                    k-data-text-field="'username'"
+                    k-data-value-field="'id'"
+                    k-template="rowTemplate"
+                    k-data-source="platformUsers"
+                    k-ng-model="device.platformUser"
+                    k-placeholder="'{{ 'device.searchPlatformUserInput' | translate }}'"
+                    k-option-label="'{{ 'choose' | translate }}'"
+                    k-auto-bind="false"
+                    k-min-length="3"
+                    required
+                    validationMessage="{{ 'device.label.platformUser' | translate }}  {{ 'validation' | translate }}" style="width: 100%;"
+            />
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="dataStatus" class="col-sm-2 control-label" translate="status">Status</label>
+
+        <div class="col-sm-2">
+            <select kendo-drop-down-list="dataStatus"
+                    ng-model="device.dataStatus"
+                    name="dataStatus"
+                    k-data-text-field="'text'"
+                    k-data-value-field="'value'"
+                    k-data-source="dataStatusDataSource"
+                    style="  width: 119px;">
+            </select>
+        </div>
+    </div>
+
+
+</div>

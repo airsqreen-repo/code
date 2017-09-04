@@ -2,17 +2,22 @@ package com.pusulait.airsqreen.resource.device;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
+import com.pusulait.airsqreen.domain.base.DataStatus;
+import com.pusulait.airsqreen.domain.dto.device.DeviceConstraintDTO;
 import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
 import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
 import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
+import com.pusulait.airsqreen.domain.dto.security.UserRoleDTO;
 import com.pusulait.airsqreen.domain.enums.ErrorType;
 import com.pusulait.airsqreen.security.SecurityUtils;
 import com.pusulait.airsqreen.service.SystemErrorService;
+import com.pusulait.airsqreen.service.device.DeviceConstraintService;
 import com.pusulait.airsqreen.service.device.DeviceService;
 import com.pusulait.airsqreen.util.HeaderUtil;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -38,6 +44,9 @@ public class DeviceResource {
 
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private DeviceConstraintService deviceConstraintService;
 
     @Autowired
     private SystemErrorService systemErrorService;
@@ -118,6 +127,40 @@ public class DeviceResource {
         log.debug("REST request to delete Device : {}", id);
         deviceService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("device", id.toString())).build();
+    }
+
+    /**
+     * GET  api/admin/devices/search -> get all  device.
+     */
+    @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_DEVICE + Constants.URL_SEARCH , method = RequestMethod.GET)
+    public ResponseEntity<?> search(@RequestParam(value="name", required=false) String name, @RequestParam(value="dataStatus", required=false) DataStatus dataStatus, @ApiParam Pageable pageable, PagedResourcesAssembler assembler) {
+        log.debug("REST request to get getAllGlobalCurrencyDTOs ");
+        try {
+            final Page<DeviceDTO> page = deviceService.search(name,dataStatus,pageable);
+            return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
+        } catch (Exception ex) {
+            systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.GET_ALL_DEVICES, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("globalCurrencyService.getFindByNameAndStatus", ex.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
+
+    @Timed
+    @ResponseBody
+    @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_DEVICE + "/{id}/deviceConstraintList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getDeviceDeviceConstraints(@PathVariable Long id, PagedResourcesAssembler assembler) {
+        log.debug("REST request to get deviceConstraintList : {}", id);
+        try{
+            List<DeviceConstraintDTO> deviceConstraintDTOS= deviceConstraintService.findDeviceDeviceConstraints(id);
+            return Optional.ofNullable(deviceConstraintDTOS)
+                    .map(result -> new ResponseEntity<>(
+                            result,
+                            HttpStatus.OK))
+                    .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        } catch (Exception ex){
+            systemErrorService.save(new SystemErrorDTO(ex.toString(),ErrorType.GET_DEVICE_DEVICE_CONSTRAINT_LIST, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("deviceConstraintService.findDeviceDeviceConstraints", ex.getMessage()), HttpStatus.CONFLICT);
+        }
     }
 
     /**

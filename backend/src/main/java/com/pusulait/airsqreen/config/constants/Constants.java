@@ -108,7 +108,9 @@ public final class Constants {
     public static final String API_URL_SYSTEM_CONFIGURATION= "/api/admin/systemConfigurations";
     public static final String API_URL_API= "/api/admin/apis";
     public static final String URL_DEVICE = "/devices";
+    public static final String URL_DEVICE_CONSTRAINTS = "/deviceConstraints";
     public static final String URL_ADMIN_DEVICE = "/admin/devices";
+    public static final String URL_ADMIN_DEVICE_CONSTRAINTS = "/admin/deviceConstraints";
     public static final String URL_PLATFORM_USER = "/platformUsers";
     public static final String URL_ADMIN_PLATFORM_USER = "/admin/platformUsers";
 

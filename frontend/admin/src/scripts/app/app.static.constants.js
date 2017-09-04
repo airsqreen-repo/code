@@ -16,6 +16,9 @@ angular.module('airSqreenApp')
     .constant('PLATFORM_TYPE',{
     "DSP":"platformType.dsp",
     "SSP":"platformType.ssp"
+}).constant('DEVICE_CONSTRAINT_TYPE',{
+    "DYNAMIC_TIME_FILTER":"deviceConstraintType.dynamicTimeFilter"
+}).constant('DEVICE_CONSTRAINT_FILTER',{
+    "INCLUDE":"deviceConstraintFilter.include",
+    "EXCLUDE":"deviceConstraintFilter.exclude"
 });
-
-

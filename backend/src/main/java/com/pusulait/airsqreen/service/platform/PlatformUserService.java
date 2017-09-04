@@ -1,5 +1,8 @@
 package com.pusulait.airsqreen.service.platform;
 
+import com.pusulait.airsqreen.domain.base.DataStatus;
+import com.pusulait.airsqreen.domain.campaign.sistem9.DeviceConstraint;
+import com.pusulait.airsqreen.domain.dto.device.DeviceConstraintDTO;
 import com.pusulait.airsqreen.domain.dto.platform.PlatformUserDTO;
 import com.pusulait.airsqreen.domain.integration.PlatformUser;
 import com.pusulait.airsqreen.repository.plt161.PlatformUserRepository;
@@ -21,9 +24,16 @@ public class PlatformUserService {
 
     @Transactional
     public PlatformUserDTO save(PlatformUserDTO platformUserDTO) {
-        PlatformUser platformUser = PlatformUserDTO.toEntity(platformUserDTO);
-        platformUserRepository.save(platformUser);
-        return PlatformUserDTO.toDTO(platformUser);
+
+        PlatformUser platformUser = null;
+        if(platformUserDTO.getId()!=null){
+            platformUser = platformUserRepository.findOne(platformUserDTO.getId());
+        }
+        else {
+            platformUser = new PlatformUser();
+        }
+        PlatformUser result = platformUserRepository.save(PlatformUserDTO.toEntity(platformUserDTO, platformUser));
+        return PlatformUserDTO.toDTO(result);
     }
 
     @Transactional(readOnly = true)
@@ -43,5 +53,23 @@ public class PlatformUserService {
         log.debug("Request to delete PlatformUser : {}", id);
         platformUserRepository.delete(id);
     }
+
+
+    /**
+     * get all the platform user  for search
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<PlatformUserDTO> findByUsernameAndStatus(String username, DataStatus dataStatus, Pageable pageable) throws  Exception {
+        log.debug("Request to get all findByNameAndStatus");
+        if(username!=null && dataStatus !=null)
+            return platformUserRepository.findByUsernameContainingIgnoreCaseAndDataStatus(username, dataStatus, pageable).map(PlatformUserDTO::toDTO);
+        else if(username!=null)
+            return platformUserRepository.findByUsernameContainingIgnoreCase(username, pageable).map(PlatformUserDTO::toDTO);
+        return platformUserRepository.findByDataStatus(dataStatus, pageable).map(PlatformUserDTO::toDTO);
+    }
+
+
 }
 

@@ -2,6 +2,7 @@ package com.pusulait.airsqreen.resource.platform;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
+import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
 import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
 import com.pusulait.airsqreen.domain.dto.platform.PlatformUserDTO;
@@ -13,6 +14,7 @@ import com.pusulait.airsqreen.util.HeaderUtil;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
@@ -119,6 +121,23 @@ public class PlatformUserResource {
         platformUserService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("platformUser", id.toString())).build();
     }
+
+
+    /**
+     * GET  api/admin/platformUsers/search/findByUsernameAndStatus -> get all findByNameAndStatus platformUsers.
+     */
+    @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_PLATFORM_USER + Constants.URL_SEARCH + "/findByUsernameAndStatus", method = RequestMethod.GET)
+    public ResponseEntity<?> getFindByNameAndStatus(@RequestParam(value="username", required=false) String username, @RequestParam(value="dataStatus", required=false) DataStatus dataStatus, @ApiParam Pageable pageable, PagedResourcesAssembler assembler) {
+        log.debug("REST request to get getAllGlobalCurrencyDTOs ");
+        try {
+            final Page<PlatformUserDTO> page = platformUserService.findByUsernameAndStatus(username, dataStatus, pageable);
+            return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
+        } catch (Exception ex) {
+            systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.GET_ALL_PLATFORM_USERS, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("platformUserService.getFindByNameAndStatus", ex.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
 
     /**
      * GET  api/v1/platformUsers/:id -> get the "id" platformUser.

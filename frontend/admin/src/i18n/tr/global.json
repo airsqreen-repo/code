@@ -36,6 +36,7 @@
               "platformUser": "Platform Kullanicilari"
             },
             "report": "Rapor",
+            "device": "Device",
             "language": "Dil"
         },
         "form": {
@@ -127,6 +128,13 @@
     "serviceType":{
       "platform161":"PLATFORM 161",
       "sistem9":"SISTEM 9"
+    },
+    "deviceConstraintType":{
+      "dynamicTimeFilter":"Dynamic Time Filter"
+    },
+    "deviceConstraintFilter":{
+      "include":"Include",
+      "exclude":"Exclude"
     },
     "validation":" girmeniz zorunludur.",
     "footer": "AirSqreen",

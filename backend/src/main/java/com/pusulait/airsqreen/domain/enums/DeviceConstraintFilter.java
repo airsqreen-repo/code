@@ -5,5 +5,5 @@ package com.pusulait.airsqreen.domain.enums;
  */
 public enum DeviceConstraintFilter {
 
-    INCLUDE,EXCLUDE
+    INCLUDE, EXCLUDE
 }

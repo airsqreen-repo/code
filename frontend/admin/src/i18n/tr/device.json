@@ -1,0 +1,25 @@
+{
+    "device": {
+        "singular": "Device",
+        "plural": "Devices",
+        "management": "Tanımlama",
+        "title": "Device Yönetimi",
+        "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
+        "searchPlatformUserInput": "Adina gore ara",
+        "detail": "Detay",
+        "deviceConstraints": "Device Constraints",
+        "label": {
+            "name": "Adı",
+            "externalDeviceId": "External Device Id",
+            "platformUser": "Platform Kullanicisi"
+        },
+        "deviceConstraintList": "Device Constraints",
+        "constraint":{
+            "label": {
+                "deviceConstraintType": "Type",
+                "deviceConstraintFilter": "Filter",
+                "filter_detail": "Filter Detail"
+            }
+        }
+    }
+}
