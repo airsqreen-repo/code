@@ -1,7 +1,8 @@
 package com.pusulait.airsqreen.service.weather.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.appengine.repackaged.com.google.gson.annotations.SerializedName;
 import com.pusulait.airsqreen.domain.dto.weather.WeatherDTO;
 import com.pusulait.airsqreen.service.weather.WeatherDriverService;
 import lombok.Data;
@@ -58,7 +59,7 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
         }
 
         WeatherDTO result = null;
-        String url = "{API_URL}/{WEATHER_POSTFIX}?unit=metric&lang=tr&lat={LATITUDE}&lon={LONGITUDE}&appid={API_KEY}"
+        String url = "{API_URL}/{WEATHER_POSTFIX}?units=metric&lang=tr&lat={LATITUDE}&lon={LONGITUDE}&appid={API_KEY}"
                 .replace("{API_URL}", apiUrl)
                 .replace("{WEATHER_POSTFIX}", weatherPostfix)
                 .replace("{API_KEY}", apiKey)
@@ -72,15 +73,28 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
 
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
         restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-        ResponseEntity<WeatherResponse> responseEntity = null;
+        ResponseEntity<String> responseEntity = null;
 
         try {
 
-            responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, WeatherResponse.class);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, String.class);
             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
-                WeatherResponse res = responseEntity.getBody();
-                if (res != null) {
+                String res = responseEntity.getBody();
+                Gson gson = new Gson();
+                WeatherResponse response = gson.fromJson(res, WeatherResponse.class);
+                if (response != null) {
                     result = new WeatherDTO();
+
+                    result.setLatitude(latitude);
+                    result.setLongitude(longitude);
+
+                    if (response.getMain() == null) {
+                        throw new NullPointerException("Donen sicaklik bilgileri NULL olamaz! Kontrol edin!");
+                    }
+
+                    result.setTemp(response.getMain().getTemp());
+                    result.setTempMin(response.getMain().getTempMin());
+                    result.setTempMax(response.getMain().getTempMax());
                 }
             }
 
@@ -97,11 +111,11 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     class WeatherResponse implements Serializable {
-        @JsonProperty(value = "main")
+        @SerializedName(value = "main")
         private WeatherResMain main;
-        @JsonProperty(value = "id")
+        @SerializedName(value = "id")
         private Long id;
-        @JsonProperty(value = "name")
+        @SerializedName(value = "name")
         private String name;
 
     }
@@ -112,11 +126,11 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public class WeatherResMain implements Serializable {
-        @JsonProperty(value = "temp")
+        @SerializedName(value = "temp")
         private Float temp;
-        @JsonProperty(value = "temp_min")
+        @SerializedName(value = "temp_min")
         private Float tempMin;
-        @JsonProperty(value = "temp_max")
+        @SerializedName(value = "temp_max")
         private Float tempMax;
 
     }

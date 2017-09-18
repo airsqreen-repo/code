@@ -2,19 +2,13 @@ package com.pusulait.airsqreen.service.weather;
 
 import com.pusulait.airsqreen.domain.dto.weather.WeatherDTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
  * Created by yildizib on 18/09/2017.
  */
-public interface WeatherService extends WeatherDriverService {
-
-    /**
-     * @param weatherDTO
-     * @return
-     * @throws NullPointerException
-     */
-    WeatherDTO getTempWithGeoCoordinates(WeatherDTO weatherDTO) throws NullPointerException;
+public interface WeatherService {
 
     /**
      * Cron da kullanilack. Liste verilecek onlarin sicaklik bilgileri
@@ -25,4 +19,23 @@ public interface WeatherService extends WeatherDriverService {
      * @throws NullPointerException
      */
     void loadTempsWithGeoCoordinates(List<WeatherDTO> weatherDTOList) throws NullPointerException;
+
+    /**
+     * @param latitude
+     * @param longitude
+     * @param update
+     * @return
+     * @throws NullPointerException
+     */
+    WeatherDTO getTempWithGeoCoordinates(BigDecimal latitude, BigDecimal longitude, boolean update) throws NullPointerException;
+
+    /**
+     * @param weatherDTO
+     * @param update
+     * @return
+     * @throws NullPointerException
+     */
+    WeatherDTO getTempWithGeoCoordinates(WeatherDTO weatherDTO, boolean update) throws NullPointerException;
+
+    void initialize();
 }
