@@ -6,7 +6,7 @@ server:
 
 spring:
     profiles:
-        active: test
+        active: prod
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:
@@ -105,9 +105,20 @@ platform161:
             appID: arkitekttl
             clientID: zplus
             clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
-            user: airsqreen.api
-            password: program720
         endpoints:
-            auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
+            auth: https://arkitekttl.platform161.com/api/v2/access_tokens
             services: https://ui.platform161.com/api/v2/zplus/
 
+sistem9:
+        api:
+            url: http://www.s9vision.com:78/s9_wexsrvc.asmx
+
+
+# Weather servisleri ayarlari burada olacak.
+weather:
+  # Openweather ayarlari burada
+  openweather:
+    api_url: http://api.openweathermap.org/data/2.5
+    api_key: 90a603dd4a6ed32073af9a78e5ded991
+    weather_postfix: weather
+    forecast_postfix: forecast

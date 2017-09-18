@@ -30,6 +30,7 @@ public class Constraints {
     public static final String UC_VIEW_COUNT_TRCK_TOKEN = "UC_VIEW_COUNT_TRCK_TOKEN";
     public static final String UC_VIEW_COUNT_GNRL_UQC = "UC_VIEW_COUNT_GNRL_UQC";
 
+    public static final String UC_WEATHER_GNRL_UQC = "UC_WEATHER_GNRL_UQC";
 
     //
 
