@@ -49,6 +49,9 @@ public class WeatherServiceImpl implements WeatherService {
             throw new NullPointerException("Geo koordinatlar bos olamaz!");
         }
 
+        longitude = longitude.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+        latitude = latitude.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
         WeatherDTO result = null;
         Weather entity = repository.findByLatitudeAndLongitude(latitude, longitude);
         if (entity == null) {
