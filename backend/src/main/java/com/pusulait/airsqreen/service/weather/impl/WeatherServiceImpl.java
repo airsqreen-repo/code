@@ -8,10 +8,12 @@ import com.pusulait.airsqreen.service.weather.WeatherService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -95,6 +97,15 @@ public class WeatherServiceImpl implements WeatherService {
     }
 
     /**
+     * Sicaklik bilgisi alinirken bu fonksiyon kullanilmalidir.
+     *
+     * <code>
+     *     WeatherDTO responseDTO = getTempWithGeoCoordinates(requestDTO, false);
+     * </code>
+     *
+     * Burada FALSE olan secenek sadece sorgulama olacagini gosterir. Eger bigisi varsa
+     * db den getirilir. Eger TRUE olursa hava servisinden canli alinir ve db de guncellenir,
+     * guncel deger doner...
      *
      * @param weatherDTO
      * @param update
@@ -119,5 +130,34 @@ public class WeatherServiceImpl implements WeatherService {
                 getTempWithGeoCoordinates(dto, true);
             }
         }
+    }
+
+    /**
+     * Verilen location listesine gore sicaklik bilgileri guncellenir.
+     * Eger hic data yok ise eklenir.
+     * <p>
+     * Bu location bilgileri Device bilgilerinden alinacaktir.
+     * Gerekli yerler doldurulunca servis calisir hale gelecektir.
+     */
+    @Scheduled(fixedDelay = 3600 * 1000L)
+    public void updateTempListCron() {
+
+        /*
+        * Burada bu liste device koordinatlari ile dolacak
+        * ardindan bu cron bu bilgileri update edecek saat basi.
+        * diger fonksiyonlar ile de sorgulanacak.
+        *
+        * */
+        List<WeatherDTO> updateList = new LinkedList<>();
+
+        WeatherDTO ornekDTO = new WeatherDTO();
+        ornekDTO.setLatitude(null);
+        ornekDTO.setLongitude(null);
+
+        updateList.add(ornekDTO);
+
+        /* Guncelleme burada olacak */
+        loadTempsWithGeoCoordinates(updateList);
+
     }
 }
