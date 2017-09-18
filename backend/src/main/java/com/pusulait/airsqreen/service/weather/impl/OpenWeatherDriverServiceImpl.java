@@ -63,8 +63,8 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
                 .replace("{API_URL}", apiUrl)
                 .replace("{WEATHER_POSTFIX}", weatherPostfix)
                 .replace("{API_KEY}", apiKey)
-                .replace("{LATITUDE}", "41.060459")
-                .replace("{LONGITUDE}", "28.987169");
+                .replace("{LATITUDE}", latitude.setScale(2, BigDecimal.ROUND_HALF_EVEN).toPlainString())
+                .replace("{LONGITUDE}", longitude.setScale(2, BigDecimal.ROUND_HALF_EVEN).toPlainString());
 
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(new MediaType("application", "json"));
