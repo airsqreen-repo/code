@@ -77,36 +77,16 @@ public final class Constants {
     public static final String URL_RIGHT = "/rights";
     public static final String URL_ROLE_RIGHT = "/roleRights";
     public static final String URL_USER_ROLE = "/user/roles";
-    public static final String URL_CARRIER= "/carriers";
-    public static final String URL_FLIGHT_DATA_PROVIDER = "/flightDataProviders";
-    public static final String URL_FLIGHT_AGENCY = "/flightAgencies";
-    public static final String URL_DESTINATION = "/destinations";
-    public static final String URL_CREDIT_CART_PROVIDER = "/creditCardProviders";
-
-    public static final String URL_CURRENCY = "/currencies";
-    public static final String URL_CURRENCY_RATE = "/currency/rates";
 
 
 
 
     public static final String API_URL_USER = "/api/admin/users";
     public static final String API_URL_ROLE= "/api/admin/roles";
-    public static final String API_URL_ROLE_RIGHT= "/api/admin/roleRights";
-    public static final String API_URL_ADMIN_ROLE = "/api/admin/roles";
 
-    public static final String API_URL_CITY = "/api/admin/cities/";
-    public static final String API_URL_COUNTRY = "/api/admin/countries/";
-    public static final String API_URL_PROVINCE = "/api/admin/provinces";
     public static final String API_URL_USER_ROLE = "/api/admin/user/roles";
     public static final String API_URL_CARRIER= "/api/admin/carriers";
-    public static final String API_URL_FLIGHT_DATA_PROVIDER = "/api/admin/flightDataProviders";
-    public static final String API_URL_FLIGHT_AGENCY = "/api/admin/flightAgencies";
-    public static final String API_URL_DESTINATION = "/api/admin/destinations";
-    public static final String API_URL_CREDIT_CART_PROVIDER = "/api/admin/creditCardProviders";
-    public static final String API_URL_ACCOUNT = "/api/admin/accounts";
 
-    public static final String API_URL_SYSTEM_CONFIGURATION= "/api/admin/systemConfigurations";
-    public static final String API_URL_API= "/api/admin/apis";
     public static final String URL_DEVICE = "/devices";
     public static final String URL_DEVICE_CONSTRAINTS = "/deviceConstraints";
     public static final String URL_ADMIN_DEVICE = "/admin/devices";
