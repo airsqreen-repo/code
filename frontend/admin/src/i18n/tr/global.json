@@ -37,6 +37,7 @@
             },
             "report": "Rapor",
             "device": "Device",
+            "campaign": "Campaign",
             "language": "Dil"
         },
         "form": {

@@ -1,0 +1,25 @@
+{
+    "campaign": {
+        "singular": "Campaing",
+        "plural": "campaings",
+        "management": "Tanımlama",
+        "title": "campaing Yönetimi",
+        "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
+        "searchPlatformUserInput": "Adina gore ara",
+        "detail": "Detay",
+        "campaignSection": "Campaign Section",
+        "label": {
+            "name": "Adı",
+            "externalDeviceId": "External Device Id",
+            "platformUser": "Platform Kullanicisi"
+        },
+        "campaignSectionList": "Campaign Section",
+        "constraint":{
+            "label": {
+                "deviceConstraintType": "Type",
+                "deviceConstraintFilter": "Filter",
+                "filter_detail": "Filter Detail"
+            }
+        }
+    }
+}

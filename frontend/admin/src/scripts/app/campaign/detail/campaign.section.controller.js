@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('airSqreenApp')
-    .controller('DeviceConstraintController', function ($rootScope, $scope, $state, $stateParams, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, DEVICE_CONSTRAINT_TYPE, DEVICE_CONSTRAINT_FILTER) {
+    .controller('UserRoleController', function ($rootScope, $scope, $state, $stateParams, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, DEVICE_CONSTRAINT_TYPE, DEVICE_CONSTRAINT_FILTER) {
 
         $scope.isView = true;
         var deviceId=$stateParams.id;

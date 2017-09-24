@@ -3,89 +3,89 @@
 angular.module('airSqreenApp')
     .config(function ($stateProvider) {
         $stateProvider
-            .state('deviceManagement', {
+            .state('campaignManagement', {
                 parent: 'app',
-                url: '/device/management',
+                url: '/campaign/management',
                 data: {
                     roles: ['ADMIN'],
-                    header: 'device.singular',
-                    subHeader: 'device.management'
+                    header: 'campaign.singular',
+                    subHeader: 'campaign.management'
                 },
                 views: {
                     'content': {
-                        templateUrl: 'scripts/app/device/device.html',
-                        controller: 'DeviceController'
+                        templateUrl: 'scripts/app/campaign/campaign.html',
+                        controller: 'CampaignController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('device');
+                        $translatePartialLoader.addPart('campaign');
                         return $translate.refresh();
                     }]
                 }
-            }).state('device', {
+            }).state('campaign', {
                 abstract: true,
-                url: 'device/:mode/:id',
+                url: 'campaign/:mode/:id',
                 parent: 'app',
                 data: {
                     roles: ['ADMIN']
                 },
                 views: {
                     'content': {
-                        templateUrl: 'scripts/app/device/device.detail.html',
-                        controller: 'DeviceDetailController'
+                        templateUrl: 'scripts/app/campaign/campaign.detail.html',
+                        controller: 'CampaignDetailController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('device');
+                        $translatePartialLoader.addPart('campaign');
                         return $translate.refresh();
                     }],
-                    deviceApi: function ($stateParams, api) {
-                        return api.one('admin/devices', $stateParams.id);
+                    campaignApi: function ($stateParams, api) {
+                        return api.one('admin/campaigns', $stateParams.id);
                     },
-                    resolvedDevice: function ($stateParams, api) {
-                        return api.one('admin/devices', $stateParams.id).get();
+                    resolvedCampaign: function ($stateParams, api) {
+                        return api.one('admin/campaigns', $stateParams.id).get();
 
                     }
                 }
-            }).state('device.detail', {
+            }).state('campaign.detail', {
                 url: '',
-                parent: 'device',
+                parent: 'campaign',
                 data: {
                     roles: ['ADMIN'],
-                    header: 'device.singular',
+                    header: 'campaign.singular',
                     subHeader: 'detail'
                 },
                 views: {
                     'tabContent': {
-                        templateUrl: 'scripts/app/device/detail/detail.html',
-                        controller: 'DeviceDetailController as ctrl'
+                        templateUrl: 'scripts/app/campaign/campaign/detail.html',
+                        controller: 'CampaignDetailController as ctrl'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('device');
+                        $translatePartialLoader.addPart('campaign');
                         return $translate.refresh();
                     }]
                 }
-            }).state('device.deviceConstraintList', {
+            }).state('campaign.campaignSectionList', {
                 url: '',
-                parent: 'device',
+                parent: 'campaign',
                 data: {
                     roles: ['ADMIN'],
-                    header: 'device.singular',
+                    header: 'campaign.singular',
                     subHeader: 'detail'
                 },
                 views: {
                     'tabContent': {
-                        templateUrl: 'scripts/app/device/detail/device.constraint.html',
-                        controller: 'DeviceConstraintController'
+                        templateUrl: 'scripts/app/campaign/detail/campaign.constraint.html',
+                        controller: 'UserRoleController'
                     }
                 },
                 resolve: {
                     translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('device');
+                        $translatePartialLoader.addPart('campaign');
                         return $translate.refresh();
                     }]
                 }
