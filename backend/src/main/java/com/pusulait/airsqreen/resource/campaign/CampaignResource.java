@@ -3,17 +3,26 @@ package com.pusulait.airsqreen.resource.campaign;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
+import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
+import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
+import com.pusulait.airsqreen.domain.enums.ErrorType;
+import com.pusulait.airsqreen.security.SecurityUtils;
 import com.pusulait.airsqreen.service.CampaignService;
+import com.pusulait.airsqreen.service.SystemErrorService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
+import com.pusulait.airsqreen.util.HeaderUtil;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
@@ -24,8 +33,10 @@ public class CampaignResource {
 
 
     @Autowired
-    private CampaignService campaignService;
+    private SystemErrorService systemErrorService;
 
+    @Autowired
+    private CampaignService campaignService;
 
     /*@Timed
     @RequestMapping(value = Constants.URL_CAMPAIGN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,5 +55,37 @@ public class CampaignResource {
         return new ResponseEntity<>("update campaign called", HttpStatus.OK);
 
     }
+
+    /**
+     * GET  api/admin/campaigns -> getAll the  campaigns.
+     */
+    @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_CAMPAIGN, method = RequestMethod.GET)
+    public ResponseEntity<?> getAllCampaigns(@ApiParam Pageable pageable, PagedResourcesAssembler assembler) {
+        log.debug("REST request to get getAllCampaignDTOs ");
+        try {
+
+            return new ResponseEntity<>(assembler.toResource(campaignService.findAll(pageable)), HttpStatus.OK);
+
+        } catch (Exception ex) {
+
+            systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.GET_ALL_CAMPAINGS, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("campaignService.getAllCampaigns", ex.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
+    /**
+     * PATCH  api/admin/campaigns -> Updates an existing campaign.
+     */
+    @Timed
+    @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_CAMPAIGN, method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateDevice(@RequestBody CampaignDTO campaignDTO) throws URISyntaxException {
+        log.debug("REST request to update Campaign : {}", campaignDTO);
+
+        Campaign result = campaignService.save(campaignDTO);
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.createEntityUpdateAlert("campaign", result.getId().toString()))
+                .body(result);
+    }
+
 
 }

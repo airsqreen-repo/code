@@ -1,11 +1,14 @@
 package com.pusulait.airsqreen.service;
 
 import com.pusulait.airsqreen.domain.base.DataStatus;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
+import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
 import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
@@ -16,6 +19,8 @@ import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +60,13 @@ public class CampaignService {
     public Plt161Campaign save(Plt161CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = Plt161CampaignDTO.toEntity(campaignDTO);
+        return campaignRepository.save(campaign);
+    }
+
+    @Transactional
+    public Campaign save(CampaignDTO campaignDTO) {
+
+        Campaign campaign = CampaignDTO.toEntity(campaignDTO);
         return campaignRepository.save(campaign);
     }
 
@@ -139,6 +151,12 @@ public class CampaignService {
                 .collect(Collectors.toList());
 
         campaigns.stream().forEach(campaignDTO -> updateCampaign(campaignDTO));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<CampaignDTO> findAll(Pageable pageable) {
+        log.debug("Request to get all Campaigns");
+        return campaignRepository.findAll(pageable).map(CampaignDTO::toDTO);
     }
 
 
