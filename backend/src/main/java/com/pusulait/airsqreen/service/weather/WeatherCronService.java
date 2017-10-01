@@ -1,6 +1,9 @@
 package com.pusulait.airsqreen.service.weather;
 
+import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
+import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
 import com.pusulait.airsqreen.domain.dto.weather.WeatherDTO;
+import com.pusulait.airsqreen.service.device.DeviceService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,9 @@ public class WeatherCronService {
     @Autowired
     private WeatherService weatherService;
 
+    @Autowired
+    private DeviceService deviceService;
+
     /**
      * Verilen location listesine gore sicaklik bilgileri guncellenir.
      * Eger hic data yok ise eklenir.
@@ -29,7 +35,7 @@ public class WeatherCronService {
      * Bu location bilgileri Device bilgilerinden alinacaktir.
      * Gerekli yerler doldurulunca servis calisir hale gelecektir.
      */
-    @Scheduled(fixedDelay = 5 * 1000L)
+    @Scheduled(fixedDelay = 1000L * 60 * 60)
     public void updateTempListCron() {
         log.debug(" - updateTempListCron() basladi.");
 
@@ -41,11 +47,13 @@ public class WeatherCronService {
         * */
         List<WeatherDTO> updateList = new LinkedList<>();
 
-        WeatherDTO ornekDTO = new WeatherDTO();
-        ornekDTO.setLatitude(new BigDecimal(28.60));
-        ornekDTO.setLongitude(new BigDecimal(41.90));
+        for (DeviceDTO device : deviceService.findAll()) {
 
-        updateList.add(ornekDTO);
+            WeatherDTO ornekDTO = new WeatherDTO();
+            ornekDTO.setLatitude(device.getLatitude());
+            ornekDTO.setLongitude(device.getLongitude());
+            updateList.add(ornekDTO);
+        }
 
         /* Guncelleme burada olacak */
         weatherService.loadTempsWithGeoCoordinates(updateList);

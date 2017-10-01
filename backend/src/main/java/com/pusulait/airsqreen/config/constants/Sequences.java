@@ -10,6 +10,7 @@ public final class Sequences {
     }
 
     public static final String CAMPAIGN_SEQUENCE  = "SEQ_CAMPAIGN_ID";
+    public static final String CAMPAIGN_CONSTRAINT_SEQUENCE = "SEQ_CAMPAIGN_CONSTRAINT";
     public static final String EVENT_SEQUENCE  = "SEQ_EVENT_ID";
 
     public static final String DEVICE_SEQUENCE = "DEVICE_SEQUENCE";

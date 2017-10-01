@@ -22,6 +22,7 @@ import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
+import com.pusulait.airsqreen.service.weather.WeatherService;
 import com.pusulait.airsqreen.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,12 +65,17 @@ public class EventService {
     @Autowired
     private ViewActiveDeviceRepository viewActiveDeviceRepository;
 
+    @Autowired
+    private WeatherService weatherService;
+
     @Scheduled(cron = "0 0 1 * * ?")
     public void prepareHourlyRecords() {
         generateSistem9Events();
     }
 
     public void generateSistem9Events() {
+
+
 
         List<Plt161Campaign> activeCampaigns = campaignRepository.findLiveCampaigns();
 
@@ -144,6 +150,8 @@ public class EventService {
     //@Scheduled(cron = "0 0 0 1 * ?")
     @Scheduled(fixedRate = 5 * 1000)
     public void pushEvents() throws Exception {
+
+        //weatherService.getTempWithGeoCoordinates()
 
         List<Sistem9PushEvent> pushEventList = sistem9PushEventRepository.findWaitingEvents();
 

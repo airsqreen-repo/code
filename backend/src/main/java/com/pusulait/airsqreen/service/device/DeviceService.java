@@ -14,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Service
 @Transactional
@@ -61,6 +64,12 @@ public class DeviceService {
         else if( name!=null)
             return deviceRepository.findByNameContainingIgnoreCase(name, pageable).map(DeviceDTO::toDTO);
         return deviceRepository.findByDataStatus(dataStatus, pageable).map(DeviceDTO::toDTO);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DeviceDTO> findAll() {
+        log.debug("Request to get all Devices");
+        return deviceRepository.findAll().stream().map(DeviceDTO::toDTO).collect(Collectors.toList());
     }
 
 

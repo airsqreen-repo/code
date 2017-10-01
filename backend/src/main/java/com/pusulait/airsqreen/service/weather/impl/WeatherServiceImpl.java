@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * Created by yildizib on 18/09/2017.
  */
-@Data
 @Slf4j
 @Service("weatherService")
 public class WeatherServiceImpl implements WeatherService {

@@ -13,6 +13,7 @@ import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,12 @@ public class Device extends AuditBase implements Serializable {
 
     @Column(name = "PLATFORM_USER_ID")
     private Long platformUserId;
+
+    @Column(name = "LATITUDE")
+    private BigDecimal latitude;
+
+    @Column(name = "LONGITUDE")
+    private BigDecimal longitude;
 
     @JsonIgnore
     @RestResource(exported = false)
