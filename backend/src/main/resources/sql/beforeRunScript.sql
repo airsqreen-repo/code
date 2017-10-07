@@ -71,3 +71,7 @@ INSERT INTO public.air_device_constraints(id, create_user, create_date, data_sta
                                           device_constraint_filter, device_constraint_type, filter_detail,device_id)
 VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, 'INCLUDE', 'DYNAMIC_TIME_FILTER', '0-15',1);
 
+INSERT INTO public.AIR_CAMPAIGN_CONSTRAINTS(id, create_user, create_date, data_status, update_user, update_date, version,
+                                        CAMPAIGN_CONSTRAINT_FILTER, CAMPAIGN_CONSTRAINT_TYPE, filter_detail,CAMPAIGN_ID)
+VALUES (1, 'system', now(), 'ACTIVE', 'system', now(), 0, 'BIGGER', 'TEMPERATURE', '10',38);
+

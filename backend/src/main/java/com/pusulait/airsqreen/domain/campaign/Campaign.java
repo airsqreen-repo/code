@@ -67,4 +67,8 @@ public class Campaign extends AuditBase implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "campaign")
     private List<CampaignSection> campaignSections = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "campaign")
+    private List<CampaignConstraint> campaignConstraints = new ArrayList<>();
+
+
 }

@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.service;
+package com.pusulait.airsqreen.service.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.dto.security.CampaignSectionDTO;

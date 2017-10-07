@@ -48,7 +48,6 @@ public class DeviceConstraint extends AuditBase implements Serializable {
     @Column(name = "DEVICE_ID")
     private Long deviceId;
 
-
     @Column(columnDefinition = "text")
     private String filter_detail;
 

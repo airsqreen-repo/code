@@ -3,7 +3,7 @@ package service;
 import com.pusulait.airsqreen.Application;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
-import com.pusulait.airsqreen.service.CampaignService;
+import com.pusulait.airsqreen.service.campaign.CampaignService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by bhdr on 17.07.2017.

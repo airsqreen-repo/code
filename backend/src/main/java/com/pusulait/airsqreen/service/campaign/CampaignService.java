@@ -1,4 +1,4 @@
-package com.pusulait.airsqreen.service;
+package com.pusulait.airsqreen.service.campaign;
 
 import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
@@ -14,6 +14,7 @@ import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
+import com.pusulait.airsqreen.service.SectionService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import com.pusulait.airsqreen.util.EntityUtil;
 import com.pusulait.airsqreen.util.StringUtils;

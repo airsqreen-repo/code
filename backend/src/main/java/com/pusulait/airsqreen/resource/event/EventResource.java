@@ -3,7 +3,6 @@ package com.pusulait.airsqreen.resource.event;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.service.CampaignService;
 import com.pusulait.airsqreen.service.cron.EventService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

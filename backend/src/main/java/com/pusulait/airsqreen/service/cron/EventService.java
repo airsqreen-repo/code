@@ -1,23 +1,22 @@
 package com.pusulait.airsqreen.service.cron;
 
 import com.pusulait.airsqreen.config.constants.Constants;
+import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.CampaignConstraint;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
 import com.pusulait.airsqreen.domain.campaign.sistem9.DeviceConstraint;
 import com.pusulait.airsqreen.domain.dto.event.Sistem9PushEventDTO;
-import com.pusulait.airsqreen.domain.enums.DeviceConstraintFilter;
-import com.pusulait.airsqreen.domain.enums.DeviceConstraintType;
-import com.pusulait.airsqreen.domain.enums.EventStatus;
-import com.pusulait.airsqreen.domain.enums.EventType;
+import com.pusulait.airsqreen.domain.enums.*;
 import com.pusulait.airsqreen.domain.event.Sistem9PushEvent;
 import com.pusulait.airsqreen.domain.view.ViewActiveDevice;
-import com.pusulait.airsqreen.predicate.DevicePredicate;
 import com.pusulait.airsqreen.predicate.EventPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.device.DeviceRepository;
 import com.pusulait.airsqreen.repository.event.Sistem9PushEventRepository;
 import com.pusulait.airsqreen.repository.view.ViewActiveDeviceRepository;
+import com.pusulait.airsqreen.service.campaign.CampaignConstraintService;
 import com.pusulait.airsqreen.service.system9.Sistem9Adapter;
 import com.pusulait.airsqreen.service.system9.Sistem9PushEventService;
 import com.pusulait.airsqreen.service.viewcount.ViewCountAndPriceService;
@@ -66,7 +65,7 @@ public class EventService {
     private ViewActiveDeviceRepository viewActiveDeviceRepository;
 
     @Autowired
-    private WeatherService weatherService;
+    private CampaignConstraintService campaignConstraintService;
 
     @Scheduled(cron = "0 0 1 * * ?")
     public void prepareHourlyRecords() {
@@ -76,12 +75,15 @@ public class EventService {
     public void generateSistem9Events() {
 
 
-
         List<Plt161Campaign> activeCampaigns = campaignRepository.findLiveCampaigns();
 
         for (Plt161Campaign plt161Campaign : activeCampaigns) {
 
             CampaignSection campaignSection = plt161Campaign.getCampaignSections().get(0);
+
+            if(campaignConstraintService.campaignControlsPassed(campaignSection)){
+                continue;
+            }
 
             Double paidBudget = viewCountAndPriceService.getTotalSpent(plt161Campaign.getExternalId().toString(), campaignSection.getSection().getExternalId().toString());
 
@@ -161,7 +163,7 @@ public class EventService {
 
             Device device = deviceRepository.findOne(viewActiveDevice.getDeviceId());
 
-            if (controlsPassed(device)) {
+            if (deviceControlsPassed(device)) {
 
                 List<Sistem9PushEvent> sistem9PushEventList = pushEventList.stream().filter(EventPredicate.deviceIdPredicate(viewActiveDevice.getDeviceId())).collect(Collectors.toList());
 
@@ -169,16 +171,16 @@ public class EventService {
 
                     Sistem9PushEvent event = sistem9PushEventList.get(RandomUtil.generateRandomNumber(sistem9PushEventList.size()));
 
-                    if(event != null) {
+                    if (event != null) {
                         String result = sistem9Adapter.pushEvent(event);
-                        if(result.contains(Constants.SISTEM9_SUCCESS_RESULT)) {
+                        if (result.contains(Constants.SISTEM9_SUCCESS_RESULT)) {
                             event.setResult(result);
                             /*String token = viewCountService.getTrackToken(event.getCampaignSection().getCampaign().getExternalId().toString(),
                                     event.getCampaignSection().getSection().getExternalId().toString());
                             viewCountService.incrementViewCount(token);*/
                             event.setEventStatus(EventStatus.DONE);
                             sistem9PushEventRepository.save(event);
-                        }else{
+                        } else {
                             event.setResult(result);
                             event.setEventStatus(EventStatus.ERROR);
                             sistem9PushEventRepository.save(event);
@@ -191,7 +193,7 @@ public class EventService {
 
 
     //faz 2 de hem event seçimi uygun devicelar ve device seçimi de uygun deviceların seçimi yapılacak
-    private Boolean controlsPassed(Device device) {
+    private Boolean deviceControlsPassed(Device device) {
 
         Boolean passed = true;
 
@@ -220,6 +222,8 @@ public class EventService {
 
         return passed;
     }
+
+
 
 
 }
