@@ -81,7 +81,7 @@ public class EventService {
 
             CampaignSection campaignSection = plt161Campaign.getCampaignSections().get(0);
 
-            if(campaignConstraintService.campaignControlsPassed(campaignSection)){
+            if(!campaignConstraintService.campaignControlsPassed(campaignSection)){
                 continue;
             }
 

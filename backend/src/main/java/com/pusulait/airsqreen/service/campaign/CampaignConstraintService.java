@@ -43,36 +43,35 @@ public class CampaignConstraintService {
 
     private Boolean checkConstraintFilter(CampaignConstraint campaignConstraint,  WeatherDTO weatherDTO) {
 
-        double temperatureValue = Double.valueOf(campaignConstraint.getFilter_detail());
-
-        double weatherTemp = weatherDTO.getTemp().doubleValue();
+        double temperatureValue= Double.valueOf(campaignConstraint.getFilter_detail());
+        double  weatherTemp = weatherDTO.getTemp().doubleValue();
 
 
         if (campaignConstraint.getCampaignConstraintFilter().equals(CampaignConstraintFilter.BIGGER)) {
-            if (temperatureValue > weatherTemp) {
+            if (weatherTemp > temperatureValue) {
                 return true;
             }
         }
         if (campaignConstraint.getCampaignConstraintFilter().equals(CampaignConstraintFilter.BIGGER_EQUAL)) {
-            if (temperatureValue > weatherTemp || temperatureValue == weatherTemp) {
+            if (weatherTemp >= temperatureValue) {
                 return true;
             }
         }
 
         if (campaignConstraint.getCampaignConstraintFilter().equals(CampaignConstraintFilter.EQUAL)) {
-            if (temperatureValue == weatherTemp) {
+            if (weatherTemp == temperatureValue) {
                 return true;
             }
         }
 
         if (campaignConstraint.getCampaignConstraintFilter().equals(CampaignConstraintFilter.SMALLER)) {
-            if (temperatureValue < weatherTemp) {
+            if (weatherTemp < temperatureValue) {
                 return true;
             }
         }
 
         if (campaignConstraint.getCampaignConstraintFilter().equals(CampaignConstraintFilter.SMALLER_EQUAL)) {
-            if (temperatureValue < weatherTemp || temperatureValue == weatherTemp) {
+            if (weatherTemp <= temperatureValue ) {
                 return true;
             }
         }
