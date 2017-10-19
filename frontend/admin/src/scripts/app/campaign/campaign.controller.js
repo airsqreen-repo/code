@@ -31,7 +31,7 @@ angular.module('airSqreenApp')
             var searchConfig={
                 filterHandler:function(filter) {
                     if(angular.isValue(item) )
-                        return{ url: "search", query: {  name: item.name, dataStatus: item.dataStatus}};
+                        return{ url: "search", query: {  active: item.active}};
                     return null;
                 }
             };
@@ -145,6 +145,14 @@ angular.module('airSqreenApp')
 
         $scope.update = function (data){
             api.one('admin/', 'campaigns').patch(data).then(success, error);
+        };
+        
+        $scope.refreshCampaign = function (data){
+            api.one('campaigns', '').patch().then(function () {
+                $scope.$emit('notifySuccess', $translate.instant('campaign.refreshCampaignSuccess'));
+            }, function (data) {
+                $scope.$emit('notifyError', sprintf($translate.instant('campaign.refreshCampaignError'), data.message));
+            });
         };
 
         var success = function () {

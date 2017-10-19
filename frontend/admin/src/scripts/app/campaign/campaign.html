@@ -16,26 +16,22 @@
 <div>
     <div class="panel panel-default">
         <div class="panel-body">
-            <form ng-submit="search(deviceSearch)" novalidate class="form-inline">
+            <form ng-submit="search(campaignSearch)" novalidate class="form-inline">
                 <fieldset ng-disabled="!right">
                     <div class="form-group">
-                        <label for="name" translate="device.label.name"></label>
-                        <input type="text" class="form-control input-sm" id="name" name="name" ng-model="deviceSearch.name" >
-                    </div>
-                    <div class="form-group">
-                        <label for="firstname" translate="status"></label>
-                        <select kendo-drop-down-list ng-model="deviceSearch.dataStatus" name="dataStatus"
-                                k-data-text-field="'text'"
-                                k-data-value-field="'value'"
-                                k-data-source="dataStatusDataSource"
-                                style="  width: 119px;"
-                                required>
+                        <label for="firstname" translate="campaign.label.status"></label>
+                        
+                        <select name="active" ng-model="campaignSearch.active" class="form-control input-sm">
+                            <option value="true">{{ 'data.status.active' | translate }}</option>
+                            <option value="false">{{ 'data.status.passive' | translate }}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <button class="btn btn-default" translate="search" type="submit">Search</button>
                         <button class="btn btn-default" ng-click="clearSearch()" translate="clearSearch">Clear Search</button>
                     </div>
+
+                    <button class="btn btn-default pull-right" translate="campaign.refreshCampaign" ng-click="refreshCampaign()">Refresh Campaign</button>
                 </fieldset>
             </form>
         </div>

@@ -6,7 +6,7 @@ angular.module('airSqreenApp')
 
 .constant('VERSION', 1.1)
 
-.constant('SERVICE_URL', 'http://localhost:9080/')
+.constant('SERVICE_URL', 'http://localhost:8080/')
 
 .constant('PUBLIC_URL', 'http://localhost:3000/')
 

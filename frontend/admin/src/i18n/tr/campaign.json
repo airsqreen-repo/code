@@ -8,6 +8,9 @@
         "searchPlatformUserInput": "Adina gore ara",
         "detail": "Detay",
         "campaignSection": "Campaign Section",
+        "refreshCampaign": "Refresh Campaign",
+        "refreshCampaignSuccess": "Refresh Campaign Success",
+        "refreshCampaignError": "Refresh Campaign Error: %s ",
         "button":{
             "setActive": "Set Active",
             "setDeActive": "Set DeActive"
