@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('airSqreenApp')
-    .controller('CampaignController', function ($rootScope, $scope, $state, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, DATA_STATUS ) {
+    .controller('CampaignController', function ($rootScope, $scope, $state, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, DATA_STATUS, _ ) {
 
         $scope.dataStatuses=DATA_STATUS;
         $scope.right="ADMIN";
@@ -50,15 +50,13 @@ angular.module('airSqreenApp')
 
         $scope.gridOptions = {
             columns: [
-                {field: "name",  title: "{{ 'device.label.name' | translate }}"},
-                {field: "externalDeviceId",  title: "{{ 'device.label.externalDeviceId' | translate }}"},
-                {field: "platformUser.username",    title: "{{ 'device.label.platformUser' | translate }}"},
-                {field: "dataStatus", title: "{{ 'status' | translate }}", template: "{{dataStatuses[dataItem.dataStatus] | translate}}", width: 100},
+                {field: "id",  title: "{{ 'global.field.id' | translate }}"},
+                {field: "name",  title: "{{ 'campaign.label.name' | translate }}"},
+                {field: "externalId",  title: "{{ 'campaign.label.externalId' | translate }}"},
+                {field: "applicationId", title: $translate.instant('campaign.label.status'), template: kendo.template($("#active-template").html()) } ,
                 {
                     command: [
-                        { template: "<button class='k-widget k-button' ng-disabled='!selected' ui-sref='device.detail  ({id: selected.id, mode: " + '"view"' + "})' has-right='" + $scope.right + "' translate='viewBtn' kendo-tooltip k-content=\"'{{ viewTooltip | translate }}'\"></button>"},
-                        { template: "<button class='k-widget k-button' ng-disabled='!selected' ui-sref='device.detail  ({id: selected.id, mode: " + '"edit"' + "})' has-right='" + $scope.right + "' kendo-tooltip k-content=\"'{{ editTooltip | translate }}'\"><i class='fa fa-edit'></i></button>"},
-                        { template: KendoUtils.deleteBtn($scope.right)},
+                        { template: "<button class='k-widget k-button' ng-disabled='!selected' ui-sref='device.detail  ({id: selected.id, mode: " + '"edit"' + "})' has-right='" + $scope.right + "' kendo-tooltip k-content=\"'{{ editTooltip | translate }}'\"><i class='fa fa-edit'></i></button>"}
                     ],
                     title: "&nbsp;",
                     width: "163px"
@@ -127,6 +125,40 @@ angular.module('airSqreenApp')
             $scope.data.read();
         };
 
+        $scope.setDeActive = function (id){
+            var data=$scope.data.data();
+            var index = _.findIndex(data, {'id': parseInt(id)});
+            if(index != -1 ){
+                data[index].active=false;
+                $scope.update(data[index]);
+            }
+        };
+
+        $scope.setActive = function (id){
+            var data=$scope.data.data();
+            var index = _.findIndex(data, {'id': parseInt(id)});
+            if(index != -1 ){
+                data[index].active=true;
+                $scope.update(data[index]);
+            }
+        };
+
+        $scope.update = function (data){
+            api.one('admin/', 'campaigns').patch(data).then(success, error);
+        };
+
+        var success = function () {
+            $scope.refresh();
+            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.singular')));
+        };
+
+        var error = function (data) {
+            $scope.$emit('notifyError', sprintf($translate.instant('notSaved'), data.message));
+        };
+
         $scope.rowTemplate = kendo.template($("#comboTemplate").html());
+
+
+
 
     });

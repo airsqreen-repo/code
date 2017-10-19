@@ -3,6 +3,16 @@
     <span class="k-state-default">##</span>
 </script>
 
+<script type="text/x-kendo-template" id="active-template">
+    #if(data.active == true){#
+        <button class="k-widget k-button"   ng-click="setDeActive('#= data.id #')"  translate="campaign.button.setDeActive"></button>
+    #}else{#
+        <button class="k-widget k-button"   ng-click="setActive('#= data.id #')"  translate="campaign.button.setActive"></button>
+    #}#
+</script>
+
+
+
 <div>
     <div class="panel panel-default">
         <div class="panel-body">

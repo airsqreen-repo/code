@@ -8,10 +8,14 @@
         "searchPlatformUserInput": "Adina gore ara",
         "detail": "Detay",
         "campaignSection": "Campaign Section",
+        "button":{
+            "setActive": "Set Active",
+            "setDeActive": "Set DeActive"
+        },
         "label": {
             "name": "Adı",
-            "externalDeviceId": "External Device Id",
-            "platformUser": "Platform Kullanicisi"
+            "externalId": "External Id",
+            "status": "Status"
         },
         "campaignSectionList": "Campaign Section",
         "constraint":{

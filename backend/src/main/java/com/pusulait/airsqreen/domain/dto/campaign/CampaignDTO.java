@@ -40,7 +40,8 @@ public class CampaignDTO {
     public static CampaignDTO toDTO(Campaign campaign) {
 
         CampaignDTO campaignDTO = new CampaignDTO();
-        campaignDTO.setExternalId(campaign.getId());
+        campaignDTO.setId(campaign.getId());
+        campaignDTO.setExternalId(campaign.getExternalId());
         campaignDTO.setPricingType(campaign.getPricingType());
         campaignDTO.setActive(campaign.getActive());
         campaignDTO.setStart_on(campaign.getStartOn());
@@ -52,7 +53,8 @@ public class CampaignDTO {
     public static Campaign toEntity(CampaignDTO campaignDTO) {
 
         Plt161Campaign campaign = new Plt161Campaign();
-        campaign.setExternalId(campaignDTO.getId());
+        campaign.setId(campaignDTO.getId());
+        campaign.setExternalId(campaignDTO.getExternalId());
         campaign.setPricingType(campaignDTO.getPricingType());
         campaign.setActive(campaignDTO.getActive());
         campaign.setStartOn(campaignDTO.getStart_on());
