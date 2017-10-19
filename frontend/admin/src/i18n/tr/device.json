@@ -11,7 +11,9 @@
         "label": {
             "name": "Adı",
             "externalDeviceId": "External Device Id",
-            "platformUser": "Platform Kullanicisi"
+            "platformUser": "Platform Kullanicisi",
+            "latitude": "Latitude",
+            "longitude": "Longitude"
         },
         "deviceConstraintList": "Device Constraints",
         "constraint":{
