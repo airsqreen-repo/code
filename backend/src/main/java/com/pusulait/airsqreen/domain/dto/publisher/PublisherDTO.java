@@ -1,9 +1,6 @@
 package com.pusulait.airsqreen.domain.dto.publisher;
 
-import com.pusulait.airsqreen.domain.campaign.Publisher;
-import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Publisher;
-import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import lombok.Data;
 
 /**

@@ -6,10 +6,9 @@ import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
-import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
-import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
-import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161SectionDTO;
 import com.pusulait.airsqreen.predicate.CampaignPredicate;
 import com.pusulait.airsqreen.repository.campaign.CampaignRepository;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
@@ -137,8 +136,8 @@ public class CampaignService {
 
     private Section getAndCreateSection(Long sectionId, Section section,Long platformUserId) {
         if (section == null) {
-            SectionDTO sectionDTO = platform161Service.getSection(null, sectionId,platformUserId);
-            section = sectionService.save(sectionDTO);
+            Plt161SectionDTO plt161SectionDTO = platform161Service.getSection(null, sectionId,platformUserId);
+            section = sectionService.save(plt161SectionDTO);
         }
         return section;
     }
@@ -159,6 +158,21 @@ public class CampaignService {
         log.debug("Request to get all Campaigns");
         return campaignRepository.findAll(pageable).map(CampaignDTO::toDTO);
     }
+
+    @Transactional(readOnly = true)
+    public Page<CampaignDTO> search(Boolean active, Pageable pageable) throws  Exception {
+        log.debug("Request to get all findByNameAndStatus");
+        if( active!=null)
+            return campaignRepository.findByActive(active, pageable).map(CampaignDTO::toDTO);
+        return campaignRepository.findAll(pageable).map(CampaignDTO::toDTO);
+    }
+
+    @Transactional(readOnly = true)
+    public CampaignDTO findOne(Long id) {
+        log.debug("Request to get Campaign : {}", id);
+        return CampaignDTO.toDTO(campaignRepository.findOne(id));
+    }
+
 
 
 }

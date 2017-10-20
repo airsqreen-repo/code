@@ -56,7 +56,7 @@ angular.module('airSqreenApp')
                 {field: "applicationId", title: $translate.instant('campaign.label.status'), template: kendo.template($("#active-template").html()) } ,
                 {
                     command: [
-                        { template: "<button class='k-widget k-button' ng-disabled='!selected' ui-sref='device.detail  ({id: selected.id, mode: " + '"edit"' + "})' has-right='" + $scope.right + "' kendo-tooltip k-content=\"'{{ editTooltip | translate }}'\"><i class='fa fa-edit'></i></button>"}
+                        { template: "<button class='k-widget k-button' ng-disabled='!selected' ui-sref='campaign.detail  ({id: selected.id, mode: " + '"edit"' + "})' has-right='" + $scope.right + "' kendo-tooltip k-content=\"'{{ editTooltip | translate }}'\"><i class='fa fa-edit'></i></button>"}
                     ],
                     title: "&nbsp;",
                     width: "163px"

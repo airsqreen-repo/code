@@ -8,6 +8,8 @@
         "searchPlatformUserInput": "Adina gore ara",
         "detail": "Detay",
         "campaignSection": "Campaign Section",
+        "campaignSections": "Campaign Sections",
+        "campaignConstraints": "Campaign Constraints",
         "refreshCampaign": "Refresh Campaign",
         "refreshCampaignSuccess": "Refresh Campaign Success",
         "refreshCampaignError": "Refresh Campaign Error: %s ",
@@ -18,13 +20,31 @@
         "label": {
             "name": "Adı",
             "externalId": "External Id",
+            "uniqueCampaignUId": "Unique Campaign UId",
+            "active": "Active",
+            "pricing_type": "Pricing type",
+            "pricingType": "Pricing Type",
+            "target": "Target",
+            "start_on": "Start on",
+            "end_on": "End on",
+            "price": "Price",
             "status": "Status"
         },
-        "campaignSectionList": "Campaign Section",
+        "campaignSections": "Campaign Sections",
+        "campaignConstraints": "Campaign Constraints",
+        "section":{
+            "label": {
+                "section": "Section",
+                "device": "Device",
+                "actionId": "action ID",
+                "key": "key",
+                "sspPrice": "SSP Price"
+            }
+        },
         "constraint":{
             "label": {
-                "deviceConstraintType": "Type",
-                "deviceConstraintFilter": "Filter",
+                "campaignConstraintType": "Type",
+                "campaignConstraintFilter": "Filter",
                 "filter_detail": "Filter Detail"
             }
         }

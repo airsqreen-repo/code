@@ -1,21 +1,15 @@
 package service;
 
 import com.pusulait.airsqreen.Application;
-import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
-import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
-import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.service.SectionService;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.List;
 
 /**
  * Created by benan on 5/14/2017.
@@ -54,7 +48,7 @@ public class TestPaltform161 {
     public void getSections() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
-        List<SectionDTO> list = platform161Service.getSections(token);
+        List<Plt161SectionDTO> list = platform161Service.getSections(token);
         log.debug("list:" + list.size());
 
     }
@@ -68,7 +62,7 @@ public class TestPaltform161 {
     public void getSection() {
         String token = platform161Service.getAuthToken();
         log.debug("token:" + token);
-        SectionDTO sectionDTO = platform161Service.getSection(token,3027210L);
+        Plt161SectionDTO sectionDTO = platform161Service.getSection(token,3027210L);
         log.debug("sectionDTO:" + sectionDTO);
 
     }

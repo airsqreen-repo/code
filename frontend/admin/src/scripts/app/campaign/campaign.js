@@ -59,7 +59,7 @@ angular.module('airSqreenApp')
                 },
                 views: {
                     'tabContent': {
-                        templateUrl: 'scripts/app/campaign/campaign/detail.html',
+                        templateUrl: 'scripts/app/campaign/detail/detail.html',
                         controller: 'CampaignDetailController as ctrl'
                     }
                 },
@@ -69,7 +69,27 @@ angular.module('airSqreenApp')
                         return $translate.refresh();
                     }]
                 }
-            }).state('campaign.campaignSectionList', {
+            }).state('campaign.campaignSections', {
+                url: '',
+                parent: 'campaign',
+                data: {
+                    roles: ['ADMIN'],
+                    header: 'campaign.singular',
+                    subHeader: 'detail'
+                },
+                views: {
+                    'tabContent': {
+                        templateUrl: 'scripts/app/campaign/detail/campaign.section.html',
+                        controller: 'CampaignSectionController'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('campaign');
+                        return $translate.refresh();
+                    }]
+                }
+            }).state('campaign.campaignConstraints', {
                 url: '',
                 parent: 'campaign',
                 data: {
@@ -80,7 +100,7 @@ angular.module('airSqreenApp')
                 views: {
                     'tabContent': {
                         templateUrl: 'scripts/app/campaign/detail/campaign.constraint.html',
-                        controller: 'UserRoleController'
+                        controller: 'CampaignConstraintController'
                     }
                 },
                 resolve: {

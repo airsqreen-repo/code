@@ -1,7 +1,7 @@
 package com.pusulait.airsqreen.service.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
-import com.pusulait.airsqreen.domain.dto.security.CampaignSectionDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignSectionDTO;
 import com.pusulait.airsqreen.repository.campaign.CampaignSectionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +57,15 @@ public class CampaignSectionService {
         log.debug("Request to get all CampaignSections");
         return campaignSectionRepository.findAll().stream().map(CampaignSectionDTO::toDTO).collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<CampaignSectionDTO> findByCampaignId(Long campaingId) {
+        log.debug("Request to get all findByCampaignId");
+        return campaignSectionRepository.findByCampaignId(campaingId).stream().map(CampaignSectionDTO::toDTO).collect(Collectors.toList());
+    }
+
+
+
 
 
 }

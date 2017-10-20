@@ -2,7 +2,7 @@ package com.pusulait.airsqreen.resource.viewcount;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.domain.dto.security.CampaignSectionDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignSectionDTO;
 import com.pusulait.airsqreen.service.viewcount.ViewCountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

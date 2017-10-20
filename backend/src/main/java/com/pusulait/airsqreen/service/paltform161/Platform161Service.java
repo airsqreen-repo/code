@@ -1,9 +1,9 @@
 package com.pusulait.airsqreen.service.paltform161;
 
 import com.pusulait.airsqreen.config.constants.ServiceConstants;
-import com.pusulait.airsqreen.domain.dto.campaign.Plt161CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161CampaignDTO;
+import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161SectionDTO;
 import com.pusulait.airsqreen.domain.dto.publisher.PublisherDTO;
-import com.pusulait.airsqreen.domain.dto.section.SectionDTO;
 import com.pusulait.airsqreen.domain.enums.PlatformType;
 import com.pusulait.airsqreen.domain.enums.ServiceType;
 import com.pusulait.airsqreen.domain.integration.PlatformUser;
@@ -139,33 +139,33 @@ public class Platform161Service {
         return plt161CampaignDTOList;
     }
 
-    public List<SectionDTO> getSections(String token) {
-        List<SectionDTO> sectionDTOList = null;
+    public List<Plt161SectionDTO> getSections(String token) {
+        List<Plt161SectionDTO> plt161SectionDTOList = null;
         String url = this.servicesEndPoint + ServiceConstants.SECTIONS;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
         RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
-        ResponseEntity<List<SectionDTO>> responseEntity = null;
+        ResponseEntity<List<Plt161SectionDTO>> responseEntity = null;
 
         try {
-            ParameterizedTypeReference<List<SectionDTO>> responseType = new ParameterizedTypeReference<List<SectionDTO>>() {
+            ParameterizedTypeReference<List<Plt161SectionDTO>> responseType = new ParameterizedTypeReference<List<Plt161SectionDTO>>() {
             };
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
 
             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
-                sectionDTOList = responseEntity.getBody();
+                plt161SectionDTOList = responseEntity.getBody();
             }
 
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
 
-        return sectionDTOList;
+        return plt161SectionDTOList;
     }
 
-    /*public List<SectionDTO> getAllSections() {
+    /*public List<Plt161SectionDTO> getAllSections() {
         return getSections(getAuthToken());
     }*/
 
@@ -200,7 +200,7 @@ public class Platform161Service {
         return getPublishers(getAuthToken());
     }*/
 
-    public SectionDTO getSection(String token, Long sectionId,Long platformUserId) {
+    public Plt161SectionDTO getSection(String token, Long sectionId, Long platformUserId) {
 
         if (token == null) {
             PlatformUser platformUser = platformUserRepository.findOne(platformUserId);
@@ -208,29 +208,29 @@ public class Platform161Service {
         }
 
 
-        SectionDTO sectionDTO = null;
+        Plt161SectionDTO plt161SectionDTO = null;
         String url = this.servicesEndPoint + ServiceConstants.SECTIONS + "/" + sectionId;
 
         HttpHeaders requestHeaders = RestPlatfrom161Util.setHeader(token);
         HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", requestHeaders);
 
         RestTemplate restTemplate = RestPlatfrom161Util.prepareRestTemplate();
-        ResponseEntity<SectionDTO> responseEntity = null;
+        ResponseEntity<Plt161SectionDTO> responseEntity = null;
 
         try {
-            ParameterizedTypeReference<SectionDTO> responseType = new ParameterizedTypeReference<SectionDTO>() {
+            ParameterizedTypeReference<Plt161SectionDTO> responseType = new ParameterizedTypeReference<Plt161SectionDTO>() {
             };
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
 
             if (responseEntity != null && responseEntity.getStatusCode().is2xxSuccessful()) {
-                sectionDTO = responseEntity.getBody();
+                plt161SectionDTO = responseEntity.getBody();
             }
 
         } catch (RestClientException e) {
             log.error(e.getMessage(), e);
         }
 
-        return sectionDTO;
+        return plt161SectionDTO;
     }
 
 

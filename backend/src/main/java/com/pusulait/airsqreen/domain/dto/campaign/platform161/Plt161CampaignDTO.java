@@ -1,7 +1,8 @@
-package com.pusulait.airsqreen.domain.dto.campaign;
+package com.pusulait.airsqreen.domain.dto.campaign.platform161;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
 import com.pusulait.airsqreen.util.EntityUtil;
 import lombok.Data;

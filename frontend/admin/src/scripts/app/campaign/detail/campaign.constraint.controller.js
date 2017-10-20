@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('airSqreenApp')
-    .controller('CampaignSectionController', function ($rootScope, $scope, $state, $stateParams, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService) {
+    .controller('CampaignConstraintController', function ($rootScope, $scope, $state, $stateParams, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, CAMPAIGN_CONSTRAINT_FILTER, CAMPAIGN_CONSTRAINT_TYPE) {
 
         $scope.isView = true;
-        var campaignId=$stateParams.id;
+        var deviceId=$stateParams.id;
         $scope.load = function (){
             if($stateParams.mode=="edit"){
                 $scope.isView = false;
@@ -26,27 +26,19 @@ angular.module('airSqreenApp')
             'SEARCH':'ADMIN'
         };
 
+        $scope.campaignConstraintType = CAMPAIGN_CONSTRAINT_TYPE;
+        $scope.campaignConstraintFilter = CAMPAIGN_CONSTRAINT_FILTER;
 
         // Role role  Data Source
         var self = this;
-        this.dataSourceName = 'campaignSections';
+        this.dataSourceName = 'campaignConstraints';
         $scope.dataSource = $scope.dataSources[self.dataSourceName];
 
         $scope.gridOptions = {
             columns: [
-                {field: "id", title: "{{ 'global.field.id' | translate }}"},
-                {field: "section.name", title: "{{ 'campaign.section.label.section' | translate }}"},
-                {field: "device.name", title: "{{ 'campaign.section.label.device' | translate }}", template: function (e) {if(e.device!=null)return e.device.name;else return '-'; }},
-                {field: "actionId", title: "{{ 'campaign.section.label.actionId' | translate }}"},
-                {field: "key", title: "{{ 'campaign.section.label.key' | translate }}"},
-                {field: "sspPrice", title: "{{ 'campaign.section.label.sspPrice' | translate }}"},
-                {
-                    command: [
-                        { template: KendoUtils.editBtn($scope.right.UPDATE)},
-                    ],
-                    title: "&nbsp;",
-                    width: "163px"
-                }
+                {field: "campaignConstraintType", title: "{{ 'campaign.constraint.label.campaignConstraintType' | translate }}", template: "{{campaignConstraintType[dataItem.campaignConstraintType] | translate}}" },
+                {field: "campaignConstraintFilter", title: "{{ 'campaign.constraint.label.campaignConstraintFilter' | translate }}", template: "{{campaignConstraintFilter[dataItem.campaignConstraintFilter] | translate}}" },
+                {field: "filter_detail", title: "{{ 'campaign.constraint.label.filter_detail' | translate }}"}
             ],
             selectable: "row",
             sortable: "true",
@@ -110,7 +102,7 @@ angular.module('airSqreenApp')
             event.preventDefault();
             if ($scope.validator.validate()) {
                 $scope.deviceConstraint.dirty = true;
-                $scope.deviceConstraint.campaignId=campaignId;
+                $scope.deviceConstraint.deviceId=deviceId;
                 if (_.isNumber($scope.deviceConstraint.id)) {
                     var toObject = Object.assign({}, $scope.deviceConstraint);
                     api.one('admin','deviceConstraints').patch(toObject).then(success, error);

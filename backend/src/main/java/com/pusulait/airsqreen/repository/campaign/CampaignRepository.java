@@ -1,8 +1,9 @@
 package com.pusulait.airsqreen.repository.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
-import com.pusulait.airsqreen.domain.campaign.Publisher;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -27,5 +28,10 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
     @Query("select c from Campaign c where now() between c.startOn and c.endOn and c.dataStatus = 'ACTIVE'")
     List<Plt161Campaign> findLiveCampaigns();
+
+
+
+    Page<Campaign> findByActive(Boolean active, Pageable pageable);
+
 
 }

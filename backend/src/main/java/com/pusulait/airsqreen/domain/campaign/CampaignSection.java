@@ -44,12 +44,13 @@ public class CampaignSection extends AuditBase {
     @Column(name = "SECTION_ID")
     private Long sectionId;
 
-    @Column(name = "DEVICE_ID")
-    private Long deviceId;
 
     @ManyToOne
     @JoinColumn(name = "DEVICE_ID",  insertable = false, updatable = false)
     private Device device;
+
+    @Column(name = "DEVICE_ID")
+    private Long deviceId;
 
     @Column(name = "ACTION_ID")
     private String actionId;

@@ -1,45 +1,75 @@
 <div class="tab-pane" ng-cloak>
 
     <div class="form-group">
-        <label for="name" class="col-sm-2 control-label" translate="device.label.name">Name</label>
+        <label for="name" class="col-sm-2 control-label" translate="campaign.label.name">Name</label>
 
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="name" name="name" ng-model="device.name" required>
+            <input type="text" class="form-control" id="name" name="name" ng-model="campaign.name" required>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="externalDeviceId" class="col-sm-2 control-label" translate="device.label.externalDeviceId">External Device ID</label>
+        <label for="externalId" class="col-sm-2 control-label" translate="campaign.label.externalId"></label>
 
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="externalDeviceId" name="externalDeviceId" ng-model="device.externalDeviceId" required>
+            <input type="text" class="form-control" id="externalId" name="externalId" ng-model="campaign.externalId" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="uniqueCampaignUId" class="col-sm-2 control-label" translate="campaign.label.uniqueCampaignUId"></label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="uniqueCampaignUId" name="externalId" ng-model="campaign.uniqueCampaignUId" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pricing_type" class="col-sm-2 control-label" translate="campaign.label.pricing_type"></label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="pricing_type" name="externalId" ng-model="campaign.pricing_type" required>
         </div>
     </div>
 
 
-
-
-
     <div class="form-group">
-        <label for="externalDeviceId" class="col-sm-2 control-label" translate="device.label.platformUser">Platform User</label>
+        <label for="pricingType" class="col-sm-2 control-label" translate="campaign.label.pricingType"></label>
 
         <div class="col-sm-2">
+            <input type="text" class="form-control" id="pricingType" name="externalId" ng-model="campaign.pricingType" required>
+        </div>
+    </div>
 
-            <input  kendo-auto-complete="platformUser"
-                    id="platformUser"
-                    k-data-text-field="'username'"
-                    k-data-value-field="'id'"
-                    k-template="rowTemplate"
-                    k-data-source="platformUsers"
-                    k-ng-model="device.platformUser"
-                    k-placeholder="'{{ 'device.searchPlatformUserInput' | translate }}'"
-                    k-option-label="'{{ 'choose' | translate }}'"
-                    k-auto-bind="false"
-                    k-min-length="3"
-                    required
-                    validationMessage="{{ 'device.label.platformUser' | translate }}  {{ 'validation' | translate }}" style="width: 100%;"
-            />
+    <div class="form-group">
+        <label for="target" class="col-sm-2 control-label" translate="campaign.label.target"></label>
 
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="target" name="target" ng-model="campaign.target" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="start_on" class="col-sm-2 control-label" translate="campaign.label.start_on"></label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="start_on" name="start_on" ng-model="campaign.start_on" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="end_on" class="col-sm-2 control-label" translate="campaign.label.end_on"></label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="end_on" name="end_on" ng-model="campaign.end_on" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="price" class="col-sm-2 control-label" translate="campaign.label.price"></label>
+
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="price" name="price" ng-model="campaign.price" required>
         </div>
     </div>
 
@@ -49,7 +79,7 @@
 
         <div class="col-sm-2">
             <select kendo-drop-down-list="dataStatus"
-                    ng-model="device.dataStatus"
+                    ng-model="campaign.dataStatus"
                     name="dataStatus"
                     k-data-text-field="'text'"
                     k-data-value-field="'value'"

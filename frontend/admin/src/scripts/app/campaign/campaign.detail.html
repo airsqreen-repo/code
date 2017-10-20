@@ -3,8 +3,9 @@
         <fieldset ng-disabled="isView">
             <div role="tabpanel" class="item-tab-container">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" ui-sref-active="active"><a ui-sref=".detail" aria-controls="detail" role="tab" tabindex="-1" translate="device.detail">Detail</a></li>
-                    <li role="presentation" ui-sref-active="active"><a ui-sref=".deviceConstraintList" aria-controls="deviceConstraintList" role="tab" tabindex="-1" ng-show="!isCreate" translate="device.deviceConstraints">DeviceConstraints</a></li>
+                    <li role="presentation" ui-sref-active="active"><a ui-sref=".detail" aria-controls="detail" role="tab" tabindex="-1" translate="campaign.detail">Detail</a></li>
+                    <li role="presentation" ui-sref-active="active"><a ui-sref=".campaignSections" aria-controls="campaignSections" role="tab" tabindex="-1" ng-show="!isCreate" translate="campaign.campaignSections">Campaign Sections</a></li>
+                    <li role="presentation" ui-sref-active="active"><a ui-sref=".campaignConstraints" aria-controls="campaignConstraints" role="tab" tabindex="-1" ng-show="!isCreate" translate="campaign.campaignConstraints">Campaign Constraints</a></li>
                     <!--
                     <li role="presentation" ui-sref-active="active"><a ui-sref=".profilesList" aria-controls="profilesList" role="tab" tabindex="-1" ng-show="!isCreate" translate="security.user.profiles">Profils</a></li>
                     <li role="presentation" ui-sref-active="active"><a ui-sref=".groupList" aria-controls="groupList" role="tab" tabindex="-1" ng-show="!isCreate" translate="security.user.groups">Groups</a></li>
@@ -12,9 +13,9 @@
                     -->
                 <div class="col-sm-offset-1 form-control-buttons">
                     <div ng-show="!isView" class="popup-process">
-                        <button class="btn btn-danger" ng-click="removeDialog()" has-right="{{ right.DELETE }}"    ng-show="isUpdate" translate="delete">Delete</button>
+                      <!--  <button class="btn btn-danger" ng-click="removeDialog()" has-right="{{ right.DELETE }}"    ng-show="isUpdate" translate="delete">Delete</button>
                         <button class="btn btn-primary" ng-click="save($event)"  has-right="{{ right.UPDATE }}"  ng-class="{disabled: form.$invalid}"  ng-show="isUpdate" translate="update">Update</button>
-                        <button class="btn btn-primary" ng-click="save($event)"  has-right="{{ right.CREATE }}"  ng-class="{disabled: form.$invalid}"  ng-show="isCreate" translate="save">Save</button>
+                        <button class="btn btn-primary" ng-click="save($event)"  has-right="{{ right.CREATE }}"  ng-class="{disabled: form.$invalid}"  ng-show="isCreate" translate="save">Save</button> -->
                     </div>
                 </div>
             </div>
@@ -24,7 +25,7 @@
         </fieldset>
         <div class="row">
             <div class="col-sm-2">
-                <button type="button" ui-sref="deviceManagement" class="k-button pull-left ng-scope c-back" translate="backBtn"></button>
+                <button type="button" ui-sref="campaignManagement" class="k-button pull-left ng-scope c-back" translate="backBtn"></button>
             </div>
         </div>
     </form>

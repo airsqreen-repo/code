@@ -4,14 +4,19 @@ import com.pusulait.airsqreen.domain.campaign.Campaign;
 import com.pusulait.airsqreen.domain.campaign.CampaignConstraint;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.sistem9.Device;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignConstraintDTO;
 import com.pusulait.airsqreen.domain.dto.weather.WeatherDTO;
 import com.pusulait.airsqreen.domain.enums.CampaignConstraintFilter;
 import com.pusulait.airsqreen.domain.enums.CampaignConstraintType;
+import com.pusulait.airsqreen.repository.campaign.CampaignConstraintRepository;
 import com.pusulait.airsqreen.service.weather.WeatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -20,6 +25,10 @@ public class CampaignConstraintService {
 
     @Autowired
     private WeatherService weatherService;
+
+    @Autowired
+    private CampaignConstraintRepository campaignConstraintRepository;
+
 
     public Boolean campaignControlsPassed(CampaignSection campaignSection) {
 
@@ -77,6 +86,12 @@ public class CampaignConstraintService {
         }
 
         return false;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CampaignConstraintDTO> findByCampaignId(Long campaingId) {
+        log.debug("Request to get all findByCampaignId");
+        return campaignConstraintRepository.findByCampaignId(campaingId).stream().map(CampaignConstraintDTO::toDTO).collect(Collectors.toList());
     }
 
 }
