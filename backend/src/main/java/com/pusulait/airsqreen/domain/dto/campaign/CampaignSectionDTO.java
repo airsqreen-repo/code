@@ -19,7 +19,6 @@ public class CampaignSectionDTO {
     private String actionId;
     private String key;
     private Double sspPrice;
-
     private String trackingToken;
 
 
@@ -29,11 +28,11 @@ public class CampaignSectionDTO {
 
         campaignSectionDTO.setId(campaignSection.getId());
         campaignSectionDTO.setSectionId(campaignSection.getSectionId());
-        if(campaignSection.getSectionId() != null)
+        if(campaignSection.getSection() != null)
         campaignSectionDTO.setSection(SectionDTO.toDTO(campaignSection.getSection()));
         campaignSectionDTO.setCampaignId(campaignSection.getCampaignId());
         campaignSectionDTO.setDeviceId(campaignSection.getDeviceId());
-        if(campaignSection.getDeviceId() != null)
+        if(campaignSection.getDevice() != null)
         campaignSectionDTO.setDevice(DeviceDTO.toDTO(campaignSection.getDevice()));
         campaignSectionDTO.setKey(campaignSection.getKey());
         campaignSectionDTO.setSspPrice(campaignSection.getSspPrice());
@@ -41,11 +40,11 @@ public class CampaignSectionDTO {
         return campaignSectionDTO;
     }
 
-    public static CampaignSection toEntity(CampaignSectionDTO campaignSectionDTO) {
+    public static CampaignSection toEntity(CampaignSectionDTO campaignSectionDTO,CampaignSection campaignSection ) {
 
-        CampaignSection campaignSection = new CampaignSection();
         campaignSection.setId(campaignSectionDTO.getId());
         campaignSection.setSectionId(campaignSectionDTO.getSectionId());
+        campaignSection.setDeviceId(campaignSectionDTO.getDeviceId());
         campaignSection.setCampaignId(campaignSectionDTO.getCampaignId());
         campaignSection.setKey(campaignSectionDTO.getKey());
         campaignSection.setSspPrice(campaignSectionDTO.getSspPrice());

@@ -1,10 +1,75 @@
 
 <div class="tab-pane" ng-cloak>
 
+    <div class="modal fade" tabindex="-1" id="editor" role="dialog" dialog="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" translate="{{ campaignConstraint.isUpdate ? 'edit' : 'new' }}"> </div>
+                <div class="modal-body">
+                    <form  kendo-validator="validator" ng-submit="" class="form-horizontal">
+                        <fieldset ng-disabled="isView">
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="campaignConstraintType" translate="campaign.constraint.label.campaignConstraintType"></label>
+                                <div class="col-sm-5">
+                                    <select ng-options="option.id as option.name for option in campaignConstraintTypes.data" class="form-control"  ng-model="campaignConstraint.campaignConstraintType" id="campaignConstraintType" name="campaignConstraintType" validationMessage="Enter {0}"  required>
+                                        <option value="">{{ 'choose'| translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="campaignConstraintFilter" translate="campaign.constraint.label.campaignConstraintFilter"></label>
+                                <div class="col-sm-5">
+                                    <select ng-options="option.id as option.name for option in campaignConstraintFilters.data" class="form-control"  ng-model="campaignConstraint.campaignConstraintFilter" id="campaignConstraintFilter" name="campaignConstraintFilter" validationMessage="Enter {0}"  required>
+                                        <option value="">{{ 'choose'| translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="filter_detail" translate="campaign.constraint.label.filter_detail"></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-md" id="filter_detail" name="filter_detail"
+                                           ng-model="campaignConstraint.filter_detail"  required validationMessage="Enter {0}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="dataStatus" translate="status">Status</label>
+                                <div class="col-sm-3">
+                                    <select kendo-drop-down-list="dataStatus"
+                                            ng-model="campaignConstraint.dataStatus"
+                                            name="dataStatus"
+                                            k-data-text-field="'text'"
+                                            k-data-value-field="'value'"
+                                            k-data-source="dataStatusDataSource"
+                                            style="  width: 119px;">
+                                    </select>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div ng-show="!isView" class="popup-process">
+                        <button class="btn btn-primary" ng-click="update($event)"  has-right="{{ right.UPDATE }}"  ng-show="campaignConstraint.isUpdate" translate="update">Update</button>
+                        <button class="btn btn-primary" ng-click="update($event)"  has-right="{{ right.CREATE }}"  ng-show="campaignConstraint.isCreate" translate="save">Save</button>
+                    </div>
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div kendo-tool-bar k-options="toolbarOptions"></div>
             <div
+                  kendo-grid-checkbox
                   kendo-grid="grid"
                   k-data-source="dataSource"
                   k-options="gridOptions"

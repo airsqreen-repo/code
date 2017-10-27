@@ -70,7 +70,8 @@ public final class Constants {
     public static final String URL_VIEW_COUNT = "/viewcounts";
     public static final String URL_CAMPAIGN = "/campaigns";
     public static final String URL_EVENT = "/events";
-
+    public static final String URL_CAMPAIGN_SECTION = "/campaignSections";
+    public static final String URL_CAMPAIGN_CONSTRAINT = "/campaignConstraints";
 
 
     public static final String URL_ROLE = "/roles";
@@ -97,6 +98,7 @@ public final class Constants {
 
 
 
+    public static final String URL_SECTION = "/sections";
 
     public static final String API_URL_CURRENCY = "/api/currencies";
     public static final String API_URL_CURRENCY_RATE = "/api/currency/rates";

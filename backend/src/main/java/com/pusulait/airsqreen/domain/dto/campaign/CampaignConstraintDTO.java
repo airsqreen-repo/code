@@ -38,9 +38,8 @@ public class CampaignConstraintDTO {
         return campaignDTO;
     }
 
-    public static CampaignConstraint toEntity(CampaignConstraintDTO campaignConstraintDTO) {
+    public static CampaignConstraint toEntity(CampaignConstraintDTO campaignConstraintDTO, CampaignConstraint campaignConstraint) {
 
-        CampaignConstraint campaignConstraint = new CampaignConstraint();
         campaignConstraint.setId(campaignConstraintDTO.getId());
         campaignConstraint.setCampaignId(campaignConstraintDTO.getCampaignId());
         campaignConstraint.setCampaignConstraintType(campaignConstraintDTO.getCampaignConstraintType());

@@ -30,8 +30,7 @@ public class CampaignSectionService {
         else {
             campaignSection = new CampaignSection();
         }
-        CampaignSection result = campaignSectionRepository.save(CampaignSectionDTO.toEntity(campaignSectionDTO));
-        return CampaignSectionDTO.toDTO(result);
+        return CampaignSectionDTO.toDTO(campaignSectionRepository.save(CampaignSectionDTO.toEntity(campaignSectionDTO, campaignSection)));
     }
 
     @Transactional(readOnly = true)

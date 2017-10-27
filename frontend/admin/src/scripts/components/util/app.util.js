@@ -1,6 +1,6 @@
 
 angular.module('airSqreenApp')
-    .service('AppUtilsService', function ($translate, LANGUAGE,DATA_STATUS,PLATFORM_TYPE, SERVICE_TYPE, DEVICE_CONSTRAINT_TYPE, DEVICE_CONSTRAINT_FILTER ) {
+    .service('AppUtilsService', function ($translate, LANGUAGE,DATA_STATUS,PLATFORM_TYPE, SERVICE_TYPE, DEVICE_CONSTRAINT_TYPE, DEVICE_CONSTRAINT_FILTER, CAMPAIGN_CONSTRAINT_FILTER, CAMPAIGN_CONSTRAINT_TYPE ) {
 
         this.getLanguages = function () {
             return {
@@ -33,6 +33,18 @@ angular.module('airSqreenApp')
         this.getDeviceConstraintFilters = function () {
             return {
                 data: _.keys(DEVICE_CONSTRAINT_FILTER).map(function(key) { return { name: $translate.instant(DEVICE_CONSTRAINT_FILTER[key]), id: key}})
+            };
+        };
+
+        this.getCampaignConstraintTypes = function () {
+            return {
+                data: _.keys(CAMPAIGN_CONSTRAINT_TYPE).map(function(key) { return { name: $translate.instant(CAMPAIGN_CONSTRAINT_TYPE[key]), id: key}})
+            };
+        };
+
+        this.getCampaignConstraintFilters = function () {
+            return {
+                data: _.keys(CAMPAIGN_CONSTRAINT_FILTER).map(function(key) { return { name: $translate.instant(CAMPAIGN_CONSTRAINT_FILTER[key]), id: key}})
             };
         };
 

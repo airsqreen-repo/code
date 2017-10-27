@@ -16,9 +16,17 @@ angular.module('airSqreenApp')
     .constant('PLATFORM_TYPE',{
     "DSP":"platformType.dsp",
     "SSP":"platformType.ssp"
-}).constant('DEVICE_CONSTRAINT_TYPE',{
-    "DYNAMIC_TIME_FILTER":"deviceConstraintType.dynamicTimeFilter"
-}).constant('DEVICE_CONSTRAINT_FILTER',{
-    "INCLUDE":"deviceConstraintFilter.include",
-    "EXCLUDE":"deviceConstraintFilter.exclude"
-});
+    }).constant('DEVICE_CONSTRAINT_TYPE',{
+        "DYNAMIC_TIME_FILTER":"deviceConstraintType.dynamicTimeFilter"
+    }).constant('DEVICE_CONSTRAINT_FILTER',{
+        "INCLUDE":"deviceConstraintFilter.include",
+        "EXCLUDE":"deviceConstraintFilter.exclude"
+    }).constant('CAMPAIGN_CONSTRAINT_FILTER',{
+        "BIGGER":"campaignConstraintFilter.bigger",
+        "SMALLER":"campaignConstraintFilter.smaller",
+        "EQUAL":"campaignConstraintFilter.equal",
+        "BIGGER_EQUAL":"campaignConstraintFilter.biggerEqual",
+        "SMALLER_EQUAL":"campaignConstraintFilter.smallerEqual"
+    }).constant('CAMPAIGN_CONSTRAINT_TYPE',{
+        "TEMPERATURE":"campaignConstraintType.temperature"
+    });

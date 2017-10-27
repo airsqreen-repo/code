@@ -1,9 +1,114 @@
 <div class="tab-pane" ng-cloak>
 
+    <div class="modal fade" tabindex="-1" id="editor" role="dialog" dialog="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" translate="{{ campaignSection.isUpdate ? 'edit' : 'new' }}"> </div>
+                <div class="modal-body">
+                    <form  kendo-validator="validator" ng-submit="" class="form-horizontal">
+                        <fieldset ng-disabled="isView">
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="section" translate="campaign.section.label.section"></label>
+                                <div class="col-sm-5">
+                                    <input  kendo-auto-complete="section"
+                                            id="section"
+                                            k-data-text-field="'name'"
+                                            k-data-value-field="'id'"
+                                            k-template="rowTemplate"
+                                            k-data-source="sections"
+                                            k-select="sectionSelected"
+                                            k-ng-model="campaignSection.section"
+                                            k-placeholder="'{{ 'campaign.section.searchSection' | translate }}'"
+                                            k-option-label="'{{ 'choose' | translate }}'"
+                                            k-auto-bind="false"
+                                            k-min-length="3"
+                                            required
+                                            validationMessage="{{ 'campaign.section.label.section' | translate }}  {{ 'validation' | translate }}" style="width: 100%;"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="device" translate="campaign.section.label.device"></label>
+                                <div class="col-sm-5">
+                                    <input  kendo-auto-complete="device"
+                                            id="device"
+                                            k-data-text-field="'name'"
+                                            k-data-value-field="'id'"
+                                            k-template="rowTemplate"
+                                            k-data-source="devices"
+                                            k-select="deviceSelected"
+                                            k-ng-model="campaignSection.device"
+                                            k-placeholder="'{{ 'campaign.section.searchDevice' | translate }}'"
+                                            k-option-label="'{{ 'choose' | translate }}'"
+                                            k-auto-bind="false"
+                                            k-min-length="3"
+                                            required
+                                            validationMessage="{{ 'campaign.section.label.device' | translate }}  {{ 'validation' | translate }}" style="width: 100%;"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="actionId" translate="campaign.section.label.actionId"></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-md" id="actionId" name="actionId"
+                                           ng-model="campaignSection.actionId"  required validationMessage="Enter {0}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="key" translate="campaign.section.label.key"></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-md" id="key" name="key"
+                                           ng-model="campaignSection.key"  required validationMessage="Enter {0}" >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="sspPrice" translate="campaign.section.label.sspPrice"></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-md" id="sspPrice" name="sspPrice"
+                                           ng-model="campaignSection.sspPrice"  required validationMessage="Enter {0}" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="dataStatus" translate="status">Status</label>
+                                <div class="col-sm-3">
+                                    <select kendo-drop-down-list="dataStatus"
+                                            ng-model="campaignSection.dataStatus"
+                                            name="dataStatus"
+                                            k-data-text-field="'text'"
+                                            k-data-value-field="'value'"
+                                            k-data-source="dataStatusDataSource"
+                                            style="  width: 119px;">
+                                    </select>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div ng-show="!isView" class="popup-process">
+                        <button class="btn btn-primary" ng-click="update($event)"  has-right="{{ right.UPDATE }}"  ng-show="campaignSection.isUpdate" translate="update">Update</button>
+                        <button class="btn btn-primary" ng-click="update($event)"  has-right="{{ right.CREATE }}"  ng-show="campaignSection.isCreate" translate="save">Save</button>
+                    </div>
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-md-12">
             <div kendo-tool-bar k-options="toolbarOptions"></div>
             <div
+                  kendo-grid-checkbox
                   kendo-grid="grid"
                   k-data-source="dataSource"
                   k-options="gridOptions"

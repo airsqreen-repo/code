@@ -104,7 +104,7 @@ public class CampaignResource {
      */
     @Timed
     @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_CAMPAIGN, method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> updateCampaing(@RequestBody CampaignDTO campaignDTO) throws URISyntaxException {
+    public ResponseEntity<?> updateCampaign(@RequestBody CampaignDTO campaignDTO) throws URISyntaxException {
         log.debug("REST request to update Campaign : {}", campaignDTO);
 
         Campaign result = campaignService.save(campaignDTO);

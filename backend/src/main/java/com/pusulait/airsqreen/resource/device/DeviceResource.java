@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.resource.device;
 import com.codahale.metrics.annotation.Timed;
 import com.pusulait.airsqreen.config.constants.Constants;
 import com.pusulait.airsqreen.domain.base.DataStatus;
+import com.pusulait.airsqreen.domain.dto.campaign.SectionDTO;
 import com.pusulait.airsqreen.domain.dto.device.DeviceConstraintDTO;
 import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
 import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
@@ -140,10 +141,9 @@ public class DeviceResource {
             return new ResponseEntity<>(assembler.toResource(page), HttpStatus.OK);
         } catch (Exception ex) {
             systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.GET_ALL_DEVICES, SecurityUtils.getCurrentLogin()));
-            return new ResponseEntity<>(new ErrorDTO("globalCurrencyService.getFindByNameAndStatus", ex.getMessage()), HttpStatus.CONFLICT);
+            return new ResponseEntity<>(new ErrorDTO("deviceService.getFindByNameAndStatus", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
-
 
     @Timed
     @ResponseBody

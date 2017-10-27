@@ -131,7 +131,7 @@ angular.module('airSqreenApp')
             $timeout(function(){
                 autocomplete.select(autocomplete.ul.children().eq(0));
                 autocomplete.close();
-            },500);
+            },1000);
         };
 
 

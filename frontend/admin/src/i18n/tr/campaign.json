@@ -7,9 +7,6 @@
         "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
         "searchPlatformUserInput": "Adina gore ara",
         "detail": "Detay",
-        "campaignSection": "Campaign Section",
-        "campaignSections": "Campaign Sections",
-        "campaignConstraints": "Campaign Constraints",
         "refreshCampaign": "Refresh Campaign",
         "refreshCampaignSuccess": "Refresh Campaign Success",
         "refreshCampaignError": "Refresh Campaign Error: %s ",
@@ -31,8 +28,16 @@
             "status": "Status"
         },
         "campaignSections": "Campaign Sections",
+        "campaignSection":{
+            "single":"Campaign Section"
+        },
         "campaignConstraints": "Campaign Constraints",
+        "campaignConstraint":{
+            "single":"Campaign Constraint"
+        },
         "section":{
+            "searchSection":"Search Section",
+            "searchDevice":"Search Device",
             "label": {
                 "section": "Section",
                 "device": "Device",

@@ -1,12 +1,18 @@
 package com.pusulait.airsqreen.service;
 
+import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Section;
+import com.pusulait.airsqreen.domain.dto.campaign.SectionDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161SectionDTO;
+import com.pusulait.airsqreen.domain.dto.device.DeviceDTO;
+import com.pusulait.airsqreen.domain.dto.platform.PlatformUserDTO;
 import com.pusulait.airsqreen.repository.campaign.SectionRepository;
 import com.pusulait.airsqreen.service.paltform161.Platform161Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +31,25 @@ public class SectionService {
 
     @Autowired
     private SectionRepository sectionRepository;
+
+
+
+    /**
+     * get all the section  for search
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<SectionDTO> search(String name, DataStatus dataStatus, Pageable pageable) throws  Exception {
+        log.debug("Request to get all findByName");
+        log.debug("Request to get all findByNameAndStatus");
+        if(name!=null && dataStatus !=null)
+            return sectionRepository.findByNameContainingIgnoreCaseAndDataStatus(name, dataStatus, pageable).map(SectionDTO::toDTO);
+        else if( name!=null)
+            return sectionRepository.findByNameContainingIgnoreCase(name, pageable).map(SectionDTO::toDTO);
+        return sectionRepository.findByDataStatus(dataStatus, pageable).map(SectionDTO::toDTO);
+    }
+
 
   /*  @Transactional
     public void saveSections() {

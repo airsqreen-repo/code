@@ -10,6 +10,7 @@ angular.module('airSqreenApp')
                 $scope.isView = false;
                 $scope.isCreate=true;
             }else{
+                $scope.isView = false;
                 $scope.isView = true;
             }
         };
@@ -43,6 +44,7 @@ angular.module('airSqreenApp')
                 {
                     command: [
                         { template: KendoUtils.editBtn($scope.right.UPDATE)},
+                        { template: KendoUtils.deleteBtn($scope.right.UPDATE)},
                     ],
                     title: "&nbsp;",
                     width: "163px"
@@ -74,7 +76,7 @@ angular.module('airSqreenApp')
         $scope.view = function (item) {
             $scope.validator.hideMessages();
             $scope.isView=true;
-            $scope.deviceConstraint = angular.copy(item);
+            $scope.campaignSection = angular.copy(item);
             $scope.dialog.show();
             $scope.formConfig();
         };
@@ -83,10 +85,10 @@ angular.module('airSqreenApp')
             $scope.validator.hideMessages();
             $scope.isView=false;
 
-            $scope.deviceConstraint = {};
-            $scope.deviceConstraint.dataStatus='ACTIVE';
-            $scope.deviceConstraint.isCreate=true;
-            $scope.deviceConstraint.isUpdate=false;
+            $scope.campaignSection = {};
+            $scope.campaignSection.dataStatus='ACTIVE';
+            $scope.campaignSection.isCreate=true;
+            $scope.campaignSection.isUpdate=false;
             $scope.dialog.show();
             $scope.formConfig();
         };
@@ -95,28 +97,37 @@ angular.module('airSqreenApp')
             $scope.validator.hideMessages();
             $scope.isView=false;
 
-            $scope.deviceConstraint = angular.copy(item);
-            $scope.deviceConstraint.isUpdate=true;
-            $scope.deviceConstraint.isCreate=false;
+            $scope.campaignSection = angular.copy(item);
+            $scope.campaignSection.isUpdate=true;
+            $scope.campaignSection.isCreate=false;
+            $scope.setSection();
+            $scope.setDevice();
+
             $scope.dialog.show();
             $scope.formConfig();
         };
         var goCreated = function (e) {
-            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignSection.singular')));
             $scope.refresh();
         };
 
         $scope.update = function (event) {
             event.preventDefault();
             if ($scope.validator.validate()) {
-                $scope.deviceConstraint.dirty = true;
-                $scope.deviceConstraint.campaignId=campaignId;
-                if (_.isNumber($scope.deviceConstraint.id)) {
-                    var toObject = Object.assign({}, $scope.deviceConstraint);
-                    api.one('admin','deviceConstraints').patch(toObject).then(success, error);
+                $scope.campaignSection.dirty = true;
+                $scope.campaignSection.campaignId=campaignId;
+
+
+                    $scope.campaignSection.device= $scope.campaignSection.device[0];
+
+                    $scope.campaignSection.section= $scope.campaignSection.section[0];
+
+                if (_.isNumber($scope.campaignSection.id)) {
+                    var toObject = Object.assign({}, $scope.campaignSection);
+                    api.one('admin','campaignSections').patch(toObject).then(success, error);
                 } else {
-                    var toObject = Object.assign({}, $scope.deviceConstraint);
-                    api.one('admin','deviceConstraints').post(toObject).then(goCreated, error);
+                    var toObject = Object.assign({}, $scope.campaignSection);
+                    api.one('admin','campaignSections').post(toObject).then(goCreated, error);
                 }
                 $scope.dialog.hide();
             } else {
@@ -124,21 +135,21 @@ angular.module('airSqreenApp')
             }
         };
 
-        $scope.$watch('deviceConstraint.shortName', function (val) {
+        $scope.$watch('campaignSection.shortName', function (val) {
             if(!_.isUndefined(val))
-                $scope.deviceConstraint.shortName = $filter('uppercase')(val);
+                $scope.campaignSection.shortName = $filter('uppercase')(val);
         }, true);
 
 
         var goList = function (e) {
-            $state.go('deviceConstraintManagement');
+            $state.go('campaignSectionManagement');
         };
 
         $scope.removeDialog = function (uid) {
             var data = $scope.dataSource.getByUid(uid.uid);
             if (data) {
                 dialogService.showDialog($translate.instant('deleteConfirmation'),
-                    sprintf($translate.instant('deleteMessage'), $translate.instant('deviceConstraint.singular'))).then(
+                    sprintf($translate.instant('deleteMessage'), $translate.instant('campaign.campaignSection.singular'))).then(
                     function () {
                         $scope.delete(data.id);
                         $scope.dataSource.remove(data);
@@ -156,7 +167,7 @@ angular.module('airSqreenApp')
             });
             if (remove_items.length > 0) {
                 dialogService.showDialog($translate.instant('deleteConfirmation'),
-                    sprintf($translate.instant('deleteMessage'), $translate.instant('deviceConstraint.singular'))).then(
+                    sprintf($translate.instant('deleteMessage'), $translate.instant('campaign.campaignSection.singular'))).then(
                     function () {
                         _.forEach(remove_items, function (value) {
                             $scope.delete(value.id);
@@ -173,7 +184,7 @@ angular.module('airSqreenApp')
 
         $scope.save = function () {
             $scope.dataSource.sync().then(function () {
-                $scope.$emit('notifySuccess', sprintf($translate.instant('saved') , $translate.instant('deviceConstraint.singular')));
+                $scope.$emit('notifySuccess', sprintf($translate.instant('saved') , $translate.instant('campaign.campaignSection.singular')));
                 $scope.refresh();
             }, function(reason) {
                 // delete entry
@@ -189,12 +200,12 @@ angular.module('airSqreenApp')
         };
 
         var success = function (data) {
-            $scope.deviceConstraint = data;
+            $scope.campaignSection = data;
 
             $scope.refresh();
             // tekrar cagir
 
-            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignSection.singular')));
         };
 
         var error = function (data) {
@@ -202,8 +213,8 @@ angular.module('airSqreenApp')
         };
 
         $scope.delete = function (id) {
-            api.one('admin/deviceConstraints', id).remove().then(function () {
-                $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            api.one('admin/campaignSections', id).remove().then(function () {
+                $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignSection.singular')));
                 $scope.refresh();
             }, function (reason) {
                 $scope.$emit('notifyError', sprintf($translate.instant('notSaved'), reason.message));
@@ -211,5 +222,80 @@ angular.module('airSqreenApp')
             });
         };
 
+
+        $scope.sections = KendoUtils.createKendoDataSourceSearch(api.all('admin/sections'), {
+            serverFiltering: true,
+            pageSize: 1000,
+            sort: [
+                { field: "id", dir: "desc" }
+            ],
+            filterHandler:function(filter) {
+                var  autocomplete = $("#section").data("kendoAutoComplete");
+                return { url: "search",
+                    query: {
+                        dataStatus:"ACTIVE",
+                        size:100,
+                        name: autocomplete.value()
+                    }
+                };
+
+            }
+        });
+
+
+
+        $scope.setSection = function(){
+            var  autocomplete = $("#section").data("kendoAutoComplete");
+            autocomplete.value($scope.campaignSection.section.name);
+            autocomplete.search(0);
+            $timeout(function(){
+                autocomplete.select(autocomplete.ul.children().eq(0));
+                autocomplete.close();
+            },1000);
+        };
+
+
+        $scope.devices = KendoUtils.createKendoDataSourceSearch(api.all('admin/devices'), {
+            serverFiltering: true,
+            pageSize: 1000,
+            sort: [
+                { field: "id", dir: "desc" }
+            ],
+            filterHandler:function(filter) {
+                var  autocomplete = $("#device").data("kendoAutoComplete");
+                return { url: "search",
+                    query: {
+                        dataStatus:"ACTIVE",
+                        size:100,
+                        name: autocomplete.value()
+                    }
+                };
+
+            }
+        });
+
+
+        $scope.setDevice = function(){
+            var  autocomplete = $("#section").data("kendoAutoComplete");
+            autocomplete.value($scope.campaignSection.device.name);
+            autocomplete.search(0);
+            $timeout(function(){
+                autocomplete.select(autocomplete.ul.children().eq(0));
+                autocomplete.close();
+            },1000);
+        };
+
+
+        $scope.sectionSelected = function (e) {
+            var  autocomplete = $("#section").data("kendoAutoComplete");
+            var item=autocomplete.dataSource.data()[e.item.index()];
+            $scope.campaignSection.sectionId= item.id;
+        }
+
+        $scope.deviceSelected = function (e) {
+            var  autocomplete = $("#device").data("kendoAutoComplete");
+            var item=autocomplete.dataSource.data()[e.item.index()];
+            $scope.campaignSection.deviceId= item.id;
+        }
 
     });

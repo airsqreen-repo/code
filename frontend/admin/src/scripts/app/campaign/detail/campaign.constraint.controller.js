@@ -4,7 +4,7 @@ angular.module('airSqreenApp')
     .controller('CampaignConstraintController', function ($rootScope, $scope, $state, $stateParams, $translate, $timeout, api, Principal, KendoUtils, dialogService, AppUtilsService, CAMPAIGN_CONSTRAINT_FILTER, CAMPAIGN_CONSTRAINT_TYPE) {
 
         $scope.isView = true;
-        var deviceId=$stateParams.id;
+        var campaignId=$stateParams.id;
         $scope.load = function (){
             if($stateParams.mode=="edit"){
                 $scope.isView = false;
@@ -13,6 +13,15 @@ angular.module('airSqreenApp')
                 $scope.isView = true;
             }
         };
+
+
+
+        $scope.campaignConstraintTypes= AppUtilsService.getCampaignConstraintTypes();
+        $scope.campaignConstraintFilters= AppUtilsService.getCampaignConstraintFilters();
+
+        $scope.campaignConstraintType= CAMPAIGN_CONSTRAINT_TYPE;
+        $scope.campaignConstraintFilter= CAMPAIGN_CONSTRAINT_FILTER;
+
 
         $scope.load();
 
@@ -38,7 +47,15 @@ angular.module('airSqreenApp')
             columns: [
                 {field: "campaignConstraintType", title: "{{ 'campaign.constraint.label.campaignConstraintType' | translate }}", template: "{{campaignConstraintType[dataItem.campaignConstraintType] | translate}}" },
                 {field: "campaignConstraintFilter", title: "{{ 'campaign.constraint.label.campaignConstraintFilter' | translate }}", template: "{{campaignConstraintFilter[dataItem.campaignConstraintFilter] | translate}}" },
-                {field: "filter_detail", title: "{{ 'campaign.constraint.label.filter_detail' | translate }}"}
+                {field: "filter_detail", title: "{{ 'campaign.constraint.label.filter_detail' | translate }}"},
+                {
+                    command: [
+                        { template: KendoUtils.editBtn($scope.right.UPDATE)},
+                        { template: KendoUtils.deleteBtn($scope.right.UPDATE)},
+                    ],
+                    title: "&nbsp;",
+                    width: "163px"
+                }
             ],
             selectable: "row",
             sortable: "true",
@@ -66,7 +83,7 @@ angular.module('airSqreenApp')
         $scope.view = function (item) {
             $scope.validator.hideMessages();
             $scope.isView=true;
-            $scope.deviceConstraint = angular.copy(item);
+            $scope.campaignConstraint = angular.copy(item);
             $scope.dialog.show();
             $scope.formConfig();
         };
@@ -75,10 +92,10 @@ angular.module('airSqreenApp')
             $scope.validator.hideMessages();
             $scope.isView=false;
 
-            $scope.deviceConstraint = {};
-            $scope.deviceConstraint.dataStatus='ACTIVE';
-            $scope.deviceConstraint.isCreate=true;
-            $scope.deviceConstraint.isUpdate=false;
+            $scope.campaignConstraint = {};
+            $scope.campaignConstraint.dataStatus='ACTIVE';
+            $scope.campaignConstraint.isCreate=true;
+            $scope.campaignConstraint.isUpdate=false;
             $scope.dialog.show();
             $scope.formConfig();
         };
@@ -87,28 +104,28 @@ angular.module('airSqreenApp')
             $scope.validator.hideMessages();
             $scope.isView=false;
 
-            $scope.deviceConstraint = angular.copy(item);
-            $scope.deviceConstraint.isUpdate=true;
-            $scope.deviceConstraint.isCreate=false;
+            $scope.campaignConstraint = angular.copy(item);
+            $scope.campaignConstraint.isUpdate=true;
+            $scope.campaignConstraint.isCreate=false;
             $scope.dialog.show();
             $scope.formConfig();
         };
         var goCreated = function (e) {
-            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignConstraint.singular')));
             $scope.refresh();
         };
 
         $scope.update = function (event) {
             event.preventDefault();
             if ($scope.validator.validate()) {
-                $scope.deviceConstraint.dirty = true;
-                $scope.deviceConstraint.deviceId=deviceId;
-                if (_.isNumber($scope.deviceConstraint.id)) {
-                    var toObject = Object.assign({}, $scope.deviceConstraint);
-                    api.one('admin','deviceConstraints').patch(toObject).then(success, error);
+                $scope.campaignConstraint.dirty = true;
+                $scope.campaignConstraint.campaignId=campaignId;
+                if (_.isNumber($scope.campaignConstraint.id)) {
+                    var toObject = Object.assign({}, $scope.campaignConstraint);
+                    api.one('admin','campaignConstraints').patch(toObject).then(success, error);
                 } else {
-                    var toObject = Object.assign({}, $scope.deviceConstraint);
-                    api.one('admin','deviceConstraints').post(toObject).then(goCreated, error);
+                    var toObject = Object.assign({}, $scope.campaignConstraint);
+                    api.one('admin','campaignConstraints').post(toObject).then(goCreated, error);
                 }
                 $scope.dialog.hide();
             } else {
@@ -116,21 +133,21 @@ angular.module('airSqreenApp')
             }
         };
 
-        $scope.$watch('deviceConstraint.shortName', function (val) {
+        $scope.$watch('campaignConstraint.shortName', function (val) {
             if(!_.isUndefined(val))
-                $scope.deviceConstraint.shortName = $filter('uppercase')(val);
+                $scope.campaignConstraint.shortName = $filter('uppercase')(val);
         }, true);
 
 
         var goList = function (e) {
-            $state.go('deviceConstraintManagement');
+            $state.go('campaignConstraintManagement');
         };
 
         $scope.removeDialog = function (uid) {
             var data = $scope.dataSource.getByUid(uid.uid);
             if (data) {
                 dialogService.showDialog($translate.instant('deleteConfirmation'),
-                    sprintf($translate.instant('deleteMessage'), $translate.instant('deviceConstraint.singular'))).then(
+                    sprintf($translate.instant('deleteMessage'), $translate.instant('campaign.campaignConstraint.singular'))).then(
                     function () {
                         $scope.delete(data.id);
                         $scope.dataSource.remove(data);
@@ -148,7 +165,7 @@ angular.module('airSqreenApp')
             });
             if (remove_items.length > 0) {
                 dialogService.showDialog($translate.instant('deleteConfirmation'),
-                    sprintf($translate.instant('deleteMessage'), $translate.instant('deviceConstraint.singular'))).then(
+                    sprintf($translate.instant('deleteMessage'), $translate.instant('campaign.campaignConstraint.singular'))).then(
                     function () {
                         _.forEach(remove_items, function (value) {
                             $scope.delete(value.id);
@@ -165,7 +182,7 @@ angular.module('airSqreenApp')
 
         $scope.save = function () {
             $scope.dataSource.sync().then(function () {
-                $scope.$emit('notifySuccess', sprintf($translate.instant('saved') , $translate.instant('deviceConstraint.singular')));
+                $scope.$emit('notifySuccess', sprintf($translate.instant('saved') , $translate.instant('campaign.campaignConstraint.singular')));
                 $scope.refresh();
             }, function(reason) {
                 // delete entry
@@ -181,12 +198,12 @@ angular.module('airSqreenApp')
         };
 
         var success = function (data) {
-            $scope.deviceConstraint = data;
+            $scope.campaignConstraint = data;
 
             $scope.refresh();
             // tekrar cagir
 
-            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignConstraint.singular')));
         };
 
         var error = function (data) {
@@ -194,8 +211,8 @@ angular.module('airSqreenApp')
         };
 
         $scope.delete = function (id) {
-            api.one('admin/deviceConstraints', id).remove().then(function () {
-                $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('deviceConstraint.singular')));
+            api.one('admin/campaignConstraints', id).remove().then(function () {
+                $scope.$emit('notifySuccess', sprintf($translate.instant('saved'), $translate.instant('campaign.campaignConstraint.singular')));
                 $scope.refresh();
             }, function (reason) {
                 $scope.$emit('notifyError', sprintf($translate.instant('notSaved'), reason.message));
