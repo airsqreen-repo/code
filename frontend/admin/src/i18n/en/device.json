@@ -2,16 +2,16 @@
     "device": {
         "singular": "Device",
         "plural": "Devices",
-        "management": "Tanımlama",
-        "title": "Device Yönetimi",
+        "management": "Management",
+        "title": "Device Management",
         "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
-        "searchPlatformUserInput": "Adina gore ara",
-        "detail": "Detay",
+        "searchPlatformUserInput": "Searching by name",
+        "detail": "Detail",
         "deviceConstraints": "Device Constraints",
         "label": {
-            "name": "Adı",
+            "name": "Name",
             "externalDeviceId": "External Device Id",
-            "platformUser": "Platform Kullanicisi",
+            "platformUser": "Platform User",
             "latitude": "Latitude",
             "longitude": "Longitude"
         },

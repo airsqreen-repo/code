@@ -205,12 +205,12 @@ angular.module('airSqreenApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pasc
             urlTemplate: 'i18n/{lang}/{part}.json'
         });
 
-        $translateProvider.preferredLanguage('tr');
+        $translateProvider.preferredLanguage('en');
         $translateProvider.useCookieStorage();
         $translateProvider.useSanitizeValueStrategy('escaped');
 
         tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
         tmhDynamicLocaleProvider.useCookieStorage();
-        tmhDynamicLocaleProvider.storageKey('NG_TRANSLATE_LANG_KEY');
+        tmhDynamicLocaleProvider.storageKey('LANGUAGE');
 
     });

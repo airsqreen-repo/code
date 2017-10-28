@@ -118,10 +118,6 @@
         "active": "Aktif",
         "passive": "Pasif"
     },
-    "data.status": {
-        "active": "Aktif",
-        "passive": "Pasif"
-    },
     "platformType":{
       "dsp":"DSP",
       "ssp":"SSP"
@@ -136,6 +132,16 @@
     "deviceConstraintFilter":{
       "include":"Include",
       "exclude":"Exclude"
+    },
+    "campaignConstraintFilter":{
+        "bigger":"Bigger",
+        "smaller":"Smaller",
+        "equal":"Equal",
+        "biggerEqual":"Bigger Equal",
+        "smallerEqual":"Smaller Equal"
+    },
+    "campaignConstraintType":{
+        "temperature":"Temperature"
     },
     "validation":" girmeniz zorunludur.",
     "footer": "AirSqreen",

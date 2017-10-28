@@ -1,0 +1,57 @@
+{
+    "campaign": {
+        "singular": "Campaign",
+        "plural": "Campaigns",
+        "management": "Management",
+        "title": "Campaign Management",
+        "searchPlaceHolder": "Adı, soyadı, kullanıcı adı ve email adresine göre ara",
+        "searchPlatformUserInput": "Searching by name",
+        "detail": "Detail",
+        "refreshCampaign": "Refresh Campaign",
+        "refreshCampaignSuccess": "Refresh Campaign Success",
+        "refreshCampaignError": "Refresh Campaign Error: %s ",
+        "button":{
+            "setActive": "Set Active",
+            "setDeActive": "Set DeActive"
+        },
+        "label": {
+            "name": "Name",
+            "externalId": "External Id",
+            "uniqueCampaignUId": "Unique Campaign UId",
+            "active": "Active",
+            "pricing_type": "Pricing type",
+            "pricingType": "Pricing Type",
+            "target": "Target",
+            "start_on": "Start on",
+            "end_on": "End on",
+            "price": "Price",
+            "status": "Status"
+        },
+        "campaignSections": "Campaign Sections",
+        "campaignSection":{
+            "single":"Campaign Section"
+        },
+        "campaignConstraints": "Campaign Constraints",
+        "campaignConstraint":{
+            "single":"Campaign Constraint"
+        },
+        "section":{
+            "searchSection":"Search Section",
+            "searchDevice":"Search Device",
+            "label": {
+                "section": "Section",
+                "device": "Device",
+                "actionId": "action ID",
+                "key": "key",
+                "sspPrice": "SSP Price"
+            }
+        },
+        "constraint":{
+            "label": {
+                "campaignConstraintType": "Type",
+                "campaignConstraintFilter": "Filter",
+                "filter_detail": "Filter Detail"
+            }
+        }
+    }
+}

@@ -30,7 +30,13 @@
                 "apidocs": "API",
                 "database": "Database"
             },
+            "defination":{
+                "title":"Definition",
+                "platformUser": "Platform User"
+            },
             "report": "Report",
+            "device": "Device",
+            "campaign": "Campaign",
             "language": "Language"
         },
         "form": {
@@ -110,6 +116,31 @@
         "turkish":"Türkçe",
         "english":"İngilizce"
     },
+    "platformType":{
+        "dsp":"DSP",
+        "ssp":"SSP"
+    },
+    "serviceType":{
+        "platform161":"PLATFORM 161",
+        "sistem9":"SISTEM 9"
+    },
+    "deviceConstraintType":{
+        "dynamicTimeFilter":"Dynamic Time Filter"
+    },
+    "deviceConstraintFilter":{
+        "include":"Include",
+        "exclude":"Exclude"
+    },
+    "campaignConstraintFilter":{
+        "bigger":"Bigger",
+        "smaller":"Smaller",
+        "equal":"Equal",
+        "biggerEqual":"Bigger Equal",
+        "smallerEqual":"Smaller Equal"
+    },
+    "campaignConstraintType":{
+        "temperature":"Temperature"
+    },
     "validation":" girmeniz zorunludur.",
     "footer": "This is your footer",
     "showBtn": "<span class='glyphicon glyphicon-chevron-right'></span>",
@@ -122,6 +153,8 @@
     "refreshBtn" : "<span class='glyphicon glyphicon-refresh'></span> Refresh",
     "approvedBtn" : "<span class='glyphicon glyphicon-ok'></span> Approved",
     "declinedBtn" : "<span class='glyphicon glyphicon-remove'></span> Declined",
+    "search": "<span class=\"glyphicon glyphicon-search\"></span> Search",
+    "clearSearch": " <i class=\"glyphicon glyphicon-erase\"></i> Clear Search",
     "saveBtn" : "Save",
     "deleteBtn" : "Delete",
     "updateBtn" : "Update",
