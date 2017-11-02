@@ -1,7 +1,5 @@
 package com.pusulait.airsqreen.resource;
 
-import com.pusulait.airsqreen.config.constants.Constants;
-import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
 import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
 import com.pusulait.airsqreen.domain.enums.ErrorType;
@@ -9,11 +7,8 @@ import com.pusulait.airsqreen.domain.view.SspViewCountLog;
 import com.pusulait.airsqreen.security.SecurityUtils;
 import com.pusulait.airsqreen.service.SystemErrorService;
 import com.pusulait.airsqreen.service.report.ReportService;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +26,6 @@ public class ReportResource {
 
     @Autowired
     private SystemErrorService systemErrorService;
-
-
 
     @RequestMapping(value = "/report/sspViewCountLog", method = RequestMethod.GET)
     public ResponseEntity<?> sspViewCountLogSearch(@RequestBody SspViewCountLog sspViewCountLog) {
