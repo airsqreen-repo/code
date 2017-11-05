@@ -43,13 +43,13 @@ public class ReportService {
 
 
     @Transactional(readOnly = true)
-    public List<EventRunReportDTO> eventRunReportDay(Long campaignId, String from, String to) {
+    public List<EventRunReportDTO> eventRunReportDay(Long campaignId, String from, String to) throws Exception {
 
         log.debug("Request to get all PlatformUsers");
         List<EventRunReport> eventRunReports = eventRunReportRepository.findAll();
 
         String query = "select count(*) as count ,campaign_Id as campaignId , extract(day from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
-        query += " err.runDate  between ( " +  ","  + ")";
+        query += " err.runDate  between ( " + DateUtil.generateStartOrEndDate("start", from) + "," + DateUtil.generateStartOrEndDate("end", from) + ")";
         if(campaignId != null){
             query += "and err.campaignId = " + campaignId ;
         }
