@@ -32,6 +32,7 @@ public class CampaignDTO {
 
         CampaignDTO campaignDTO = new CampaignDTO();
         campaignDTO.setId(campaign.getId());
+        campaignDTO.setName(campaign.getName());
         campaignDTO.setExternalId(campaign.getExternalId());
         campaignDTO.setPricingType(campaign.getPricingType());
         campaignDTO.setActive(campaign.getActive());

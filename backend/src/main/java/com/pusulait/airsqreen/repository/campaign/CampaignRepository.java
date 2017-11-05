@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.repository.campaign;
 
 import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,5 +34,6 @@ public interface CampaignRepository extends JpaRepository<Campaign, Long> {
 
     Page<Campaign> findByActive(Boolean active, Pageable pageable);
 
+    Page<Campaign> findByNameContainingIgnoreCase(String name, Pageable pageable);
 
 }

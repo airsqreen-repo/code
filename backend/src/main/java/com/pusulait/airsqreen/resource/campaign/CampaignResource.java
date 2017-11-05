@@ -89,10 +89,10 @@ public class CampaignResource {
      * GET  api/admin/campaigns/search -> getAll the  campaigns.
      */
     @RequestMapping(value = Constants.URL_ADMIN + Constants.URL_CAMPAIGN + Constants.URL_SEARCH , method = RequestMethod.GET)
-    public ResponseEntity<?> search(@RequestParam(value="active", required=false) Boolean active, @ApiParam Pageable pageable, PagedResourcesAssembler assembler) {
+    public ResponseEntity<?> search(@RequestParam(value="active", required=false) Boolean active, @RequestParam(value="name", required=false) String name, @ApiParam Pageable pageable, PagedResourcesAssembler assembler) {
         log.debug("REST request to get getAllGlobalCurrencyDTOs ");
         try {
-            return new ResponseEntity<>(assembler.toResource(campaignService.search(active,pageable)), HttpStatus.OK);
+            return new ResponseEntity<>(assembler.toResource(campaignService.search(active, name, pageable)), HttpStatus.OK);
         } catch (Exception ex) {
             systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.GET_ALL_CAMPAINGS, SecurityUtils.getCurrentLogin()));
             return new ResponseEntity<>(new ErrorDTO("campaignService.search", ex.getMessage()), HttpStatus.CONFLICT);

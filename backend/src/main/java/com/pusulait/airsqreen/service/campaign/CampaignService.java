@@ -160,11 +160,14 @@ public class CampaignService {
     }
 
     @Transactional(readOnly = true)
-    public Page<CampaignDTO> search(Boolean active, Pageable pageable) throws  Exception {
+    public Page<CampaignDTO> search(Boolean active, String name, Pageable pageable) throws  Exception {
         log.debug("Request to get all findByNameAndStatus");
         if( active!=null)
             return campaignRepository.findByActive(active, pageable).map(CampaignDTO::toDTO);
-        return campaignRepository.findAll(pageable).map(CampaignDTO::toDTO);
+        else if( name!=null)
+            return campaignRepository.findByNameContainingIgnoreCase(name, pageable).map(CampaignDTO::toDTO);
+        else
+            return campaignRepository.findAll(pageable).map(CampaignDTO::toDTO);
     }
 
     @Transactional(readOnly = true)
