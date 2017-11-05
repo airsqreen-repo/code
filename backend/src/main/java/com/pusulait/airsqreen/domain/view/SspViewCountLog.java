@@ -15,9 +15,7 @@ import java.util.Date;
 @Immutable
 public class SspViewCountLog extends SspViewCount implements Serializable {
 
-
     @Column(name = "update_date", updatable = false, nullable = false)
     private Date updateDate;
-
 
 }

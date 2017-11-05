@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.resource;
 import com.pusulait.airsqreen.domain.dto.error.ErrorDTO;
 import com.pusulait.airsqreen.domain.dto.error.SystemErrorDTO;
 import com.pusulait.airsqreen.domain.enums.ErrorType;
+import com.pusulait.airsqreen.domain.view.EventRunReport;
 import com.pusulait.airsqreen.domain.view.SspViewCountLog;
 import com.pusulait.airsqreen.security.SecurityUtils;
 import com.pusulait.airsqreen.service.SystemErrorService;
@@ -11,13 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
+import java.util.Date;
 
 @RestController
-@RequestMapping(value = "/api", produces = "application/hal+json")
+@RequestMapping(value = "/api/report", produces = "application/hal+json")
 @Slf4j
 public class ReportResource {
 
@@ -27,7 +28,7 @@ public class ReportResource {
     @Autowired
     private SystemErrorService systemErrorService;
 
-    @RequestMapping(value = "/report/sspViewCountLog", method = RequestMethod.GET)
+    @RequestMapping(value = "/sspViewCountLog", method = RequestMethod.GET)
     public ResponseEntity<?> sspViewCountLogSearch(@RequestBody SspViewCountLog sspViewCountLog) {
         log.debug("REST request to get getAllCampaignDTOs ");
         try {
@@ -39,4 +40,18 @@ public class ReportResource {
             return new ResponseEntity<>(new ErrorDTO("reportService.sspViewCountLogSearch", ex.getMessage()), HttpStatus.CONFLICT);
         }
     }
+
+    @RequestMapping(value = "/eventViewReportDay", method = RequestMethod.GET)
+    public ResponseEntity<?> eventViewReport(@RequestParam(value="campaignId", required=false)Long campaignId, @RequestParam(value="from", required=false) String from, @RequestParam(value="to", required=false) String to) {
+        log.debug("REST request to get getAllCampaignDTOs ");
+        try {
+
+            return new ResponseEntity<>(reportService.eventRunReportDay(campaignId,from,to), HttpStatus.OK);
+
+        } catch (Exception ex) {
+            systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.SSPVIEWCOUNTLOGSEARCH, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("reportService.sspViewCountLogSearch", ex.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
 }

@@ -3,6 +3,7 @@ package com.pusulait.airsqreen.util;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
 import org.joda.time.DateTime;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -144,6 +145,35 @@ public class DateUtil {
             }
         }
         return totalHour;
+    }
+
+
+    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+
+    public static Date generateStartOrEndDate(String type, String time) throws Exception{
+        Date tempStartDate = formatter.parse(time);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(tempStartDate.getTime());
+
+        if(type.equals("start")){
+           /* calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);*/
+            calendar.set(Calendar.SECOND, 0);
+        }else if (type.equals("end")){
+           /* calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59); */
+            calendar.set(Calendar.SECOND, 59);
+        }
+
+        return calendar.getTime();
+    }
+
+
+    public static String currentDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 }
