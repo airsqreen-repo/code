@@ -54,4 +54,18 @@ public class ReportResource {
         }
     }
 
+
+    @RequestMapping(value = "/eventViewReportHour", method = RequestMethod.GET)
+    public ResponseEntity<?> eventViewReportHour(@RequestParam(value="campaignId", required=false)Long campaignId, @RequestParam(value="from", required=false) String from, @RequestParam(value="to", required=false) String to) {
+        log.debug("REST request to get getAllCampaignDTOs ");
+        try {
+
+            return new ResponseEntity<>(reportService.eventRunReportHour(campaignId,from,to), HttpStatus.OK);
+
+        } catch (Exception ex) {
+            systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.SSPVIEWCOUNTLOGSEARCH, SecurityUtils.getCurrentLogin()));
+            return new ResponseEntity<>(new ErrorDTO("reportService.sspViewCountLogSearch", ex.getMessage()), HttpStatus.CONFLICT);
+        }
+    }
+
 }

@@ -11,10 +11,18 @@ public class EventRunReportDTO {
     public BigInteger campaignId;
     public BigInteger count;
     public String date;
+    public Double hour;
 
     public EventRunReportDTO(BigInteger campaignId, BigInteger count, String date) {
         this.campaignId = campaignId;
         this.count = count;
         this.date = date;
     }
+
+    public EventRunReportDTO(BigInteger campaignId, BigInteger count, Double hour) {
+        this.campaignId = campaignId;
+        this.count = count;
+        this.hour = hour;
+    }
+
 }
