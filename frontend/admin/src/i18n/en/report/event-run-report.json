@@ -1,0 +1,24 @@
+{
+    "eventRunReport": {
+      "singular":"Event Run Report",
+      "plural":"Event Run Reports",
+      "management":"Management",
+      "title": "Event Run Report Management",
+      "createReport": "Create Report",
+      "dailyRevenue": "Daily Revenue ",
+      "HourlyRevenue": "Hourly Revenue ",
+      "button":{
+        "go":"GO",
+        "exportExcel":"Export Excel"
+      },
+      "search":{
+        "campaign":"Campaign",
+        "Date":"Date",
+        "dates":"Dates",
+        "to":"to"
+      }
+    }
+}
+
+
+

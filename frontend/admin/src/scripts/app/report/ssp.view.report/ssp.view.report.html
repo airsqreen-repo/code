@@ -1,0 +1,60 @@
+
+<div>
+    <h4 translate="sspViewReport.dailyRevenue">Daily Revenue (last 30 days)</h4>
+    <div class="col-md-12">
+    <div kendo-chart
+         k-legend="{ position: 'bottom' }"
+         k-series-defaults="{ type: 'line' }"
+         k-series="[
+                                 { field: 'solar', name: '' }
+                             ]"
+         k-category-axis="categoryAxis"
+         k-data-source="electricity"
+         k-series-hover="onSeriesHover"
+         style="height: 250px;" ></div>
+    </div>
+    <div class="clearfix"></div>
+<br><br><br>
+
+    <h4 translate="sspViewReport.createReport">Create Report</h4>
+    <div class="col-md-12">
+        <form ng-submit="searchForm(search)"  novalidate class="form-inline">
+            <div class="form-group mr-10">
+                <label for="reportType" translate="sspViewReport.search.reportType">Report Type:</label>
+                <select class="form-control"  ng-model="search.reportType"  name="reportType" id="reportType" >
+                    <option value="SSP">SSP</option>
+                </select>
+            </div>
+
+
+            <div class="form-group mr-10">
+                <label for="dates" translate="sspViewReport.search.dates">Dates:</label>
+                <input id="from" class="form-control input-md"  kendo-date-picker k-ng-model="search.from" />
+
+                <label for="to" translate="sspViewReport.search.to">to:</label>
+                <input id="to" class="form-control input-md"  kendo-date-picker k-ng-model="search.to" />
+            </div>
+
+            <button type="submit" ng-click="searchForm(search)" class="btn btn-default" translate="sspViewReport.button.go">Go</button>
+        </form>
+    </div>
+    <div class="clearfix"></div>
+    <br><br><br>
+
+    <div>
+
+        <div
+                id="grid"
+                kendo-grid="grid"
+                data-role="grid"
+                k-data-source="data"
+                k-data-binding="dataBinding"
+                k-options="gridOptions"
+                k-on-change="onChange(data)"
+        >
+        </div>
+    </div>
+
+      <br />
+    <button class="btn btn-success pull-right"  ng-click="saveExcel()" type="button" translate="sspViewReport.button.exportExcel"></button>
+</div>

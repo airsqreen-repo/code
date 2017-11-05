@@ -6,11 +6,10 @@ angular.module('airSqreenApp')
 
 .constant('VERSION', 1.1)
 
-    .constant('SERVICE_URL', 'http://testapi.airsqreen.com/')
+.constant('SERVICE_URL', 'http://localhost:8080/')
 
-    .constant('PUBLIC_URL', 'http://testapi.airsqreen.com/')
+.constant('PUBLIC_URL', 'http://localhost:3000/')
 
-    .constant('CDN_URL', 'http://testapi.airsqreen.com/')
 .constant('CDN_URL', 'http://127.0.0.1:82/projects/cdn')
 
 ;

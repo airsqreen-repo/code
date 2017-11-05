@@ -1,0 +1,31 @@
+
+{
+    "sspViewReport": {
+      "singular":"Report",
+      "plural":"Reports",
+      "management":"Management",
+      "title": "Report Management",
+      "dailyRevenue": "Daily Revenue (last 30 days)",
+      "createReport": "Create Report",
+      "button":{
+        "go":"GO",
+        "exportExcel":"Export Excel"
+      },
+      "search":{
+        "reportType":"Report Type",
+        "show":"Show",
+        "dates":"Dates",
+        "to":"to"
+      },
+      "label": {
+        "date":"Date",
+        "screenName":"Screen Name",
+        "cpm":"CPM",
+        "impressions":"Impressions",
+        "revenue":"Revenue"
+      }
+    }
+}
+
+
+

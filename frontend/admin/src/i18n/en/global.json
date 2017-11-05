@@ -34,7 +34,11 @@
                 "title":"Definition",
                 "platformUser": "Platform User"
             },
-            "report": "Report",
+            "report": {
+                "title":"Report",
+                "eventRunReport":"Event Run Report",
+                "sspViewReport":"SSP View Report"
+            },
             "device": "Device",
             "campaign": "Campaign",
             "language": "Language"
