@@ -47,7 +47,7 @@ public class ReportService {
 
         log.debug("Request to get all PlatformUsers");
 
-        String query = "select count(*) as count ,campaign_Id as campaignId , extract(day from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
+        String query = "select count(*) as count ,campaign_Id as campaignId , ,campaign_name as campaignName,extract(day from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
 
         if (from != null && to != null) {
             query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'" ;
@@ -57,13 +57,13 @@ public class ReportService {
             query += " and err.campaign_id = " + campaignId;
         }
 
-        query += " group by campaign_Id,   to_char(run_date, 'YYYY-dd-MM')";
+        query += " group by campaign_Id,   to_char(run_date, 'YYYY-dd-MM'),campaign_name";
 
         Query qt = entityManager.createNativeQuery(query);
         List<Object[]> candidateList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (String) e[2])));
+        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (String) e[2],(String) e[3])));
 
         return resultList;
 
@@ -74,7 +74,7 @@ public class ReportService {
 
         log.debug("Request to get all PlatformUsers");
 
-        String query = "select count(*) as count ,campaign_Id as campaignId , extract(hour from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'WAITING' ";
+        String query = "select count(*) as count ,campaign_Id as campaignId ,campaign_name as campaignName, extract(hour from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'WAITING' ";
 
         if (from != null && to != null) {
             query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'" ;
@@ -84,13 +84,13 @@ public class ReportService {
             query += " and err.campaign_id = " + campaignId;
         }
 
-        query += " group by campaign_Id,   extract(hour from  run_date)";
+        query += " group by campaign_Id,   extract(hour from  run_date), campaign_name";
 
         Query qt = entityManager.createNativeQuery(query);
         List<Object[]> candidateList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (Double) e[2])));
+        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (Double) e[2],(String) e[3])));
 
         return resultList;
 
