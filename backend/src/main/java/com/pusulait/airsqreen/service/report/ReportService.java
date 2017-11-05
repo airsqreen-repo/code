@@ -46,12 +46,15 @@ public class ReportService {
     public List<EventRunReportDTO> eventRunReportDay(Long campaignId, String from, String to) throws Exception {
 
         log.debug("Request to get all PlatformUsers");
-        List<EventRunReport> eventRunReports = eventRunReportRepository.findAll();
 
         String query = "select count(*) as count ,campaign_Id as campaignId , extract(day from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
-        query += " err.runDate  between ( " + DateUtil.generateStartOrEndDate("start", from) + "," + DateUtil.generateStartOrEndDate("end", from) + ")";
-        if(campaignId != null){
-            query += "and err.campaignId = " + campaignId ;
+
+        if (from != null && to != null) {
+            query += " and err.runDate  between " + DateUtil.generateStartOrEndDate("start", from) + " and " + DateUtil.generateStartOrEndDate("end", from) ;
+
+        }
+        if (campaignId != null) {
+            query += " and err.campaignId = " + campaignId;
         }
 
         query += " group by campaign_Id, extract(day from  run_date)";
@@ -61,9 +64,9 @@ public class ReportService {
         List<Object[]> candidateList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e->resultList.add(new EventRunReportDTO((BigInteger)e[1],(BigInteger)e[0],(BigInteger)e[2])));
+        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (BigInteger) e[2])));
 
-        return  resultList;
+        return resultList;
 
     }
 

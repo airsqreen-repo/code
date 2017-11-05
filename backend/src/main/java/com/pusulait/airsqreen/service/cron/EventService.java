@@ -149,8 +149,7 @@ public class EventService {
     }
 
 
-    //@Scheduled(cron = "0 0 0 1 * ?")
-    @Scheduled(fixedRate = 5 * 1000)
+    //@Scheduled(fixedRate = 5 * 1000)
     public void pushEvents() throws Exception {
 
         //weatherService.getTempWithGeoCoordinates()
