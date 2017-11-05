@@ -148,7 +148,7 @@ public class DateUtil {
     }
 
 
-    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 
     public static Date generateStartOrEndDate(String type, String time) throws Exception{
@@ -157,12 +157,12 @@ public class DateUtil {
         calendar.setTimeInMillis(tempStartDate.getTime());
 
         if(type.equals("start")){
-           /* calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);*/
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
         }else if (type.equals("end")){
-           /* calendar.set(Calendar.HOUR_OF_DAY, 23);
-            calendar.set(Calendar.MINUTE, 59); */
+           calendar.set(Calendar.HOUR_OF_DAY, 23);
+            calendar.set(Calendar.MINUTE, 59);
             calendar.set(Calendar.SECOND, 59);
         }
 

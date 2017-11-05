@@ -10,9 +10,9 @@ public class EventRunReportDTO {
 
     public BigInteger campaignId;
     public BigInteger count;
-    public BigInteger date;
+    public String date;
 
-    public EventRunReportDTO(BigInteger campaignId, BigInteger count, BigInteger date) {
+    public EventRunReportDTO(BigInteger campaignId, BigInteger count, String date) {
         this.campaignId = campaignId;
         this.count = count;
         this.date = date;

@@ -50,21 +50,20 @@ public class ReportService {
         String query = "select count(*) as count ,campaign_Id as campaignId , extract(day from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
 
         if (from != null && to != null) {
-            query += " and err.runDate  between " + DateUtil.generateStartOrEndDate("start", from) + " and " + DateUtil.generateStartOrEndDate("end", from) ;
+            query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'" ;
 
         }
         if (campaignId != null) {
-            query += " and err.campaignId = " + campaignId;
+            query += " and err.campaign_id = " + campaignId;
         }
 
-        query += " group by campaign_Id, extract(day from  run_date)";
+        query += " group by campaign_Id,   to_char(run_date, 'YYYY-dd-MM')";
 
         Query qt = entityManager.createNativeQuery(query);
-
         List<Object[]> candidateList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (BigInteger) e[2])));
+        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (String) e[2])));
 
         return resultList;
 
