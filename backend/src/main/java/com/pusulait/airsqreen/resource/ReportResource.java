@@ -29,11 +29,11 @@ public class ReportResource {
     private SystemErrorService systemErrorService;
 
     @RequestMapping(value = "/sspViewCountLog", method = RequestMethod.GET)
-    public ResponseEntity<?> sspViewCountLogSearch(@RequestBody SspViewCountLog sspViewCountLog) {
+    public ResponseEntity<?> sspViewCountLogSearch(@RequestParam(value="deviceId", required=false)Long deviceId, @RequestParam(value="from", required=false) String from, @RequestParam(value="to", required=false) String to) {
         log.debug("REST request to get getAllCampaignDTOs ");
         try {
 
-            return new ResponseEntity<>(reportService.search(sspViewCountLog), HttpStatus.OK);
+            return new ResponseEntity<>(reportService.search(deviceId,from,to), HttpStatus.OK);
 
         } catch (Exception ex) {
             systemErrorService.save(new SystemErrorDTO(ex.getMessage(), ErrorType.SSPVIEWCOUNTLOGSEARCH, SecurityUtils.getCurrentLogin()));

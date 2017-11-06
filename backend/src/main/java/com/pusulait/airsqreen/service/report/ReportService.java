@@ -1,6 +1,7 @@
 package com.pusulait.airsqreen.service.report;
 
 import com.pusulait.airsqreen.domain.dto.report.EventRunReportDTO;
+import com.pusulait.airsqreen.domain.dto.report.SspViewCountDTO;
 import com.pusulait.airsqreen.domain.view.EventRunReport;
 import com.pusulait.airsqreen.domain.view.SspViewCountLog;
 import com.pusulait.airsqreen.repository.view.EventRunReportRepository;
@@ -34,11 +35,29 @@ public class ReportService {
     private EntityManager entityManager;
 
     @Transactional(readOnly = true)
-    public List<SspViewCountLog> search(SspViewCountLog sspViewCountLog) {
+    public List<SspViewCountDTO> search(Long deviceId, String from, String to) throws Exception {
 
         log.debug("Request to get all PlatformUsers");
 
-        return sspViewCountLogRepository.search(sspViewCountLog.getSspPrice(), sspViewCountLog.getDeviceId(), sspViewCountLog.getActionId(), sspViewCountLog.getSspDeviceId(), sspViewCountLog.getPlatformUserId());
+        String query = "select sum(ssp_price) as count ,to_char(update_date, 'YYYY-dd-MM'), device_name  from ssp_view_count_log svcl";
+        //
+
+        if (from != null && to != null) {
+            query += " and svcl.update_date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
+
+        }
+        if (deviceId != null) {
+            query += " and svcl.device_Id = " + deviceId;
+        }
+        query += "group by to_char(update_date, 'YYYY-dd-MM'), device_name";
+
+        Query qt = entityManager.createNativeQuery(query);
+        List<Object[]> resultObjectList = qt.getResultList();
+
+        List<SspViewCountDTO> resultList = new ArrayList<>();
+        resultObjectList.forEach(e -> resultList.add(new SspViewCountDTO((String) e[0], (String) e[1], (String) e[2])));
+        return resultList;
+
     }
 
 
@@ -50,7 +69,7 @@ public class ReportService {
         String query = "select count(*) as count ,campaign_Id as campaignId ,campaign_name as campaignName, to_char(run_date, 'YYYY-dd-MM')  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'DONE' ";
 
         if (from != null && to != null) {
-            query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'" ;
+            query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
 
         }
         if (campaignId != null) {
@@ -60,10 +79,10 @@ public class ReportService {
         query += " group by campaign_Id,   to_char(run_date, 'YYYY-dd-MM') ,campaign_name";
 
         Query qt = entityManager.createNativeQuery(query);
-        List<Object[]> candidateList = qt.getResultList();
+        List<Object[]> resultObjectList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (String) e[3],(String) e[2])));
+        resultObjectList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (String) e[3], (String) e[2])));
 
         return resultList;
 
@@ -77,7 +96,7 @@ public class ReportService {
         String query = "select count(*) as count , campaign_Id as campaignId ,campaign_name as campaignName, extract(hour from  run_date)  as runDate from EVENT_RUN_REPORT err where err.event_Status = 'WAITING' ";
 
         if (from != null && to != null) {
-            query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'" ;
+            query += " and err.run_Date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
 
         }
         if (campaignId != null) {
@@ -90,7 +109,7 @@ public class ReportService {
         List<Object[]> candidateList = qt.getResultList();
 
         List<EventRunReportDTO> resultList = new ArrayList<>();
-        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (Double) e[3],(String) e[2])));
+        candidateList.forEach(e -> resultList.add(new EventRunReportDTO((BigInteger) e[1], (BigInteger) e[0], (Double) e[3], (String) e[2])));
 
         return resultList;
 

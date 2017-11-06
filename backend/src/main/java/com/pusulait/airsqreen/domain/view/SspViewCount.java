@@ -14,7 +14,6 @@ import java.io.Serializable;
 @Immutable
 public class SspViewCount implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", updatable = false, nullable = false)
@@ -34,4 +33,7 @@ public class SspViewCount implements Serializable {
 
     @Column(name = "PLATFORM_USER_ID")
     private String platformUserId;
+
+    @Column(name = "DEVICE_NAME")
+    private String deviceName;
 }

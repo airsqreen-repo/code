@@ -23,7 +23,8 @@ CREATE OR REPLACE VIEW public.SSP_VIEW_COUNT AS
       aaa.device_id,
       aaa.action_id,
       aaa.ssp_device_id,
-      aaa.platform_user_id
+      aaa.platform_user_id,
+      aaa.device_name
     FROM air_VIEW_COUNT vc
       , (
           SELECT
@@ -33,7 +34,8 @@ CREATE OR REPLACE VIEW public.SSP_VIEW_COUNT AS
             CAMDEVSEC.ssp_price   AS ssp_price,
             CAMDEVSEC.action_id   AS action_id,
             ad.external_device_id AS ssp_device_id,
-            pu.id                 AS platform_user_id
+            pu.id                 AS platform_user_id,
+            ad.name as device_name
           FROM
             (SELECT
                cs.device_id   AS device_id,
@@ -47,10 +49,9 @@ CREATE OR REPLACE VIEW public.SSP_VIEW_COUNT AS
                 pu.id = ad.platform_user_id) aaa
     WHERE
       vc.section_id :: VARCHAR = aaa.section_id :: VARCHAR
-      AND
-      vc.campaign_id :: VARCHAR = aaa.campaign_id :: VARCHAR
-      AND vc.device_id :: VARCHAR = aaa.device_id :: VARCHAR)
-
+                     AND
+    vc.campaign_id :: VARCHAR = aaa.campaign_id :: VARCHAR
+                                                AND vc.device_id :: VARCHAR = aaa.device_id :: VARCHAR);
 
 CREATE OR REPLACE VIEW public.SSP_VIEW_COUNT_LOG AS
   (
