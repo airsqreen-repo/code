@@ -12,7 +12,7 @@
         "exportExcel":"Export Excel"
       },
       "search":{
-        "reportType":"Report Type",
+        "device":"Device",
         "show":"Show",
         "dates":"Dates",
         "to":"to"

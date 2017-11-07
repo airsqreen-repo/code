@@ -6,7 +6,7 @@
       "title": "Event Run Report Management",
       "createReport": "Create Report",
       "dailyRevenue": "Daily Revenue ",
-      "HourlyRevenue": "Hourly Revenue ",
+      "hourlyRevenue": "Hourly Revenue ",
       "button":{
         "go":"GO",
         "exportExcel":"Export Excel"
