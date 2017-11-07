@@ -115,7 +115,7 @@ angular.module('airSqreenApp')
                 { field: "id", dir: "desc" }
             ],
             filterHandler:function(filter) {
-                var  autocomplete = $("#campaign").data("kendoAutoComplete");
+                var  autocomplete = $("#device").data("kendoAutoComplete");
                 return { url: "search",
                     query: {
                         dataStatus:"ACTIVE",
