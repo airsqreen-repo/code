@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class SspViewCountDTO {
 
-    private String sspPrice;
+    private Double sspPrice;
     private String date;
     private String deviceName;
 
-    public SspViewCountDTO(String sspPrice, String date, String deviceName) {
+    public SspViewCountDTO(Double sspPrice, String date, String deviceName) {
         this.sspPrice = sspPrice;
         this.date = date;
         this.deviceName = deviceName;

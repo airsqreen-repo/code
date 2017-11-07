@@ -9,6 +9,10 @@ import com.pusulait.airsqreen.repository.view.SspViewCountLogRepository;
 import com.pusulait.airsqreen.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,28 +39,103 @@ public class ReportService {
     private EntityManager entityManager;
 
     @Transactional(readOnly = true)
-    public List<SspViewCountDTO> search(Long deviceId, String from, String to) throws Exception {
+    public List<SspViewCountDTO> last30Day(String from, String to) throws Exception {
 
         log.debug("Request to get all PlatformUsers");
 
-        String query = "select sum(ssp_price) as count ,to_char(update_date, 'YYYY-dd-MM'), device_name  from ssp_view_count_log svcl";
+        String query = "select sum(ssp_price) as count ,to_char(update_date, 'YYYY-dd-MM'), device_name  from ssp_view_count_log svcl where";
         //
 
         if (from != null && to != null) {
-            query += " and svcl.update_date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
+            query += " svcl.update_date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
 
         }
+        /*
         if (deviceId != null) {
             query += " and svcl.device_Id = " + deviceId;
         }
-        query += "group by to_char(update_date, 'YYYY-dd-MM'), device_name";
+        */
+        query += " group by to_char(update_date, 'YYYY-dd-MM'), device_name";
 
         Query qt = entityManager.createNativeQuery(query);
         List<Object[]> resultObjectList = qt.getResultList();
 
         List<SspViewCountDTO> resultList = new ArrayList<>();
-        resultObjectList.forEach(e -> resultList.add(new SspViewCountDTO((String) e[0], (String) e[1], (String) e[2])));
+        resultObjectList.forEach(e -> resultList.add(new SspViewCountDTO((Double) e[0], (String) e[1], (String) e[2])));
         return resultList;
+    }
+
+
+
+    @Transactional(readOnly = true)
+    public Page<SspViewCountDTO> search(Long deviceId, String from, String to, Pageable pageable) throws Exception {
+
+        log.debug("Request to get all PlatformUsers");
+
+        String query = "";
+        String countSql = "select count(svcl) as total from ssp_view_count_log svcl";
+        String normalSql = "select ssp_price , to_char(update_date, 'YYYY-dd-MM') as date, device_name  from ssp_view_count_log svcl";
+        boolean andNeed = false;
+        if ( deviceId != null
+                        || from != null ||
+                        to != null) {
+            query += " where ";
+        }
+
+        if (from != null && to != null) {
+            query += "  svcl.update_date  between '" + DateUtil.generateStartOrEndDate("start", from) + "' and '" + DateUtil.generateStartOrEndDate("end", to) + "'";
+            andNeed = true;
+        }
+
+        if (deviceId != null) {
+            if (andNeed) query += " and ";
+            query += "  svcl.device_Id = " + deviceId;
+        }
+
+
+
+
+        countSql += query;
+
+        if (pageable != null) {
+            String idStr = "date";
+            Sort sort = pageable.getSort();
+            if (sort == null) {
+                sort = new Sort(new Sort.Order(Sort.Direction.ASC, idStr));
+            }
+            query += " ORDER BY " + idStr + " " + sort.getOrderFor(idStr).getDirection().toString();
+        }
+
+        /*
+        Query qt = entityManager.createNativeQuery(query);
+        List<Object[]> resultObjectList = qt.getResultList();
+
+        List<SspViewCountDTO> resultList = new ArrayList<>();
+        resultObjectList.forEach(e -> resultList.add(new SspViewCountDTO((Double) e[0], (String) e[1], (String) e[2])));
+        */
+        // TOTAL ITEM SQL
+        Query qt = entityManager.createNativeQuery(countSql);
+        BigInteger total = (BigInteger) qt.getSingleResult();
+        // NORMAL SQL
+        Query q = entityManager.createNativeQuery(normalSql + query);
+
+        if (pageable != null) {
+            int pn = pageable.getPageNumber() == 0 ? 0 : pageable.getPageNumber();
+            int ps = pageable.getPageSize();
+
+            q.setFirstResult(pn * ps);
+            q.setMaxResults(ps);
+        }
+
+
+        List<Object[]> resultObjectList = q.getResultList();
+        List<SspViewCountDTO> resultList = new ArrayList<>();
+        resultObjectList.forEach(e -> resultList.add(new SspViewCountDTO((Double) e[0], (String) e[1], (String) e[2])));
+
+
+
+        Page<SspViewCountDTO> page = new PageImpl<SspViewCountDTO>(resultList, pageable, total.longValue());
+        return page;
 
     }
 
