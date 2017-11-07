@@ -89,7 +89,7 @@ public class ReportService {
 
         if (deviceId != null) {
             if (andNeed) query += " and ";
-            query += "  svcl.device_Id = " + deviceId;
+            query += "  svcl.device_id = " + deviceId;
         }
 
 
