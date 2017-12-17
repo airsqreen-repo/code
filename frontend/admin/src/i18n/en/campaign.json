@@ -43,7 +43,8 @@
                 "device": "Device",
                 "actionId": "action ID",
                 "key": "key",
-                "sspPrice": "SSP Price"
+                "sspPrice": "SSP Price",
+                "detail": "Detail"
             }
         },
         "constraint":{

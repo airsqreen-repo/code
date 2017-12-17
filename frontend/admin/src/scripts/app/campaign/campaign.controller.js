@@ -18,10 +18,10 @@ angular.module('airSqreenApp')
             ]
         };
 
+        //  {template: "<button class='k-widget k-button' ui-sref='device.detail  ({mode: " + '"create"' + "})' has-right='" + $scope.right + "' translate='newBtn'></button>"},
         $scope.toolbarOptions = {
             items: [
                 {template: KendoUtils.removeAllBtn($scope.right)},
-                {template: "<button class='k-widget k-button' ui-sref='device.detail  ({mode: " + '"create"' + "})' has-right='" + $scope.right + "' translate='newBtn'></button>"},
                 {template: KendoUtils.refreshBtn()}
 
             ]

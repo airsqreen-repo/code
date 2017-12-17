@@ -45,7 +45,7 @@ angular.module('airSqreenApp')
                         return api.one('admin/roles', $stateParams.id);
                     },
                     resolvedRole: function ($stateParams, api) {
-                        return api.one('admin/roles', $stateParams.id+'/rightList').get();
+                        return api.one('admin/roles', $stateParams.id).get();
                     }
                 },
             }).state('role.detail', {

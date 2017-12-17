@@ -10,6 +10,13 @@ angular.module('airSqreenApp')
             }
         };
 
+
+        $scope.tooltip= {
+            visible: true,
+                format: "{0}%",
+                template: "#= series.name #: #= value #"
+        };
+
         $scope.search={};
 
         $scope.searchForm = function (item) {

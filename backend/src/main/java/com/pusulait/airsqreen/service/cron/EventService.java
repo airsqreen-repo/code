@@ -145,7 +145,6 @@ public class EventService {
         pushEventDTO.setPlatformUserId(plt161Campaign.getPlatformUserId());
         pushEventDTO = EventUtil.setDeviceActionAndSectionId(pushEventDTO, plt161Campaign, i);
         sistem9PushEventService.save(pushEventDTO);
-
     }
 
 

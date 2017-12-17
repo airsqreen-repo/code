@@ -3,8 +3,9 @@
 angular.module('airSqreenApp')
     .service('DateUtils', function ($filter) {
         this.convertLocaleDateKendoGrid = function (date){
+
             if (date) {
-                return $filter('date')(date,'yyyy-MM-dd');
+                return $filter('date')(date,'yyyy-MM-dd HH:mm:ss');
             } else {
                 return null;
             }
@@ -26,8 +27,8 @@ angular.module('airSqreenApp')
           utcDate.setUTCMonth(date.getMonth());
           utcDate.setUTCFullYear(date.getFullYear());
 
-          utcDate.setUTCHours(0);
-          utcDate.setUTCMinutes(0);
+          utcDate.setUTCHours(date.getHours());
+          utcDate.setUTCMinutes(date.getMinutes());
           utcDate.setUTCSeconds(0);
           utcDate.setUTCMilliseconds(0);
 

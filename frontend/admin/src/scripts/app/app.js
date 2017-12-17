@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('airSqreenApp', ['LocalStorageModule', 'tmh.dynamicLocale', 'pascalprecht.translate',
-    'ngResource', 'ui.router', 'ui.bootstrap', 'ngSanitize', 'ngAnimate', 'ngSanitize', 'kendo.directives', 'as.sortable', 'ui.mask', 'dtrw.bcrypt', 'ngCookies', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'])
+    'ngResource', 'ui.router', 'ngAnimate', 'ngSanitize', 'ui.bootstrap',  'kendo.directives', 'as.sortable', 'ui.mask', 'dtrw.bcrypt', 'ngCookies', 'ngCacheBuster', 'ngFileUpload', 'infinite-scroll'
+
+,  'ui.bootstrap.datetimepicker'])
     .config(function (apiProvider, SERVICE_URL) {
         apiProvider.setBaseUrl(SERVICE_URL+'api/');
     })

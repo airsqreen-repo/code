@@ -76,6 +76,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-sm-3 control-label" for="detail" translate="campaign.section.label.detail"></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control input-md" id="detail" name="detail"
+                                           ng-model="campaignSection.detail"  required validationMessage="Enter {0}" >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label" for="dataStatus" translate="status">Status</label>
                                 <div class="col-sm-3">
                                     <select kendo-drop-down-list="dataStatus"

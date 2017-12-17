@@ -60,7 +60,6 @@ angular.module('airSqreenApp')
                 views: {
                     'tabContent': {
                         templateUrl: 'scripts/app/campaign/detail/detail.html',
-                        controller: 'CampaignDetailController as ctrl'
                     }
                 },
                 resolve: {

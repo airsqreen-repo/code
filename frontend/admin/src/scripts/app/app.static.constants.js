@@ -14,8 +14,8 @@ angular.module('airSqreenApp')
         "SISTEM_9":"serviceType.sistem9"
     })
     .constant('PLATFORM_TYPE',{
-    "DSP":"platformType.dsp",
-    "SSP":"platformType.ssp"
+        "DSP":"platformType.dsp",
+        "SSP":"platformType.ssp"
     }).constant('DEVICE_CONSTRAINT_TYPE',{
         "DYNAMIC_TIME_FILTER":"deviceConstraintType.dynamicTimeFilter"
     }).constant('DEVICE_CONSTRAINT_FILTER',{
@@ -29,4 +29,8 @@ angular.module('airSqreenApp')
         "SMALLER_EQUAL":"campaignConstraintFilter.smallerEqual"
     }).constant('CAMPAIGN_CONSTRAINT_TYPE',{
         "TEMPERATURE":"campaignConstraintType.temperature"
-    });
+    }).constant('PRICING_TYPE',{
+        "CPM":"pricingType.cpm",
+        "CPC":"pricingType.cpc",
+        "CPA":"pricingType.cpa"
+});

@@ -20,6 +20,7 @@ public class CampaignSectionDTO {
     private String key;
     private Double sspPrice;
     private String trackingToken;
+    private String detail;
 
 
     public static CampaignSectionDTO toDTO(CampaignSection campaignSection) {
@@ -37,6 +38,7 @@ public class CampaignSectionDTO {
         campaignSectionDTO.setKey(campaignSection.getKey());
         campaignSectionDTO.setSspPrice(campaignSection.getSspPrice());
         campaignSectionDTO.setActionId(campaignSection.getActionId());
+        campaignSectionDTO.setDetail(campaignSection.getDetail());
         return campaignSectionDTO;
     }
 
@@ -49,6 +51,7 @@ public class CampaignSectionDTO {
         campaignSection.setKey(campaignSectionDTO.getKey());
         campaignSection.setSspPrice(campaignSectionDTO.getSspPrice());
         campaignSection.setActionId(campaignSectionDTO.getActionId());
+        campaignSection.setDetail(campaignSectionDTO.getDetail());
 
         return campaignSection;
     }

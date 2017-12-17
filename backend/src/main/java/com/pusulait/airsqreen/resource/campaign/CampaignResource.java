@@ -107,7 +107,7 @@ public class CampaignResource {
     public ResponseEntity<?> updateCampaign(@RequestBody CampaignDTO campaignDTO) throws URISyntaxException {
         log.debug("REST request to update Campaign : {}", campaignDTO);
 
-        Campaign result = campaignService.save(campaignDTO);
+        CampaignDTO result = campaignService.save(campaignDTO);
         return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert("campaign", result.getId().toString()))
                 .body(result);

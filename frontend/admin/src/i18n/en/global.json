@@ -124,6 +124,11 @@
         "dsp":"DSP",
         "ssp":"SSP"
     },
+    "pricingType":{
+        "cpm":"CPM",
+        "cpc":"CPC",
+        "cpa":"CPA"
+    },
     "serviceType":{
         "platform161":"PLATFORM 161",
         "sistem9":"SISTEM 9"

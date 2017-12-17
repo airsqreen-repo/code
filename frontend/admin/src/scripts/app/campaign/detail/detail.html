@@ -3,7 +3,7 @@
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label" translate="campaign.label.name">Name</label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" id="name" name="name" ng-model="campaign.name" required>
         </div>
     </div>
@@ -11,7 +11,7 @@
     <div class="form-group">
         <label for="externalId" class="col-sm-2 control-label" translate="campaign.label.externalId"></label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" id="externalId" name="externalId" ng-model="campaign.externalId" required>
         </div>
     </div>
@@ -19,32 +19,29 @@
     <div class="form-group">
         <label for="uniqueCampaignUId" class="col-sm-2 control-label" translate="campaign.label.uniqueCampaignUId"></label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" id="uniqueCampaignUId" name="externalId" ng-model="campaign.uniqueCampaignUId" required>
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="pricing_type" class="col-sm-2 control-label" translate="campaign.label.pricing_type"></label>
 
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="pricing_type" name="externalId" ng-model="campaign.pricing_type" required>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pricingType" translate="campaign.label.pricingType"></label>
+        <div class="col-sm-3">
+            <select ng-options="option.id as option.name for option in pricingTypes.data" class="form-control"  ng-model="campaign.pricingType" id="pricingType" name="pricingType" validationMessage="Enter {0}"  required>
+                <option value="">{{ 'choose'| translate }}</option>
+            </select>
         </div>
     </div>
 
 
-    <div class="form-group">
-        <label for="pricingType" class="col-sm-2 control-label" translate="campaign.label.pricingType"></label>
 
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="pricingType" name="externalId" ng-model="campaign.pricingType" required>
-        </div>
-    </div>
+
 
     <div class="form-group">
         <label for="target" class="col-sm-2 control-label" translate="campaign.label.target"></label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" id="target" name="target" ng-model="campaign.target" required>
         </div>
     </div>
@@ -52,23 +49,35 @@
     <div class="form-group">
         <label for="start_on" class="col-sm-2 control-label" translate="campaign.label.start_on"></label>
 
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="start_on" name="start_on" ng-model="campaign.start_on" required>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" class="form-control" datetime-picker id="start_on" name="start_on" ng-model="start_on.date" is-open="start_on.open"  validationMessage="Enter {0}"  required>
+                <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="openCalendarStartOn()"><i class="fa fa-calendar"></i></button>
+                  </span>
+            </div>
         </div>
     </div>
+
 
     <div class="form-group">
-        <label for="end_on" class="col-sm-2 control-label" translate="campaign.label.end_on"></label>
+        <label for="start_on" class="col-sm-2 control-label" translate="campaign.label.end_on"></label>
 
-        <div class="col-sm-2">
-            <input type="text" class="form-control" id="end_on" name="end_on" ng-model="campaign.end_on" required>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <input type="text" class="form-control" datetime-picker id="end_on" name="end_on" ng-model="end_on.date" is-open="end_on.open"  validationMessage="Enter {0}"  required>
+                <span class="input-group-btn">
+                      <button type="button" class="btn btn-default" ng-click="openCalendarEndOn()"><i class="fa fa-calendar"></i></button>
+                  </span>
+            </div>
         </div>
     </div>
+
 
     <div class="form-group">
         <label for="price" class="col-sm-2 control-label" translate="campaign.label.price"></label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" id="price" name="price" ng-model="campaign.price" required>
         </div>
     </div>
@@ -77,7 +86,7 @@
     <div class="form-group">
         <label for="dataStatus" class="col-sm-2 control-label" translate="status">Status</label>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <select kendo-drop-down-list="dataStatus"
                     ng-model="campaign.dataStatus"
                     name="dataStatus"

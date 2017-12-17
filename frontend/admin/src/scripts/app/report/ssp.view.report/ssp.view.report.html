@@ -40,10 +40,10 @@
 
             <div class="form-group mr-10">
                 <label for="dates" translate="sspViewReport.search.dates">Dates:</label>
-                <input id="from" class="form-control input-md"  kendo-date-picker k-ng-model="search.from" />
+                <input id="from" class="form-control input-md"  kendo-date-time-picker k-time-format="'HH:mm:ss'" time-format="'HH:mm:ss'" k-format="'MM/dd/yyyy HH:mm:ss'"  k-ng-model="search.from" />
 
                 <label for="to" translate="sspViewReport.search.to">to:</label>
-                <input id="to" class="form-control input-md"  kendo-date-picker k-ng-model="search.to" />
+                <input id="to" class="form-control input-md"  kendo-date-time-picker k-time-format="'HH:mm:ss'" time-format="'HH:mm:ss'" k-format="'MM/dd/yyyy HH:mm:ss'"  k-ng-model="search.to" />
             </div>
 
             <button type="submit" class="btn btn-default" translate="sspViewReport.button.go">Go</button>

@@ -2,9 +2,11 @@ package com.pusulait.airsqreen.service.campaign;
 
 import com.pusulait.airsqreen.domain.base.DataStatus;
 import com.pusulait.airsqreen.domain.campaign.Campaign;
+import com.pusulait.airsqreen.domain.campaign.CampaignConstraint;
 import com.pusulait.airsqreen.domain.campaign.CampaignSection;
 import com.pusulait.airsqreen.domain.campaign.Section;
 import com.pusulait.airsqreen.domain.campaign.platform161.Plt161Campaign;
+import com.pusulait.airsqreen.domain.dto.campaign.CampaignConstraintDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.platform161.Plt161CampaignDTO;
 import com.pusulait.airsqreen.domain.dto.campaign.enums.PricingType;
@@ -46,6 +48,8 @@ public class CampaignService {
     @Autowired
     private CampaignRepository campaignRepository;
 
+
+
     @Autowired
     private CampaignSectionRepository campaignSectionRepository;
 
@@ -64,10 +68,18 @@ public class CampaignService {
     }
 
     @Transactional
-    public Campaign save(CampaignDTO campaignDTO) {
+    public CampaignDTO save(CampaignDTO campaignDTO) {
 
-        Campaign campaign = CampaignDTO.toEntity(campaignDTO);
-        return campaignRepository.save(campaign);
+        Plt161Campaign campaign = null;
+        if(campaignDTO.getId()!=null){
+            campaign = campaignRepository.findById(campaignDTO.getId());
+        }
+        else {
+            campaign = new Plt161Campaign();
+        }
+
+        return Plt161CampaignDTO.toDTO( campaignRepository.save(CampaignDTO.toEntity(campaignDTO, campaign)));
+
     }
 
     @Transactional

@@ -42,9 +42,8 @@ public class CampaignDTO {
         return campaignDTO;
     }
 
-    public static Campaign toEntity(CampaignDTO campaignDTO) {
+    public static Campaign toEntity(CampaignDTO campaignDTO,  Plt161Campaign campaign){
 
-        Plt161Campaign campaign = new Plt161Campaign();
         campaign.setId(campaignDTO.getId());
         campaign.setExternalId(campaignDTO.getExternalId());
         campaign.setPricingType(campaignDTO.getPricingType());
@@ -53,7 +52,7 @@ public class CampaignDTO {
         campaign.setEndOn(campaignDTO.getEnd_on());
         campaign.setPrice(campaignDTO.getPrice());
         campaign.setName(campaignDTO.getName());
-        campaign.setPricingType(PricingType.convert(campaignDTO.getPricing_type()));
+      //  campaign.setPricingType(PricingType.convert(campaignDTO.getPricing_type()));
         return campaign;
     }
 }

@@ -41,6 +41,7 @@ angular.module('airSqreenApp')
                 {field: "actionId", title: "{{ 'campaign.section.label.actionId' | translate }}"},
                 {field: "key", title: "{{ 'campaign.section.label.key' | translate }}"},
                 {field: "sspPrice", title: "{{ 'campaign.section.label.sspPrice' | translate }}"},
+                {field: "detail", title: "{{ 'campaign.section.label.detail' | translate }}"},
                 {
                     command: [
                         { template: KendoUtils.editBtn($scope.right.UPDATE)},
@@ -245,13 +246,17 @@ angular.module('airSqreenApp')
 
 
         $scope.setSection = function(){
+
             var  autocomplete = $("#section").data("kendoAutoComplete");
-            autocomplete.value($scope.campaignSection.section.name);
-            autocomplete.search(0);
-            $timeout(function(){
-                autocomplete.select(autocomplete.ul.children().eq(0));
-                autocomplete.close();
-            },1000);
+            if($scope.campaignSection.section!=null) {
+                autocomplete.value($scope.campaignSection.section.name);
+                autocomplete.search(0);
+                $timeout(function () {
+                    autocomplete.select(autocomplete.ul.children().eq(0));
+                    autocomplete.close();
+                }, 1000);
+            }
+
         };
 
 
@@ -276,13 +281,15 @@ angular.module('airSqreenApp')
 
 
         $scope.setDevice = function(){
-            var  autocomplete = $("#section").data("kendoAutoComplete");
-            autocomplete.value($scope.campaignSection.device.name);
-            autocomplete.search(0);
-            $timeout(function(){
-                autocomplete.select(autocomplete.ul.children().eq(0));
-                autocomplete.close();
-            },1000);
+            var  autocomplete = $("#device").data("kendoAutoComplete");
+            if($scope.campaignSection.device!=null){
+                autocomplete.value($scope.campaignSection.device.name);
+                autocomplete.search(0);
+                $timeout(function(){
+                    autocomplete.select(autocomplete.ul.children().eq(0));
+                    autocomplete.close();
+                },1000);
+            }
         };
 
 

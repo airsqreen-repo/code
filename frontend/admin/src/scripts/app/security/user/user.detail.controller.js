@@ -32,9 +32,7 @@ angular.module('airSqreenApp')
             'SEARCH':'ADMIN'
         };
 
-
         $scope.dataSources = {
-
             roleList: KendoUtils.createSubCollectionDataSource({
                 readApi: userApi.all('userRoleList'),
                 writeApi: api.all('userRoles'),
@@ -63,7 +61,7 @@ angular.module('airSqreenApp')
                     // password hash
                     $scope.user.password = bcrypt.hashSync($scope.user.tempPassword, 10);
                     $scope.user.user_status="ACTIVE";
-                    //$scope.user.activated=true;
+                     $scope.user.activated=true;
                     delete $scope.user.tempPassword;
                     delete $scope.user.tempPassword_re;
                     userApi.post($scope.user).then(goCreatedUser,error);

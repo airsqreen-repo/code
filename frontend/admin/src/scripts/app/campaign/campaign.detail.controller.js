@@ -1,10 +1,32 @@
 'use strict';
 
 angular.module('airSqreenApp')
-    .controller('CampaignDetailController', function ($rootScope, $scope, $state, $stateParams, $translate, _, campaignApi, api, resolvedCampaign,  Principal, KendoUtils, dialogService, $timeout, AppUtilsService, DateUtils ) {
+    .controller('CampaignDetailController', function ($rootScope, $scope, $state, $stateParams, $translate, _, campaignApi, api, $filter, resolvedCampaign,  Principal, KendoUtils, dialogService, $timeout, AppUtilsService, DateUtils ) {
         $scope.campaign = resolvedCampaign;
 
         $rootScope.isView = true;
+
+
+        $scope.pricingTypes= AppUtilsService.getPricingTypes();
+
+
+
+        $scope.start_on = {
+            date:new Date($scope.campaign.start_on)
+        };
+
+        $scope.openCalendarStartOn = function() {
+            $scope.start_on.open = true;
+        };
+
+        $scope.end_on = {
+            date:new Date($scope.campaign.end_on)
+        };
+
+        $scope.openCalendarEndOn = function() {
+            $scope.end_on.open = true;
+        };
+
 
         $scope.load = function (){
             if($stateParams.mode=="create"){
@@ -48,22 +70,24 @@ angular.module('airSqreenApp')
                 readQuery: {projection: "summary"}
             })
         };
-/*
+
         $scope.save = function (event) {
             event.preventDefault();
             if ($scope.validator.validate()) {
                 if (_.isNumber($scope.campaign.id)) {
+                    $scope.campaign.start_on = new Date($scope.start_on.date).getTime();
+                    $scope.campaign.end_on = new Date($scope.end_on.date).getTime();
                     var toObject = Object.assign({}, $scope.campaign);
                     api.one('admin','campaigns').patch(toObject).then(success, error);
-                } else {
+                } /*else {
                     var toObject = Object.assign({}, $scope.campaign);
                     api.one('admin','campaigns').post(toObject).then(goCreatedCampaign, error);
-                }
+                }*/
 
             } else {
                 $scope.validationClass = "invalid";
             }
-        };*/
+        };
 
         $scope.removeDialog = function () {
 
