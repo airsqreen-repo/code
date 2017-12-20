@@ -6,12 +6,12 @@ server:
 
 spring:
     profiles:
-        active: prod
+        active: test
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:
         databaseName: airsqreen
-        serverName: localhost
+        serverName: 35.190.200.190
         username: postgres
         password: 1234
 
@@ -22,7 +22,7 @@ spring:
         show_sql: true
         generate-ddl: true
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
             naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
             hikari:
                     minimumIdle : 10
@@ -105,14 +105,15 @@ platform161:
             appID: arkitekttl
             clientID: zplus
             clientSecret: e6fbc36198b09941b135aa3a15570a533afe08e7da10dc30
+            user: airsqreen.api
+            password: program720
         endpoints:
-            auth: https://arkitekttl.platform161.com/api/v2/access_tokens
+            auth: https://ui.platform161.com/api/v2/arkitekttl/access_tokens
             services: https://ui.platform161.com/api/v2/zplus/
 
 sistem9:
         api:
             url: http://www.s9vision.com:78/s9_wexsrvc.asmx
-
 
 # Weather servisleri ayarlari burada olacak.
 weather:

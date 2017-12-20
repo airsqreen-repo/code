@@ -51,6 +51,24 @@ public class Weather extends AuditBase {
     @Column(name = "TEMP_MAX", scale = 2, precision = 2)
     private Float tempMax;
 
+    @Column(name = "HUMIDITY", scale = 2, precision = 2)
+    private Float humidity;
+
+    @Column(name = "PRESSURE", scale = 2, precision = 2)
+    private Float pressure;
+
+    @Column(name = "SPEED", scale = 2, precision = 2)
+    private Float speed;
+
+    @Column(name = "WIND_DEG", scale = 2, precision = 2)
+    private Float windDeg;
+
+    @Column(name = "ALL_CLOUDS", scale = 2, precision = 2)
+    private Float allClouds;
+
+    @Column(name = "MAIN")
+    private String main;
+
 
     /**
      *

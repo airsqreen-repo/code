@@ -29,7 +29,10 @@ public class WeatherServiceIntTest {
 
     @Test
     public void openWeatherApiCallTest() {
-        WeatherDTO dto = weatherService.getTempWithGeoCoordinates(new BigDecimal(41.060459), new BigDecimal(28.987169), true);
+
+        //59.911491, 10.757933.
+        //(57.1649118,65.5198002)
+        WeatherDTO dto = weatherService.getTempWithGeoCoordinates(new BigDecimal(57.1649118), new BigDecimal(65.5198002), true);
         log.debug(dto.toString());
     }
 }

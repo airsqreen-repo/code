@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by yildizib on 18/09/2017.
@@ -95,6 +96,14 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
                     result.setTemp(response.getMain().getTemp());
                     result.setTempMin(response.getMain().getTempMin());
                     result.setTempMax(response.getMain().getTempMax());
+                    result.setHumidity(response.getMain().getHumidity());
+                    result.setPressure(response.getMain().getPressure());
+                    result.setWindDeg(response.getWind().getDeg());
+                    result.setSpeed(response.getWind().getSpeed());
+
+                    if(response.getWeatherMainList() != null && response.getWeatherMainList().size() > 0) {
+                        result.setMain(response.getWeatherMainList().get(0).getMain());
+                    }
                 }
             }
 
@@ -117,7 +126,47 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
         private Long id;
         @SerializedName(value = "name")
         private String name;
+        @SerializedName(value = "wind")
+        private WeatherWind wind;
+        @SerializedName(value = "clouds")
+        private WeatherClouds clouds;
+        @SerializedName(value = "weather")
+        private List<WeatherMain> weatherMainList;
 
+
+    }
+
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class WeatherClouds implements Serializable {
+
+        @SerializedName(value = "all")
+        private Float all;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class WeatherWind implements Serializable {
+
+        @SerializedName(value = "speed")
+        private Float speed;
+        @SerializedName(value = "deg")
+        private Float deg;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public class WeatherMain implements Serializable {
+
+        @SerializedName(value = "main")
+        private String main;
+
+        @SerializedName(value = "id")
+         private Long id;
+
+        @SerializedName(value = "description")
+        private String description;
     }
 
     /**
@@ -132,6 +181,10 @@ public class OpenWeatherDriverServiceImpl implements WeatherDriverService {
         private Float tempMin;
         @SerializedName(value = "temp_max")
         private Float tempMax;
+        @SerializedName(value = "humidity")
+        private Float humidity;
+        @SerializedName(value = "pressure")
+        private Float pressure;
 
     }
 }

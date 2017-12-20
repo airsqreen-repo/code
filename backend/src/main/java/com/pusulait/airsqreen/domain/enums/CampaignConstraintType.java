@@ -2,6 +2,6 @@ package com.pusulait.airsqreen.domain.enums;
 
 public enum CampaignConstraintType {
 
-    TEMPERATURE
+    TEMPERATURE,WIND,PRESSURE,SNOW
 
 }

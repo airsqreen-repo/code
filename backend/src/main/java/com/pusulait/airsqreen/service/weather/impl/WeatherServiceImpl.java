@@ -87,6 +87,7 @@ public class WeatherServiceImpl implements WeatherService {
             result.setTempMin(entity.getTempMin());
             result.setLatitude(entity.getLatitude());
             result.setLongitude(entity.getLongitude());
+            result.setMain(entity.getMain());
 
         }
 

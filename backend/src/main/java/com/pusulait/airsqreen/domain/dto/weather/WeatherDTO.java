@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  */
 @Data
 public class WeatherDTO {
+
     @Digits(integer = 2, fraction = 6)
     private BigDecimal latitude;
     @Digits(integer = 2, fraction = 6)
@@ -22,18 +23,28 @@ public class WeatherDTO {
     private Float tempMin;
     @Size(min = -40, max = 80)
     private Float tempMax;
+    private Float humidity;
+    private Float pressure;
+    private Float speed;
+    private Float windDeg;
+    private String main;
 
     /**
      * @return
      */
     public Weather getEntity() {
-        Weather result = new Weather();
 
+        Weather result = new Weather();
         result.setLatitude(getLatitude());
         result.setLongitude(getLongitude());
         result.setTemp(getTemp());
         result.setTempMin(getTempMin());
         result.setTempMax(getTempMax());
+        result.setHumidity(getHumidity());
+        result.setPressure(getPressure());
+        result.setSpeed(getSpeed());
+        result.setWindDeg(getWindDeg());
+        result.setMain(getMain());
 
         return result;
     }
