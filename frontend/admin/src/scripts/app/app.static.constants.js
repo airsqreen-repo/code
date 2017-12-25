@@ -28,7 +28,10 @@ angular.module('airSqreenApp')
         "BIGGER_EQUAL":"campaignConstraintFilter.biggerEqual",
         "SMALLER_EQUAL":"campaignConstraintFilter.smallerEqual"
     }).constant('CAMPAIGN_CONSTRAINT_TYPE',{
-        "TEMPERATURE":"campaignConstraintType.temperature"
+        "TEMPERATURE":"campaignConstraintType.temperature",
+        "WIND":"campaignConstraintType.wind",
+        "PRESSURE":"campaignConstraintType.pressure",
+        "SNOW":"campaignConstraintType.snow"
     }).constant('PRICING_TYPE',{
         "CPM":"pricingType.cpm",
         "CPC":"pricingType.cpc",

@@ -141,7 +141,10 @@
         "smallerEqual":"Smaller Equal"
     },
     "campaignConstraintType":{
-        "temperature":"Temperature"
+        "temperature":"Temperature",
+        "wind":"Wind",
+        "pressure":"Pressure",
+        "snow":"Snow"
     },
     "validation":" girmeniz zorunludur.",
     "footer": "AirSqreen",
